@@ -1,7 +1,20 @@
+using Capstone_____Vescio_Pia_Francesca__BE_.Context;
+using Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes;
+using Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+var conn = builder.Configuration.GetConnectionString("SqlServer")!;
+builder.Services
+    .AddDbContext<DataContext>(opt => opt.UseSqlServer(conn))
+    ;
+
+builder.Services
+    .AddScoped<IRacesService, RaceService>();
 
 var app = builder.Build();
 
