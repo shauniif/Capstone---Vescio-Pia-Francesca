@@ -1,0 +1,89 @@
+﻿@model Capstone_____Vescio_Pia_Francesca__BE_.Models.NationModel
+
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<h1>Detail</h1>
+
+<div>
+    <h4>NationModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FormOfGovernment)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FormOfGovernment)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Modifier)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Modifier)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Ecos)
+        </dt>
+        <dd>
+            @if (Model.Ecos.Any()) 
+            { 
+            @foreach(var item in Model.Ecos )
+            {
+                @item.Name
+                }
+            } else
+            {
+                <p>Nessun Eco disponibile</p>
+            }
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Guilds)
+        </dt>
+        <dd>
+            @if (Model.Guilds.Any())
+            {
+                @foreach (var item in Model.Guilds)
+                {
+                    @item.Name
+                }
+            }
+            else
+            {
+                <p>Nessuna Gilda disponibile</p>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cities)
+        </dt>
+        <dd>
+            @if (Model.Cities.Any())
+            {
+                @foreach (var item in Model.Cities)
+                {
+                    @item.Name
+                }
+            }
+            else
+            {
+                <p>Nessuna Città disponibile</p>
+            }
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

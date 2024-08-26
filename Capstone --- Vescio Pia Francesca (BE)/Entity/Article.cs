@@ -12,6 +12,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Entity
         [MaxLength(50)]
         public required string Title { get; set; }
         [StringLength(2048)]
+        public required string Image {  get; set; }
         public required string Content { get; set; }
         public User? Author { get; set; }
         public DateTime PublicationDate { get; set; }

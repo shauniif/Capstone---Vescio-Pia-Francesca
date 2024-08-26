@@ -12,7 +12,6 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Entity
         public string Name { get; set; }
 
         public string Description { get; set; }
-        public string Photo {  get; set; }
 
         public Nation Nation { get; set; }
 

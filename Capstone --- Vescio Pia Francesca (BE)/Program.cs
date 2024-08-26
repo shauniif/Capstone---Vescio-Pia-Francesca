@@ -14,7 +14,9 @@ builder.Services
     ;
 
 builder.Services
-    .AddScoped<IRacesService, RaceService>();
+    .AddScoped<IRacesService, RaceService>()
+    .AddScoped<INationService, NationService>()
+    ;
 
 var app = builder.Build();
 
