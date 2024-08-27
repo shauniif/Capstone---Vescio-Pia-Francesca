@@ -27,16 +27,16 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(NationModel nations)
+        public async Task<IActionResult> Create(NationModel nation)
         {
             if (ModelState.IsValid)
             {
-                await _nationSvc.Create(nations);
+                await _nationSvc.Create(nation);
                 return RedirectToAction(nameof(AllNations));
             }
             else
             {
-                return View(nations);
+                return View(nation);
             }
         }
 
@@ -62,14 +62,27 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-            var race = await _nationSvc.Delete(id);
+            var nation = await _nationSvc.Delete(id);
             return RedirectToAction(nameof(AllNations));
         }
 
         public async Task<IActionResult> Detail(int  id)
         {
-            var nation = await _nationSvc.Get(id);
+            var nation = await _nationSvc.Read(id);
             return View(nation);
+        }
+
+        public async Task<IActionResult> GetNationImage(int id) 
+        {
+            var nation = await _nationSvc.Read(id);
+            if (nation?.Photo == null)
+            {
+                return NotFound(); // O un'immagine placeholder
+            }
+            var nationPhotodata = nation.Photo.Substring(23);
+            byte[] imageBytes = Convert.FromBase64String(nationPhotodata);
+            Console.WriteLine(imageBytes);
+            return File(imageBytes, "image/jpeg");
         }
     }
 }

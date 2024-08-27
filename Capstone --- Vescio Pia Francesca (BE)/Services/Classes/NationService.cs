@@ -25,9 +25,11 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                 string urlImg = $"data:image/jpeg;base64,{base64String}";
                 return urlImg;
             }
+
         }
 
-        
+       
+
 
         public async Task<Nation> Create(NationModel entity)
         {
@@ -82,7 +84,9 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
         {
             try
             {
-                var nation = await _db.Nations.SingleOrDefaultAsync(i => i.Id == id);
+                var nation = await _db.Nations
+                    .Include(n => n.Cities)
+                    .SingleOrDefaultAsync(i => i.Id == id);
 
                 if (nation == null)
                 {
@@ -123,7 +127,8 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
         {
             try
             {
-                var nation = await _db.Nations.SingleOrDefaultAsync(i => i.Id == id);
+                var nation = await _db.Nations
+                    .SingleOrDefaultAsync(i => i.Id == id);
 
                 if (nation == null)
                 {
@@ -134,7 +139,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                 nationModel.Description = nation.Description;
                 nationModel.FormOfGovernment = nation.FormOfGovernment;
                 nationModel.Modifier = nation.Modifier;
-                
+                nationModel.Cities = nation.Cities;
                 return nationModel;
             }
             catch (Exception ex)
