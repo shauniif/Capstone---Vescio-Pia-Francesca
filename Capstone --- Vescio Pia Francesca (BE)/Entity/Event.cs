@@ -11,7 +11,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Entity
 
         [MaxLength(150)]
         public string Name { get; set; }
-
+        public string Cover { get; set; }
         public DateTime Date { get; set; }
 
         public int YearOfEvent { get; set; }

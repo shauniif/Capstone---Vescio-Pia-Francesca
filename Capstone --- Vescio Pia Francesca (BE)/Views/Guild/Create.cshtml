@@ -1,17 +1,17 @@
-﻿@model Capstone_____Vescio_Pia_Francesca__BE_.Models.CityModel
+﻿@model Capstone_____Vescio_Pia_Francesca__BE_.Models.GuildModel
 
 @{
-    ViewData["Title"] = "Edit";
-   
+    ViewData["Title"] = "Create";
+    var nations = ViewBag.Nations;
 }
 
-<h1>Edit</h1>
+<h1>Create</h1>
 
-<h4>City</h4>
+<h4>GuildModel</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -25,14 +25,22 @@
             </div>
             <div class="form-group">
                 <label for="NationId" class="control-label">Nation</label>
-                <label asp-for="NationId" class="control-label">Nation</label>
-                <select asp-for="NationId" class="form-select" asp-items="ViewBag.Nations">
-                    
+                <select id="NationId" name="NationId" class="form-select">
+                    <option value="">-- Seleziona la Nazione --</option>
+                    @foreach (var nation in nations)
+                    {
+                        <option value="@nation.Id" name="nationId">@nation.Name</option>
+                    }
                 </select>
 
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <label asp-for="Modifier" class="control-label"></label>
+                <input asp-for="Modifier" type="number" class="form-control" />
+                <span asp-validation-for="Modifier" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>

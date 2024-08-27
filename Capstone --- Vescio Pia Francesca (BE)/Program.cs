@@ -18,6 +18,7 @@ builder.Services
     .AddScoped<INationService, NationService>()
     .AddScoped<ICitiesService, CitiesService>()
     .AddScoped<IEcoService, EcoService>()
+    .AddScoped<IGuildService, GuildService>()
     ;
 
 var app = builder.Build();

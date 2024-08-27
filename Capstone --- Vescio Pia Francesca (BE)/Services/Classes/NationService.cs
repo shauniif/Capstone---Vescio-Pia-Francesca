@@ -59,6 +59,23 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             {
                 var nation = await Read(id);
                 _db.Nations.Remove(nation);
+                var ecos = await _db.Ecos.Where(e => e.Nation.Id == id).ToListAsync();
+                var cities = await _db.Cities.Where(c => c.Nation.Id == id).ToListAsync();
+                var guilds = await _db.Guilds.Where(c => c.Nation.Id == id).ToListAsync();
+
+                // In questo modo gli Echi (che sono associati a quella determinata nazione non vengono eleminati, ma non sono più associati a nessuna nazione
+                // in questo modo sono "NOMADI"
+                foreach (var eco in ecos)
+                {
+                    eco.Nation = null;
+                }
+                foreach (var guild in guilds) { 
+                    _db.Remove(guild);
+                }
+                foreach(var city in cities )
+                {
+                    _db.Remove(city); 
+                }
                 await _db.SaveChangesAsync();
                 return nation;
             }
