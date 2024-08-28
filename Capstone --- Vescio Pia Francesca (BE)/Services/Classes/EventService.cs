@@ -27,7 +27,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             }
 
         }
-        public async Task<EventModel> Create(EventModel model)
+        public async Task<Event> Create(EventModel model)
         {
             try {
 
@@ -45,29 +45,12 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                 await _db.Events.AddAsync(newEvent);
                 await _db.SaveChangesAsync();
 
-                return model;
+                return newEvent;
             } 
             catch(Exception ex) 
             {
                 throw new Exception("Create failed", ex);
             }
-        }
-
-        public async Task<IEnumerable<Event>> Delete(string name)
-        {
-            var currEvents = await Read(name);
-            foreach (var currEvent in currEvents) {
-                _db.Events.Remove(currEvent);
-            }
-            
-            await _db.SaveChangesAsync();
-            return currEvents;
-        }
-
-        public async Task<EventModel> Get(string name)
-        {
-                throw new Exception("Error");
-
         }
 
         public async Task<IEnumerable<Event>> GetAll()
@@ -82,53 +65,88 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             }
         }
 
-        public async Task<IEnumerable<EventModel>> GetAllView()
+        public async Task<Event> Read(int id)
+        {
+            try 
+            {
+                var currEvent = await _db.Events.FirstOrDefaultAsync(e => e.Id == id);
+                if (currEvent == null) 
+                {
+                    throw new Exception("Event not found");
+                }
+                return currEvent;
+            } 
+            catch (Exception ex) 
+            {
+                throw new Exception("Error", ex);
+            }
+        }
+
+        public async Task<Event> Update(EventModel model)
         { try
             {
-                var events = await GetAll();
-                var groupedEvents = new List<EventModel>();
-                foreach (var e in events)
-                {
-                    groupedEvents.Add(new EventModel
-                    {
-                        Name = e.Name,
-                        Date = e.Date,
-                        YearOfEvent = e.YearOfEvent,
-                        Description = e.Description,
-                        Influence = e.Influence,
-                        Modifier = e.Modifier,
-                    });
-                }
-                    
-                return groupedEvents;
-            } catch(Exception ex) 
-            {
-                  throw new Exception("Error", ex); 
+                var currEvent = await Read(model.Id);
+                currEvent.Name = model.Name;
+                currEvent.Description = model.Description;
+                currEvent.Date = model.Date;
+                currEvent.Influence = model.Influence;
+                currEvent.Modifier = model.Modifier;
+                _db.Events.Update(currEvent);
+                _db.SaveChanges();
+                return currEvent;
+            }
+            catch (Exception ex) 
+            { 
+                throw new Exception("Error", ex);
             }
            
         }
 
-        public async Task<IEnumerable<Event>> Read(string name)
-        { try
+        public async Task<Event> Delete(int id)
+        {
+            var currEvent = await Read(id);
+            _db.Remove(currEvent);
+            await _db.SaveChangesAsync();
+            return currEvent;
+        }
+
+        public async Task<EventModel> Get(int id)
+        {
+            try
             {
-                var currEvents = await _db.Events.Where(e => e.Name == name).ToListAsync();
-                
-                if (currEvents == null) {
+                var currEvent = await _db.Events.FirstOrDefaultAsync(e => e.Id == id);
+                if (currEvent == null)
+                {
                     throw new Exception("Event not found");
                 }
-                return currEvents;
+                var eventModel = new EventModel
+                {
+                    Name = currEvent.Name,
+                    Date = currEvent.Date,
+                    YearOfEvent = currEvent.YearOfEvent,
+                    Description = currEvent.Description,
+                    Influence = currEvent.Influence,
+                    Modifier = currEvent.Modifier,
+                };
+                return eventModel;
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 throw new Exception("Error", ex);
-                    
             }
         }
 
-        public async Task<EventModel> Update(EventModel model)
+        public async Task<IEnumerable<Event>> GetEventsOfTheDay()
         {
-            throw new Exception();
+            try
+            {
+                var events = await _db.Events.Where(e => e.Date.Date == DateTime.Now.Date).ToListAsync();
+                return events;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error", ex);
+            }
         }
-
     }
 }

@@ -25,7 +25,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
 
         // GET api/<NationApiController>/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetAll(int id)
+        public async Task<IActionResult> Detail(int id)
         {
             var nation = await _nationSvc.Read(id);
             return Ok(nation);

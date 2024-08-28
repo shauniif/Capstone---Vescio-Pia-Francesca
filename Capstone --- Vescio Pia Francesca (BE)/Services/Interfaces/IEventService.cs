@@ -5,15 +5,15 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces
 {
     public interface IEventService
     {
-        Task<EventModel> Create(EventModel model);
-        Task<IEnumerable<Event>> Read(string name);
-        Task<EventModel> Update(EventModel model);
-        Task<IEnumerable<Event>> Delete(string name);
+        Task<Event> Create(EventModel model);
+        Task<Event> Read(int id);
+        Task<Event> Update(EventModel model);
+        Task<Event> Delete(int id);
         
-        Task<EventModel> Get(string name);
+        Task<EventModel> Get(int id);
 
         Task<IEnumerable<Event>> GetAll();
-        Task<IEnumerable<EventModel>> GetAllView();
 
+        Task<IEnumerable<Event>> GetEventsOfTheDay();
     }
 }

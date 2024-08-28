@@ -7,12 +7,12 @@ using Microsoft.Extensions.Options;
 
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
 {
-    public class CitiesController : Controller
+    public class CityController : Controller
     {
         private readonly ICitiesService _citiesSvc;
         private readonly INationService _nationSvc;
 
-        public CitiesController(ICitiesService citiesSvc, INationService nationSvc)
+        public CityController(ICitiesService citiesSvc, INationService nationSvc)
         {
             _citiesSvc = citiesSvc;
             _nationSvc = nationSvc;

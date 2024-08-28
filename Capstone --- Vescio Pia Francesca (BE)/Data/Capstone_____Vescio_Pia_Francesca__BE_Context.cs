@@ -15,5 +15,6 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Data
         }
 
         public DbSet<Capstone_____Vescio_Pia_Francesca__BE_.Entity.Nation> Nation { get; set; } = default!;
+        public DbSet<Capstone_____Vescio_Pia_Francesca__BE_.Entity.Event> Event { get; set; } = default!;
     }
 }

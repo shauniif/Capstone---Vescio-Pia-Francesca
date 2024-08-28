@@ -14,9 +14,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<Capstone_____Vescio_Pia_Francesca__BE_Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Capstone_____Vescio_Pia_Francesca__BE_Context") ?? throw new InvalidOperationException("Connection string 'Capstone_____Vescio_Pia_Francesca__BE_Context' not found.")));
 
-
-
-
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -37,8 +34,11 @@ builder.Services
     .AddScoped<IAuthService, AuthService>()
     .AddScoped<IPasswordEncoder, PasswordEncoder>()
     .AddScoped<IArticleService, ArticleService>()
+    .AddScoped<ICommentService, CommentService>()
     ;
 string key = builder.Configuration["Jwt:Key"]!;
+string audience = builder.Configuration["Jwt:Audience"]!;
+string issuer = builder.Configuration["Jwt:Issuer"]!;
 var bytesKey = System.Text.Encoding.UTF8.GetBytes(key);
 
 builder.Services.AddAuthentication( opt =>
@@ -47,14 +47,18 @@ builder.Services.AddAuthentication( opt =>
         opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
         opt.DefaultForbidScheme = JwtBearerDefaults.AuthenticationScheme;
         opt.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+        
     })
     .AddCookie(opt => opt.LoginPath = "/Auth/Login")
     .AddJwtBearer( opt =>
     {
         opt.TokenValidationParameters = new TokenValidationParameters
         {
-            ValidateLifetime = true,
+            ValidateIssuer = true,
+            ValidateAudience = true,
             ValidateIssuerSigningKey = true,
+            ValidIssuer = issuer,
+            ValidAudience = audience,
             IssuerSigningKey = new SymmetricSecurityKey(bytesKey)
         };
     })

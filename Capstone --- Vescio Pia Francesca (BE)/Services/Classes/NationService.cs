@@ -72,7 +72,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                 foreach (var guild in guilds) { 
                     _db.Remove(guild);
                 }
-                foreach(var city in cities )
+                foreach(var city in cities)
                 {
                     _db.Remove(city); 
                 }

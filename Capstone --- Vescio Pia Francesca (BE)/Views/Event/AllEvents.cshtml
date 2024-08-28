@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Capstone_____Vescio_Pia_Francesca__BE_.Models.EventModel>
+﻿@model IEnumerable<Capstone_____Vescio_Pia_Francesca__BE_.Entity.Event>
 
 @{
     ViewData["Title"] = "AllEvents";
@@ -55,9 +55,9 @@
                     @Html.DisplayFor(modelItem => item.Modifier)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new {  id=item.Name }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Name }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Name })
+                @Html.ActionLink("Edit", "Edit", new {  id=item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
         </tr>
 }

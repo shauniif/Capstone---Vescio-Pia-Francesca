@@ -98,7 +98,9 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
         {
             try
             {
-                var guild = await _db.Guilds.SingleOrDefaultAsync(i => i.Id == id);
+                var guild = await _db.Guilds
+                    .Include(g => g.Nation)
+                    .SingleOrDefaultAsync(i => i.Id == id);
 
                 if (guild == null)
                 {

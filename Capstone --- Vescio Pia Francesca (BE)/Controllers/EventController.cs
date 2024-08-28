@@ -15,21 +15,48 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
         }
         public async Task<IActionResult> AllEvents()
         {
-            var events = await _eventSvc.GetAllView();
+            var events = await _eventSvc.GetAll();
             return View(events);
         }
 
-        public IActionResult Create() { 
+        public IActionResult Create()
+        {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(EventModel newEvent) {
+        public async Task<IActionResult> Create(EventModel newEvent)
+        {
+            if (ModelState.IsValid) {
+                {
+                    await _eventSvc.Create(newEvent);
+                    return RedirectToAction(nameof(AllEvents));
+                } 
+            }
+                return View(newEvent);
+        }
 
-            
-                _eventSvc.Create(newEvent);
+        public async Task<IActionResult> Delete(int id) 
+        {
+            await _eventSvc.Delete(id);
+            return RedirectToAction(nameof(AllEvents));
+        }
+
+        public async Task<IActionResult> Edit(int id) 
+        { 
+            var eventModel = await _eventSvc.Get(id);
+            return View(eventModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EventModel currEvent)
+        {
+            if (ModelState.IsValid)
+            {
+                await _eventSvc.Update(currEvent);
                 return RedirectToAction(nameof(AllEvents));
-
+            }
+            return View(currEvent);
         }
     }
 }

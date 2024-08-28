@@ -14,12 +14,15 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
     public class AuthApiController : ControllerBase
     {
         private readonly IAuthService _authSvc;
-        private readonly byte[] _key;
-
+        private readonly string key;
+        private readonly string issuer;
+        private readonly string audience;
         public AuthApiController(IAuthService authSvc, IConfiguration configuration)
         {
             _authSvc = authSvc;
-            _key = System.Text.Encoding.UTF8.GetBytes(configuration["Jwt:Key"]!);
+            key = configuration["Jwt:Key"]!;
+            issuer = configuration["Jwt:Issuer"]!;
+            audience = configuration["Jwt:Audience"]!;
         }
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserViewModel user)
@@ -40,20 +43,25 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
       };
                 u.Roles.ForEach(r => claims.Add(new Claim(ClaimTypes.Role, r.Name)));
 
-                var key = new SymmetricSecurityKey(_key);
-                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-                var token = new System.IdentityModel.Tokens.Jwt.JwtSecurityToken(
+                var k = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(key));
+                var signed = new SigningCredentials(k, SecurityAlgorithms.HmacSha256);
+                var expiration = DateTime.Now.AddMonths(1);
+
+
+                var token = new JwtSecurityToken(
                          claims: claims,
+                         audience: audience,
+                         issuer: issuer,
                          expires: DateTime.Now.AddMonths(1),
-                         signingCredentials: creds
+                         signingCredentials: signed
                     );
                 var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
 
-                return Ok(new LoginResponseModel { Username = u.Username, Token = tokenString});
+                return Ok(new LoginResponseModel { Username = u.Username, Token = tokenString });
             }
             else
             {
-                return BadRequest();
+                return Unauthorized();
             }
         }
     }
