@@ -11,7 +11,8 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Entity
         [MinLength(5)]
         [MaxLength(50)]
         public required string Title { get; set; }
-        [StringLength(2048)]
+        
+        [Column(TypeName = "nvarchar(max)")]
         public required string Image {  get; set; }
         public required string Content { get; set; }
         public User? Author { get; set; }

@@ -81,7 +81,6 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
             }
             var nationPhotodata = nation.Photo.Substring(23);
             byte[] imageBytes = Convert.FromBase64String(nationPhotodata);
-            Console.WriteLine(imageBytes);
             return File(imageBytes, "image/jpeg");
         }
     }

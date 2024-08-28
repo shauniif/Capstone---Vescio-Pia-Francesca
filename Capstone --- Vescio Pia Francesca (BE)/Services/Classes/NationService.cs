@@ -89,7 +89,11 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
         {
             try
             {
-                return await _db.Nations.ToListAsync();
+                return await _db.Nations
+                    .Include(n => n.Ecos)
+                    .Include(n => n.Guilds)
+                    .Include(n => n.Cities)
+                    .ToListAsync();
             }
             catch (Exception ex)
             {

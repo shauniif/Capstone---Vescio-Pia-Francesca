@@ -1,0 +1,14 @@
+﻿@model Capstone_____Vescio_Pia_Francesca__BE_.Entity.User
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@{
+    ViewData["Title"] = "Detail New User";
+}
+
+<h2>Ciao @Model.Name</h2>
+Benvenuto in Zantha Universe 
+Ecco il tuo codice per loggare <strong>@Model.AdminCode</strong> non dimenticarlo! 
+
+<a asp-action="Login" asp-controller="Auth">Vai al Login</a>

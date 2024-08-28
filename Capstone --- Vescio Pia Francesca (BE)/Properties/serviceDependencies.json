@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:Capstone_____Vescio_Pia_Francesca__BE_Context"
+    }
+  }
+}

@@ -26,6 +26,18 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="AllRoles">Roles</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="AllUsers">Users</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Register">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Logout">Logout</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Race" asp-action="AllRaces">Races</a>
                         </li>
                         <li class="nav-item">
@@ -40,7 +52,22 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Guild" asp-action="AllGuilds"> Guilds </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Event" asp-action="AllEvents"> Events </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Article" asp-action="AllArticles"> Articles </a>
+                        </li>
                     </ul>
+
+                    @if (!User.Identity?.IsAuthenticated ?? false)
+                    {
+                        <span class="user-greeting">Ciao Anonimo</span>
+                    }
+                    @if (User.Identity?.IsAuthenticated ?? false)
+                    {
+                        <span class="user-greeting">Ciao @User.Identity.Name!</span>
+                    }
                 </div>
             </div>
         </nav>

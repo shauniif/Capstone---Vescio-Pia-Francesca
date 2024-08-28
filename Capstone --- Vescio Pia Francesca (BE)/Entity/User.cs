@@ -27,6 +27,8 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Entity
         [Column(TypeName = "nvarchar(max)")]
         public string? Password { get; set; }
 
+        [Column(TypeName = "nvarchar(6)")]
+        public string? AdminCode { get; set; }
         public List<Role> Roles { get; set; } = new List<Role>();
 
         public List<Article> Articles { get; set; } = new List<Article>();
