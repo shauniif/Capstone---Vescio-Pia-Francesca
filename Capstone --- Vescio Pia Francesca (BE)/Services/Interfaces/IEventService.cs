@@ -15,5 +15,6 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces
         Task<IEnumerable<Event>> GetAll();
 
         Task<IEnumerable<Event>> GetEventsOfTheDay();
+        Task<decimal> ChangeModifier(string name, decimal modifier);
     }
 }

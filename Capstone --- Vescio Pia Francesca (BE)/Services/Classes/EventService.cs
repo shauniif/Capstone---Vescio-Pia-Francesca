@@ -8,6 +8,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
 {
     public class EventService : IEventService
     {
+     
         private readonly DataContext _db;
 
         public EventService(DataContext db)
@@ -29,7 +30,8 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
         }
         public async Task<Event> Create(EventModel model)
         {
-            try {
+            try
+            {
 
                 var newEvent = new Event
                 {
@@ -39,6 +41,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                     Description = model.Description,
                     Influence = model.Influence,
                     Modifier = model.Modifier,
+                    IsChanged = false,
                     Cover = ConvertImage(model.Cover)
                 };
 
@@ -46,8 +49,8 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                 await _db.SaveChangesAsync();
 
                 return newEvent;
-            } 
-            catch(Exception ex) 
+            }
+            catch (Exception ex)
             {
                 throw new Exception("Create failed", ex);
             }
@@ -55,35 +58,38 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
 
         public async Task<IEnumerable<Event>> GetAll()
         {
-            try {
+            try
+            {
                 var events = await _db.Events.ToListAsync();
+                
                 return events;
-            } 
-            catch(Exception ex) 
-            { 
+            }
+            catch (Exception ex)
+            {
                 throw new Exception("Error", ex);
             }
         }
 
         public async Task<Event> Read(int id)
         {
-            try 
+            try
             {
                 var currEvent = await _db.Events.FirstOrDefaultAsync(e => e.Id == id);
-                if (currEvent == null) 
+                if (currEvent == null)
                 {
                     throw new Exception("Event not found");
                 }
                 return currEvent;
-            } 
-            catch (Exception ex) 
+            }
+            catch (Exception ex)
             {
                 throw new Exception("Error", ex);
             }
         }
 
         public async Task<Event> Update(EventModel model)
-        { try
+        {
+            try
             {
                 var currEvent = await Read(model.Id);
                 currEvent.Name = model.Name;
@@ -95,11 +101,11 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                 _db.SaveChanges();
                 return currEvent;
             }
-            catch (Exception ex) 
-            { 
+            catch (Exception ex)
+            {
                 throw new Exception("Error", ex);
             }
-           
+
         }
 
         public async Task<Event> Delete(int id)
@@ -140,13 +146,34 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
         {
             try
             {
-                var events = await _db.Events.Where(e => e.Date.Date == DateTime.Now.Date).ToListAsync();
+                var today = DateTime.Today.Date;
+                var events = await _db.Events.Where(e => e.Date == today).ToListAsync();
                 return events;
             }
             catch (Exception ex)
             {
                 throw new Exception("Error", ex);
             }
+        }
+
+        public async Task<decimal> ChangeModifier(string name, decimal modifier)
+        {
+            var events = await GetEventsOfTheDay();
+
+            foreach (var e in events)
+            {
+                if(e.IsChanged != null)
+                {
+
+                if ( e.IsChanged == false&& e.Influence.ToLower().Trim().Contains(name.ToLower().Trim()))
+                {
+                    modifier += e.Modifier;
+                    e.IsChanged = true;
+                }
+                }
+            }
+            await _db.SaveChangesAsync();
+            return modifier;
         }
     }
 }

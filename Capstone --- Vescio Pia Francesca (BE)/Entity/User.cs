@@ -33,5 +33,6 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Entity
 
         public List<Article> Articles { get; set; } = new List<Article>();
         public List<Comment> Comments { get; set; } = new List<Comment>();
+        public List<Character> Characters { get; set; } = new List<Character>();
     }
 }

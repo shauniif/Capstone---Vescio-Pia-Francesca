@@ -82,7 +82,10 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
         {
             try
             {
-                var articles = await _db.Articles.Include(a => a.Author).ToListAsync();
+                var articles = await _db.Articles
+                    .Include(a => a.Author)
+                    .Where(a => a.Author.Name == name)
+                    .ToListAsync();
                 return articles;
             }
             catch (Exception ex)

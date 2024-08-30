@@ -1,5 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Capstone_____Vescio_Pia_Francesca__BE_.Data;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.OpenApi;
+using Microsoft.EntityFrameworkCore;
 
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Entity
 {

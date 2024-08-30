@@ -9,10 +9,12 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
     public class NationController : Controller
     {
         private readonly INationService _nationSvc;
+        private readonly IEventService _eventSvc;
 
-        public NationController(INationService nationSvc)
+        public NationController(INationService nationSvc, IEventService eventSvc)
         {
             _nationSvc = nationSvc;
+            _eventSvc = eventSvc;
 
         }
         public async Task<IActionResult> AllNations()

@@ -28,8 +28,15 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
         }
         public async Task<IActionResult> AllArticles()
         {
-            var article = await _articleSvc.GetAllArticles();
-            return View(article);
+            var articles = await _articleSvc.GetAllArticles();
+            return View(articles);
+        }
+
+        public async Task<IActionResult> MyArticle()
+        {
+            var name = User.Identity.Name;
+            var articles = await _articleSvc.GetAllArticlesOfAdmin(name);
+            return View(articles);
         }
 
         public IActionResult Create() 

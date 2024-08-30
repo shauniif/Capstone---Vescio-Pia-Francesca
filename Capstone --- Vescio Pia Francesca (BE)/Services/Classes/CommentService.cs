@@ -52,7 +52,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             try
             {
                 var comment = await Read(id);
-                _db.Remove(comment);
+                _db.Comments.Remove(comment);
                 await _db.SaveChangesAsync();
                 return comment;
             }
@@ -97,32 +97,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
         {
             try 
             {
-                var comment = await _db.Comments
-       .Include(c => c.Article)
-       .Include(c => c.Author)
-       .Where(c => c.Id == id)
-       .Select(c => new Comment
-       {
-           Id = c.Id,
-           Content = c.Content,
-           PublicationDate = c.PublicationDate,
-           Article = new Article
-           {
-               Id = c.Article.Id, // Evita proprietà che causano cicli
-               Image = c.Article.Image,
-               Title = c.Article.Title,
-               Content = c.Article.Content
-           },
-           Author = new User
-           {
-               Id = c.Author.Id, // Evita proprietà che causano cicli
-               Name = c.Author.Name,
-               Email = c.Author.Email,
-               DateBirth = c.Author.DateBirth,
-               Username = c.Author.Username
-           }
-       })
-       .FirstOrDefaultAsync();
+                var comment = await SelectComment(id);
                 if (comment == null)
                 {
                     throw new Exception("comment not found");
@@ -138,17 +113,65 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
         {
             try
             {
-                var currComment = await Read(dto.Id);
+                var currComment = await _db.Comments.FirstOrDefaultAsync(c=> c.Id == dto.Id);
+                if (currComment == null)
+                {
+                    throw new Exception("Comment not found");
+                }
+
                 currComment.Content = dto.Content;
-                _db.Comments.Update(currComment);
                 await _db.SaveChangesAsync();
-                return currComment;
+
+                return await SelectComment(currComment.Id);
             }
             catch (Exception ex)
             {
                 throw new Exception("Update failed", ex);
             }
 
+        }
+        
+        public async Task<Comment> SelectComment(int id)
+        {
+            try
+            {
+                var comment = await _db.Comments
+                    .AsNoTracking()
+                    .Include(c => c.Article)
+                    .Include(c => c.Author)
+                    .Where(c => c.Id == id)
+                    .Select(c => new Comment
+                        {
+                            Id = c.Id,
+                            Content = c.Content,
+                            PublicationDate = c.PublicationDate,
+                            Article = new Article
+                        {
+                            Id = c.Article.Id, 
+                            Image = c.Article.Image,
+                            Title = c.Article.Title,
+                            Content = c.Article.Content
+                        },
+                            Author = new User
+                        {
+                            Id = c.Author.Id, 
+                            Name = c.Author.Name,
+                            Email = c.Author.Email,
+                            DateBirth = c.Author.DateBirth,
+                            Username = c.Author.Username
+                        }
+                    })
+                    .FirstOrDefaultAsync();
+                if (comment == null)
+                {
+                    throw new Exception("Comment not found");
+                }
+                return comment;
+            }
+            catch (Exception ex) 
+            {
+                throw new Exception("Comment not found", ex);
+            }
         }
     }
 }

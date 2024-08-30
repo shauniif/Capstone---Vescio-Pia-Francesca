@@ -4,6 +4,7 @@ using Capstone_____Vescio_Pia_Francesca__BE_.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240829084101_implementsOfUserInCharacters")]
+    partial class implementsOfUserInCharacters
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,10 +76,6 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Migrations
                     b.Property<int?>("GuildId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Image")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -84,9 +83,6 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Migrations
 
                     b.Property<int>("RaceId")
                         .HasColumnType("int");
-
-                    b.Property<decimal>("Score")
-                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -223,9 +219,6 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Migrations
                     b.Property<string>("Influence")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool?>("IsChanged")
-                        .HasColumnType("bit");
 
                     b.Property<decimal>("Modifier")
                         .HasColumnType("decimal(18, 2)");

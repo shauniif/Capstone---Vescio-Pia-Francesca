@@ -22,5 +22,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Entity
 
         [Column(TypeName = "decimal(18, 2)")]
         public decimal Modifier { get; set; }
+
+        public bool? IsChanged { get; set; }
     }
 }

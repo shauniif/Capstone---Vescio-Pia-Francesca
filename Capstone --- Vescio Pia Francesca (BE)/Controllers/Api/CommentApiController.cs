@@ -16,12 +16,11 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
     public class CommentApiController : ControllerBase
     {
         private readonly ICommentService _commentSvc;
-        private readonly DataContext _db;
 
-        public CommentApiController(ICommentService commentSvc, DataContext db)
+        public CommentApiController(ICommentService commentSvc)
         {
             _commentSvc = commentSvc;
-            _db = db;
+
         }
 
         [Authorize]
@@ -30,6 +29,13 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
         {
             var comments = await _commentSvc.GetAllComments();
             return Ok(comments);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(int id)
+        {
+            var comment = await _commentSvc.Read(id);
+            return Ok(comment);
         }
 
 
@@ -43,6 +49,27 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
                 return Ok(newComment);
             }
             return BadRequest();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _commentSvc.Delete(id);
+            return NoContent();
+
+        }
+
+        [HttpPut("{id}")] 
+        public async Task<IActionResult> Update(int id, [FromBody] CommentDTO dto)
+        {
+            if(ModelState.IsValid)
+            {
+                dto.Id = id;
+                var comment = await _commentSvc.Update(dto);
+                return Ok(comment);
+            } 
+            return BadRequest();
+
         }
     }
 }

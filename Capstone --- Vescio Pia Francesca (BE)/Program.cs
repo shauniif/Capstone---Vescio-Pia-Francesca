@@ -9,6 +9,8 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.DependencyInjection;
 using Capstone_____Vescio_Pia_Francesca__BE_.Data;
+using Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api;
+using Capstone_____Vescio_Pia_Francesca__BE_.Entity;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<Capstone_____Vescio_Pia_Francesca__BE_Context>(options =>
@@ -35,6 +37,8 @@ builder.Services
     .AddScoped<IPasswordEncoder, PasswordEncoder>()
     .AddScoped<IArticleService, ArticleService>()
     .AddScoped<ICommentService, CommentService>()
+    .AddScoped<ICharacterService, CharacterService>()
+    .AddScoped<DbContext, DataContext>()
     ;
 string key = builder.Configuration["Jwt:Key"]!;
 string audience = builder.Configuration["Jwt:Audience"]!;
@@ -64,6 +68,10 @@ builder.Services.AddAuthentication( opt =>
     })
     ;
 builder.Services.AddAuthorization();
+
+builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -73,6 +81,12 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+};
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

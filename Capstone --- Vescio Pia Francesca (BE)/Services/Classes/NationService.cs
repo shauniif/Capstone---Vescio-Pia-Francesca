@@ -3,6 +3,7 @@ using Capstone_____Vescio_Pia_Francesca__BE_.Entity;
 using Capstone_____Vescio_Pia_Francesca__BE_.Models;
 using Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
 {
@@ -89,11 +90,12 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
         {
             try
             {
-                return await _db.Nations
+                var nations = await _db.Nations
                     .Include(n => n.Ecos)
                     .Include(n => n.Guilds)
                     .Include(n => n.Cities)
                     .ToListAsync();
+                return nations;
             }
             catch (Exception ex)
             {
@@ -132,6 +134,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                 nation.Name = entity.Name;
                 nation.Description = entity.Description;
                 nation.FormOfGovernment = entity.FormOfGovernment;
+                nation.Modifier = entity.Modifier;
                 nation.Photo = ConvertImage(entity.Photo);
 
                 _db.Nations.Update(nation);

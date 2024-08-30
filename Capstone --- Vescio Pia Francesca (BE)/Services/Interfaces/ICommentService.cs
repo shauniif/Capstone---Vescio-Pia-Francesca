@@ -14,5 +14,6 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces
         Task<Comment> Delete(int id);
         Task<Comment> Read(int id);
 
+        Task<Comment> SelectComment(int id);
     }
 }
