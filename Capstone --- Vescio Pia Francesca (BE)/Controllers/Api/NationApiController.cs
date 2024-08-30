@@ -1,4 +1,6 @@
 ﻿using Capstone_____Vescio_Pia_Francesca__BE_.Entity;
+using Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes;
+using Capstone_____Vescio_Pia_Francesca__BE_.DTO;
 using Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,10 +19,18 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
             _nationSvc = nationSvc;
 
         }
+
         [HttpGet]
         public async Task<IActionResult> GetAll()
-        { var nations = await _nationSvc.GetAllNations();
-            return Ok(nations);
+        {
+                var nations = await _nationSvc.GetAllNations();
+            var nationsSelect = new List<Nation>();
+                foreach (var nation in nations) {
+                var nationSel= await _nationSvc.getNation(nation.Id);
+                nationsSelect.Add(nationSel);
+            }
+                return Ok(nationsSelect);
+            
         }
 
         // GET api/<NationApiController>/5
@@ -28,8 +38,14 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
         public async Task<IActionResult> Detail(int id)
         {
             var nation = await _nationSvc.Read(id);
-            return Ok(nation);
+            var nationSel = await _nationSvc.getNation(nation.Id);
+            return Ok(nationSel);
         }
 
+        [HttpGet("test")]
+        public IActionResult Test()
+        {
+            return Ok("Test funzionante");
+        }
     }
 }

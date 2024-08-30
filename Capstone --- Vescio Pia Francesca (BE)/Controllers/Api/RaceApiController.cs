@@ -19,7 +19,6 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
         }
 
         [HttpGet]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> GetAll()
         {
             var races = await _raceSvc.GetAllRaces();

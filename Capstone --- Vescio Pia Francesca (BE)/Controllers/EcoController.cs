@@ -114,11 +114,11 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
         public async Task<IActionResult> GetEcoImage(int id)
         {
             var nation = await _ecoSvc.Read(id);
-            if (nation?.Photo == null)
+            if (nation?.Pic == null)
             {
                 return NotFound(); 
             }
-            var nationPhotodata = nation.Photo.Substring(23);
+            var nationPhotodata = nation.Pic.Substring(23);
             byte[] imageBytes = Convert.FromBase64String(nationPhotodata);
             Console.WriteLine(imageBytes);
             return File(imageBytes, "image/jpeg");

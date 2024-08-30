@@ -15,7 +15,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Entity
 
         public string Description { get; set; }
 
-        public string Photo { get; set; }
+        public string Pic { get; set; }
 
         [Column(TypeName = "decimal(18, 2)")]
         public decimal Modifier { get; set; }

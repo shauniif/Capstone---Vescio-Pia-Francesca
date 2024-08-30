@@ -19,10 +19,25 @@ builder.Services.AddDbContext<Capstone_____Vescio_Pia_Francesca__BE_Context>(opt
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+
+
+
 var conn = builder.Configuration.GetConnectionString("SqlServer")!;
 builder.Services
     .AddDbContext<DataContext>(opt => opt.UseSqlServer(conn))
     ;
+
+
+ builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        policy =>
+        {
+            policy.AllowAnyOrigin() // Permette richieste da qualsiasi origine
+                  .AllowAnyMethod() // Permette qualsiasi metodo HTTP
+                  .AllowAnyHeader(); // Permette qualsiasi intestazione
+        });
+}); 
 
 builder.Services
     .AddScoped<IRacesService, RaceService>()
@@ -67,12 +82,19 @@ builder.Services.AddAuthentication( opt =>
         };
     })
     ;
+
+
+
 builder.Services.AddAuthorization();
 
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();
+
+
 var app = builder.Build();
+
+app.UseCors("AllowAllOrigins");
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -90,7 +112,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
 
 app.UseAuthorization();

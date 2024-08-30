@@ -1,4 +1,5 @@
 ﻿using Capstone_____Vescio_Pia_Francesca__BE_.Context;
+using Capstone_____Vescio_Pia_Francesca__BE_.DTO;
 using Capstone_____Vescio_Pia_Francesca__BE_.Entity;
 using Capstone_____Vescio_Pia_Francesca__BE_.Models;
 using Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces;
@@ -171,6 +172,43 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                 throw new Exception("Error", ex);
 
             }
+        }
+
+        public async Task<Nation> getNation(int id)
+        {
+            var nation = await _db.Nations
+                        .Include(c => c.Guilds)
+                        .Include(c => c.Cities)
+                        .Include(c => c.Ecos)
+                        .Select(c => new Nation
+                        {
+                            Id = c.Id,
+                            Name = c.Name,
+                            Description = c.Description,
+                            FormOfGovernment = c.FormOfGovernment,
+                            Modifier = c.Modifier,
+                            Photo = c.Photo,
+                            Cities = c.Cities.Select(city => new City
+                            {
+                                Id = city.Id,
+                                Name = city.Name,
+                            }).ToList(),
+                            Guilds = c.Guilds.Select(guild => new Guild
+                            {
+                                Id = guild.Id,
+                                Name = guild.Name,
+                            }).ToList(),
+                            Ecos = c.Ecos.Select(eco => new Eco
+                            {
+                                Id= eco.Id,
+                                Name = eco.Name,
+                            }).ToList()
+                        }).FirstOrDefaultAsync(c => c.Id == id);
+            if(nation == null)
+            {
+                throw new Exception();
+            }
+            return nation;
         }
     }
 }

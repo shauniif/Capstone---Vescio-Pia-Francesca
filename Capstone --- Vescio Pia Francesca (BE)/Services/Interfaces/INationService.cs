@@ -1,4 +1,5 @@
 ﻿using Capstone_____Vescio_Pia_Francesca__BE_.Entity;
+using Capstone_____Vescio_Pia_Francesca__BE_.DTO;
 using Capstone_____Vescio_Pia_Francesca__BE_.Models;
 
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces
@@ -7,6 +8,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces
     {
         Task<Nation> Create(NationModel entity);
         Task<Nation> Read(int id);
+        Task<Nation> getNation(int id);
         Task<NationModel> Get(int id);
         Task<Nation> Update(NationModel entity);
 

@@ -187,7 +187,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Migrations
                     b.Property<int?>("NationId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Photo")
+                    b.Property<string>("Pic")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

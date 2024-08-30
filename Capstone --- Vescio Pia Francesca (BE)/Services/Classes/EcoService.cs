@@ -38,7 +38,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                     Name = entity.Name,
                     Description = entity.Description,
                     Modifier = entity.Modifier,
-                    Photo = ConvertImage(entity.Photo),
+                    Pic = ConvertImage(entity.Photo),
                     Nation = nation,
                 };
                 await _db.Ecos.AddAsync(eco);
@@ -56,6 +56,11 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             try
             {
                 var eco = await Read(id);
+                var characters = await _db.Characters.Where(c => c.Eco.Id == id).ToListAsync();
+                foreach (var character in characters) 
+                { 
+                    character.Eco = null;
+                }
                 _db.Ecos.Remove(eco);
                 await _db.SaveChangesAsync();
                 return eco;
@@ -146,7 +151,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                 eco.Position = entity.Position;
                 eco.Name = entity.Name;
                 eco.Description = entity.Description;
-                eco.Photo = ConvertImage(entity.Photo);
+                eco.Pic = ConvertImage(entity.Photo);
                 eco.Modifier = entity.Modifier;
                 eco.Nation = nation;
                 _db.Ecos.Update(eco);
