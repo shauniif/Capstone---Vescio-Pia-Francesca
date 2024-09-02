@@ -94,6 +94,29 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             };
         }
 
+        public async Task<Guild> GetGuild(int id)
+        {
+            var guild = await _db.Guilds
+                       .Include(g => g.Nation)
+                       .Select(g => new Guild
+                       {
+                           Id = g.Id,
+                           Name = g.Name,
+                           Description = g.Description,
+                           Modifier = g.Modifier,
+                           Nation = new Nation
+                           {
+                               Id = g.Nation.Id,
+                               Name = g.Nation.Name,
+                           }
+                       }).FirstOrDefaultAsync(c => c.Id == id);
+            if (guild == null)
+            {
+                throw new Exception("Error");
+            }
+            return guild;
+        }
+
         public async Task<Guild> Read(int id)
         {
             try

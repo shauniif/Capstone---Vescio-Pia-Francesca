@@ -8,7 +8,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces
     {
         Task<Nation> Create(NationModel entity);
         Task<Nation> Read(int id);
-        Task<Nation> getNation(int id);
+        Task<Nation> GetNation(int id);
         Task<NationModel> Get(int id);
         Task<Nation> Update(NationModel entity);
 

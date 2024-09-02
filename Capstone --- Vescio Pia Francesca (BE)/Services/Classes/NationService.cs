@@ -174,7 +174,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             }
         }
 
-        public async Task<Nation> getNation(int id)
+        public async Task<Nation> GetNation(int id)
         {
             var nation = await _db.Nations
                         .Include(c => c.Guilds)

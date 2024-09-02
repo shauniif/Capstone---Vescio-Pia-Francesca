@@ -1,0 +1,8 @@
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+  <div class="col my-3" *ngFor="let guild of guilds">
+    <div class="card d-flex flex-column h-100">
+      <app-single-guild [guild]="guild"></app-single-guild>
+      <a [routerLink]="['detail', guild.id]">Dettagli</a>
+    </div>
+  </div>
+</div>

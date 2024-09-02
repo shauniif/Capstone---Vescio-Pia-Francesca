@@ -1,0 +1,8 @@
+<div *ngIf="city">
+  <app-single-city [city]="city"></app-single-city>
+  <div *ngIf="city.nation">
+    <a [routerLink]="['/nations/detail', city.nation.id]">{{
+      city.nation.name
+    }}</a>
+  </div>
+</div>

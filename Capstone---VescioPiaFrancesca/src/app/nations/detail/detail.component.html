@@ -1,36 +1,40 @@
-<div class="d-flex flex-column h-100">
-  <img [src]="nation.photo" class="card-img-top" alt="Nation_image" />
-  <div class="card-body flex-grow-1">
-    <h5 class="card-title">{{ nation.name }}</h5>
-    <p class="card-text">
-      {{ nation.description }}
-    </p>
-    <p class="card-text">
-      <span class="fw-bold"></span>
-      {{ nation.formOfGovernment }}
-    </p>
+<div *ngIf="nation">
+  <div class="d-flex flex-column h-100">
+    <img [src]="nation.photo" class="card-img-top" alt="Nation_image" />
+    <div class="card-body flex-grow-1">
+      <h5 class="card-title">{{ nation.name }}</h5>
+      <p class="card-text">
+        {{ nation.description }}
+      </p>
+      <p class="card-text">
+        <span class="fw-bold"></span>
+        {{ nation.formOfGovernment }}
+      </p>
+    </div>
   </div>
+
+  <p>Divinità</p>
+
+  <p *ngIf="nation.ecos && nation.ecos.length === 0">Nessun Eco disponibile</p>
+  <ul *ngIf="nation.ecos && nation.ecos.length > 0">
+    <li *ngFor="let eco of nation.ecos">
+      <a [routerLink]="['/ecos/detail', eco.id]"> {{ eco.name }}</a>
+    </li>
+  </ul>
+
+  <p>Città</p>
+  <p *ngIf="nation.cities && nation.cities.length === 0">
+    Nessuna Città disponibile
+  </p>
+  <ul *ngIf="nation.cities && nation.cities.length > 0">
+    <li *ngFor="let city of nation.cities">{{ city.name }}</li>
+  </ul>
+
+  <p>Gilde</p>
+  <p *ngIf="nation.guilds && nation.guilds.length === 0">
+    Nessuna Gilda disponibile
+  </p>
+  <ul *ngIf="nation.guilds && nation.guilds.length > 0">
+    <li *ngFor="let guild of nation.guilds">{{ guild.name }}</li>
+  </ul>
 </div>
-
-<p>Divinità</p>
-
-<p *ngIf="nation.ecos && nation.ecos.length === 0">Nessun Eco disponibile</p>
-<ul *ngIf="nation.ecos && nation.ecos.length > 0">
-  <li *ngFor="let eco of nation.ecos">{{ eco.name }}</li>
-</ul>
-
-<p>Città</p>
-<p *ngIf="nation.cities && nation.cities.length === 0">
-  Nessuna Città disponibile
-</p>
-<ul *ngIf="nation.cities && nation.cities.length > 0">
-  <li *ngFor="let city of nation.cities">{{ city.name }}</li>
-</ul>
-
-<p>Gilde</p>
-<p *ngIf="nation.guilds && nation.guilds.length === 0">
-  Nessuna Gilda disponibile
-</p>
-<ul *ngIf="nation.guilds && nation.guilds.length > 0">
-  <li *ngFor="let guild of nation.guilds">{{ guild.name }}</li>
-</ul>

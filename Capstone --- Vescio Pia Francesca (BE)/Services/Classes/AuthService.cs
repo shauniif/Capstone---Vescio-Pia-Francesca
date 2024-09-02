@@ -201,7 +201,12 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                 Email = u.Email,
                 DateBirth = u.DateBirth,
                 Password = u.Password,
-                Username = u.Name
+                Username = u.Name,
+                Roles = u.Roles.Select(r => new Role
+                {
+                    Id = r.Id,
+                    Name = r.Name,
+                }).ToList()
             }).FirstOrDefaultAsync(u => u.Id == id);
             if(user == null)
             {

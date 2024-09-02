@@ -164,6 +164,29 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             }
         }
 
-        
+        public async Task<Eco> GetEco(int id)
+        {
+            var eco = await _db.Ecos
+                       .Include(e => e.Nation)
+                       .Select(e => new Eco
+                       {
+                           Id = e.Id,
+                           Position = e.Position,
+                           Name = e.Name,
+                           Description = e.Description,
+                           Modifier = e.Modifier,
+                           Pic = e.Pic,
+                           Nation = e.Nation != null ? new Nation
+                           {
+                               Id = e.Nation.Id,
+                               Name = e.Nation.Name,
+                           } : null
+                       }).FirstOrDefaultAsync(c => c.Id == id);
+            if (eco == null)
+            {
+                throw new Exception();
+            }
+            return eco;
+        }
     }
 }

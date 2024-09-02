@@ -9,6 +9,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces
         Task<Guild> Delete(int id);
         Task<Guild> Read(int id);
         Task<GuildModel> Get(int id);
+        Task<Guild> GetGuild(int id);
 
         Task<IEnumerable<Guild>> GetAll();
     }

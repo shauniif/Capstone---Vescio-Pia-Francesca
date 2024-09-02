@@ -7,7 +7,6 @@ import { environment } from '../../environments/environment.development';
   providedIn: 'root'
 })
 export class NationsService {
-  nations: iNations[] = [];
   constructor(private http:HttpClient) { }
 
 

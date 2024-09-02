@@ -128,5 +128,60 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                 throw new Exception("Update failed", ex);
             }
         }
+
+        public async Task<Article> GetArticle(int id)
+        {
+            var article = await _db.Articles
+                      .Include(a => a.Author)
+                      .Select(a => new Article
+                      {
+                         Id = a.Id,
+                         Image = a.Image,
+                         Title = a.Title,
+                         PublicationDate = a.PublicationDate,
+                         Content = a.Content,
+                         Author = new User { 
+                             Id = a.Author.Id,
+                             Name = a.Author.Name,
+                             DateBirth = a.Author.DateBirth,
+                             Email = a.Author.Email,
+                             Username = a.Author.Username
+                         },
+                         Comments = a.Comments.Select(c => new Comment
+                         {
+                             Id=c.Id,
+                             Content=c.Content,
+                             Author = new User
+                             {
+                                 Id = c.Author.Id,
+                                 Name = c.Author.Name,
+                                 DateBirth = c.Author.DateBirth,
+                                 Email=c.Author.Email,
+                                 Username = c.Author.Username
+                             },
+                             PublicationDate = c.PublicationDate,
+                             Article = new Article
+                             {
+                                 Id = c.Article.Id,
+                                 Title = c.Article.Title,
+                                 Content = c.Article.Content,
+                                 Author = new User
+                                 {
+                                     Id = a.Author.Id,
+                                     Name = a.Author.Name,
+                                     DateBirth = a.Author.DateBirth,
+                                     Email = a.Author.Email,
+                                     Username = a.Author.Username
+                                 },
+                                 Image = c.Article.Image
+                             }
+                         }).ToList()
+                      }).FirstOrDefaultAsync(c => c.Id == id);
+            if (article == null)
+            {
+                throw new Exception();
+            }
+            return article;
+        }
     }
 }

@@ -10,15 +10,16 @@ export class EcosService {
 
   constructor(private http:HttpClient) { }
 
-  nationUrl:string = `${environment.apiUrl}EcoApi`
+  ecoUrl:string = `${environment.apiUrl}EcoApi`
 
 
   getAll(): Observable<iEco[]> {
-  return this.http.get<iEco[]>(this.nationUrl);
+  return this.http.get<iEco[]>(this.ecoUrl);
   }
 
   getEco(id: number) : Observable<iEco>  {
-    return this.http.get<iEco>(`${this.nationUrl}/${id}`);
+    console.log("ID ricevuto nel servizio:", id);
+    return this.http.get<iEco>(`${this.ecoUrl}/${id}`);
   }
 
 

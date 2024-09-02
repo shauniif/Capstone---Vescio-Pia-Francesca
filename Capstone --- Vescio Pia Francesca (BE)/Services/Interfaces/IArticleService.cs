@@ -9,6 +9,8 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces
         Task<Article> Update(ArticleModel model);
         Task<Article> Delete(int id);
         Task<Article> Read(int id);
+
+        Task<Article> GetArticle(int id);
         Task<IEnumerable<Article>> GetAllArticles();
         Task<IEnumerable<Article>> GetAllArticlesOfAdmin(string name);
     }

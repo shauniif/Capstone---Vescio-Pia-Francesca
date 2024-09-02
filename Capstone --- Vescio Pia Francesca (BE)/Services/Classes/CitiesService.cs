@@ -96,6 +96,28 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             }
         }
 
+        public async Task<City> GetCity(int id)
+        {
+            var city = await _db.Cities
+                       .Include(c => c.Nation)
+                       .Select(c => new City
+                       {
+                           Id = c.Id,
+                           Name = c.Name,
+                           Description = c.Description,
+                           Nation = new Nation
+                           {
+                               Id = c.Nation.Id,
+                               Name = c.Nation.Name,
+                           } 
+                       }).FirstOrDefaultAsync(c => c.Id == id);
+            if (city == null)
+            {
+                throw new Exception();
+            }
+            return city;
+        }
+
         public async Task<City> Read(int id)
         {
             try

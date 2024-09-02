@@ -1,4 +1,5 @@
-﻿using Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces;
+﻿using Capstone_____Vescio_Pia_Francesca__BE_.Entity;
+using Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,14 +19,21 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
         public async Task<IActionResult> AllCities()
         {
             var cities = await _citiesSvc.GetAllCities();
-            return Ok(cities);
+            var citiesSel = new List<City>();
+            foreach (var city in cities) 
+            {
+                var citySel = await _citiesSvc.GetCity(city.Id);
+                citiesSel.Add(citySel);
+            }
+            return Ok(citiesSel);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Detail(int id)
         {
             var city = await _citiesSvc.Read(id);
-            return Ok(city);
+            var citySel = await _citiesSvc.GetCity(city.Id);
+            return Ok(citySel);
         }
 
 

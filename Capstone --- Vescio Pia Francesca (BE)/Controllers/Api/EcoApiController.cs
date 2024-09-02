@@ -1,4 +1,5 @@
-﻿using Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces;
+﻿using Capstone_____Vescio_Pia_Francesca__BE_.Entity;
+using Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,10 +7,10 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EchoApiController : ControllerBase
+    public class EcoApiController : ControllerBase
     {
         private readonly IEcoService _ecoSvc;
-        public EchoApiController(IEcoService ecoSvc)
+        public EcoApiController(IEcoService ecoSvc)
         {
             _ecoSvc = ecoSvc;
         }
@@ -18,14 +19,21 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
         public async Task<IActionResult> GetAll()
         {
             var ecos = await _ecoSvc.GetAllEcos();
-            return Ok(ecos);
+            var ecosSelect = new List<Eco>();
+            foreach (var nation in ecos)
+            {
+                var nationSel = await _ecoSvc.GetEco(nation.Id);
+                ecosSelect.Add(nationSel);
+            }
+            return Ok(ecosSelect);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Detail(int id)
         {
             var nation = await _ecoSvc.Read(id);
-            return Ok(nation);
+            var nationSel = await _ecoSvc.GetEco(nation.Id);
+            return Ok(nationSel);
         }
     }
 }

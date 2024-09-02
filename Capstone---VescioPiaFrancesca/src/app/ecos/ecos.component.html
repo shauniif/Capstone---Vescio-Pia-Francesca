@@ -1,1 +1,8 @@
-<p>ecos works!</p>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+  <div class="col my-3" *ngFor="let eco of ecos">
+    <div class="card d-flex flex-column h-100">
+      <app-single-eco [eco]="eco"></app-single-eco>
+      <a [routerLink]="['detail', eco.id]">Dettagli</a>
+    </div>
+  </div>
+</div>

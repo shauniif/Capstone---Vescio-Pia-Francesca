@@ -26,7 +26,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
                 var nations = await _nationSvc.GetAllNations();
             var nationsSelect = new List<Nation>();
                 foreach (var nation in nations) {
-                var nationSel= await _nationSvc.getNation(nation.Id);
+                var nationSel= await _nationSvc.GetNation(nation.Id);
                 nationsSelect.Add(nationSel);
             }
                 return Ok(nationsSelect);
@@ -38,7 +38,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
         public async Task<IActionResult> Detail(int id)
         {
             var nation = await _nationSvc.Read(id);
-            var nationSel = await _nationSvc.getNation(nation.Id);
+            var nationSel = await _nationSvc.GetNation(nation.Id);
             return Ok(nationSel);
         }
 

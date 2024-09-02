@@ -1,0 +1,11 @@
+<div *ngIf="eco">
+  <app-single-eco [eco]="eco"></app-single-eco>
+  <p *ngIf="eco.nation == null">
+    Questo Eco non appartiene a nessuna Nazione, è un nomade.
+  </p>
+  <div *ngIf="eco.nation">
+    <a [routerLink]="['/nations/detail', eco.nation.id]">{{
+      eco.nation.name
+    }}</a>
+  </div>
+</div>

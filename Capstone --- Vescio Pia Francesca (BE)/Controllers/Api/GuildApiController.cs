@@ -1,4 +1,5 @@
 ﻿using Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces;
+using Capstone_____Vescio_Pia_Francesca__BE_.Entity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,13 +18,20 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
         public async Task<IActionResult> GeAll()
         {
             var guilds = await _guildSvc.GetAll();
-            return Ok(guilds);
+            var guildsSelect = new List<Guild>();
+            foreach (var guild in guilds)
+            {
+                var guildSelect = await _guildSvc.GetGuild(guild.Id);
+                guildsSelect.Add(guildSelect);
+            }
+            return Ok(guildsSelect);
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
             var guild = await _guildSvc.Read(id);
-            return Ok(guild);
+            var guildSelect = await _guildSvc.GetGuild(guild.Id);
+            return Ok(guildSelect);
         }
     }
 }

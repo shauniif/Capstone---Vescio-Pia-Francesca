@@ -1,4 +1,11 @@
+import { iNations } from "./nations"
+
 export interface iEco {
-  id: number;
-  name: string;
+  id: number
+  position: number
+  name: string
+  description: string
+  pic: string
+  modifier: number
+  nation: iNations
 }
