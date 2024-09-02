@@ -1,8 +1,10 @@
-﻿namespace Capstone_____Vescio_Pia_Francesca__BE_.Models
+﻿using Capstone_____Vescio_Pia_Francesca__BE_.Entity;
+
+namespace Capstone_____Vescio_Pia_Francesca__BE_.Models
 {
     public class LoginResponseModel
     {
-        public required string Username { get; set; }
+        public User User { get; set; }
         /// <summary>
         /// Token per l'autenticazione.
         /// </summary>

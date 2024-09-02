@@ -1,0 +1,26 @@
+<form [formGroup]="loginForm">
+  <div class="form-group col-6">
+    <input
+      type="email"
+      formControlName="email"
+      #email
+      class="form-control"
+      placeholder="La tua email"
+    />
+    <span *ngIf="isTouchedInvalid('email')">Email mancante</span>
+  </div>
+
+  <div class="form-group col-6">
+    <input
+      type="password"
+      formControlName="password"
+      #password
+      class="form-control"
+      placeholder="La tua password"
+    />
+  </div>
+
+  <span *ngIf="isTouchedInvalid('password')">Password mancante</span>
+
+  <button (click)="login()" class="btn btn-success">Invia</button>
+</form>

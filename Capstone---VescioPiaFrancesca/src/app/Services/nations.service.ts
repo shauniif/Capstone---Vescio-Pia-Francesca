@@ -12,7 +12,6 @@ export class NationsService {
 
 
   nationUrl:string = `${environment.apiUrl}NationApi`
-  nationUrltext:string = `${environment.apiUrl}NationApi`
 
   getAll() {
   return this.http.get<iNations[]>(this.nationUrl);

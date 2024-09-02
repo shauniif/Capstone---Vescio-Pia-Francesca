@@ -7,7 +7,11 @@ const routes: Routes = [
   },
   { path: 'nations',
     loadChildren: () => import('./nations/nations.module').then(m => m.NationsModule)
-  }
+  },
+  { path: 'ecos',
+    loadChildren: () => import('./ecos/ecos.module').then(m => m.EcosModule)
+  },
+  { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) }
 ];
 
 @NgModule({

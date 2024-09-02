@@ -25,10 +25,11 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
             audience = configuration["Jwt:Audience"]!;
         }
         [HttpPost("register")]
-        public async Task<IActionResult> Register(UserViewModel user)
+        public async Task<IActionResult> Register([FromBody] UserViewModel user)
         {
             var newUser = await _authSvc.Create(user);
-            return Ok(newUser);
+            var userSel = await _authSvc.CreateUser(newUser.Id);
+            return Ok(userSel);
         }
 
         [HttpPost("login")]
@@ -45,19 +46,26 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
 
                 var k = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(key));
                 var signed = new SigningCredentials(k, SecurityAlgorithms.HmacSha256);
-                var expiration = DateTime.Now.AddMonths(1);
+                var expiration = DateTime.Now.AddHours(1);
 
 
                 var token = new JwtSecurityToken(
                          claims: claims,
                          audience: audience,
                          issuer: issuer,
-                         expires: DateTime.Now.AddMonths(1),
+                         expires: expiration,
                          signingCredentials: signed
                     );
                 var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
 
-                return Ok(new LoginResponseModel { Username = u.Username, Token = tokenString });
+                return Ok(new LoginResponseModel { User = new User
+                {
+                    Id = u.Id,
+                    Name = u.Name,
+                    DateBirth = u.DateBirth,
+                    Email = u.Email,
+                    Username = u.Username
+                }, Token = tokenString });
             }
             else
             {

@@ -20,6 +20,17 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/nations">Nazioni</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/ecos">Echi</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" *ngIf="!isLoggedIn" routerLink="/auth"
+            >Registrazione</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" *ngIf="isLoggedIn" (click)="logout()">Esci</a>
+        </li>
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"

@@ -1,27 +1,36 @@
-<app-single-nation [nation]="currNation"></app-single-nation>
+<div class="d-flex flex-column h-100">
+  <img [src]="nation.photo" class="card-img-top" alt="Nation_image" />
+  <div class="card-body flex-grow-1">
+    <h5 class="card-title">{{ nation.name }}</h5>
+    <p class="card-text">
+      {{ nation.description }}
+    </p>
+    <p class="card-text">
+      <span class="fw-bold"></span>
+      {{ nation.formOfGovernment }}
+    </p>
+  </div>
+</div>
+
 <p>Divinità</p>
-<!-- Ecos -->
-<!--<p *ngIf="currNation.ecos && currNation.ecos.length === 0">
-  Nessun Eco disponibile
-</p>
-<ul *ngIf="currNation.ecos && currNation.ecos.length > 0">
-  <li *ngFor="let eco of currNation.ecos">{{ eco.name }}</li>
+
+<p *ngIf="nation.ecos && nation.ecos.length === 0">Nessun Eco disponibile</p>
+<ul *ngIf="nation.ecos && nation.ecos.length > 0">
+  <li *ngFor="let eco of nation.ecos">{{ eco.name }}</li>
 </ul>
 
- Cities
 <p>Città</p>
-<p *ngIf="currNation.cities && currNation.cities.length === 0">
+<p *ngIf="nation.cities && nation.cities.length === 0">
   Nessuna Città disponibile
 </p>
-<ul *ngIf="currNation.cities && currNation.cities.length > 0">
-  <li *ngFor="let city of currNation.cities">{{ city.name }}</li>
+<ul *ngIf="nation.cities && nation.cities.length > 0">
+  <li *ngFor="let city of nation.cities">{{ city.name }}</li>
 </ul>
 
-Guilds
 <p>Gilde</p>
-<p *ngIf="currNation.guilds && currNation.guilds.length === 0">
+<p *ngIf="nation.guilds && nation.guilds.length === 0">
   Nessuna Gilda disponibile
 </p>
-<ul *ngIf="currNation.guilds && currNation.guilds.length > 0">
-  <li *ngFor="let guild of currNation.guilds">{{ guild.name }}</li>
-</ul> -->
+<ul *ngIf="nation.guilds && nation.guilds.length > 0">
+  <li *ngFor="let guild of nation.guilds">{{ guild.name }}</li>
+</ul>

@@ -11,18 +11,19 @@ import { NationsService } from '../../Services/nations.service';
 })
 export class DetailComponent {
 
-  currNation!: iNations
+  nation!: iNations
   constructor(
     private route:ActivatedRoute,
     private nationSvc: NationsService
   ){}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.params['id'];
-    this.nationSvc.getNation(id).subscribe(nation => {
-      this.currNation = nation;
-      console.log('Nazione trovata:', this.currNation);
-    });
+    this.route.params.subscribe((params:any) => {
+
+      this.nationSvc.getNation(params.id).subscribe(nation => {
+        this.nation = nation;
+      })
+    })
   }
 
 }

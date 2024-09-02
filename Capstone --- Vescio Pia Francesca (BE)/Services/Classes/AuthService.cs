@@ -192,6 +192,24 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             return null!;
         }
 
+        public async Task<User> CreateUser(int id)
+        {   
+            var user = await _db.Users.Select(u => new User
+            {
+                Id = u.Id,
+                Name = u.Name,
+                Email = u.Email,
+                DateBirth = u.DateBirth,
+                Password = u.Password,
+                Username = u.Name
+            }).FirstOrDefaultAsync(u => u.Id == id);
+            if(user == null)
+            {
+                throw new Exception("user not found");
+            }
+            return user;
+        }
+
         
     }
 }
