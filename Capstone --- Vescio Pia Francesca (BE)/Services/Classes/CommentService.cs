@@ -26,7 +26,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                 var author = await _db.Users.SingleOrDefaultAsync(a => a.Id == dto.AuthorId);
                 if (author == null)
                 {
-                    throw new Exception("Article not found");
+                    throw new Exception("Author not found");
                 };
 
                 var comment = new Comment

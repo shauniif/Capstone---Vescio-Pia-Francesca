@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
 {
@@ -33,7 +34,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
-        {
+        {   
             var comment = await _commentSvc.Read(id);
             return Ok(comment);
         }
@@ -42,8 +43,10 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
         [HttpPost("Create")]
         public async Task<IActionResult> Create([FromBody] CommentDTO dto)
         {
+            
             if (ModelState.IsValid)
             {
+                
                 var comment = await _commentSvc.Create(dto);
                 var newComment = await _commentSvc.Read(comment.Id);
                 return Ok(newComment);

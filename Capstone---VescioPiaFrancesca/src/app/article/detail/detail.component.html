@@ -1,0 +1,35 @@
+<div *ngIf="article">
+  <app-single-article [article]="article"></app-single-article>
+  <div *ngFor="let comment of article.comments">
+    <p class="card-text">
+      <span class="fw-bold"></span>
+      {{ comment.author.username }}: {{ comment.content }}
+    </p>
+    <button type="button" class="btn btn-danger">Modfica</button>
+    <button
+      type="button"
+      (click)="DeleteComment(comment.id)"
+      class="btn btn-danger"
+    >
+      Cancella
+    </button>
+  </div>
+  <form [formGroup]="commentForm">
+    <input
+      type="text"
+      formControlName="content"
+      class="form-control"
+      placeholder="Scrivi un commento..."
+    />
+    <span *ngIf="isTouchedInvalid('content')"
+      >Devi inserire lo il commento</span
+    >
+    <button
+      type="submit"
+      (click)="CreateComment()"
+      [disabled]="commentForm.invalid"
+    >
+      Commenta
+    </button>
+  </form>
+</div>

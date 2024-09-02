@@ -1,6 +1,8 @@
 ﻿using Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces;
 using Capstone_____Vescio_Pia_Francesca__BE_.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
 {
@@ -13,6 +15,8 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
             _eventSvc = eventSvc;
 
         }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)] 
         public async Task<IActionResult> AllEvents()
         {
             var events = await _eventSvc.GetAll();

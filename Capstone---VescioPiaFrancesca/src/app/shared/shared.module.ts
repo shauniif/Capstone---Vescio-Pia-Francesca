@@ -5,6 +5,7 @@ import { SingleEcoComponent } from './single-eco/single-eco.component';
 import { SingleCityComponent } from './single-city/single-city.component';
 import { SingleGuildComponent } from './single-guild/single-guild.component';
 import { SingleEventComponent } from './single-event/single-event.component';
+import { SingleArticleComponent } from './single-article/single-article.component';
 
 
 
@@ -14,7 +15,8 @@ import { SingleEventComponent } from './single-event/single-event.component';
     SingleEcoComponent,
     SingleCityComponent,
     SingleGuildComponent,
-    SingleEventComponent
+    SingleEventComponent,
+    SingleArticleComponent
   ],
   imports: [
     CommonModule
@@ -25,7 +27,8 @@ import { SingleEventComponent } from './single-event/single-event.component';
     SingleEcoComponent,
     SingleCityComponent,
     SingleGuildComponent,
-    SingleEventComponent
+    SingleEventComponent,
+    SingleArticleComponent
   ]
 })
 export class SharedModule { }

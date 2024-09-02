@@ -180,6 +180,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             {
                 var userResulted = new User
                 {
+                    Id = user.Id,
                     Name = user.Name,
                     Username = user.Username,
                     DateBirth = user.DateBirth,

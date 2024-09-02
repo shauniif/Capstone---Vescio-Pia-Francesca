@@ -40,7 +40,8 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
             {
                 var claims = new List<Claim> {
                 new Claim(JwtRegisteredClaimNames.Sub, u.Name),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(ClaimTypes.NameIdentifier, u.Id.ToString())
       };
                 u.Roles.ForEach(r => claims.Add(new Claim(ClaimTypes.Role, r.Name)));
 

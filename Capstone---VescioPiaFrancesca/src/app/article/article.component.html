@@ -1,1 +1,8 @@
-<p>article works!</p>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+  <div class="col my-3" *ngFor="let article of articles">
+    <div class="card d-flex flex-column h-100">
+      <app-single-article [article]="article"></app-single-article>
+      <a [routerLink]="['detail', article.id]">Dettagli</a>
+    </div>
+  </div>
+</div>

@@ -3,6 +3,8 @@ using Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes;
 using Capstone_____Vescio_Pia_Francesca__BE_.DTO;
 using Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -21,6 +23,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
         }
 
         [HttpGet]
+        
         public async Task<IActionResult> GetAll()
         {
                 var nations = await _nationSvc.GetAllNations();

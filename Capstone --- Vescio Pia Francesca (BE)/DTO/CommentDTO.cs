@@ -16,5 +16,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.DTO
 
         [Required]
         public required int ArticleId { get; set; }
+        
+        
 }
 }
