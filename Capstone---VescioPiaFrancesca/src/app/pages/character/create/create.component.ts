@@ -49,6 +49,19 @@ export class CreateComponent implements OnInit {
     this.getEco()
     this.getGuilds()
     this.getCities()
+
+    this.createCharacterForm.get('guildId')?.valueChanges.subscribe((selectedGuildId: number) => {
+      if (selectedGuildId) {
+        console.log('Value change detected');
+        this.onGuildChange(selectedGuildId);
+      }
+    });
+
+    this.createCharacterForm.get('cityId')?.valueChanges.subscribe((selectedCityId: number)  => {
+      if (selectedCityId) {
+        this.onCityChange(selectedCityId);
+      }
+    });
   }
 
 
@@ -68,7 +81,7 @@ export class CreateComponent implements OnInit {
     if(this.createCharacterForm.valid) {
       const formData = new FormData();
 
-    // Aggiungi i dati del modulo
+
     formData.append('name', this.createCharacterForm.get('name')?.value);
     formData.append('cityId', this.createCharacterForm.get('cityId')?.value);
     formData.append('raceId', this.createCharacterForm.get('raceId')?.value);
@@ -106,40 +119,32 @@ export class CreateComponent implements OnInit {
     })
   }
 
-  onGuildChange(event: Event): void {
-    const target = event.target as HTMLSelectElement;
-    console.log('Event target:', target);  // Aggiungi questo
-    console.log('Selected value:', target.value);
-    if (target) {
-      const selectedGuildId = parseInt(target.value, 10);
-      console.log(selectedGuildId)
-      const selectedGuild = this.guilds.find(guild => guild.id === selectedGuildId);
-      console.log(selectedGuild?.name)
+  onGuildChange(selectedGuildId: number): void {
+    console.log('Selected Guild ID:', selectedGuildId);
+    const selectedGuild = this.guilds.find(guild => guild.id == selectedGuildId);
+    console.log('Selected Guild:', selectedGuild);
       if (selectedGuild) {
         const nationId = selectedGuild.nation.id;
         console.log(nationId)
         // Filtra le città basate sulla nazione
         this.getCitiesByNation(nationId);
-      }
+
     } else {
       this.getCities(); // Gestisci il caso in cui non ci sono città da filtrare
     }
   }
 
-  onCityChange(event: Event): void {
-    const target = event.target as HTMLSelectElement; // Casting dell'event.target
-    if (target) {
-      const selectedCityId = parseInt(target.value, 10);
+  onCityChange(selectedCityId: number): void {
+
       console.log(selectedCityId)
-      const selectedCity = this.cities.find(city => city.id === selectedCityId);
+      const selectedCity = this.cities.find(city => city.id == selectedCityId);
       console.log(selectedCity?.name)
       if (selectedCity) {
         const nationId = selectedCity.nation.id;
         // Filtra le gilde basate sulla nazione
         this.getGuildsByNation(nationId);
-      }
     } else {
-      this.getGuilds(); // Gestisci il caso in cui non ci sono gilde da filtrare
+      this.getGuilds();
     }
     }
 

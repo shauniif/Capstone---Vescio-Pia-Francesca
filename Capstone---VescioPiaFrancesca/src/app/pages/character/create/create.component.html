@@ -12,11 +12,7 @@
 
   <div class="form-group">
     <label for="guildId">Gilda:</label>
-    <select
-      formControlName="guildId"
-      class="form-control"
-      (change)="onGuildChange($event)"
-    >
+    <select formControlName="guildId" class="form-control">
       <option value="null">--Please choose an option--</option>
       <option *ngFor="let guild of guilds" [value]="guild.id">
         {{ guild.name }}
@@ -27,11 +23,7 @@
 
   <div class="form-group">
     <label for="cityId">Città:</label>
-    <select
-      formControlName="cityId"
-      class="form-control"
-      (change)="onCityChange($event)"
-    >
+    <select formControlName="cityId" class="form-control">
       <option value="null">--Please choose an option--</option>
       <option *ngFor="let city of cities" [value]="city.id">
         {{ city.name }}
