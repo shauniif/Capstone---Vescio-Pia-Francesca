@@ -19,6 +19,9 @@ export class CommentService {
     return this.http.post<iComment>(`${this.commentUrl}/Create`, newComment);
   }
 
+  UpdateComment(id:number, newComment: Partial<ICommentCreate>): Observable<iComment> {
+    return this.http.put<iComment>(`${this.commentUrl}/${id}`, newComment);
+  }
   DeleteComment(id:number) {
     return this.http.delete<iComment>(`${this.commentUrl}/${id}`);
   }

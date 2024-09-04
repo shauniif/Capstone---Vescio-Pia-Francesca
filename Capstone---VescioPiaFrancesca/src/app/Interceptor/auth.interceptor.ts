@@ -6,7 +6,8 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AuthService } from '../Services/auth.service';
+import { AuthService } from '../pages/auth/auth.service';
+
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -15,13 +16,10 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const accessData = this.authSvc.getAccessData()
-    console.log(accessData);
     if(!accessData) return next.handle(request);
-    console.log(accessData.token);
     const newRequest = request.clone({
       headers: request.headers.append('Authorization', `Bearer ${accessData.token}`),
     });
-    console.log(newRequest.headers);
     return next.handle(newRequest);
   }
 }

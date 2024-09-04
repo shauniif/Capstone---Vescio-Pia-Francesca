@@ -1,0 +1,70 @@
+<div *ngIf="article">
+  <app-single-article [article]="article"></app-single-article>
+  <div *ngFor="let comment of article.comments">
+    <p class="card-text">
+      <span class="fw-bold"></span>
+      {{ comment.author.username }}: {{ comment.content }}
+    </p>
+
+    <div *ngIf="comment.author.username == currentUserLog?.username">
+      <button
+        type="button"
+        (click)="PrepareToUpdate(comment.id)"
+        class="btn btn-danger"
+      >
+        Modfica
+      </button>
+
+      <button
+        type="button"
+        (click)="DeleteComment(comment.id)"
+        class="btn btn-danger"
+      >
+        Cancella
+      </button>
+    </div>
+    <div *ngIf="currComment">
+      <form
+        [formGroup]="updateCommentForm"
+        *ngIf="currComment.id == comment.id"
+      >
+        <input
+          type="text"
+          formControlName="content"
+          class="form-control"
+          placeholder="Scrivi un commento..."
+        />
+        <span *ngIf="isTouchedInvalid2('content')"
+          >Devi inserire lo il commento</span
+        >
+
+        <button
+          type="submit"
+          (click)="UpdateComment()"
+          [disabled]="updateCommentForm.invalid"
+        >
+          Modifica
+        </button>
+      </form>
+    </div>
+  </div>
+  <!-- Form for create the comment -->
+  <form [formGroup]="createCommentForm" *ngIf="!currComment">
+    <input
+      type="text"
+      formControlName="content"
+      class="form-control"
+      placeholder="Scrivi un commento..."
+    />
+    <span *ngIf="isTouchedInvalid('content')"
+      >Devi inserire lo il commento</span
+    >
+    <button
+      type="submit"
+      (click)="CreateComment()"
+      [disabled]="createCommentForm.invalid"
+    >
+      Commenta
+    </button>
+  </form>
+</div>
