@@ -16,7 +16,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
 
         }
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)] 
+        
         public async Task<IActionResult> AllEvents()
         {
             var events = await _eventSvc.GetAll();

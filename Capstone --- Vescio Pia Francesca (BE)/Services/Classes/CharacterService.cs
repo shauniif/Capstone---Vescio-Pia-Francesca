@@ -79,7 +79,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                     Guild = guild,
                     User = user,
                     Image = ConvertImage(dto.Image),
-                    Score = await CountScore(eco?.Modifier ?? 1, city.Id, race.Modifier, eco?.Modifier ?? 1)
+                    Score = await CountScore(eco?.Modifier ?? 1, city.Id, race.Modifier, guild?.Modifier ?? 1)
                 };
 
                 await _db.Characters.AddAsync(character);
@@ -249,7 +249,8 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                             User = new User
                             {
                                 Id = c.User.Id,
-                                Name = c.User.Name,
+                                FirstName = c.User.FirstName,
+                                LastName = c.User.LastName,
                                 Email = c.User.Email,
                                 DateBirth = c.User.DateBirth,
                                 Username = c.User.Username

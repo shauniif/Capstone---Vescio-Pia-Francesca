@@ -11,7 +11,11 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Entity
 
         [Required]
         [StringLength(30)]
-        public required string Name { get; set; }
+        public required string FirstName { get; set; }
+
+        [Required]
+        [StringLength(30)]
+        public required string LastName { get; set; }
 
         [Required]
         [StringLength(30)]
@@ -29,6 +33,9 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Entity
 
         [Column(TypeName = "nvarchar(6)")]
         public string? AdminCode { get; set; }
+
+        [Column(TypeName = "nvarchar(max)")]
+        public string? Image { get; set; }
         public List<Role> Roles { get; set; } = new List<Role>();
 
         public List<Article> Articles { get; set; } = new List<Article>();

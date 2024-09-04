@@ -19,6 +19,8 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces
         Task<User> AddRoleToUser(int userId, string roleName);
         Task<User> RemoveRoleToUser(int userId, string roleName);
         Task<User> CreateUser(int id);
+        Task<User> InsertImage(int id, IFormFile image);
+        
 
     }
 }

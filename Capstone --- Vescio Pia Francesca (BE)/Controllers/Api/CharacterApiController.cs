@@ -1,4 +1,5 @@
 ﻿using Capstone_____Vescio_Pia_Francesca__BE_.DTO;
+using Capstone_____Vescio_Pia_Francesca__BE_.Entity;
 using Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -9,7 +10,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+  //  [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class CharacterApiController : ControllerBase
     {
         private readonly ICharacterService _characterSvc;
@@ -26,8 +27,8 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
             if (ModelState.IsValid)
             {
                 var character = await _characterSvc.Create(dto);
-                var newCharacter = await _characterSvc.Read(character.Id);
-                return Ok(newCharacter);
+                var characterSel = await _characterSvc.Read(character.Id);
+                return Ok(characterSel);
             }
             return BadRequest();
         }
@@ -57,21 +58,33 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
         public async Task<IActionResult> Get(int id)
         {
             var character = await _characterSvc.Read(id);
-            return Ok(character);
+            var characterSel = await _characterSvc.Read(character.Id);
+            return Ok(characterSel);
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var characters = await _characterSvc.GetAll();
-            return Ok(characters);
+            var charactersSel = new List<Character>();
+            foreach (var character in characters) {
+                var characterSel = await _characterSvc.Read(character.Id);
+                charactersSel.Add(characterSel);
+            }
+            return Ok(charactersSel);
         }
 
         [HttpGet("OfUser/{id}")]
         public async Task<IActionResult> GetAllOfUSer(int id)
         {
             var characters = await _characterSvc.GetAllByUser(id);
-            return Ok(characters);
+            var charactersSel = new List<Character>();
+            foreach (var character in characters)
+            {
+                var characterSel = await _characterSvc.Read(character.Id);
+                charactersSel.Add(characterSel);
+            }
+            return Ok(charactersSel);
         }
     }
    

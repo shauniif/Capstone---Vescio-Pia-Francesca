@@ -9,7 +9,11 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Models
 
         [Required(ErrorMessage = "Il nome è obbligatorio")]
         [StringLength(30)]
-        public required string Name { get; set; }
+        public required string FirstName { get; set; }
+
+        [Required(ErrorMessage = "Il nome è obbligatorio")]
+        [StringLength(30)]
+        public required string LastName { get; set; }
 
         [Required]
         [StringLength(30)]
@@ -24,6 +28,8 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Models
         [Required]
         [StringLength(30)]
         public string Password { get; set; }
+
+
 
         [StringLength(6)]
         public string? AdminCode { get; set; }

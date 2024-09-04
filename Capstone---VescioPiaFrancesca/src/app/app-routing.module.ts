@@ -26,6 +26,7 @@ const routes: Routes = [
      loadChildren: () => import('./pages/city/city.module').then(m => m.CityModule) },
   { path: 'auth',
     loadChildren: () => import('./pages/auth/auth.module').then(m => m.AuthModule) },
+  { path: 'character', loadChildren: () => import('./pages/character/character.module').then(m => m.CharacterModule) },
 ];
 
 @NgModule({

@@ -20,6 +20,17 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
 
         private readonly byte[] _key;
 
+        public async Task<IActionResult> GetUserImage(int id)
+        {
+            var user = await _authSvc.GetById(id);
+            if (user?.Image == null)
+            {
+                return NotFound();
+            }
+            var userPhotodata = user.Image.Substring(23);
+            byte[] imageBytes = Convert.FromBase64String(userPhotodata);
+            return File(imageBytes, "image/jpeg");
+        }
         public AuthController(IRoleService roleSvc, IAuthService authSvc, IConfiguration configuration)
         {
             _roleSvc = roleSvc;
@@ -121,9 +132,14 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
             {
                 var claims = new List<Claim>
                      {
-                     new Claim(ClaimTypes.Name, u.Name),
+                     new Claim(ClaimTypes.Name, $"{u.FirstName} {u.LastName}"),
+                     new Claim("Id", u.Id.ToString()),
+                     new Claim("FirstName", u.FirstName),
+                     new Claim("LastName", u.LastName),
+                     new Claim(ClaimTypes.NameIdentifier, u.Username),
                      new Claim(ClaimTypes.Email, u.Email),
-                     new Claim(ClaimTypes.SerialNumber, u.AdminCode)
+                     new Claim("BirthDate", u.DateBirth.ToString("dd-MM-yyyy")),
+                     new Claim("AdminCode", u.AdminCode)
                      };
                 u.Roles.ForEach(r => claims.Add(new Claim(ClaimTypes.Role, r.Name)));
 
@@ -187,7 +203,20 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
                 await _authSvc.RemoveRoleToUser(userid, roleName);
                 return RedirectToAction("AllUsers", "Auth");
             }
-        }
 
+            public IActionResult Profile()
+            {
+            return View();   
+            }
+
+            public async Task<IActionResult> InsertImage(int id, IFormFile photo)
+            {
+              var user =  await _authSvc.InsertImage(id, photo);
+                Console.WriteLine(user.Image);
+                return RedirectToAction(nameof(Profile));
+            }
     }
+
+
+}
 

@@ -18,7 +18,8 @@ export class RegisterComponent {
   ngOnInit()  {
 
     this.signInForm = this.fb.group({
-      name: this.fb.control(null, [Validators.required]),
+      firstName: this.fb.control(null, [Validators.required]),
+      lastName: this.fb.control(null, [Validators.required]),
       username: this.fb.control(null, [Validators.required]),
       email: this.fb.control(null, [Validators.required, Validators.email]),
       dateBirth: this.fb.control(null, [Validators.required]),
@@ -42,4 +43,5 @@ export class RegisterComponent {
     const field = this.signInForm.get(fieldName);
     return field?.invalid && field?.touched
   }
+
 }

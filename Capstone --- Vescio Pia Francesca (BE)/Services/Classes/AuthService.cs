@@ -18,6 +18,21 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             _db = db;
         }
 
+        private string ConvertImage(IFormFile image)
+        {
+
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                image.CopyTo(memoryStream);
+                byte[] fileBytes = memoryStream.ToArray();
+                string base64String = Convert.ToBase64String(fileBytes);
+                string urlImg = $"data:image/jpeg;base64,{base64String}";
+                return urlImg;
+            }
+
+        }
+
+
         private string GenerateCode()
         {
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -57,7 +72,8 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             var defaultRole = await _db.Roles.FirstOrDefaultAsync(r => r.Name == "User");
             var user = new User
             {
-                Name = entity.Name,
+                FirstName = entity.FirstName,
+                LastName = entity.LastName,
                 Username = entity.Username,
                 Email = entity.Email,
                 DateBirth = entity.DateBirth,
@@ -72,7 +88,22 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
         public async Task<User> Delete(int id)
         {
             var user = await GetById(id);
-            _db.Users.Remove(user);
+
+            var articles = await _db.Articles.Where(a => a.Author.Id == user.Id).ToListAsync();
+
+            var comments = new List<Comment>();
+            foreach (var article in articles) 
+            {
+                var allComments = await _db.Comments.Where(c => c.Article.Id == article.Id).ToListAsync();
+                comments.AddRange(allComments);
+                _db.Articles.Remove(article);
+            }
+            foreach (var comment in comments)
+            {
+                _db.Comments.Remove(comment);
+            }
+
+                _db.Users.Remove(user);
             await _db.SaveChangesAsync();
             return user;
         }
@@ -100,7 +131,9 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             {
                 var userResulted = new User
                 {
-                    Name = user.Name,
+                    Id = user.Id,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
                     Username = user.Username,
                     DateBirth = user.DateBirth,
                     AdminCode = entity.AdminCode,
@@ -119,7 +152,8 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             {
                 var userResulted = new User
                 {
-                    Name = user.Name,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
                     Username = user.Username,
                     DateBirth = user.DateBirth,
                     Email = user.Email,
@@ -154,7 +188,8 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             var defaultRole = await _db.Roles.FirstOrDefaultAsync(r => r.Name == "Sub-Admin");
             var user = new User
             {
-                Name = entity.Name,
+                FirstName = entity.FirstName,
+                LastName = entity.LastName,
                 Username = entity.Username,
                 Email = entity.Email,
                 DateBirth = entity.DateBirth,
@@ -181,9 +216,11 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                 var userResulted = new User
                 {
                     Id = user.Id,
-                    Name = user.Name,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
                     Username = user.Username,
                     DateBirth = user.DateBirth,
+                    Image = user.Image,
                     Email = user.Email,
                     Roles = user.Roles.ToList()
                 };
@@ -198,11 +235,12 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             var user = await _db.Users.Select(u => new User
             {
                 Id = u.Id,
-                Name = u.Name,
+                FirstName = u.FirstName,
+                LastName = u.LastName,
                 Email = u.Email,
                 DateBirth = u.DateBirth,
-                Password = u.Password,
-                Username = u.Name,
+                Username = u.Username,
+                Image = u.Image,
                 Roles = u.Roles.Select(r => new Role
                 {
                     Id = r.Id,
@@ -216,6 +254,12 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             return user;
         }
 
-        
+        public async Task<User> InsertImage(int id, IFormFile image)
+        {
+            var user = await GetById(id);
+            user.Image = ConvertImage(image);
+            await _db.SaveChangesAsync();
+            return user;
+        }
     }
 }

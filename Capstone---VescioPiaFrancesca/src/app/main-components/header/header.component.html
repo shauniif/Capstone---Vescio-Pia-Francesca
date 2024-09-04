@@ -75,7 +75,9 @@
       </form>
 
       <div>
-        <p>tu</p>
+        <a class="nav-link" *ngIf="isLoggedIn" routerLink="/auth/profile"
+          >Il tuo profilo</a
+        >
       </div>
     </div>
   </div>

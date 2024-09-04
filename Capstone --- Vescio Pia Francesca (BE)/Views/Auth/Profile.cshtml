@@ -1,0 +1,53 @@
+﻿@using System.Security.Claims
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Profile";
+    var firstNameClaim = User.FindFirst("FirstName")?.Value;
+    var lastNameClaim = User.FindFirst("LastName")?.Value;
+    var birthDateClaim = User.FindFirst("BirthDate")?.Value;
+    var adminCodeClaim = User.FindFirst("AdminCode")?.Value;
+    var usernameClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    var emailClaim = User.FindFirst(ClaimTypes.Email)?.Value;
+    
+    var idClaimString = User.FindFirst("Id")?.Value;
+
+    // Converti idClaimString in int?
+    int? idClaim = null;
+    if (int.TryParse(idClaimString, out int id))
+    {
+        idClaim = id;
+    }
+}
+
+
+<form asp-action="InsertImage" enctype="multipart/form-data">
+
+    <div class="form-group">
+        <input type="hidden" value="@idClaim" name="id" id="id"/>
+        <label for="photo" class="control-label">Inserisci o Modifica l'immagine</label>
+        <input name="photo" id="photo" type="file" class="form-control" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>
+@if (idClaim.HasValue)
+{
+<img src="@Url.Action("GetUserImage", "Auth", new { id = @idClaim.Value })"
+     alt="User Image"
+     style="max-width: 100px;" /> 
+    
+}
+
+
+<p>Nome: @firstNameClaim </p>
+<p>Cognome: @lastNameClaim </p>
+<p>DatadiNascita: @lastNameClaim </p>
+<p>Username: @usernameClaim</p>
+<p>Email: @emailClaim</p>
+
+<p>il tuo codice per accedere:</p>
+
+<p>@adminCodeClaim</p>

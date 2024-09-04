@@ -30,7 +30,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
         public async Task<Article> Create(ArticleModel model, string name)
         {   try
             {
-                var author = await _db.Users.FirstOrDefaultAsync(u => u.Name == name);
+                var author = await _db.Users.FirstOrDefaultAsync(u => u.FirstName == name);
                 var article = new Article
                 {
                     Title = model.Title,
@@ -84,7 +84,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             {
                 var articles = await _db.Articles
                     .Include(a => a.Author)
-                    .Where(a => a.Author.Name == name)
+                    .Where(a => a.Author.FirstName == name)
                     .ToListAsync();
                 return articles;
             }
@@ -142,7 +142,8 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                          Content = a.Content,
                          Author = new User { 
                              Id = a.Author.Id,
-                             Name = a.Author.Name,
+                             FirstName = a.Author.FirstName,
+                             LastName = a.Author.LastName,
                              DateBirth = a.Author.DateBirth,
                              Email = a.Author.Email,
                              Username = a.Author.Username
@@ -154,7 +155,8 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                              Author = new User
                              {
                                  Id = c.Author.Id,
-                                 Name = c.Author.Name,
+                                 FirstName=c.Author.FirstName,
+                                 LastName=c.Author.LastName,
                                  DateBirth = c.Author.DateBirth,
                                  Email=c.Author.Email,
                                  Username = c.Author.Username
@@ -168,7 +170,8 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                                  Author = new User
                                  {
                                      Id = a.Author.Id,
-                                     Name = a.Author.Name,
+                                     FirstName = a.Author.FirstName,
+                                     LastName = a.Author.LastName,
                                      DateBirth = a.Author.DateBirth,
                                      Email = a.Author.Email,
                                      Username = a.Author.Username

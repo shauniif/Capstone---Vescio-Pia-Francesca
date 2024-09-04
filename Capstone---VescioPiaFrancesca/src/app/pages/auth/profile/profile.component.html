@@ -1,1 +1,51 @@
-<p>profile works!</p>
+<div class="textWhite border border-2 mt-2 ps-2 bgUserInf">
+  <h1>Bevenuto {{ user.username }}</h1>
+
+  <h4 class="">Ecco un recap dei tuoi dati:</h4>
+  <div *ngIf="!user.image">
+    <img src="../../../../assets/img/default.png" style="width: 100px" />
+  </div>
+  <div *ngIf="user.image">
+    <img [src]="user.image" style="width: 100px" />
+  </div>
+  <form [formGroup]="imageForm">
+    <div>
+      <input formControlName="id" type="hidden" [value]="user.id" />
+    </div>
+    <div>
+      <input type="file" (change)="onFileSelected($event)" />
+    </div>
+    <div>
+      <button
+        type="submit"
+        (click)="UploadImage()"
+        [disabled]="!imageForm.valid"
+      >
+        Upload
+      </button>
+    </div>
+  </form>
+
+  <p><span class="btn btn-primary">Nome:</span> {{ user.firstName }}</p>
+  <p>
+    <span class="btn btn-primary">Il tuo indirzzo email:</span>
+    {{ user.email }}
+  </p>
+  <p>
+    <span class="btn btn-primary">Il tuo username: </span> {{ user.username }}
+  </p>
+
+  <h3>I tuoi personaggi:</h3>
+  <div *ngFor="let character of user.characters">
+    <p>Nome: {{ character.name }}</p>
+    <p>Punteggio: {{ character.score }}</p>
+    <button
+      type="button"
+      (click)="DeleteCharacter(character.id)"
+      class="btn btn-danger"
+    >
+      Cancella
+    </button>
+  </div>
+  <a routerLink="/character/create">Crea un nuovo personaggio</a>
+</div>

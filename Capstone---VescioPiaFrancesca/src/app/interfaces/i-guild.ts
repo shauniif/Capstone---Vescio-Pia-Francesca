@@ -5,5 +5,5 @@ export interface iGuild {
   name: string;
   description: string;
   modifier: number;
-  Nation: iNations
+  nation: iNations
 }

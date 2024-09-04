@@ -27,6 +27,7 @@ export class AuthService {
 
   registerUrl: string = `${environment.apiUrl}AuthApi/register`
   loginUrl: string = `${environment.apiUrl}AuthApi/login`
+  UploadUrl: string = `${environment.apiUrl}AuthApi/InsertImage`
 
   register(newUser: Partial<iUser>): Observable<iUser> {
     return this.http.post<iUser>(this.registerUrl, newUser);
@@ -72,5 +73,10 @@ export class AuthService {
     if(this.jwtHelper.isTokenExpired(accessData.token)) return;
     this.authSubject.next(accessData.user)
     this.autoLogout();
+   }
+
+   insertImage(formData: FormData): Observable<iUser>
+   {
+      return this.http.patch<iUser>(`${this.UploadUrl}`, formData)
    }
 }

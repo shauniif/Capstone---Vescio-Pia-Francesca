@@ -154,8 +154,9 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                         },
                             Author = new User
                         {
-                            Id = c.Author.Id, 
-                            Name = c.Author.Name,
+                            Id = c.Author.Id,
+                            FirstName = c.Author.FirstName,
+                            LastName = c.Author.LastName,
                             Email = c.Author.Email,
                             DateBirth = c.Author.DateBirth,
                             Username = c.Author.Username

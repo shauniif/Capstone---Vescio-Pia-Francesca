@@ -39,7 +39,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
             if (u != null)
             {
                 var claims = new List<Claim> {
-                new Claim(JwtRegisteredClaimNames.Sub, u.Name),
+                new Claim(JwtRegisteredClaimNames.Sub, u.FirstName),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(ClaimTypes.NameIdentifier, u.Id.ToString())
       };
@@ -62,16 +62,26 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
                 return Ok(new LoginResponseModel { User = new User
                 {
                     Id = u.Id,
-                    Name = u.Name,
+                    FirstName = u.FirstName,
+                    LastName = u.LastName,
                     DateBirth = u.DateBirth,
                     Email = u.Email,
-                    Username = u.Username
+                    Username = u.Username,
+                    Image = u.Image,
                 }, Token = tokenString });
             }
             else
             {
                 return Unauthorized();
             }
+        }
+
+        [HttpPatch("InsertImage")]
+        public async Task<IActionResult> InsertImage([FromForm] int id, [FromForm] IFormFile image)
+        {
+            var user = await _authSvc.InsertImage(id, image);
+            var userSel = await _authSvc.CreateUser(user.Id);
+            return Ok(userSel);
         }
     }
 }
