@@ -34,7 +34,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
 
         public async Task<IActionResult> MyArticle()
         {
-            var name = User.Identity.Name;
+            var name = User.FindFirst("FirstName")?.Value;
             var articles = await _articleSvc.GetAllArticlesOfAdmin(name);
             return View(articles);
         }

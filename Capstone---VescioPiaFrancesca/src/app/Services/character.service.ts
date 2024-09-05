@@ -20,11 +20,21 @@ export class CharacterService {
     return this.http.get<iCharacter[]>(`${this.characterUrl}/OfUser/${id}`);
   }
 
+  GetCharacter(id: number) : Observable<iCharacter> {
+    return this.http.get<iCharacter>(`${this.characterUrl}/${id}`);
+  }
+
   CreateCharacter(newCharacter: FormData) : Observable<iCharacter>{
     return this.http.post<iCharacter>(`${this.characterUrl}/Create`, newCharacter)
+  }
+
+  UpdateCharacter(id:number,currCharacter: FormData) : Observable<iCharacter>{
+    return this.http.put<iCharacter>(`${this.characterUrl}/${id}`, currCharacter)
   }
 
   DeleteCharacter(id:number) {
     return this.http.delete<iCharacter>(`${this.characterUrl}/${id}`);
   }
+
+
 }

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { NationsService } from '../../Services/nations.service';
+import { CityService } from '../../Services/city.service';
 
 @Component({
   selector: 'app-home',
@@ -7,4 +9,5 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 
+  constructor(private nationSvc: NationsService, private citySvc: CityService) {}
 }

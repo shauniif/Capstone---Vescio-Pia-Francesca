@@ -12,16 +12,9 @@ export class NationComponent {
   nations:iNations[] = [];
   constructor(private nationSvc: NationsService) {}
   ngOnInit(): void {
-    this.nationSvc.getAll().subscribe
-    (nations => {
+    this.nationSvc.nations$.subscribe((nations) =>{
       this.nations = nations;
-      console.log("Nazioni ricevute:", this.nations)
-    },
-    error => {
-      console.error('Errore durante il recupero delle nazioni:', error.message);
-    }
-  )
-  console.log("ciao");
+    })
   }
 
 }

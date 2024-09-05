@@ -64,5 +64,7 @@
     <span *ngIf="isTouchedInvalid('password')">Dati non corretti</span>
   </div>
 
-  <button (click)="CreateUser()" class="btn btn-success">Invia</button>
+  <button (click)="CreateUser()" class="btn btn-success">
+    {{ this.user ? "Modifica" : "Registrati" }}
+  </button>
 </form>

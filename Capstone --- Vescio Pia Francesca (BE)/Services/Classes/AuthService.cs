@@ -103,7 +103,13 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                 _db.Comments.Remove(comment);
             }
 
-                _db.Users.Remove(user);
+            var characters = await _db.Characters.Where(c => c.User.Id == id).ToListAsync();
+            foreach (var character in characters)
+            {
+                _db.Characters.Remove(character);
+            }
+
+            _db.Users.Remove(user);
             await _db.SaveChangesAsync();
             return user;
         }
@@ -258,6 +264,19 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
         {
             var user = await GetById(id);
             user.Image = ConvertImage(image);
+            await _db.SaveChangesAsync();
+            return user;
+        }
+
+        public async Task<User> Update(UserViewModel entity)
+        {
+            var user = await GetById(entity.Id);
+            user.FirstName = entity.FirstName;
+            user.LastName = entity.LastName;
+            user.Email = entity.Email;
+            user.DateBirth = entity.DateBirth;
+            user.Username = entity.Username;
+            _db.Update(user);
             await _db.SaveChangesAsync();
             return user;
         }

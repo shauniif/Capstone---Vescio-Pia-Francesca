@@ -1,5 +1,6 @@
 ﻿using Capstone_____Vescio_Pia_Francesca__BE_.Context;
 using Capstone_____Vescio_Pia_Francesca__BE_.Entity;
+using Capstone_____Vescio_Pia_Francesca__BE_.DTO;
 using Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
@@ -35,6 +36,11 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             {
                 var race = await Read(id);
                 _db.Races.Remove(race);
+                var characters = await _db.Characters.Where(c => c.Race.Id == id).ToListAsync();
+                foreach (var character in characters)
+                {
+                    _db.Characters.Remove(character);
+                }
                 await _db.SaveChangesAsync();
                 return race;
             }
@@ -48,7 +54,8 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
         {
             try
             {
-                return await _db.Races.ToListAsync();
+                var races = await _db.Races.ToListAsync();
+                return races;
             }
             catch (Exception ex)
             {
@@ -90,6 +97,18 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             {
                 throw new Exception("Race not updated", ex);
             }
+        }
+
+        public async Task<RaceDTO> ReturnRace(int id)
+        {
+            var race = await Read(id);
+            var raceDTO = new RaceDTO
+            {
+                Id = id,
+                Name = race.Name,
+                Modifier = race.Modifier,
+            };
+            return raceDTO;
         }
     }
 }

@@ -44,6 +44,11 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             {
                 var city = await Read(id);
                 _db.Cities.Remove(city);
+                var characters = await _db.Characters.Where(c => c.City.Id == id).ToListAsync();
+                foreach (var character in characters)
+                {
+                    _db.Characters.Remove(character);
+                }
                 await _db.SaveChangesAsync();
                 return city;
             }

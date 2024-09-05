@@ -13,7 +13,7 @@
   <div class="form-group">
     <label for="guildId">Gilda:</label>
     <select formControlName="guildId" class="form-control">
-      <option value="null">--Please choose an option--</option>
+      <option value="">--Please choose an option--</option>
       <option *ngFor="let guild of guilds" [value]="guild.id">
         {{ guild.name }}
       </option>
@@ -46,7 +46,7 @@
   <div class="form-group">
     <label for="ecoId">Eco:</label>
     <select formControlName="ecoId" class="form-control">
-      <option value="null">--Please choose an option--</option>
+      <option value="">--Please choose an option--</option>
       <option *ngFor="let eco of ecos" [value]="eco.id">
         {{ eco.name }}
       </option>
@@ -59,9 +59,18 @@
   </div>
   <button
     type="submit"
+    *ngIf="!this.character"
     (click)="CreateCaracter()"
     [disabled]="!createCharacterForm.valid"
   >
-    Upload
+    Crea personaggio
+  </button>
+  <button
+    type="submit"
+    *ngIf="this.character"
+    (click)="CreateCaracter()"
+    [disabled]="!createCharacterForm.valid"
+  >
+    Modifica personaggio
   </button>
 </form>

@@ -5,7 +5,7 @@ export interface iUser {
   firstName: string;
   lastName: string;
   username: string;
-  DateBirth: Date;
+  dateBirth: Date;
   email: string;
   password: string;
   image?: string;

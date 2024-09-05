@@ -25,6 +25,7 @@ export class AuthService {
     this.restoreUser();
   }
 
+  authUrl: string = `${environment.apiUrl}AuthApi`
   registerUrl: string = `${environment.apiUrl}AuthApi/register`
   loginUrl: string = `${environment.apiUrl}AuthApi/login`
   UploadUrl: string = `${environment.apiUrl}AuthApi/InsertImage`
@@ -79,4 +80,12 @@ export class AuthService {
    {
       return this.http.patch<iUser>(`${this.UploadUrl}`, formData)
    }
+
+   GetUser(id: number): Observable<iUser> {
+    return this.http.get<iUser>(`${this.authUrl}/${id}`);
+   }
+
+    UpdateUser(id:number,currUser: iUser) : Observable<iUser>{
+    return this.http.put<iUser>(`${this.authUrl}/${id}`, currUser)
+  }
 }

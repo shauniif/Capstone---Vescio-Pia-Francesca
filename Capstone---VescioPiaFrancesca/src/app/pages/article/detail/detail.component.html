@@ -34,8 +34,8 @@
           class="form-control"
           placeholder="Scrivi un commento..."
         />
-        <span *ngIf="isTouchedInvalid2('content')"
-          >Devi inserire lo il commento</span
+        <span *ngIf="isTouchedInvalid(updateCommentForm, 'content')"
+          >Devi inserire il commento</span
         >
 
         <button
@@ -56,8 +56,8 @@
       class="form-control"
       placeholder="Scrivi un commento..."
     />
-    <span *ngIf="isTouchedInvalid('content')"
-      >Devi inserire lo il commento</span
+    <span *ngIf="isTouchedInvalid(createCommentForm, 'content')"
+      >Devi inserire il commento</span
     >
     <button
       type="submit"

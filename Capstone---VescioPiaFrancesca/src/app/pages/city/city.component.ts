@@ -11,16 +11,8 @@ export class CityComponent implements OnInit {
   cities: iCity[] = [];
   constructor(private citySvc: CityService) {}
   ngOnInit(): void {
-    this.citySvc.getAll().subscribe
-    (cities => {
+    this.citySvc.cities$.subscribe((cities) =>{
       this.cities = cities;
-      console.log("Città ricevute:", this.cities)
-    },
-    error => {
-      console.error('Errore durante il recupero delle città:', error.message);
-      })
+    })
   }
-
-
-
 }

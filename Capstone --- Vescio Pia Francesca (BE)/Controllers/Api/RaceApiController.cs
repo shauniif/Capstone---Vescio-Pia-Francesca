@@ -1,4 +1,5 @@
-﻿using Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces;
+﻿using Capstone_____Vescio_Pia_Francesca__BE_.DTO;
+using Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -22,13 +23,25 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
         public async Task<IActionResult> GetAll()
         {
             var races = await _raceSvc.GetAllRaces();
-            return Ok(races);
+            var racesDTO = new List<RaceDTO>();
+
+
+            foreach (var race in races)
+            {
+                var raceDTO = await _raceSvc.ReturnRace(race.Id);
+                racesDTO.Add(raceDTO);    
+            }
+
+            return Ok(racesDTO);
         }
+
+
         [HttpGet("{id}")]
         public async Task<IActionResult> Detail(int id)
         {
             var race = await _raceSvc.Read(id);
-            return Ok(race);
+            var raceDTO = await _raceSvc.ReturnRace(race.Id);
+            return Ok(raceDTO);
         }
     }
 

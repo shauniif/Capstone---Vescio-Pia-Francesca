@@ -26,6 +26,10 @@
     </div>
   </form>
 
+  <div>
+    <a [routerLink]="['/auth/edit', user.id]">Modifica i tuoi dati</a>
+  </div>
+
   <p><span class="btn btn-primary">Nome:</span> {{ user.firstName }}</p>
   <p>
     <span class="btn btn-primary">Il tuo indirzzo email:</span>
@@ -46,6 +50,9 @@
     >
       Cancella
     </button>
+    <a [routerLink]="['/character/edit', character.id]" class="btn btn-warning"
+      >Modifica</a
+    >
   </div>
   <a routerLink="/character/create">Crea un nuovo personaggio</a>
 </div>

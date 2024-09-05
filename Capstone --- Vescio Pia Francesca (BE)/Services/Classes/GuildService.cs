@@ -49,6 +49,12 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                     throw new Exception("Guild not found");
                 }
                 _db.Guilds.Remove(guild);
+
+                var characters = await _db.Characters.Where(c => c.Guild.Id == id).ToListAsync();
+                foreach (var character in characters)
+                {
+                    character.Guild = null;
+                }
                 await _db.SaveChangesAsync();
                 return guild;
             }

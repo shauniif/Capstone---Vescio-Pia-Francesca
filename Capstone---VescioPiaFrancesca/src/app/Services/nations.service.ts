@@ -8,20 +8,28 @@ import { BehaviorSubject, catchError, of } from 'rxjs';
   providedIn: 'root'
 })
 export class NationsService {
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient) {
+    this.getAll();
+  }
 
   private nationsSubject = new BehaviorSubject<iNations[]>([]);
-  mations$ = this.nationsSubject.asObservable();
-  nationUrl:string = `${environment.apiUrl}NationApi`
+  nations$ = this.nationsSubject.asObservable();
 
-  getAll() {
-  return this.http
-    .get<iNations[]>(this.nationUrl)
-    }
+  nationUrl:string = `${environment.apiUrl}NationApi`
+  nation: iNations[] = []
+
 
   getNation(id: number) {
     return this.http
     .get<iNations>(`${this.nationUrl}/${id}`)
   }
+
+  getAll() {
+    return this.http
+    .get<iNations[]>(this.nationUrl)
+    .subscribe((data) => {
+      this.nation = data
+      this.nationsSubject.next(this.nation);
+    })}
 }
 

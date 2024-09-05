@@ -6,6 +6,8 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces
     public interface IAuthService
     {
         Task<User> Create(UserViewModel entity);
+
+        Task<User> Update(UserViewModel entity);
         Task<User> CreateSubAdmin(UserViewModel entity);
         Task<User> Delete(int id);
 

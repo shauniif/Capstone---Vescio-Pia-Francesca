@@ -212,9 +212,41 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
             public async Task<IActionResult> InsertImage(int id, IFormFile photo)
             {
               var user =  await _authSvc.InsertImage(id, photo);
-                Console.WriteLine(user.Image);
                 return RedirectToAction(nameof(Profile));
             }
+
+
+
+        public async Task<IActionResult> UpdateUser(int id)
+        {
+            var user = await _authSvc.GetById(id);
+            var userModel = new UserViewModel
+            {
+                Username = user.Username,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                DateBirth = user.DateBirth,
+                AdminCode = user.AdminCode,
+            };
+
+            return View(userModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
+        public async Task<IActionResult> UpdateUser(UserViewModel userModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _authSvc.Update(userModel);
+                await Login(userModel);
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View(userModel);
+        }
     }
 
 

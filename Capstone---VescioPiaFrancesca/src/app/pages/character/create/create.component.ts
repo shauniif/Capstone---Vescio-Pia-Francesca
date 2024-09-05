@@ -1,3 +1,4 @@
+import { Router, ActivatedRoute } from '@angular/router';
 import { CityService } from './../../../Services/city.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
@@ -28,31 +29,29 @@ export class CreateComponent implements OnInit {
   ecos: iEco[] = [];
   guilds: iGuild[] = [];
   cities: iCity[] = [];
-  constructor(private fb: FormBuilder, private authSvc: AuthService, private characterSvc: CharacterService, private raceSvc: RaceService, private ecoSvc: EcosService, private guildSvc: GuildService, private citySvc: CityService ) {
+  character!: iCharacter;
+  constructor(private fb: FormBuilder, private authSvc: AuthService, private characterSvc: CharacterService, private raceSvc: RaceService, private ecoSvc: EcosService, private guildSvc: GuildService, private citySvc: CityService, private route: ActivatedRoute) {
 
   }
   ngOnInit(): void {
+
+
     this.authSvc.user$.subscribe(user => {
       if(user)this.user = user;
       this.createCharacterForm = this.fb.group({
         name: this.fb.control(null, [Validators.required]),
-        guildId: this.fb.control(null ),
+        guildId: this.fb.control(''),
         cityId: this.fb.control(null, [Validators.required]),
         raceId: this.fb.control(null, [Validators.required]),
-        ecoId: this.fb.control(null ),
+        ecoId: this.fb.control(''),
         userId: this.fb.control(this.user.id, [Validators.required]),
         image: this.fb.control(null, [Validators.required]),
       });
     })
 
-    this.getRaces()
-    this.getEco()
-    this.getGuilds()
-    this.getCities()
 
     this.createCharacterForm.get('guildId')?.valueChanges.subscribe((selectedGuildId: number) => {
       if (selectedGuildId) {
-        console.log('Value change detected');
         this.onGuildChange(selectedGuildId);
       }
     });
@@ -62,6 +61,28 @@ export class CreateComponent implements OnInit {
         this.onCityChange(selectedCityId);
       }
     });
+
+    this.route.params.subscribe((params:any) => {;
+      this.characterSvc.GetCharacter(params.id).subscribe(character => {
+        this.character = character;
+        this.createCharacterForm.patchValue({
+          name: this.character?.name,
+          guildId: this.character?.guild?.id ? this.character?.guild?.id : '',
+          cityId: this.character?.city?.id,
+          raceId: this.character?.race?.id,
+          ecoId: this.character?.eco?.id ? this.character?.eco?.id : '',
+          userId: this.user?.id,
+          image: null,
+        });;
+      })
+    })
+
+
+    this.getRaces()
+    this.getEco()
+    this.getGuilds()
+    this.getCities()
+
   }
 
 
@@ -89,21 +110,31 @@ export class CreateComponent implements OnInit {
     formData.append('image', this.createCharacterForm.get('image')?.value);
 
     const guildId = this.createCharacterForm.get('guildId')?.value;
+
     if (guildId) {
       formData.append('guildId', guildId);
     }
 
     const ecoId = this.createCharacterForm.get('ecoId')?.value;
-    if (ecoId) {
+    console.log(ecoId);
+    if (ecoId  != null) {
       formData.append('ecoId', ecoId);
     }
-
-    this.characterSvc.CreateCharacter(formData).subscribe((character) =>
+    if(this.character) {
+      this.characterSvc.UpdateCharacter(this.character.id, formData).subscribe((character) =>
         {
-          console.log("Personaggio creato con successo:", character);
+          console.log("Personaggio modificato con successo:", character);
           this.createCharacterForm.reset();
         }
       )
+    } else {
+      this.characterSvc.CreateCharacter(formData).subscribe((character) =>
+          {
+            console.log("Personaggio creato con successo:", character);
+            this.createCharacterForm.reset();
+          }
+        )
+      }
     }
   }
 
@@ -116,29 +147,25 @@ export class CreateComponent implements OnInit {
   getEco(): void {
     this.ecoSvc.getAll().subscribe((ecos) => {
       this.ecos = ecos;
+      console.log("Echi",  this.ecos)
     })
   }
 
   onGuildChange(selectedGuildId: number): void {
-    console.log('Selected Guild ID:', selectedGuildId);
+
     const selectedGuild = this.guilds.find(guild => guild.id == selectedGuildId);
-    console.log('Selected Guild:', selectedGuild);
       if (selectedGuild) {
         const nationId = selectedGuild.nation.id;
-        console.log(nationId)
-        // Filtra le città basate sulla nazione
+
         this.getCitiesByNation(nationId);
 
     } else {
-      this.getCities(); // Gestisci il caso in cui non ci sono città da filtrare
+      this.getCities();
     }
   }
 
   onCityChange(selectedCityId: number): void {
-
-      console.log(selectedCityId)
-      const selectedCity = this.cities.find(city => city.id == selectedCityId);
-      console.log(selectedCity?.name)
+      const selectedCity = this.cities.find(city => city.id == selectedCityId)
       if (selectedCity) {
         const nationId = selectedCity.nation.id;
         // Filtra le gilde basate sulla nazione
@@ -156,10 +183,9 @@ export class CreateComponent implements OnInit {
   }
 
   getCities(): void {
-    this.citySvc.getAll()
-    .subscribe((cities) => {
-         this.cities = cities
-        })
+    this.citySvc.cities$.subscribe((cities) =>{
+      this.cities = cities;
+    })
   }
 
 
@@ -174,11 +200,11 @@ export class CreateComponent implements OnInit {
   }
 
   getCitiesByNation(id: number): void {
-    this.citySvc.getAll()
+    this.citySvc.cities$
     .pipe(
       map(cities => cities.filter(city => city.nation.id === id))
     )
-    .subscribe((filteredCities) => {
+    .subscribe((filteredCities) =>{
       this.cities = filteredCities;
     })
   }

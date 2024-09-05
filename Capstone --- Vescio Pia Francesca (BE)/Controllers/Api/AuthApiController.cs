@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using Capstone_____Vescio_Pia_Francesca__BE_.DTO;
 
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
 {
@@ -59,7 +60,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
                     );
                 var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
 
-                return Ok(new LoginResponseModel { User = new User
+                return Ok(new LoginResponseModel { User = new UserResponseDTO
                 {
                     Id = u.Id,
                     FirstName = u.FirstName,
@@ -82,6 +83,35 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
             var user = await _authSvc.InsertImage(id, image);
             var userSel = await _authSvc.CreateUser(user.Id);
             return Ok(userSel);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUser(int id)
+        {
+            var user = await _authSvc.GetById(id);
+            var userSel = await _authSvc.CreateUser(user.Id);
+            return Ok(userSel);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateUser(int id, [FromBody] UserViewModel user)
+        {
+            if (ModelState.IsValid)
+            {   
+                var Curruser = await _authSvc.GetById(id);
+                if (Curruser != null && Curruser.Id == user.Id)
+                {
+                     await _authSvc.Update(user);
+                }
+
+                var loginModel = new LoginModel
+                {
+                    Email = user.Email,
+                    Password = user.Password,
+                };
+                return Ok(loginModel);
+            }
+            return BadRequest();
         }
     }
 }

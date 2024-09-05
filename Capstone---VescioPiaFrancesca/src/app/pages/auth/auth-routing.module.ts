@@ -20,6 +20,10 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent
+  },
+  {
+    path: 'edit/:id',
+    component: RegisterComponent
   }
   ];
 

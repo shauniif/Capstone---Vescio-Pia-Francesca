@@ -60,15 +60,12 @@ export class DetailComponent implements OnInit {
 
 
 
-  isTouchedInvalid(fieldName:string){
-    const field = this.createCommentForm.get(fieldName);
+  isTouchedInvalid(form: FormGroup, fieldName:string){
+    const field = form.get(fieldName);
     return field?.invalid && field?.touched
   }
 
-  isTouchedInvalid2(fieldName:string){
-    const field = this.updateCommentForm.get(fieldName);
-    return field?.invalid && field?.touched
-  }
+
 
   CreateComment(): void {
     if (this.createCommentForm.valid) {
