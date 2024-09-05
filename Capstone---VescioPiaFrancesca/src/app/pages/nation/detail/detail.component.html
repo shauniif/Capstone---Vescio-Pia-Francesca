@@ -18,7 +18,7 @@
   <p *ngIf="nation.ecos && nation.ecos.length === 0">Nessun Eco disponibile</p>
   <ul *ngIf="nation.ecos && nation.ecos.length > 0">
     <li *ngFor="let eco of nation.ecos">
-      <a [routerLink]="['/ecos/detail', eco.id]"> {{ eco.name }}</a>
+      <a [routerLink]="['/eco/detail', eco.id]"> {{ eco.name }}</a>
     </li>
   </ul>
 
@@ -27,7 +27,9 @@
     Nessuna Città disponibile
   </p>
   <ul *ngIf="nation.cities && nation.cities.length > 0">
-    <li *ngFor="let city of nation.cities">{{ city.name }}</li>
+    <li *ngFor="let city of nation.cities">
+      <a [routerLink]="['/city/detail', city.id]">{{ city.name }}</a>
+    </li>
   </ul>
 
   <p>Gilde</p>
@@ -35,6 +37,8 @@
     Nessuna Gilda disponibile
   </p>
   <ul *ngIf="nation.guilds && nation.guilds.length > 0">
-    <li *ngFor="let guild of nation.guilds">{{ guild.name }}</li>
+    <li *ngFor="let guild of nation.guilds">
+      <a [routerLink]="['/guild/detail', guild.id]">{{ guild.name }}</a>
+    </li>
   </ul>
 </div>

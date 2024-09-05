@@ -17,16 +17,5 @@ export class RaceService {
   return this.http.get<iRace[]>(this.raceUrl);
   }
 
-  /*
-(DA USARE NELLA CREATE DEL PG)
-      this.raceSvc.getAll().subscribe
-    (races => {
-      this.races = races;
-      console.log("Razze ricevute:",races)
-      console.log("Razze ricevute:",this.races)
-    },
-    error => {
-      console.error('Errore durante il recupero delle città:', error.message);
-      })
-  */
+
 }

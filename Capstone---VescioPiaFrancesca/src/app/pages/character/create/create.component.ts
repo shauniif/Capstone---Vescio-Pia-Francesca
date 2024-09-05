@@ -145,9 +145,8 @@ export class CreateComponent implements OnInit {
   }
 
   getEco(): void {
-    this.ecoSvc.getAll().subscribe((ecos) => {
+    this.ecoSvc.ecos$.subscribe((ecos) => {
       this.ecos = ecos;
-      console.log("Echi",  this.ecos)
     })
   }
 
@@ -176,8 +175,7 @@ export class CreateComponent implements OnInit {
     }
 
   getGuilds(): void {
-    this.guildSvc.getAll()
-    .subscribe((guilds) => {
+    this.guildSvc.guilds$.subscribe((guilds) => {
       this.guilds = guilds
     })
   }
@@ -190,7 +188,7 @@ export class CreateComponent implements OnInit {
 
 
   getGuildsByNation(id: number): void {
-    this.guildSvc.getAll()
+    this.guildSvc.guilds$
     .pipe(
       map(guilds => guilds.filter(guild => guild.nation.id === id))
     )

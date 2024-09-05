@@ -6,11 +6,9 @@ import { iEco } from '../../interfaces/i-eco';
   templateUrl: './single-eco.component.html',
   styleUrl: './single-eco.component.scss'
 })
-export class SingleEcoComponent implements OnInit  {
+export class SingleEcoComponent  {
   @Input() eco!: iEco
-  ngOnInit(): void {
-    console.log('SingleEcoComponent: ', this.eco)
-  }
+
 
 
 

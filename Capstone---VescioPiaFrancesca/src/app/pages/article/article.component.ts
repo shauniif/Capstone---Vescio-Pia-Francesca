@@ -13,9 +13,8 @@ export class ArticleComponent implements OnInit {
   articles: iArticle[] = [];
   constructor(private articleSvc: ArticleService) {}
   ngOnInit(): void {
-    this.articleSvc.getAll().subscribe((articles) => {
+    this.articleSvc.articles$.subscribe((articles) => {
       this.articles = articles;
-      console.log('Articoli ricevuti:', articles);
     });
   }
 

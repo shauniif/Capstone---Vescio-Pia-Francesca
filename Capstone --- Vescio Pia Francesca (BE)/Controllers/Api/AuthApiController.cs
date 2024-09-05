@@ -48,7 +48,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
 
                 var k = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(key));
                 var signed = new SigningCredentials(k, SecurityAlgorithms.HmacSha256);
-                var expiration = DateTime.Now.AddHours(1);
+                var expiration = DateTime.Now.AddDays(1);
 
 
                 var token = new JwtSecurityToken(

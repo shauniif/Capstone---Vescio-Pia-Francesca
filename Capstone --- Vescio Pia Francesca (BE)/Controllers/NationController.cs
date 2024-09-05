@@ -45,6 +45,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var nation = await _nationSvc.Get(id);
+            Console.WriteLine(nation.Photo);
             return View(nation);
         }
 

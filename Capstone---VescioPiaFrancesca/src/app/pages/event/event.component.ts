@@ -12,13 +12,8 @@ export class EventComponent implements OnInit {
   events: iEvent[] = [];
   constructor(private eventSvc: EventService) {}
   ngOnInit(): void {
-    this.eventSvc.getAll().subscribe(events => {
-
+    this.eventSvc.events$.subscribe((events) => {
       this.events = events
-      console.log("Eventi ricevuti:", this.events)
-    },
-    error => {
-      console.error('Errore durante il recupero degli echi:', error.message);
     })
   }
 

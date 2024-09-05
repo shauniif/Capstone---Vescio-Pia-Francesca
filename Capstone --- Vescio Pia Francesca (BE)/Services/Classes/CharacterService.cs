@@ -195,6 +195,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                 currCharacter.Guild = guild;
                 currCharacter.Eco = eco;
                 currCharacter.Image = ConvertImage(dto.Image);
+                currCharacter.Score = await CountScore(eco?.Modifier ?? 1, city.Id, race.Modifier, guild?.Modifier ?? 1);
                 _db.Characters.Update(currCharacter);
                 await _db.SaveChangesAsync();
 

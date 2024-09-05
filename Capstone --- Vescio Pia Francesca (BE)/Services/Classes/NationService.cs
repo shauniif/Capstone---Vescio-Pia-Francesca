@@ -5,6 +5,9 @@ using Capstone_____Vescio_Pia_Francesca__BE_.Models;
 using Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System.Collections;
+using System.IO;
+using System.Reflection.PortableExecutable;
 
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
 {
@@ -30,7 +33,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
 
         }
 
-       
+        
 
 
         public async Task<Nation> Create(NationModel entity)
@@ -159,6 +162,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                 {
                     throw new Exception("Nation not found");
                 }
+                
                 var nationModel = new NationModel();
                 nationModel.Name = nation.Name;
                 nationModel.Description = nation.Description;

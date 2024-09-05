@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { iGuild } from '../../interfaces/i-guild';
 import { GuildService } from '../../Services/guild.service';
+import { NationsService } from '../../Services/nations.service';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-guild',
@@ -10,17 +12,37 @@ import { GuildService } from '../../Services/guild.service';
 export class GuildComponent {
 
   guilds: iGuild[] = [];
-  constructor(private guildSvc: GuildService) {}
+  nationsName: string[] = [];
+  filteredGuilds: iGuild[] = [];
+  guildsCopy: iGuild[] = [];
+  constructor(private guildSvc: GuildService, private nationSvc: NationsService) {}
   ngOnInit(): void {
-  this.guildSvc.getAll().subscribe(guilds => {
-  this.guilds = guilds
-  console.log("Ecos ricevuti:", this.guilds)
-  },
-  error => {
-  console.error('Errore durante il recupero degli echi:', error.message);
-  })
+
+    this.guildSvc.guilds$.subscribe((guilds) =>{
+      this.guilds = guilds;
+      this.filteredGuilds = [...this.guilds]
+      })
+
+
+
+      this.getNationName()
   }
 
 
+  getNationName(): void {
+
+    this.nationSvc.nations$
+    .pipe(
+       map(nations => nations.map(nation => nation.name)
+    ))
+    .subscribe((nationsname) => {
+      this.nationsName = nationsname
+    });
+  }
+
+
+  FilterGuild(name: string): void {
+    this.filteredGuilds = this.guilds.filter(guild => guild.nation.name === name)
+  }
 
 }

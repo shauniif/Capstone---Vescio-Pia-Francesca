@@ -2,7 +2,7 @@ import { iNations } from './../interfaces/nations';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
-import { BehaviorSubject, catchError, of } from 'rxjs';
+import { BehaviorSubject, catchError, of, Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,7 @@ export class NationsService {
     .get<iNations>(`${this.nationUrl}/${id}`)
   }
 
-  getAll() {
+  getAll(): Subscription {
     return this.http
     .get<iNations[]>(this.nationUrl)
     .subscribe((data) => {

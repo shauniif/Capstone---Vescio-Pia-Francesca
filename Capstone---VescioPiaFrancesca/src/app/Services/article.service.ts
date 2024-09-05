@@ -2,21 +2,28 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { iArticle } from '../interfaces/i-article';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ArticleService {
 
-  constructor(private http: HttpClient) { }
-
+  article: iArticle[] = [];
+  private articlesSubject = new BehaviorSubject<iArticle[]>([]);
+  articles$ = this.articlesSubject.asObservable();
+  constructor(private http: HttpClient) {
+    this.getAll();
+  }
   articleApi: string = `${environment.apiUrl}ArticleApi`
 
 
-  getAll(): Observable<iArticle[]>
+  getAll()
   {
-    return this.http.get<iArticle[]>(this.articleApi);
+    return this.http.get<iArticle[]>(this.articleApi).subscribe((data) => {
+      this.article = data;
+      this.articlesSubject.next(this.article);
+    });
    }
 
   getArticle(id: number): Observable<iArticle> {
