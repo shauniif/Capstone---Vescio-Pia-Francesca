@@ -25,15 +25,10 @@ export class SearchComponent implements OnInit  {
       console.log(params);
       this.searchQuery = params['search'];
       this.searchSvc.GetElementSearched(this.searchQuery).subscribe((e: iSearchResponse) => {
-        console.log(e);
         this.ecos = e.ecos;
-        console.log("echi trovati", this.ecos)
         this.guilds = e.guilds;
-        console.log("gilde trovate", this.guilds)
         this.cities = e.cities;
-        console.log("città trovate", this.cities)
         this.nations = e.nations;
-        console.log("nazioni trovate", this.nations)
       })
     });
   }

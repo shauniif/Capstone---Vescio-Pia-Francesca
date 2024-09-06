@@ -9,6 +9,8 @@ import { FooterComponent } from './main-components/footer/footer.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './Interceptor/auth.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Error404Component } from './pages/error404/error404.component';
+import { Error401Component } from './pages/error401/error401.component';
 
 
 @NgModule({
@@ -16,6 +18,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppComponent,
     HeaderComponent,
     FooterComponent,
+    Error404Component,
+    Error401Component,
   ],
   imports: [
     BrowserModule,

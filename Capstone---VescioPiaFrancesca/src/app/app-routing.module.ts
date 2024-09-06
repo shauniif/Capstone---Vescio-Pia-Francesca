@@ -1,5 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { Error404Component } from './pages/error404/error404.component';
+import { AuthGuard } from './pages/auth/guard/auth.guard';
+import { HomeComponent } from './pages/home/home.component';
+import { NationComponent } from './pages/nation/nation.component';
+import { Error401Component } from './pages/error401/error401.component';
+
 
 const routes: Routes = [
   { path: '',
@@ -16,7 +22,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/guild/guild.module').then(m => m.GuildModule) },
   {
     path: 'event',
-    loadChildren: () => import('./pages/event/event.module').then(m => m.EventModule)
+    loadChildren: () => import('./pages/event/event.module').then(m => m.EventModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'article',
@@ -27,6 +34,14 @@ const routes: Routes = [
   { path: 'auth',
     loadChildren: () => import('./pages/auth/auth.module').then(m => m.AuthModule) },
   { path: 'character', loadChildren: () => import('./pages/character/character.module').then(m => m.CharacterModule) },
+  {
+    path: 'page401',
+    component: Error401Component
+  },
+  {
+    path: '**',
+    component: Error404Component,
+  }
 ];
 
 @NgModule({

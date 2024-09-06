@@ -1,5 +1,26 @@
+<p>PASSATO</p>
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
-  <div class="col my-3" *ngFor="let event of events">
+  <div class="col my-3" *ngFor="let event of pastEvents">
+    <div class="card d-flex flex-column h-100">
+      <app-single-event [event]="event"></app-single-event>
+      <a [routerLink]="['detail', event.id]">Dettagli</a>
+    </div>
+  </div>
+</div>
+
+<p>PRESENTE</p>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+  <div class="col my-3" *ngFor="let event of currEvents">
+    <div class="card d-flex flex-column h-100">
+      <app-single-event [event]="event"></app-single-event>
+      <a [routerLink]="['detail', event.id]">Dettagli</a>
+    </div>
+  </div>
+</div>
+
+<p>FUTURO</p>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+  <div class="col my-3" *ngFor="let event of futureEvents">
     <div class="card d-flex flex-column h-100">
       <app-single-event [event]="event"></app-single-event>
       <a [routerLink]="['detail', event.id]">Dettagli</a>
