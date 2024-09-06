@@ -3,6 +3,7 @@ using Capstone_____Vescio_Pia_Francesca__BE_.Entity;
 using Capstone_____Vescio_Pia_Francesca__BE_.Models;
 using Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
 {
@@ -10,10 +11,12 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
     {
      
         private readonly DataContext _db;
+        private readonly ICharacterService _characterSvc;
 
-        public EventService(DataContext db)
+        public EventService(DataContext db, ICharacterService characterSvc)
         {
             _db = db;
+            _characterSvc = characterSvc;
         }
         private string ConvertImage(IFormFile image)
         {
@@ -159,13 +162,13 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
         public async Task<decimal> ChangeModifier(string name, decimal modifier)
         {
             var events = await GetEventsOfTheDay();
-
+            
             foreach (var e in events)
-            {
+            { 
                 if(e.IsChanged != null)
                 {
 
-                if ( e.IsChanged == false&& e.Influence.ToLower().Trim().Contains(name.ToLower().Trim()))
+                if ( e.IsChanged == false && e.Influence.ToLower().Trim().Contains(name.ToLower().Trim()))
                 {
                     modifier += e.Modifier;
                     e.IsChanged = true;
@@ -174,6 +177,49 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             }
             await _db.SaveChangesAsync();
             return modifier;
+        }
+
+        public async Task CalcuateModifier(IEnumerable<Eco> ecos, IEnumerable<Guild> guilds, IEnumerable<Nation> nations, IEnumerable<Race> races, IEnumerable<Character> characters)
+        {
+            foreach (var eco in ecos)
+            {
+                eco.Modifier = await ChangeModifier(eco.Name, eco.Modifier);
+            }
+            foreach (var guild in guilds)
+            {
+                guild.Modifier = await ChangeModifier(guild.Name, guild.Modifier);
+            }
+            foreach (var nation in nations)
+            {
+                nation.Modifier = await ChangeModifier(nation.Name, nation.Modifier);
+            }
+            foreach (var race in races)
+            {
+                race.Modifier = await ChangeModifier(race.Name, race.Modifier);
+            }
+
+            foreach (var character in characters)
+            {
+                Console.WriteLine($"{character.Id}:{character.Score} prima:");
+
+            };
+            foreach (var character in characters)
+            {
+                character.Score = await _characterSvc.ChangeScore(character.Id);
+                Console.WriteLine($"{character.Id}:{character.Score} durante:");
+            };
+
+            foreach (var character in characters)
+            {
+                Console.WriteLine($"{character.Id}:{character.Score} dopo:");
+
+            }
+            await _db.SaveChangesAsync();
+            foreach (var character in characters)
+            {
+                Console.WriteLine($"{character.Id}:{character.Score} dopo salvataggio:");
+
+            };
         }
     }
 }

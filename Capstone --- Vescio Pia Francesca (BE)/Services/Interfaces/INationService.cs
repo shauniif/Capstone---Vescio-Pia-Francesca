@@ -15,5 +15,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces
         Task<Nation> Delete(int id);
 
         Task<IEnumerable<Nation>> GetAllNations();
+
+        Task<IEnumerable<Nation>> Search(string query);
     }
 }

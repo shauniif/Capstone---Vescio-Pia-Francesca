@@ -7,10 +7,11 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Capstone_____Vescio_Pia_Francesca__BE_.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Capstone_____Vescio_Pia_Francesca__BE_</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -20,72 +21,72 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="AllRoles">Roles</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Auth" asp-action="AllRoles">Roles</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="AllUsers">Users</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Auth" asp-action="AllUsers">Users</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Register">Register</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Auth" asp-action="Register">Register</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Logout">Logout</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Auth" asp-action="Logout">Logout</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Race" asp-action="AllRaces">Races</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Race" asp-action="AllRaces">Races</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Nation" asp-action="AllNations">Nations</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Nation" asp-action="AllNations">Nations</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="City" asp-action="AllCities">Cities</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="City" asp-action="AllCities">Cities</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Eco" asp-action="AllEcos">Ecos</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Eco" asp-action="AllEcos">Ecos</a>
                         </li> 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Guild" asp-action="AllGuilds"> Guilds </a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Guild" asp-action="AllGuilds"> Guilds </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Event" asp-action="AllEvents"> Events </a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Event" asp-action="AllEvents"> Events </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Article" asp-action="AllArticles"> Articles </a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Article" asp-action="AllArticles"> Articles </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Article" asp-action="MyArticle"> My Articles </a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Article" asp-action="MyArticle"> My Articles </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Profile"> My Profile </a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Auth" asp-action="Profile"> My Profile </a>
                         </li>
                     </ul>
 
                     @if (!User.Identity?.IsAuthenticated ?? false)
                     {
-                        <span class="user-greeting">Ciao Anonimo</span>
+                        <span class="user-greeting text-light">Ciao Anonimo</span>
                     }
                     @if (User.Identity?.IsAuthenticated ?? false)
                     {
-                        <span class="user-greeting">Ciao @User.Identity.Name!</span>
+                        <span class="user-greeting text-light">Ciao @User.Identity.Name!</span>
                     }
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container-fluid">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted bg-dark">
         <div class="container">
             &copy; 2024 - Capstone_____Vescio_Pia_Francesca__BE_ - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>

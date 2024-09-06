@@ -167,5 +167,23 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             }
             
         }
+
+        public async Task<IEnumerable<Guild>> Search(string query)
+        {
+            var guilds = await _db.Guilds.Include(g => g.Nation)
+                .Where(
+                g => g.Name.Contains(query) ||
+                g.Description.Contains(query) ||
+                g.Nation.Name.Contains(query)
+                ).ToListAsync();
+
+            var guildsSel = new List<Guild>();
+            foreach (var guild in guilds)
+            {
+                var guildSel = await GetGuild(guild.Id);
+                guildsSel.Add(guildSel);
+            }
+            return guildsSel;
+        }
     }
 }

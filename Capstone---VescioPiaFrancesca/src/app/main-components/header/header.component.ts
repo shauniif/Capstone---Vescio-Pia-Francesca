@@ -31,6 +31,6 @@ export class HeaderComponent implements OnInit {
   Prova(): void {
     let search = this.searchForm.get('search')?.value;
     console.log(search);
-    this.router.navigate(['', search]);
+    this.router.navigate(['search/', search]);
   }
 }

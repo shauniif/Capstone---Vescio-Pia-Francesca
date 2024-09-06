@@ -188,5 +188,22 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             }
             return eco;
         }
+
+        public async Task<IEnumerable<Eco>> Search(string query)
+        {
+            var ecos = await _db.Ecos.Include(e => e.Nation)
+                .Where(
+                e => e.Name.Contains(query)||
+                e.Description.Contains(query) ||
+                (e.Nation != null && e.Nation.Name.Contains(query))
+                ).ToListAsync();
+
+            var ecosSel = new List<Eco>();
+            foreach (var eco in ecos) { 
+                var ecoSel = await GetEco(eco.Id);
+                ecosSel.Add(ecoSel);
+            }
+              return ecosSel;
+        }
     }
 }

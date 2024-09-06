@@ -1,0 +1,8 @@
+<div *ngIf="currCharacter">
+  <img [src]="[currCharacter.image]" />
+  <p>{{ currCharacter.name }}</p>
+  <p>Razza: {{ currCharacter.race.name }}</p>
+  <p>Devota a :{{ currCharacter.eco?.name }}</p>
+  <p>Appartente alla gilda : {{ currCharacter.guild?.name }}</p>
+  <p>Nata a: {{ currCharacter.city.name }}</p>
+</div>

@@ -142,6 +142,24 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             }
         }
 
+        public async Task<IEnumerable<City>> Search(string query)
+        {
+            var cities = await _db.Cities.Include(g => g.Nation)
+                .Where(
+                g => g.Name.Contains(query) ||
+                g.Description.Contains(query) ||
+                g.Nation.Name.Contains(query)
+                ).ToListAsync();
+
+            var citiesSel = new List<City>();
+            foreach (var city in cities)
+            {
+                var citySel = await GetCity(city.Id);
+                citiesSel.Add(citySel);
+            }
+            return citiesSel;
+        }
+
         public async Task<City> Update(CityModel entity)
         {
             try

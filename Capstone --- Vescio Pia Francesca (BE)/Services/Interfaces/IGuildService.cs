@@ -12,5 +12,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces
         Task<Guild> GetGuild(int id);
 
         Task<IEnumerable<Guild>> GetAll();
+
+        Task<IEnumerable<Guild>> Search(string query);
     }
 }

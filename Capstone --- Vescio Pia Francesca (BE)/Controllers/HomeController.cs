@@ -42,45 +42,15 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
                 var nations = await _nationSvc.GetAllNations();
                 var races = await _racesSvc.GetAllRaces();
                  var characters = await _characterSvc.GetAll();
-                foreach (var nation in nations)
-                {
-                    nation.Modifier = await _eventSvc.ChangeModifier(nation.Name, nation.Modifier);
-                }
-                foreach (var eco in ecos)
-                {
-                    eco.Modifier = await _eventSvc.ChangeModifier(eco.Name, eco.Modifier);
-                }
-                foreach (var guild in guilds)
-                {
-                    guild.Modifier = await _eventSvc.ChangeModifier(guild.Name, guild.Modifier);
-                }
-                foreach (var race in races)
-                {
-                    race.Modifier = await _eventSvc.ChangeModifier(race.Name, race.Modifier);
-                }
+            var events = await _eventSvc.GetAll();
 
-            foreach (var character in characters)
-            {
-                Console.WriteLine($"{character.Id}:{character.Score} prima:" );
-
-            };
-            foreach (var character in characters)
+            foreach (var e in events) { 
+                if(e.Date.Date == DateTime.Now.Date && !(e.IsChanged ?? false))
                 {
-                    character.Score = await _characterSvc.ChangeScore(character.Id);
-                    Console.WriteLine($"{character.Id}:{character.Score} durante:");
-            };
-
-            foreach (var character in characters)
-            {
-                Console.WriteLine($"{character.Id}:{character.Score} dopo:");
-
+                    await _eventSvc.CalcuateModifier(ecos, guilds, nations, races, characters);
+                };
             }
-            await _db.SaveChangesAsync();
-            foreach (var character in characters)
-            {
-                Console.WriteLine($"{character.Id}:{character.Score} dopo salvataggio:");
 
-            }
             return View();
         }
 

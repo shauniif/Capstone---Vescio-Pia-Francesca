@@ -8,13 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.DependencyInjection;
-using Capstone_____Vescio_Pia_Francesca__BE_.Data;
 using Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api;
 using Capstone_____Vescio_Pia_Francesca__BE_.Entity;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<Capstone_____Vescio_Pia_Francesca__BE_Context>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Capstone_____Vescio_Pia_Francesca__BE_Context") ?? throw new InvalidOperationException("Connection string 'Capstone_____Vescio_Pia_Francesca__BE_Context' not found.")));
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -33,9 +31,9 @@ builder.Services
     options.AddPolicy("AllowAllOrigins",
         policy =>
         {
-            policy.AllowAnyOrigin() // Permette richieste da qualsiasi origine
-                  .AllowAnyMethod() // Permette qualsiasi metodo HTTP
-                  .AllowAnyHeader(); // Permette qualsiasi intestazione
+            policy.AllowAnyOrigin() 
+                  .AllowAnyMethod() 
+                  .AllowAnyHeader(); 
         });
 }); 
 

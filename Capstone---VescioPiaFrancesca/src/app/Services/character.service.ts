@@ -24,6 +24,8 @@ export class CharacterService {
     return this.http.get<iCharacter>(`${this.characterUrl}/${id}`);
   }
 
+
+
   CreateCharacter(newCharacter: FormData) : Observable<iCharacter>{
     return this.http.post<iCharacter>(`${this.characterUrl}/Create`, newCharacter)
   }

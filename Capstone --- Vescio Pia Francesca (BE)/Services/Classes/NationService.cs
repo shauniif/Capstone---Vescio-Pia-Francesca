@@ -214,5 +214,22 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             }
             return nation;
         }
+
+        public async Task<IEnumerable<Nation>> Search(string query)
+        {
+            var nations = await _db.Nations.Where(
+                n => n.Name.Contains(query) ||
+                n.Description.Contains(query) ||
+                n.FormOfGovernment.Contains(query)
+                ).ToListAsync();
+
+            var nationsSel = new List<Nation>();
+            foreach (var city in nations)
+            {
+                var nationSel = await GetNation(city.Id);
+                nationsSel.Add(nationSel);
+            }
+            return nationsSel;
+        }
     }
 }
