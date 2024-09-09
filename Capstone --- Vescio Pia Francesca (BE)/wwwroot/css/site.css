@@ -20,18 +20,13 @@ html {
 
 }
 
-body {
-  
+.bg {
+    background-image: url('../img/bg.jpg');
 }
 
-main {
-    background-color;
-    
-    
-}
 
-main {
-    min-height: 85vh;
+.container {
+    min-height: 86.8vh;
 }
 footer {
     height: 7vh;
@@ -42,4 +37,5 @@ a {
     text-decoration: none;
     color: #f2c506
 }
-}
+
+

@@ -105,14 +105,14 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
         {
             try
             {
-                var comments = await _db.Characters
+                var characters = await _db.Characters
                      .Include(c => c.Guild)
                         .Include(c => c.City)
                         .Include(c => c.Race)
                         .Include(c => c.Eco)
                         .Include(c => c.User)
                     .ToListAsync();
-                return comments;
+                return characters;
             }
             catch (Exception ex)
             {
