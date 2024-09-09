@@ -1,6 +1,7 @@
 ﻿using Capstone_____Vescio_Pia_Francesca__BE_.Entity;
 using Capstone_____Vescio_Pia_Francesca__BE_.Models;
 using Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces;
+using Capstone_____Vescio_Pia_Francesca__BE_.Views;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -13,6 +14,8 @@ using System.Security.Claims;
 
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
 {
+    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
+    
     public class AuthController : Controller
     {
         private readonly IRoleService _roleSvc;
@@ -20,6 +23,12 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
 
         private readonly byte[] _key;
 
+        public AuthController(IRoleService roleSvc, IAuthService authSvc, IConfiguration configuration)
+        {
+            _roleSvc = roleSvc;
+            _authSvc = authSvc;
+            _key = System.Text.Encoding.UTF8.GetBytes(configuration["Jwt:Key"]!);
+        }
         public async Task<IActionResult> GetUserImage(int id)
         {
             var user = await _authSvc.GetById(id);
@@ -31,19 +40,16 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
             byte[] imageBytes = Convert.FromBase64String(userPhotodata);
             return File(imageBytes, "image/jpeg");
         }
-        public AuthController(IRoleService roleSvc, IAuthService authSvc, IConfiguration configuration)
-        {
-            _roleSvc = roleSvc;
-            _authSvc = authSvc;
-            _key = System.Text.Encoding.UTF8.GetBytes(configuration["Jwt:Key"]!);
-        }
 
+        [Authorize(Policies.IsAdmin)]
         public async Task<IActionResult> AllRoles()
         {
             var roles = await _roleSvc.GetAll();
             return View(roles);
         }
 
+
+        [Authorize(Policies.IsAdmin)]
         public IActionResult CreateRole()
         {
             return View();
@@ -60,7 +66,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
             }
             return View(role);
         }
-
+        [Authorize(Policies.IsAdmin)]
         public async Task<IActionResult> EditRole(int id)
         {
             var role = await _roleSvc.Read(id);
@@ -69,6 +75,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policies.IsAdmin)]
         public async Task<IActionResult> EditRole(Role role)
         {
             if (ModelState.IsValid)
@@ -79,6 +86,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
             return View(role);
         }
 
+        [Authorize(Policies.IsAdmin)]
         public async Task<IActionResult> DeleteRole(int id)
         {
             await _roleSvc.Delete(id);
@@ -153,25 +161,27 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [AllowAnonymous]
+        
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Home");
         }
 
+        [Authorize(Policies.IsAdmin)]
         public async Task<IActionResult> AllUsers()
             {
                 var users = await _authSvc.GetAll();
                 return View(users);
             }
-
-            public async Task<IActionResult> DeleteUser(int id)
+        [Authorize(Policies.IsAdmin)]
+        public async Task<IActionResult> DeleteUser(int id)
             {
                 await _authSvc.Delete(id);
                 return RedirectToAction("AllUsers", "Auth");
             }
-            public async Task<IActionResult> DetailUser(int id)
+        [Authorize(Policies.IsAdmin)]
+        public async Task<IActionResult> DetailUser(int id)
             {
                 // trovo l'user
                 var user = await _authSvc.GetById(id);
@@ -192,30 +202,29 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
                 ViewBag.Roles = rolesName;
                 return View(user);
             }
-
-            public async Task<IActionResult> AddRoleToUser(int userid, string roleName)
+        [Authorize(Policies.IsAdmin)]
+        public async Task<IActionResult> AddRoleToUser(int userid, string roleName)
             {
                 await _authSvc.AddRoleToUser(userid, roleName);
                 return RedirectToAction("AllUsers", "Auth");
             }
-            public async Task<IActionResult> RemoveRoleToUser(int userid, string roleName)
+        [Authorize(Policies.IsAdmin)]
+        public async Task<IActionResult> RemoveRoleToUser(int userid, string roleName)
             {
                 await _authSvc.RemoveRoleToUser(userid, roleName);
                 return RedirectToAction("AllUsers", "Auth");
             }
 
-            public IActionResult Profile()
+        public IActionResult Profile()
             {
             return View();   
             }
 
-            public async Task<IActionResult> InsertImage(int id, IFormFile photo)
+        public async Task<IActionResult> InsertImage(int id, IFormFile photo)
             {
               var user =  await _authSvc.InsertImage(id, photo);
                 return RedirectToAction(nameof(Profile));
             }
-
-
 
         public async Task<IActionResult> UpdateUser(int id)
         {
@@ -235,7 +244,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [AllowAnonymous]
+
         public async Task<IActionResult> UpdateUser(UserViewModel userModel)
         {
             if (ModelState.IsValid)
@@ -246,6 +255,12 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
             }
 
             return View(userModel);
+        }
+
+
+        public IActionResult Error401Page()
+        {
+            return View();
         }
     }
 

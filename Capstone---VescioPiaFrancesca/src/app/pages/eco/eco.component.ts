@@ -33,7 +33,6 @@ export class EcoComponent {
   }
 
   getNationName(): void {
-
     this.nationSvc.nations$
     .pipe(
        map(nations => nations.map(nation => nation.name)
@@ -61,5 +60,14 @@ export class EcoComponent {
         console.log("Ecco", this.filteredEcos)
       }
      })
+
+  }
+
+  OrderEcoByPosition(): void {
+    this.filteredEcos.sort((a, b) => a.position - b.position)
+  }
+
+  OrderEcoByName(): void {
+    this.filteredEcos.sort((a, b) => a.name.localeCompare(b.name))
   }
 }

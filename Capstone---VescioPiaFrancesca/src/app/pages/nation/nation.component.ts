@@ -17,4 +17,8 @@ export class NationComponent {
     })
   }
 
+
+  OrderNationByName(): void {
+    this.nations.sort((a, b) => a.name.localeCompare(b.name))
+  }
 }

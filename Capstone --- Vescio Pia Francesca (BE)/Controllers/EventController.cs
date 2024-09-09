@@ -3,9 +3,13 @@ using Capstone_____Vescio_Pia_Francesca__BE_.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Capstone_____Vescio_Pia_Francesca__BE_.Views;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
 {
+    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
+    [Authorize(Policies.IsSubAdminOrAdmin)]
     public class EventController : Controller
     {
         private readonly IEventService _eventSvc;

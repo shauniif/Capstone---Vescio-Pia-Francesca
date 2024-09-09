@@ -39,4 +39,7 @@ export class CityComponent implements OnInit {
     this.filteredCities = this.cities.filter(city => city.nation.name === name)
   }
 
+  OrderCitiesByName(): void {
+    this.filteredCities.sort((a, b) => a.name.localeCompare(b.name))
+  }
 }

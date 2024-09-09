@@ -2,10 +2,15 @@
 using Capstone_____Vescio_Pia_Francesca__BE_.Models;
 using Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes;
 using Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces;
+using Capstone_____Vescio_Pia_Francesca__BE_.Views;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
 {
+    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
+    [Authorize(Policies.IsSubAdminOrAdmin)]
     public class ArticleController : Controller
     {
         private readonly IArticleService _articleSvc;
@@ -84,5 +89,12 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
             await _articleSvc.Delete(id);
             return RedirectToAction(nameof(AllArticles));
         }
-    }
+
+        public async Task<IActionResult> Detail(int id)
+        {
+        var article = await _articleSvc.Read(id);
+        return View(article);
+        }
 }
+    }
+

@@ -4,13 +4,16 @@
   </button>
   <button (click)="filteredEcos = ecos">Mostra tutte</button>
   <button (click)="filteredEcos = EcosWithNoNation">Mostra Nomadi</button>
+  <button (click)="OrderEcoByName()">Ordina in ordine alfabeitco</button>
+  <button (click)="OrderEcoByPosition()">
+    Ordina in base al posizionamento
+  </button>
 </div>
 
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
   <div class="col my-3" *ngFor="let eco of filteredEcos">
     <div class="card d-flex flex-column h-100">
       <app-single-eco [eco]="eco"></app-single-eco>
-
       <a [routerLink]="['detail', eco.id]">Dettagli</a>
     </div>
   </div>

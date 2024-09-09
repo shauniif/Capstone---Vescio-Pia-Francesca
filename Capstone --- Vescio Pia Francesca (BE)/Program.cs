@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.DependencyInjection;
 using Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api;
 using Capstone_____Vescio_Pia_Francesca__BE_.Entity;
+using Capstone_____Vescio_Pia_Francesca__BE_.Views;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -58,15 +59,20 @@ string audience = builder.Configuration["Jwt:Audience"]!;
 string issuer = builder.Configuration["Jwt:Issuer"]!;
 var bytesKey = System.Text.Encoding.UTF8.GetBytes(key);
 
-builder.Services.AddAuthentication( opt =>
+builder.Services.AddAuthentication(opt =>
     {
         opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
         opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
         opt.DefaultForbidScheme = JwtBearerDefaults.AuthenticationScheme;
         opt.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-        
+
     })
-    .AddCookie(opt => opt.LoginPath = "/Auth/Login")
+    .AddCookie(opt =>
+    {
+        
+        opt.LoginPath = "/Auth/Login";  
+        opt.AccessDeniedPath = "/Auth/Error401Page"; 
+    })
     .AddJwtBearer( opt =>
     {
         opt.TokenValidationParameters = new TokenValidationParameters
@@ -80,7 +86,17 @@ builder.Services.AddAuthentication( opt =>
         };
     })
     ;
-
+builder.Services.
+              AddAuthorization(opt =>
+              {
+                  opt.AddPolicy(Policies.LoggedIn, cfg => cfg.RequireAuthenticatedUser());
+                  opt.AddPolicy(Policies.IsAdmin, cfg => cfg.RequireRole("Admin"));
+                  opt.AddPolicy(Policies.IsSubAdmin, cfg => cfg.RequireRole("Sub-Admin"));
+                  opt.AddPolicy(Policies.IsSubAdminOrAdmin, cfg =>
+                  {
+                      cfg.RequireRole("Admin", "Sub-Admin");
+                  });
+              });
 
 
 builder.Services.AddAuthorization();
@@ -101,6 +117,7 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+app.UseStatusCodePagesWithReExecute("/StatusCodeError/{0}");
 
 if (app.Environment.IsDevelopment())
 {
@@ -112,6 +129,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 

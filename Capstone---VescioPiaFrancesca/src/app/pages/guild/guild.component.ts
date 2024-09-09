@@ -45,4 +45,8 @@ export class GuildComponent {
     this.filteredGuilds = this.guilds.filter(guild => guild.nation.name === name)
   }
 
+  OrderGuildByName(): void {
+    this.filteredGuilds.sort((a, b) => a.name.localeCompare(b.name))
+  }
+
 }

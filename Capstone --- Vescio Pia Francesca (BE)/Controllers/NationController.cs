@@ -1,11 +1,16 @@
 ﻿using Capstone_____Vescio_Pia_Francesca__BE_.Entity;
 using Capstone_____Vescio_Pia_Francesca__BE_.Models;
 using Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces;
+using Capstone_____Vescio_Pia_Francesca__BE_.Views;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Buffers.Text;
 
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
 {
+    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
+    [Authorize(Policies.IsSubAdminOrAdmin)]
     public class NationController : Controller
     {
         private readonly INationService _nationSvc;

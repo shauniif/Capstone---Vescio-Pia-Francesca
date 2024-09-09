@@ -98,7 +98,12 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
         {
             try
             {
-                var article = await _db.Articles.Include(a => a.Author).FirstOrDefaultAsync(a => a.Id == id);
+                var article = await _db.Articles
+                    .Include(a => a.Author)
+                    .Include(a => a.Comments)
+                    .ThenInclude(c => c.Author)
+                    .FirstOrDefaultAsync(a => a.Id == id);
+
                 if(article == null)
                 {
                     throw new Exception("Article not found");

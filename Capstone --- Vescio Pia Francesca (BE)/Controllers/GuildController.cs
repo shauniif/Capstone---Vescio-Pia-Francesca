@@ -3,9 +3,14 @@ using Capstone_____Vescio_Pia_Francesca__BE_.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Capstone_____Vescio_Pia_Francesca__BE_.Entity;
+using Capstone_____Vescio_Pia_Francesca__BE_.Views;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
 {
+    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
+    [Authorize(Policies.IsSubAdminOrAdmin)]
     public class GuildController : Controller
     {
             private readonly IGuildService _guildSvc;

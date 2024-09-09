@@ -1,10 +1,16 @@
 ﻿using Capstone_____Vescio_Pia_Francesca__BE_.Entity;
 using Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes;
 using Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces;
+using Capstone_____Vescio_Pia_Francesca__BE_.Views;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
 {
+
+    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
+    [Authorize(Policies.IsSubAdminOrAdmin)]
     public class RaceController : Controller
     {
         private readonly IRacesService _raceSvc;

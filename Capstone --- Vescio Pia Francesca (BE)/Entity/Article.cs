@@ -18,6 +18,6 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Entity
         public User? Author { get; set; }
         public DateTime PublicationDate { get; set; }
 
-        public List<Comment>? Comments { get; set; } = new List<Comment>();
+        public List<Comment> Comments { get; set; } = new List<Comment>();
     }
 }
