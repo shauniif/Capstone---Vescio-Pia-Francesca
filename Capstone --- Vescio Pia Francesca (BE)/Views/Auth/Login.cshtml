@@ -1,16 +1,14 @@
-﻿@model Capstone_____Vescio_Pia_Francesca__BE_.Entity.User
+﻿@model Capstone_____Vescio_Pia_Francesca__BE_.Models.UserViewModel
 
 @{
     ViewData["Title"] = "Login";
 }
 
-<h1>Login</h1>
-
-<h4>User</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Login">
+<h2 class="text-light d-flex align-content-center justify-content-center pt-5">Login</h2>
+<div class="row justify-content-center align-items-center mt-2">
+    <div class="col-12 col-sm-9 col-md-4 p-0">
+        <form asp-action="Login" class="form">
+           
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="AdminCode" class="control-label"></label>
@@ -23,14 +21,14 @@
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group mt-3">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary btnSty" />
             </div>
         </form>
+        
+        <div class="d-flex justify-content-center mt-3">
+            <a asp-action="Register" asp-controller="Auth">Are you not registered?</a>
+        </div>
     </div>
-</div>
-
-<div class="col-md-4">
-    <a asp-action="Register" asp-controller="Auth">Are you not registred?</a>
 </div>
 
 @section Scripts {

@@ -11,7 +11,7 @@
 </head>
 <body>
     <header class="m-0 p-0">
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark box-shadow">
+        <nav class="navbar navbar-expand-lg navbar-toggleable-lg navbar-dark bg-dark box-shadow">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ZanthaVerse</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -20,50 +20,67 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
+                        @if(User.IsInRole("Admin"))
+                        {
+                        <li class="nav-item dropdown">
+                            <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                Sezione admin
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Auth" asp-action="AllRoles">Ruoli</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Auth" asp-action="AllUsers">Utenti</a></li>
+                            </ul>
+                        </li>
+                        }
+                        @if (User.IsInRole("Admin") || User.IsInRole("Sub-Admin"))
+                        {
+                            <li class="nav-item dropdown">
+                                <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Sezione gestione mondo
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-dark">
+                                    <li> <a class="nav-link text-light" asp-area="" asp-controller="Race" asp-action="AllRaces">Races</a></li>
+                                    <li> <a class="nav-link text-light" asp-area="" asp-controller="Nation" asp-action="AllNations">Nations</a></li>
+                                    <li> <a class="nav-link text-light" asp-area="" asp-controller="City" asp-action="AllCities">Cities</a></li>
+                                    <li> <a class="nav-link text-light" asp-area="" asp-controller="Eco" asp-action="AllEcos">Ecos</a></li>
+                                    <li> <a class="nav-link text-light" asp-area="" asp-controller="Guild" asp-action="AllGuilds"> Guilds </a></li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Sezione community
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-dark">
+                                    <li><a class="nav-link text-light" asp-area="" asp-controller="Event" asp-action="AllEvents"> Events </a></li>
+                                    <li><a class="nav-link text-light" asp-area="" asp-controller="Article" asp-action="AllArticles"> Articles </a></li>
+                                    <li><a class="nav-link text-light" asp-area="" asp-controller="Article" asp-action="MyArticle"> My Articles </a></li>
+                                    <li><a class="nav-link text-light" asp-area="" asp-controller="Character" asp-action="AllCharacters"> Characters </a></li>
+                                </ul>
+                            </li>
+
+                        }
+
+                        
+
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Auth" asp-action="AllRoles">Roles</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Auth" asp-action="AllUsers">Users</a>
-                        </li>
+                        
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Auth" asp-action="Register">Register</a>
                         </li>
+                        @if (User.Identity?.IsAuthenticated ?? false)
+                        {  
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Auth" asp-action="Logout">Logout</a>
                         </li>
+                        }
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Race" asp-action="AllRaces">Races</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Nation" asp-action="AllNations">Nations</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="City" asp-action="AllCities">Cities</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Eco" asp-action="AllEcos">Ecos</a>
-                        </li> 
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Guild" asp-action="AllGuilds"> Guilds </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Event" asp-action="AllEvents"> Events </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Article" asp-action="AllArticles"> Articles </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Article" asp-action="MyArticle"> My Articles </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Character" asp-action="AllCharacters"> My Profile </a>
+                            
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Auth" asp-action="Profile"> My Profile </a>
@@ -78,13 +95,16 @@
                     @if (User.Identity?.IsAuthenticated ?? false)
                     {
                         <span class="user-greeting text-light">Ciao @User.Identity.Name!</span>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Auth" asp-action="Profile"> My Profile </a>
+                        </li>
                     }
                 </div>
             </div>
         </nav>
     </header>
     <div class="bg">
-    <div class="container">
+        <div class="container p-0">
         <main role="main">
             @RenderBody()
         </main>

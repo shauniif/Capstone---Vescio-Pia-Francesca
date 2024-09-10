@@ -202,12 +202,14 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
                 ViewBag.Roles = rolesName;
                 return View(user);
             }
+
         [Authorize(Policies.IsAdmin)]
         public async Task<IActionResult> AddRoleToUser(int userid, string roleName)
             {
                 await _authSvc.AddRoleToUser(userid, roleName);
                 return RedirectToAction("AllUsers", "Auth");
             }
+
         [Authorize(Policies.IsAdmin)]
         public async Task<IActionResult> RemoveRoleToUser(int userid, string roleName)
             {
@@ -225,6 +227,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
               var user =  await _authSvc.InsertImage(id, photo);
                 return RedirectToAction(nameof(Profile));
             }
+
 
         public async Task<IActionResult> UpdateUser(int id)
         {
@@ -244,7 +247,6 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-
         public async Task<IActionResult> UpdateUser(UserViewModel userModel)
         {
             if (ModelState.IsValid)
@@ -256,7 +258,6 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
 
             return View(userModel);
         }
-
 
         public IActionResult Error401Page()
         {

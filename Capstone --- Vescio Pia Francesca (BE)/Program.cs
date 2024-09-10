@@ -70,7 +70,7 @@ builder.Services.AddAuthentication(opt =>
     .AddCookie(opt =>
     {
         
-        opt.LoginPath = "/Auth/Login";  
+        opt.LoginPath = "/Home/Error";  
         opt.AccessDeniedPath = "/Auth/Error401Page"; 
     })
     .AddJwtBearer( opt =>

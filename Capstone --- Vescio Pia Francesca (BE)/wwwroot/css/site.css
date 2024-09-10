@@ -3,6 +3,10 @@ html {
 
 }
 
+* {
+    font-family: 'Poppins',sans-serif;
+}
+
 @media (min-width: 768px) {
   html {
     font-size: 16px;
@@ -30,12 +34,80 @@ html {
 }
 footer {
     height: 7vh;
-}    
+}
 
 
 a {
     text-decoration: none;
-    color: #f2c506
+    color: #B3CDE0
+}
+
+    a:hover {
+        color: #D3D3D3;
+    }
+
+
+
+
+.form {
+    height: 31rem;
+    width: 25rem;
+    background-color: rgba(255,255,255,0.13);
+    border-radius: 10px;
+    
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 50px 35px;
+}
+
+ .form * {
+        
+        color: #ffffff;
+        letter-spacing: 0.5px;
+        outline: none;
+        border: none;
+    }
+
+ .form h3 {
+        font-size: 32px;
+        font-weight: 500;
+        line-height: 42px;
+        text-align: center;
+    }
+
+.label {
+    display: block;
+    margin-top: 30px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.input {
+    display: block;
+    height: 50px;
+    width: 100%;
+    background-color: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+::placeholder {
+    color: #e5e5e5;
+}
+
+.btnSty {
+    
+    width: 100%;
+    background-color: #ffffff;
+    color: #080710;
+    
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 
