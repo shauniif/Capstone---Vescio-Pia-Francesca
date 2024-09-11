@@ -34,6 +34,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(EcoModel eco)
         {
             if (ModelState.IsValid) {
@@ -57,29 +58,12 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
         {
             var eco = await _ecoSvc.Get(id);
             var nations = await _nationSvc.GetAllNations();
-
-            var nationList = new List<SelectListItem>
-            {
-                    new SelectListItem
-                    {
-                        Value = "",
-                        Text = "-- Seleziona la Nazione --",
-                        Selected = eco.NationId == 0 
-                    }
-            };
-
-            nationList.AddRange(nations.Select(n => new SelectListItem
-            {
-                Value = n.Id.ToString(),
-                Text = n.Name,
-                Selected = n.Id == eco.NationId 
-            }));
-
-            ViewBag.Nations = new SelectList(nationList, "Value", "Text", eco.NationId);
+            ViewBag.Nations = nations;
             return View(eco);
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(EcoModel eco)
         {
             if (ModelState.IsValid) {
@@ -88,23 +72,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
             }
             else {
                 var nations = await _nationSvc.GetAllNations();
-                var nationList = new List<SelectListItem>
-            {
-               new SelectListItem
-            {
-                Value = "",
-                Text = "-- Seleziona la Nazione --",
-                Selected = eco.NationId == 0
-                }
-            };
-
-                nationList.AddRange(nations.Select(n => new SelectListItem
-                {
-                    Value = n.Id.ToString(),
-                    Text = n.Name,
-                    Selected = n.Id == eco.NationId
-                }));
-                ViewBag.Nations = new SelectList(nationList, "Id", "Name", eco.NationId);
+                ViewBag.Nations = nations;
                 return View(eco);
             };
         }

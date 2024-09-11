@@ -130,7 +130,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             return user!;
         }
 
-        public async Task<User> Login(UserViewModel entity)
+        public async Task<User> Login(LoginAdminModel entity)
         {
             var user = await _db.Users.Include(u => u.Roles).FirstOrDefaultAsync(u => u.AdminCode == entity.AdminCode);
             if (user != null && _passwordEncoder.IsSame(entity.Password, user.Password))
@@ -142,7 +142,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                     LastName = user.LastName,
                     Username = user.Username,
                     DateBirth = user.DateBirth,
-                    AdminCode = entity.AdminCode,
+                    AdminCode = user.AdminCode,
                     Email = user.Email,
                     Roles = user.Roles.ToList()
                 };
@@ -151,17 +151,19 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             }
             return null!;
         }
-        public async Task<User> LoginAdmin(UserViewModel entity)
+        public async Task<User> LoginUser(LoginModel entity)
         {
-            var user =  await _db.Users.Include(u => u.Roles).FirstOrDefaultAsync(u => u.Email == entity.AdminCode);
+            var user = await _db.Users.Include(u => u.Roles).FirstOrDefaultAsync(u => u.Email == entity.Email);
             if (user != null && _passwordEncoder.IsSame(entity.Password, user.Password))
             {
                 var userResulted = new User
                 {
+                    Id = user.Id,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
                     Username = user.Username,
                     DateBirth = user.DateBirth,
+                    Image = user.Image,
                     Email = user.Email,
                     Roles = user.Roles.ToList()
                 };
@@ -170,6 +172,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             }
             return null!;
         }
+
         // trovo l'user e il ruolo, se è presente tra i suoi ruoli lo rimuove
         public async Task<User> RemoveRoleToUser(int userId, string roleName)
         {
@@ -214,28 +217,6 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             return user;
         }
 
-        public async Task<User> LoginUser(LoginModel entity)
-        {
-            var user = await _db.Users.Include(u => u.Roles).FirstOrDefaultAsync(u => u.Email == entity.Email);
-            if (user != null && _passwordEncoder.IsSame(entity.Password, user.Password))
-            {
-                var userResulted = new User
-                {
-                    Id = user.Id,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    Username = user.Username,
-                    DateBirth = user.DateBirth,
-                    Image = user.Image,
-                    Email = user.Email,
-                    Roles = user.Roles.ToList()
-                };
-                return userResulted;
-
-            }
-            return null!;
-        }
-
         public async Task<User> CreateUser(int id)
         {   
             var user = await _db.Users.Select(u => new User
@@ -267,6 +248,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             await _db.SaveChangesAsync();
             return user;
         }
+
 
         public async Task<User> Update(UserViewModel entity)
         {

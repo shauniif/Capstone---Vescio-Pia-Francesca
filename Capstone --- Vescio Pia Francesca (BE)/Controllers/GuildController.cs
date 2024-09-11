@@ -35,6 +35,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
             }
 
             [HttpPost]
+            [ValidateAntiForgeryToken]
             public async Task<IActionResult> Create(GuildModel guild)
             {
                 if(ModelState.IsValid) {
@@ -42,8 +43,8 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
                     return RedirectToAction(nameof(AllGuilds));
                 }
                 else {
-                    var nation = await _nationSvc.GetAllNations();
-                    ViewBag.Nations = nation;
+                    var nations = await _nationSvc.GetAllNations();
+                    ViewBag.Nations = nations;
                     return View(guild);
                 }
                 
@@ -59,25 +60,25 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
             {
                 var city = await _guildSvc.Get(id);
                 var nations = await _nationSvc.GetAllNations();
-                ViewBag.Nations = new SelectList(nations, "Id", "Name", city.NationId);
+                ViewBag.Nations = nations;
                 return View(city);
             }
 
             [HttpPost]
+            [ValidateAntiForgeryToken]
             public async Task<IActionResult> Edit(GuildModel guild)
             {
-            if (ModelState.IsValid)
-            {
-                await _guildSvc.Update(guild);
-                return RedirectToAction(nameof(AllGuilds));
-            }
-            else
-            {
-                var nation = await _nationSvc.GetAllNations();
-                ViewBag.Nations = nation;
-                return View(guild);
-            }
-
+                if (ModelState.IsValid)
+                {
+                    await _guildSvc.Update(guild);
+                    return RedirectToAction(nameof(AllGuilds));
+                }
+                else
+                {
+                    var nation = await _nationSvc.GetAllNations();
+                    ViewBag.Nations = nation;
+                    return View(guild);
+                }
             
         }
 

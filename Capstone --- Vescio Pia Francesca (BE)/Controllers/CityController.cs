@@ -37,6 +37,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CityModel city, int nationId)
         {
 
@@ -47,21 +48,22 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
             }
             else
             {
-                var nation = await _nationSvc.GetAllNations();
-                ViewBag.Nations = nation;
+                var nations = await _nationSvc.GetAllNations();
+                ViewBag.Nations = nations;
                 return View(city);
             }
-        } 
+        }
 
         public async Task<IActionResult> Edit(int id)
         {
             var city = await _citiesSvc.Get(id);
             var nations = await _nationSvc.GetAllNations();
-            ViewBag.Nations = new SelectList(nations, "Id", "Name", city.NationId);
+            ViewBag.Nations = nations;
             return View(city);
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(CityModel city)
         {
             if (ModelState.IsValid)
@@ -72,7 +74,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
             else
             {
                 var nations = await _nationSvc.GetAllNations();
-                ViewBag.Nations = new SelectList(nations, "Id", "Name", city.NationId);
+                ViewBag.Nations = nations;
                 return View(city);
             }
         }

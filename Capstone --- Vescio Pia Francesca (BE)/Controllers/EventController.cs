@@ -33,6 +33,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(EventModel newEvent)
         {
             if (ModelState.IsValid) {
@@ -57,6 +58,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(EventModel currEvent)
         {
             if (ModelState.IsValid)

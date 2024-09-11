@@ -32,6 +32,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Race race)
         {
             if (ModelState.IsValid)
@@ -52,6 +53,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Race race)
         {
             if (ModelState.IsValid)

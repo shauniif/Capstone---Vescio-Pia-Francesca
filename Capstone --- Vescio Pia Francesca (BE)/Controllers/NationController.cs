@@ -34,6 +34,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(NationModel nation)
         {
             if (ModelState.IsValid)
@@ -55,6 +56,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(NationModel nation)
         {
             if (ModelState.IsValid)
@@ -85,7 +87,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
             var nation = await _nationSvc.Read(id);
             if (nation?.Photo == null)
             {
-                return NotFound(); // O un'immagine placeholder
+                return NotFound(); 
             }
             var nationPhotodata = nation.Photo.Substring(23);
             byte[] imageBytes = Convert.FromBase64String(nationPhotodata);

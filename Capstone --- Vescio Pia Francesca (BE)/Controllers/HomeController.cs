@@ -12,7 +12,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
 {
     public class HomeController : Controller
     {
-        private static DateTime? _lastCheckDate = null;
+
         private readonly ILogger<HomeController> _logger;
         private readonly IEcoService _ecoSvc;
         private readonly IGuildService _guildSvc;
@@ -20,9 +20,10 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
         private readonly IRacesService _racesSvc;
         private readonly IEventService _eventSvc;
         private readonly ICharacterService _characterSvc;
+        private readonly IAuthService _authSvc;
         private readonly DataContext _db;
 
-        public HomeController(ILogger<HomeController> logger, IEcoService ecoSvc, IGuildService guildSvc, INationService nationSvc, IRacesService raceSvc, IEventService eventSvc, ICharacterService characterSvc, DataContext db)
+        public HomeController(ILogger<HomeController> logger, IEcoService ecoSvc, IGuildService guildSvc, INationService nationSvc, IRacesService raceSvc, IEventService eventSvc, ICharacterService characterSvc, DataContext db, IAuthService authSvc)
         {
             _logger = logger;
             _ecoSvc = ecoSvc;
@@ -32,6 +33,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
             _eventSvc = eventSvc;
             _characterSvc = characterSvc;
             _db = db;
+            _authSvc = authSvc;
         }
 
         
@@ -80,6 +82,16 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
             return View();
         }
 
-
+        public async Task<IActionResult> GetUserImage(int id)
+        {
+            var user = await _authSvc.GetById(id);
+            if (user?.Image == null)
+            {
+                return NotFound();
+            }
+            var userImgData = user.Image.Substring(23);
+            byte[] imageBytes = Convert.FromBase64String(userImgData);
+            return File(imageBytes, "image/jpeg");
+        }
     }
 }

@@ -1,38 +1,46 @@
 ﻿@model Capstone_____Vescio_Pia_Francesca__BE_.Models.CityModel
 
 @{
-    ViewData["Title"] = "Edit";
-   
+    ViewData["Title"] = "Modifica città";
+    var nations = ViewBag.Nations;
 }
 
-<h1>Edit</h1>
-
-<h4>City</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+<h2 class="text-light d-flex align-content-center justify-content-center pt-2 h3Form">Modifica la città</h2>
+<div class="row justify-content-center align-items-center mt-2 mx-0">
+    <div class="col-12 col-sm-9 col-md-4 p-0">
+        <form asp-action="Edit" class="formStyle">
+            @Html.AntiForgeryToken()
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+                <label asp-for="Name" class="control-label labelStyle"></label>
+                <input asp-for="Name" class="form-control input" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
+                <label asp-for="Description" class="control-label labelStyle"></label>
+                <input asp-for="Description" class="form-control input" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label for="NationId" class="control-label">Nation</label>
-                <label asp-for="NationId" class="control-label">Nation</label>
-                <select asp-for="NationId" class="form-select" asp-items="ViewBag.Nations">
-                    
+                <label for="NationId" class="control-label labelStyle">Nation</label>
+                <select asp-for="NationId" class="form-select input mb-3">
+                    <option value="" class="text-dark">-- Seleziona la Nazione --</option>
+                    @foreach (var nation in nations)
+                    {
+                        if (Model.NationId == nation.Id)
+                        {
+                            <option value="@nation.Id" class="text-dark" selected="selected">@nation.Name</option>
+
+                        } else
+                        {
+                           <option value="@nation.Id" class="text-dark">@nation.Name</option>
+                        }
+                    }
                 </select>
 
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btnSty" />
             </div>
         </form>
     </div>

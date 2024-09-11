@@ -99,6 +99,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
             return View();
         }
 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
@@ -129,36 +130,40 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(UserViewModel user)
+        public async Task<IActionResult> Login(LoginAdminModel user)
         {
-            var u = await _authSvc.Login(user);
-            if(u.AdminCode == null)
+            if(ModelState.IsValid)
             {
-                throw new Exception("Admin not found");
-            }
-            if (u != null)
-            {
-                var claims = new List<Claim>
-                     {
-                     new Claim(ClaimTypes.Name, $"{u.FirstName} {u.LastName}"),
-                     new Claim("Id", u.Id.ToString()),
-                     new Claim("FirstName", u.FirstName),
-                     new Claim("LastName", u.LastName),
-                     new Claim(ClaimTypes.NameIdentifier, u.Username),
-                     new Claim(ClaimTypes.Email, u.Email),
-                     new Claim("BirthDate", u.DateBirth.ToString("dd-MM-yyyy")),
-                     new Claim("AdminCode", u.AdminCode)
-                     };
-                u.Roles.ForEach(r => claims.Add(new Claim(ClaimTypes.Role, r.Name)));
+                var u = await _authSvc.Login(user);
+                 if(u.AdminCode == null)
+                    {
+                    throw new Exception("Admin not found");
+                    }
+                  if (u != null)
+                    {
+                    var claims = new List<Claim>
+                        {
+                        new Claim(ClaimTypes.Name, $"{u.FirstName} {u.LastName}"),
+                        new Claim("Id", u.Id.ToString()),
+                        new Claim("FirstName", u.FirstName),
+                        new Claim("LastName", u.LastName),
+                        new Claim(ClaimTypes.NameIdentifier, u.Username),
+                        new Claim(ClaimTypes.Email, u.Email),
+                        new Claim("BirthDate", u.DateBirth.ToString("dd-MM-yyyy")),
+                        new Claim("AdminCode", u.AdminCode)
+                        };
+                    u.Roles.ForEach(r => claims.Add(new Claim(ClaimTypes.Role, r.Name)));
 
-                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
 
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
-                new ClaimsPrincipal(identity));
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                    new ClaimsPrincipal(identity));
 
-            }
-            return RedirectToAction("Index", "Home");
+                    }
+                    return RedirectToAction("Index", "Home");
+                  }
+            return View();
         }
 
         
@@ -247,12 +252,17 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UpdateUser(UserViewModel userModel)
+        public async Task<IActionResult> UpdateUser(UserViewModel userModel, string password)
         {
             if (ModelState.IsValid)
             {
                 var user = await _authSvc.Update(userModel);
-                await Login(userModel);
+                var adminModel = new LoginAdminModel
+                {
+                    AdminCode = user.AdminCode,
+                    Password = password
+                };
+                await Login(adminModel);
                 return RedirectToAction("Index", "Home");
             }
 

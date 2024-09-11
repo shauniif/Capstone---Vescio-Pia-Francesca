@@ -13,7 +13,6 @@
     
     var idClaimString = User.FindFirst("Id")?.Value;
 
-    // Converti idClaimString in int?
     int? idClaim = null;
     if (int.TryParse(idClaimString, out int id))
     {

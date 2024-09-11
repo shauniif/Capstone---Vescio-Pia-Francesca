@@ -1,55 +1,52 @@
 ﻿@model Capstone_____Vescio_Pia_Francesca__BE_.Models.UserViewModel
 
 @{
-    ViewData["Title"] = "UpdateUser";
+    ViewData["Title"] = "Modifica utente";
 }
 
-<h1>UpdateUser</h1>
-
-<h4>User</h4>
+<h2 class="text-light d-flex align-content-center justify-content-center pt-2 h3Form">Modifica i tuoi dati</h2>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="UpdateUser">
+<div class="row justify-content-center align-items-center mt-2 mx-0">
+    <div class="col-12 col-sm-9 col-md-4 p-0">
+        <form asp-action="UpdateUser" class="formStyle">
             @Html.AntiForgeryToken()
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
+                <label asp-for="FirstName" class="control-label labelStyle"></label>
+                <input asp-for="FirstName" class="form-control input" />
                 <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
+                <label asp-for="LastName" class="control-label labelStyle"></label>
+                <input asp-for="LastName" class="form-control input" />
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Username" class="control-label"></label>
-                <input asp-for="Username" class="form-control" />
+                <label asp-for="Username" class="control-label labelStyle"></label>
+                <input asp-for="Username" class="form-control input" />
                 <span asp-validation-for="Username" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DateBirth" class="control-label"></label>
-                <input asp-for="DateBirth" class="form-control" />
+                <label asp-for="DateBirth" class="control-label labelStyle"></label>
+                <input asp-for="DateBirth" class="form-control input" />
                 <span asp-validation-for="DateBirth" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
+                <label asp-for="Email" class="control-label labelStyle"></label>
+                <input asp-for="Email" class="form-control input" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
 
-            Inserisci la password per conferma:
+            <p class="control-label labelStyle">Inserisci la password per conferma: </p>
             <input type="hidden" asp-for="AdminCode" />
             <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" type="password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
+                <label for="Password" class="control-label labelStyle"></label>
+                <input id="password" name="password" type="password" class="form-control input mb-3" />
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btnSty" />
             </div>
         </form>
     </div>

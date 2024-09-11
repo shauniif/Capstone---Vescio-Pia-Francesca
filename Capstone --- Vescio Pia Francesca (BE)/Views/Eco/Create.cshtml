@@ -1,56 +1,54 @@
 ﻿@model Capstone_____Vescio_Pia_Francesca__BE_.Models.EcoModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Creazione Eco";
     var nations = ViewBag.Nations;
 }
 
-<h1>Create</h1>
-
-<h4>EcoModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create" enctype="multipart/form-data">
+<h2 class="text-light d-flex align-content-center justify-content-center pt-2 h3Form">Crea l'eco</h2>
+<div class="row justify-content-center align-items-center mt-2 mx-0">
+    <div class="col-12 col-sm-9 col-md-4 p-0">
+        <form asp-action="Create" enctype="multipart/form-data" class="formStyle">
+            @Html.AntiForgeryToken()
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
             </div>
             <div class="form-group">
-                <label asp-for="Position" class="control-label"></label>
-                <input asp-for="Position" class="form-control" />
+                <label asp-for="Position"class="control-label labelStyle"></label>
+                <input asp-for="Position" class="form-control input" />
                 <span asp-validation-for="Position" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+                <label asp-for="Name"class="control-label labelStyle"></label>
+                <input asp-for="Name" class="form-control input" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
+                <label asp-for="Description"class="control-label labelStyle"></label>
+                <input asp-for="Description" class="form-control input" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label for="NationId" class="control-label">Nation</label>
-                <select id="NationId" name="NationId" class="form-select">
+                <label for="NationId"class="control-label labelStyle">Nation</label>
+                <select id="NationId" name="NationId" class="form-select input">
                     <option value="">-- Seleziona la Nazione --</option>
                     @foreach (var nation in nations)
                     {
-                        <option value="@nation.Id" name="nationId">@nation.Name</option>
+                        <option value="@nation.Id" name="nationId" class="text-dark">@nation.Name</option>
                     }
                 </select>
             <div class="form-group">
-                <label asp-for="Modifier" class="control-label"></label>
-                <input asp-for="Modifier" type="number" class="form-control" />
+                <label asp-for="Modifier"class="control-label labelStyle"></label>
+                <input asp-for="Modifier" type="number" class="form-control input" />
                 <span asp-validation-for="Modifier" class="text-danger"></span>
             </div>
             <div>
-                <label asp-for="Photo" class="control-label"></label>
-                <input asp-for="Photo" type="file" class="form-control" />
+                <label asp-for="Photo"class="control-label labelStyle"></label>
+                <input asp-for="Photo" type="file" class="form-control input" />
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btnSty" />
             </div>
         </form>
     </div>
