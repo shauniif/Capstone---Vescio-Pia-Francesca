@@ -4,77 +4,81 @@
     ViewData["Title"] = "AllEcos";
 }
 
-<h1>AllEcos</h1>
+<div class="row m-0">
+    <div class="col d-flex justify-content-center align-items-center mt-5">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Pic)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Position)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Modifier)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nation)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                    <img src="@Url.Action("GetEcoImage", "Eco", new { id = item.Id })"
-                         alt="@item.Name"
-                         style="max-width: 100px;" />
+        <h2 class="text-light fs-1">Tutte le nazioni</h2>
+    </div>
 
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Position)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-           
-            <td>
-                @Html.DisplayFor(modelItem => item.Modifier)
-            </td>
-            <td>
-                    @if (item.Nation != null) {
+    <div class="col-12">
+        <a asp-action="Create" class="fs-4">Crea una nuova nazione</a>
+    </div>
 
-                        <p>@item.Nation.Name</p>
-                    } else
-                    {
-                        <p>Nomade</p>
-                    }
-                </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new {  id=item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="col-12 my-3">
+        <div class="table-responsive tableStyle">
+                <table class="table m-0">
+                    <thead>
+                    <tr class="text-center text-light thStyle fs-5">
+                            <th>
+                                @Html.DisplayNameFor(model => model.Pic)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Position)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Name)
+                            </th>
+                            <th class="d-none d-md-table-cell">
+                                @Html.DisplayNameFor(model => model.Description)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Modifier)
+                            </th>
+                        <th class="d-none d-md-table-cell">
+                                @Html.DisplayNameFor(model => model.Nation)
+                            </th>
+                            <th>Azioni</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model) {
+                                <tr class="text-light text-center trStyle fs-6">
+                                    <td>
+                                            <img src="@Url.Action("GetEcoImage", "Eco", new { id = item.Id })"
+                                                 alt="@item.Name"
+                                     class="imgTable" />
+
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Position)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td class="d-none d-md-table-cell">
+                                        @Html.DisplayFor(modelItem => item.Description)
+                                    </td>
+                                    <td class="d-none d-md-table-cell">
+                                        @Html.DisplayFor(modelItem => item.Modifier)
+                                    </td>
+                                    <td>
+                                            @if (item.Nation != null) {
+
+                                                <p>@item.Nation.Name</p>
+                                            } else
+                                            {
+                                                <p>Nomade</p>
+                                            }
+                                        </td>
+                                    <td>
+                                            <a class="btn iconStyWar" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil"></i></a>
+                                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                                             <a class="btn iconStyDang" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash-fill"></i></a>
+                                    </td>
+                                </tr>
+                        }
+                    </tbody>
+                </table>
+        </div>
+    </div>
+</div>

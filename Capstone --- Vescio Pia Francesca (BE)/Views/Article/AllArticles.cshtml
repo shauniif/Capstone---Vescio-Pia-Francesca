@@ -1,71 +1,76 @@
 ﻿@model IEnumerable<Capstone_____Vescio_Pia_Francesca__BE_.Entity.Article>
 
 @{
-    ViewData["Title"] = "AllArticles";
+    ViewData["Title"] = "Tutti gli articoli";
 }
 
-<h1>AllArticles</h1>
+<div class="row m-0">
+    <div class="col d-flex justify-content-center align-items-center mt-5">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Image)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Content)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PublicationDate)
-            </th>
-            <th>  @Html.DisplayNameFor(model => model.Author)</th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                    <img src="@Url.Action("GetArticleImage", "Article", new { id = item.Id })"
-                         alt="@item.Title"
-                         style="max-width: 100px;" />
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Content)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PublicationDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Author.FirstName)
-            </td>
-            <td>
-                    @Html.ActionLink("Detail", "Detail", new {id = item.Id }) 
-                    @if (User.FindFirst("FirstName")?.Value == item.Author.FirstName || User.IsInRole("Admin")) 
-                    {
+        <h2 class="text-light fs-1">Tutti gli articoli</h2>
+    </div>
 
-                        @Html.ActionLink("Edit", "Update", new { id = item.Id });
-                        <br />
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id });
-                    }
+    <div class="col-12">
+        <a asp-action="Create" class="fs-4">Crea una nuova un nuovo articolo</a>
+    </div>
+
+    <div class="col-12 my-3">
+        <div class="table-responsive tableStyle">
+            <table class="table m-0">
+                <thead>
+                    <tr class="text-center text-light thStyle fs-5">
+                        <th>
+                            @Html.DisplayNameFor(model => model.Title)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Image)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Content)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PublicationDate)
+                        </th>
+                        <th>  @Html.DisplayNameFor(model => model.Author)</th>
+                        <th>Azioni</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model) {
+                                <tr class="text-light text-center trStyle fs-6">
+                                        <td>
+                                                <img src="@Url.Action("GetArticleImage", "Article", new { id = item.Id })"
+                                                     alt="@item.Title"
+                                                     class="imgTable" />
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Title)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Content)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.PublicationDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Author.FirstName)
+                                        </td>
+                                        <td>
+                                                @Html.ActionLink("Detail", "Detail", new {id = item.Id }) 
+                                                @if (User.FindFirst("FirstName")?.Value == item.Author.FirstName || User.IsInRole("Admin")) 
+                                                {
+
+                                                    <a class="btn iconStyWar" asp-action="Update" asp-route-id="@item.Id"><i class="bi bi-pencil"></i></a>
+                                                    <a class="btn iconStyDang" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash-fill"></i></a>
+
+                                                }
 
                
-            </td>
-        </tr>
+                            </td>
+                        </tr>
 }
-    </tbody>
+                </tbody>
 </table>
+        </div>
+    </div>
+</div>

@@ -1,46 +1,56 @@
 ﻿@model IEnumerable<Capstone_____Vescio_Pia_Francesca__BE_.Entity.Race>
 
 @{
-    ViewData["Title"] = "AllRaces";
+    ViewData["Title"] = "Tutte le razze";
 }
 
-<h1>AllRaces</h1>
+<div class="row m-0">
+    <div class="col d-flex justify-content-center align-items-center mt-5">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Modifier)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Modifier)
-            </td>
-            <td>
-                    @Html.ActionLink("Edit", "Edit", new {  id=item.Id  }) |
-                    @Html.ActionLink("Delete", "Delete", new {  id=item.Id  })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        <h2 class="text-light fs-1">Tutte le razze</h2>
+    </div>
+
+    <div class="col-12">
+        <a asp-action="Create" class="fs-4">Crea una nuova razza</a>
+    </div> 
+
+    <div class="col-12 mt-3">
+            <div class="table-responsive tableStyle">
+                <table class="table m-0">
+                    <thead>
+                        <tr class="text-center text-light thStyle fs-5">
+                            <th>
+                                @Html.DisplayNameFor(model => model.Id)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Name)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Modifier)
+                            </th>
+                            <th>Azioni</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model) {
+                                <tr class="text-light text-center trStyle fs-6">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Id)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Modifier)
+                                    </td>
+                                    <td>
+                                        <a class="btn iconStyWar" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil"></i></a>
+                                        <a class="btn iconStyDang" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash-fill"></i></a>
+                                    </td>
+                                </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+    </div>
+</div> 

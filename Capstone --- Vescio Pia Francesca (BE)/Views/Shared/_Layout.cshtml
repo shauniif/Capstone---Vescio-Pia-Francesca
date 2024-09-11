@@ -24,7 +24,7 @@
                         {
                         <li class="nav-item dropdown">
                             <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                Sezione admin
+                                Admin
                             </button>
                             <ul class="dropdown-menu dropdown-menu-dark">
                                 <li><a class="dropdown-item" asp-area="" asp-controller="Auth" asp-action="AllRoles">Ruoli</a></li>
@@ -36,7 +36,7 @@
                         {
                             <li class="nav-item dropdown">
                                 <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Sezione gestione mondo
+                                     Gestione mondo
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-dark">
                                     <li> <a class="nav-link text-light" asp-area="" asp-controller="Race" asp-action="AllRaces">Races</a></li>
@@ -49,52 +49,36 @@
 
                             <li class="nav-item dropdown">
                                 <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Sezione community
+                                    Community
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-dark">
                                     <li><a class="nav-link text-light" asp-area="" asp-controller="Event" asp-action="AllEvents"> Events </a></li>
+                                    @if (User.IsInRole("Admin"))
+                                    {    
                                     <li><a class="nav-link text-light" asp-area="" asp-controller="Article" asp-action="AllArticles"> Articles </a></li>
+                                    }
                                     <li><a class="nav-link text-light" asp-area="" asp-controller="Article" asp-action="MyArticle"> My Articles </a></li>
                                     <li><a class="nav-link text-light" asp-area="" asp-controller="Character" asp-action="AllCharacters"> Characters </a></li>
                                 </ul>
                             </li>
 
                         }
-
-                        
-
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Auth" asp-action="Register">Register</a>
                         </li>
-                        @if (User.Identity?.IsAuthenticated ?? false)
-                        {  
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Auth" asp-action="Logout">Logout</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Auth" asp-action="Login">Login</a>
                         </li>
-                        }
-                        <li class="nav-item">
-                            
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Auth" asp-action="Profile"> My Profile </a>
-                        </li>
-
                     </ul>
 
                     
                     @if (User.Identity?.IsAuthenticated ?? false)
                     {
-                        <div class="dropdown-toggle">
+                        <div class="dropdown-toggle ms-auto">
                             <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="@Url.Action("GetUserImage", "Auth", new { id =  User.FindFirst("Id")?.Value})"
-                                     alt="Propic" />
+                                     alt="Propic" class="imgProfile d-none d-md-inline" />
+                                <span class="d-md-none">Impostazioni</span>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end dropdown-menu-start">
                                 <li><a class="nav-link text-light" asp-area="" asp-controller="Auth" asp-action="Profile"> My Profile </a></li>
