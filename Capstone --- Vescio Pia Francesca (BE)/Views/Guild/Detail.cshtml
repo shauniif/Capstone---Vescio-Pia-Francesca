@@ -1,21 +1,15 @@
-﻿@model Capstone_____Vescio_Pia_Francesca__BE_.Entity.Eco
+﻿@model Capstone_____Vescio_Pia_Francesca__BE_.Entity.Guild
 
 @{
-    ViewData["Title"] = "Dettaglio Eco";
+    ViewData["Title"] = "Dettaglio Gilda";
 }
 
-<h2 class="text-light fs-1 text-center pt-2">Dettagli Eco</h2>
+<h2 class="text-light fs-1 text-center pt-2">Dettagli Gilda</h2>
 
 <div class="row mt-4 mx-0">
     <div class="col-md-12 d-flex">
         <div class="card d-sm-flex flex-sm-row">
-            <img src="@Url.Action("GetEcoImage", "Eco", new { id = Model.Id })"
-                 alt="Model.Title" class="card-img-top">
             <div class="card-body">
-                <h5 class="card-title text-light fw-bold mb-2 fs-5">
-                    <span class="infoText">@Html.DisplayNameFor(model => model.Position):</span>
-                    @Html.DisplayFor(model => model.Position)
-                </h5>
                 <h5 class="card-title text-light fw-bold fs-5 mb-2">
                     <span class="infoText ">@Html.DisplayNameFor(model => model.Name):</span>
                     @Html.DisplayFor(model => model.Name)
@@ -30,14 +24,7 @@
                 </p>
                 <p class="card-text text-light fs-5 mb-2 styleList">
                     <span class="fw-bold infoText">@Html.DisplayNameFor(model => model.Nation):</span>
-                    @if(Model.Nation != null)
-                    {
-                        @Html.DisplayFor(model => model.Nation.Name)
-                    } else
-                    {
-                        <span>Nomade</span>
-                    }
-                </p>
+                    @Html.DisplayFor(model => model.Nation.Name)
             </div>
         </div>
     </div>
@@ -49,8 +36,6 @@
 <div class="row mt-4 mx-0">
     <div class="col-md-12">
         <a class="btn iconStyWar" asp-action="Edit" asp-route-id="@Model.Id">Modifica</a>
-        <a class="btn btnHref" asp-action="AllEcos">Torna alla lista</a>
+        <a class="btn btnHref" asp-action="AllGuilds">Torna alla lista</a>
     </div>
 </div>
-
-

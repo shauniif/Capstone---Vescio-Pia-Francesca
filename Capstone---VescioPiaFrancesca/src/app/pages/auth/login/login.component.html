@@ -1,26 +1,41 @@
-<form [formGroup]="loginForm">
-  <div class="form-group col-6">
-    <input
-      type="email"
-      formControlName="email"
-      #email
-      class="form-control"
-      placeholder="La tua email"
-    />
-    <span *ngIf="isTouchedInvalid('email')">Email mancante</span>
+<div class="d-flex justify-content-center align-items-center height">
+  <div
+    class="formBg d-flex flex-column justify-content-center align-content-center p-4"
+  >
+    <h2 class="fs-1 text-center mb-2 text">Accedi</h2>
+    <form [formGroup]="loginForm">
+      <div class="form-group row flex-column flex-sm-row mt-3">
+        <div class="col">
+          <label class="control-label text fs-4">Email</label>
+          <input
+            type="email"
+            formControlName="email"
+            class="form-control"
+            placeholder="La tua email"
+          />
+          <span *ngIf="isTouchedInvalid('email')">Email mancante</span>
+        </div>
+        <div class="col mt-3 mt-sm-0">
+          <label class="control-label text fs-4">Password</label>
+          <input
+            type="password"
+            formControlName="password"
+            class="form-control"
+            placeholder="La tua password"
+          />
+          <span *ngIf="isTouchedInvalid('password')">Dati non corretti</span>
+        </div>
+      </div>
+
+      <span *ngIf="isTouchedInvalid('password')">Password mancante</span>
+      <div class="mt-3 d-flex justify-content-center">
+        <button (click)="login()" class="btn btnSty">Invia</button>
+      </div>
+      <div class="mt-3 text-center">
+        <a routerLink="/auth/register" class="fs-5 text"
+          >Non hai ancora un account?</a
+        >
+      </div>
+    </form>
   </div>
-
-  <div class="form-group col-6">
-    <input
-      type="password"
-      formControlName="password"
-      #password
-      class="form-control"
-      placeholder="La tua password"
-    />
-  </div>
-
-  <span *ngIf="isTouchedInvalid('password')">Password mancante</span>
-
-  <button (click)="login()" class="btn btn-success">Invia</button>
-</form>
+</div>

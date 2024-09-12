@@ -77,11 +77,11 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
             };
         }
 
-        [HttpPost]
+        
         public async Task<IActionResult> Detail(int id)
         {
-            var nation = await _ecoSvc.Read(id);
-            return View(nation);
+            var eco = await _ecoSvc.Read(id);
+            return View(eco);
         }
 
         public async Task<IActionResult> GetEcoImage(int id)

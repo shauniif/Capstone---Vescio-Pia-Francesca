@@ -1,0 +1,62 @@
+﻿@model Capstone_____Vescio_Pia_Francesca__BE_.Entity.Character
+
+@{
+    ViewData["Title"] = "Dettaglio Personaggio";
+}
+<h2 class="text-light fs-1 text-center pt-2">Dettagli Personaggio</h2>
+
+<div class="row mt-4 mx-0">
+    <div class="col-md-12 d-flex">
+        <div class="card d-sm-flex flex-sm-row">
+            <img src="@Url.Action("GetCharacterImage", "Character", new { id = Model.Id })"
+                 alt="Model.Title" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title text-light fw-bold fs-5 mb-2">
+                    <span class="infoText ">@Html.DisplayNameFor(model => model.Name):</span>
+                    @Html.DisplayFor(model => model.Name)
+                </h5>
+                <p class="card-text text-light fs-5 mb-2">
+                    <span class="fw-bold infoText">@Html.DisplayNameFor(model => model.Race):</span>
+                    @Html.DisplayFor(model => model.Race.Name)
+                </p>
+                <p class="card-text text-light fs-5 mb-2">
+                    <span class="fw-bold infoText">@Html.DisplayNameFor(model => model.City):</span>
+                    @Html.DisplayFor(model => model.City.Name)
+                </p>
+                <p class="card-text text-light fs-5 mb-2 styleList">
+                    <span class="fw-bold infoText">@Html.DisplayNameFor(model => model.Eco):</span>
+                    @if (Model.Eco != null)
+                    {
+                        @Html.DisplayFor(model => model.Eco.Name)
+                    }
+                    else
+                    {
+                        <span>Ateo</span>
+                    }
+                </p>
+                <p class="card-text text-light fs-5 mb-2 styleList">
+                    <span class="fw-bold infoText">@Html.DisplayNameFor(model => model.Guild):</span>
+                    @if (Model.Guild != null)
+                    {
+                        @Html.DisplayFor(model => model.Guild.Name)
+                    }
+                    else
+                    {
+                        <span>Non ancora iscritto in nessuna gilda.</span>
+                    }
+                </p> 
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<div class="row mt-4 mx-0">
+    <div class="col-md-12">
+        <a class="btn iconStyWar" asp-action="Edit" asp-route-id="@Model.Id">Modifica</a>
+        <a class="btn btnHref" asp-action="AllCharacters">Torna alla lista</a>
+    </div>
+</div>
+

@@ -1,0 +1,12 @@
+.container {
+  min-height: 80.7vh;
+
+  @media screen and (min-width: 521px) {
+    min-height: 86vh;
+  }
+
+}
+.bg {
+  background-image: url('../assets/img/zxc.png');
+  background-size: cover;
+}

@@ -7,11 +7,11 @@
 <div class="row m-0">
     <div class="col d-flex justify-content-center align-items-center mt-5">
 
-        <h2 class="text-light fs-1">Tutte le nazioni</h2>
+        <h2 class="text-light fs-1">Tutte gli echi</h2>
     </div>
 
     <div class="col-12">
-        <a asp-action="Create" class="fs-4">Crea una nuova nazione</a>
+        <a asp-action="Create" class="fs-4">Crea un nuovo eco</a>
     </div>
 
     <div class="col-12 my-3">
@@ -72,7 +72,7 @@
                                         </td>
                                     <td>
                                             <a class="btn iconStyWar" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil"></i></a>
-                                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                                            <a class="btn iconStyDetail" asp-action="Detail" asp-route-id="@item.Id"><i class="bi bi-card-text"></i></a>
                                              <a class="btn iconStyDang" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash-fill"></i></a>
                                     </td>
                                 </tr>

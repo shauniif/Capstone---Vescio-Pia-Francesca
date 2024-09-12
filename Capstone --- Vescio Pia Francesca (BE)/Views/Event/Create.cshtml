@@ -45,15 +45,19 @@
                 <label asp-for="Cover"class="control-label labelStyle"></label>
                 <input asp-for="Cover" type="file" class="form-control input" />
             </div>
+            <div class="form-group mb-3">
+                <label asp-for="IsChanged" class="control-label labelStyle"></label>
+                <input asp-for="IsChanged" class="form-check-input" type="checkbox" class="form-control input" />
+                <span asp-validation-for="IsChanged" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btnSty" />
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
+    <div class="d-flex justify-content-center my-3">
+        <a asp-action="AllEvents" class="btn btnHref">Back to List</a>
+    </div>
 </div>
 
 @section Scripts {

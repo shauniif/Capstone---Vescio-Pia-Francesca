@@ -1,34 +1,46 @@
 ﻿@model IEnumerable<Capstone_____Vescio_Pia_Francesca__BE_.Entity.Role>
 
 @{
-    ViewData["Title"] = "AllRoles";
+    ViewData["Title"] = "Tutti i ruoli";
 }
 
-<h1>All Roles</h1>
 
-<p>
-    <a class="btn btn-primary" asp-action="CreateRole">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                <a class="btn btn-warning" asp-action="EditRole" asp-route-id="@item.Id">Edit</a> |
-                <a class="btn btn-danger" asp-action="DeleteRole" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="row m-0">
+<div class="col d-flex justify-content-center align-items-center mt-5">
+
+    <h2 class="text-light fs-1">Tutti i ruoli</h2>
+</div>
+
+<div class="col-12">
+    <a asp-action="CreateRole" class="fs-4">Crea un nuovo</a>
+</div>
+
+
+    <div class="col-12 mt-3">
+        <div class="table-responsive tableStyle">
+            <table class="table m-0">
+                <thead>
+                    <tr class="text-center text-light thStyle fs-5">
+                        <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>Azioni</th>
+                    </tr>
+                </thead>
+                 <tbody>
+                    @foreach (var item in Model) {
+                        <tr class="text-light text-center trStyle fs-6">
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                <a class="btn iconStyWar" asp-action="EditRole" asp-route-id="@item.Id"><i class="bi bi-pencil"></i></a>
+                                <a class="btn iconStyDang" asp-action="DeleteRole" asp-route-id="@item.Id"><i class="bi bi-trash-fill"></i></a>
+                                </td>
+                            </tr>
+                    }
+                  </tbody>
+            </table>
+        </div>
+    </div>
+</div>

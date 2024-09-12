@@ -1,0 +1,10 @@
+.picsum-img-wrapper {
+  text-align: center;
+}
+
+.picsum-img-wrapper img {
+  min-width: 30vw;
+  max-width: 40vw;
+  height: auto;
+  object-fit: cover;
+}

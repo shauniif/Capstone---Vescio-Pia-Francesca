@@ -19,16 +19,16 @@
                     <thead>
                        <tr class="text-center text-light thStyle fs-5">
                             <th>
-                                @Html.DisplayNameFor(model => model.Id)
-                            </th>
-                            <th>
                                 @Html.DisplayNameFor(model => model.Name)
                             </th>
-                            <th>
+                            <th class="d-none d-md-table-cell">
                                 @Html.DisplayNameFor(model => model.Description)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Modifier)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Nation)
                             </th>
                             <th>Azioni</th>
                         </tr>
@@ -37,20 +37,20 @@
                         @foreach (var item in Model) {
                                 <tr class="text-light text-center trStyle fs-6">
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Id)
-                                    </td>
-                                    <td>
                                         @Html.DisplayFor(modelItem => item.Name)
                                     </td>
-                                    <td>
+                                    <td class="d-none d-md-table-cell">
                                         @Html.DisplayFor(modelItem => item.Description)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Modifier)
                                     </td>
                                     <td>
+                                        @Html.DisplayFor(modelItem => item.Nation.Name)
+                                    </td>
+                                    <td>
                                         <a class="btn iconStyWar" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil"></i></a>
-                                        @Html.ActionLink("Details", "Details", new { id=item.Id }) 
+                                <a class="btn iconStyDetail" asp-action="Detail" asp-route-id="@item.Id"><i class="bi bi-card-text"></i></a>
                                         <a class="btn iconStyDang" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash-fill"></i></a>
                                     </td>
                                 </tr>

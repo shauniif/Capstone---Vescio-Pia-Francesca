@@ -122,7 +122,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                 var article = await Read(model.Id);
                 article.Title = model.Title;
                 article.Content = model.Content;
-                article.Image = article.Image;
+                article.Image = ConvertImage(model.Image);
 
                 _db.Articles.Update(article);
                 await _db.SaveChangesAsync();

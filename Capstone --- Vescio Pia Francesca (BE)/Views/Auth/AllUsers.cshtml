@@ -4,49 +4,58 @@
     ViewData["Title"] = "AllUsers";
 }
 
-<h1>All Users</h1>
+<div class="row m-0">
+    <div class="col d-flex justify-content-center align-items-center mt-5">
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Roles)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastName)
-                </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                <ul class="list-unstyled">
-                    @foreach (var role in item.Roles) {
-                        <li>@role.Name</li>
-                    }
-                </ul>
-            </td>
-            <td>
-                <a class="btn btn-warning"  asp-action="DetailUser" asp-route-id="@item.Id">Details</a> |
-                <a class="btn btn-danger" asp-action="DeleteUser" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        <h2 class="text-light fs-1">Tutti gli utenti</h2>
+    </div>
+
+<div class="col-12 mt-3">
+    <div class="table-responsive tableStyle">
+        <table class="table m-0">
+            <thead>
+                <tr class="text-center text-light thStyle fs-5">
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LastName)
+                    </th>
+                    <th class="d-none d-md-table-cell">
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                        <th class ="d-none d-md-table-cell">
+                        @Html.DisplayNameFor(model => model.Roles)
+                    </th>
+                    <th>Azioni</th>
+                </tr>
+            </thead>
+            <tbody>
+        @foreach (var item in Model) {
+                    <tr class="text-light text-center trStyle fs-6">
+                    <td>
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LastName)
+                        </td>
+                    <td class="d-none d-md-table-cell">
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td class="d-none d-md-table-cell">
+                        <ul class="list-unstyled">
+                            @foreach (var role in item.Roles) {
+                                <li>@role.Name</li>
+                            }
+                        </ul>
+                    </td>
+                    <td>
+                            <a class="btn iconStyDetail" asp-action="DetailUser" asp-route-id="@item.Id"><i class="bi bi-card-text"></i></a>
+                            <a class="btn iconStyDang" asp-action="DeleteUser" asp-route-id="@item.Id"><i class="bi bi-trash-fill"></i></a>
+                    </td>
+                </tr>
+        }
+            </tbody>
+        </table>
+    </div>
+</div>

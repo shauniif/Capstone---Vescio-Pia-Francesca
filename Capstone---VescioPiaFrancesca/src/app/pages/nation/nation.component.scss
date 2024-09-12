@@ -1,0 +1,31 @@
+.imgBg {
+  background-image: url('../../../assets/img/Nations.png');
+  background-size: cover;
+  height: 30em;
+  position: relative;
+  width: 100%;
+  box-shadow: 0 15px 25px rgba(129, 124, 124, 0.2);
+}
+
+.cards:hover .card {
+  transition: 400ms;
+}
+.cards .card:hover {
+  transform: scale(1.1);
+}
+
+.cards:hover > .col:not(:hover) .card {
+  filter: blur(10px);
+  transform: scale(0.9, 0.9);
+  color: white;
+}
+.card {
+  background-color: transparent;
+  box-shadow: 0 15px 25px rgba(129, 124, 124, 0.2);
+  backdrop-filter: blur(16px);
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+}
+.cards .card:hover {
+  z-index: 1;
+}

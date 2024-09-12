@@ -68,5 +68,23 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
             }
             return View(currEvent);
         }
+
+        public async Task<IActionResult> Detail(int id)
+        {
+            var currEvent = await _eventSvc.Read(id);
+            return View(currEvent);
+        }
+
+        public async Task<IActionResult> GetEventImage(int id)
+        {
+            var currEv = await _eventSvc.Read(id);
+            if (currEv?.Cover == null)
+            {
+                return NotFound();
+            }
+            var eventPhotodata = currEv.Cover.Substring(23);
+            byte[] imageBytes = Convert.FromBase64String(eventPhotodata);
+            return File(imageBytes, "image/jpeg");
+        }
     }
 }

@@ -61,7 +61,7 @@
                             </td>
                             <td>
                                 <a class="btn iconStyWar" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil"></i></a>
-                                @Html.ActionLink("Detail", "Detail", new { id = item.Id }) |
+                                <a class="btn iconStyDetail" asp-action="Detail" asp-route-id="@item.Id"><i class="bi bi-card-text"></i></a>
                                 <a class="btn iconStyDang" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash-fill"></i></a>
                             </td>
                     </tr>

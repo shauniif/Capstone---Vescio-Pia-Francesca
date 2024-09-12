@@ -1,63 +1,103 @@
-<div class="textWhite border border-2 mt-2 ps-2 bgUserInf">
-  <h1>Bevenuto {{ user.username }}</h1>
-
-  <h4 class="">Ecco un recap dei tuoi dati:</h4>
-  <div *ngIf="!user.image">
-    <img src="../../../../assets/img/default.png" style="width: 100px" />
-  </div>
-  <div *ngIf="user.image">
-    <img [src]="user.image" style="width: 100px" />
-  </div>
-  <form [formGroup]="imageForm">
-    <div>
-      <input formControlName="id" type="hidden" [value]="user.id" />
-    </div>
-    <div>
-      <input type="file" (change)="onFileSelected($event)" />
-    </div>
-    <div>
-      <button
-        type="submit"
-        (click)="UploadImage()"
-        [disabled]="!imageForm.valid"
+<div class="pt-5">
+  <div class="row justify-content-center textWhite border p-5 ps-2 bgUserInf">
+    <div class="col-3">
+      <div
+        *ngIf="!user.image"
+        class="d-flex justify-content-center rounded-circle mt-3"
       >
-        Upload
-      </button>
+        <img src="../../../../assets/img/default.png" style="width: 100px" />
+      </div>
+      <div *ngIf="user.image" class="d-flex justify-content-center mt-3">
+        <img [src]="user.image" class="imgPropic rounded-circle" />
+      </div>
+
+      <form [formGroup]="imageForm" class="py-1 text-center">
+        <div class="mb-3">
+          <input formControlName="id" type="hidden" [value]="user.id" />
+        </div>
+        <div class="mb-3">
+          <label for="fileUpload" class="form-label text-center"
+            >Modifica la tua immagine di profilo
+          </label>
+          <input
+            id="fileUpload"
+            type="file"
+            (change)="onFileSelected($event)"
+            class="form-control"
+          />
+        </div>
+        <div class="d-flex justify-content-sm-center">
+          <button
+            type="submit"
+            (click)="UploadImage()"
+            class="btn btn-primary"
+            [disabled]="!imageForm.valid"
+          >
+            Upload
+          </button>
+        </div>
+      </form>
     </div>
-  </form>
 
+    <div class="col-9 py-3">
+      <div class="border-bottom mb-3">
+        <h5 class="fs-4 text-white">
+          {{ user.firstName }} {{ user.lastName }}
+        </h5>
+      </div>
+      <h4 class="text-white">Informazioni Utente</h4>
+
+      <div
+        class="row row-cols-3 flex-column justify-content-center align-content-center"
+      >
+        <div class="col d-flex justify-content-around">
+          <p class="text-white">Email:</p>
+          <p>{{ user.email }}</p>
+        </div>
+        <div class="col d-flex justify-content-around">
+          <p class="text-white d-flex">Data di nascita:</p>
+          <p>{{ user.dateBirth }}</p>
+        </div>
+        <div class="col d-flex justify-content-around">
+          <p class="text-white">Username:</p>
+          <p>{{ user.username }}</p>
+        </div>
+      </div>
+
+      <div class="row justify-content-center align-content-center">
+        <a
+          class="btn btn-primary mt-3 w-25"
+          [routerLink]="['/auth/edit', user.id]"
+          >Modifica i tuoi dati</a
+        >
+      </div>
+    </div>
+  </div>
   <div>
-    <a [routerLink]="['/auth/edit', user.id]">Modifica i tuoi dati</a>
+    <h3>I tuoi personaggi:</h3>
+    <div *ngFor="let character of user.characters">
+      <p>Nome: {{ character.name }}</p>
+      <p>Punteggio: {{ character.score }}</p>
+      <button
+        type="button"
+        (click)="DeleteCharacter(character.id)"
+        class="btn btn-danger"
+      >
+        Cancella
+      </button>
+      <a
+        [routerLink]="['/character/edit', character.id]"
+        class="btn btn-warning"
+        >Modifica</a
+      >
+      <a
+        [routerLink]="['/character/detail', character.id]"
+        class="btn btn-success"
+        >Dettagli</a
+      >
+    </div>
+    <a routerLink="/character/create">Crea un nuovo personaggio</a>
   </div>
 
-  <p><span class="btn btn-primary">Nome:</span> {{ user.firstName }}</p>
-  <p>
-    <span class="btn btn-primary">Il tuo indirzzo email:</span>
-    {{ user.email }}
-  </p>
-  <p>
-    <span class="btn btn-primary">Il tuo username: </span> {{ user.username }}
-  </p>
-
-  <h3>I tuoi personaggi:</h3>
-  <div *ngFor="let character of user.characters">
-    <p>Nome: {{ character.name }}</p>
-    <p>Punteggio: {{ character.score }}</p>
-    <button
-      type="button"
-      (click)="DeleteCharacter(character.id)"
-      class="btn btn-danger"
-    >
-      Cancella
-    </button>
-    <a [routerLink]="['/character/edit', character.id]" class="btn btn-warning"
-      >Modifica</a
-    >
-    <a
-      [routerLink]="['/character/detail', character.id]"
-      class="btn btn-success"
-      >Dettagli</a
-    >
-  </div>
-  <a routerLink="/character/create">Crea un nuovo personaggio</a>
+  <div class="row"></div>
 </div>

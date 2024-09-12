@@ -44,7 +44,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                     Description = model.Description,
                     Influence = model.Influence,
                     Modifier = model.Modifier,
-                    IsChanged = false,
+                    IsChanged = model.IsChanged,
                     Cover = ConvertImage(model.Cover)
                 };
 
@@ -100,6 +100,8 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                 currEvent.Date = model.Date;
                 currEvent.Influence = model.Influence;
                 currEvent.Modifier = model.Modifier;
+                currEvent.IsChanged = model.IsChanged;
+                currEvent.Cover = ConvertImage(model.Cover);
                 _db.Events.Update(currEvent);
                 _db.SaveChanges();
                 return currEvent;

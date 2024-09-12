@@ -8,15 +8,16 @@
 <div class="row justify-content-center align-items-center mt-2 mx-0">
     <div class="col-12 col-sm-9 col-md-4 p-0">
         <form asp-action="Create" class="formStyle">
+            @Html.AntiForgeryToken()
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label labelStyle"></label>
                 <input asp-for="Name" class="form-control input" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="Modifier" class="control-label labelStyle"></label>
-                <input asp-for="Modifier" type="number"  class="form-control input mb-3" />
+                <input asp-for="Modifier" type="number"  class="form-control input" />
                 <span asp-validation-for="Modifier" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -24,10 +25,9 @@
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
+    <div class="d-flex justify-content-center mt-2">
+        <a asp-action="AllRaces" class="btn btnHref">Back to List</a>
+    </div
 </div>
 
 @section Scripts {

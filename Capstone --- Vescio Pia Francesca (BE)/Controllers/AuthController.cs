@@ -20,21 +20,25 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
     {
         private readonly IRoleService _roleSvc;
         private readonly IAuthService _authSvc;
+        private readonly IWebHostEnvironment _env;
 
-        private readonly byte[] _key;
-
-        public AuthController(IRoleService roleSvc, IAuthService authSvc, IConfiguration configuration)
+        public AuthController(IRoleService roleSvc, IAuthService authSvc, IConfiguration configuration, IWebHostEnvironment env)
         {
             _roleSvc = roleSvc;
             _authSvc = authSvc;
-            _key = System.Text.Encoding.UTF8.GetBytes(configuration["Jwt:Key"]!);
+            _env = env;
+            
         }
         public async Task<IActionResult> GetUserImage(int id)
         {
             var user = await _authSvc.GetById(id);
+            var defaultImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/default.jpg");
+            Console.WriteLine(defaultImagePath);
             if (user?.Image == null)
             {
-                return NotFound();
+                var defaultImageBytes = await System.IO.File.ReadAllBytesAsync(defaultImagePath);
+                return File(defaultImageBytes, "image/jpeg");
+
             }
             var userPhotodata = user.Image.Substring(23);
             byte[] imageBytes = Convert.FromBase64String(userPhotodata);
@@ -135,7 +139,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
             if(ModelState.IsValid)
             {
                 var u = await _authSvc.Login(user);
-                 if(u.AdminCode == null)
+                if(u.AdminCode == null)
                     {
                     throw new Exception("Admin not found");
                     }
@@ -259,7 +263,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
                 var user = await _authSvc.Update(userModel);
                 var adminModel = new LoginAdminModel
                 {
-                    AdminCode = user.AdminCode,
+                    AdminCode = userModel.AdminCode,
                     Password = password
                 };
                 await Login(adminModel);

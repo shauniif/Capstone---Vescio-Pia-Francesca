@@ -7,8 +7,14 @@
     ViewData["Title"] = "Dettaglio Nuovo Utente";
 }
 
-<h2>Ciao @Model.FirstName</h2>
-Benvenuto in Zantha Universe 
-Ecco il tuo codice per loggare <strong>@Model.AdminCode</strong> non dimenticarlo! 
-
-<a asp-action="Login" asp-controller="Auth">Vai al Login</a>
+<div class="card shadow-lg">
+    <div class="card-header bgHeader text-white mt-5">
+        <h2>Ciao, @Model.FirstName!</h2>
+    </div>
+    <div class="card-body">
+        <p class="fs-3 text-light">Benvenuto in Zantha Universe!</p>
+        <p class="mb-4 text-light">Ecco il tuo codice per loggare: <strong class="text-danger">@Model.AdminCode</strong></p>
+        <p class="fst-italic text-light">Non dimenticarlo!</p>
+        <a asp-action="Login" asp-controller="Auth" class="btn btnHref">Vai al Login</a>
+    </div>
+</div>

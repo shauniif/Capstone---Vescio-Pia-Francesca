@@ -1,98 +1,91 @@
 ﻿@model Capstone_____Vescio_Pia_Francesca__BE_.Entity.Nation
 
 @{
-    ViewData["Title"] = "Detail";
+    ViewData["Title"] = "Dettaglio Nazione";
 }
 
-<h1>Detail</h1>
 
-<div>
-    <h4>NationModel</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Photo)
-        </dt>
-        <dd class="col-sm-10">
-            
+<h2 class="text-light fs-1 text-center">Dettagli Nazione</h2>
+
+<div class="row mt-4 mx-0">
+    <div class="col-md-12 d-flex">
+        <div class="card d-sm-flex flex-sm-row">
             <img src="@Url.Action("GetNationImage", "Nation", new { id = Model.Id })"
-                 alt="@Model.Name"
-                 style="max-width: 100px;" />
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FormOfGovernment)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FormOfGovernment)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Modifier)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Modifier)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Ecos)
-        </dt>
-        <dd>
-            @if (Model.Ecos.Any()) 
-            { 
-            @foreach(var item in Model.Ecos )
-            {
-                @item.Name
-                }
-            } else
-            {
-                <p>Nessun Eco disponibile</p>
-            }
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Guilds)
-        </dt>
-        <dd>
-            @if (Model.Guilds.Any())
-            {
-                @foreach (var item in Model.Guilds)
-                {
-                    @item.Name
-                }
-            }
-            else
-            {
-                <p>Nessuna Gilda disponibile</p>
-            }
-        </dd>
+                 alt="Model.Title" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title text-light">@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h5>
+                <p class="card-text text-light">@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description)</p>
+                <p class="card-text text-light">@Html.DisplayNameFor(model => model.FormOfGovernment): @Html.DisplayFor(model => model.FormOfGovernment)</p>
+                <p class="card-text text-light">@Html.DisplayNameFor(model => model.Modifier): @Html.DisplayFor(model => model.Modifier)</p>
+                <p class="card-text text-light">
+                    @Html.DisplayNameFor(model => model.Cities):
+                    @if (Model.Cities.Any())
+                    {
+                        @foreach (var item in Model.Cities)
+                        {
+                            <li class="list-group-item styleList text-light">
+                                <strong>@item.Name</strong>
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        <li class="list-group-item styleNoList text-light">
+                            Nessuna Città disponibile
+                        </li>
+                    }
+                </p>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Cities)
-        </dt>
-        <dd>
-            @if (Model.Cities.Any())
-            {
-                @foreach (var item in Model.Cities)
-                {
-                    @item.Name
-                }
-            }
-            else
-            {
-                <p>Nessuna Città disponibile</p>
-            }
-        </dd>
-    </dl>
+                <p class="card-text text-light"> @Html.DisplayNameFor(model => model.Ecos):
+                    @if (Model.Ecos.Any())
+                    {
+                        @foreach (var item in Model.Ecos)
+                        {
+                            <li class="list-group-item styleList text-light">
+                                <strong>@item.Name</strong>
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        <li class="list-group-item styleNoList text-light">
+                                Nessun Eco disponibile
+                            </li>
+                    }
+               </p>
+
+                <p class="card-text text-light">
+                    @Html.DisplayNameFor(model => model.Guilds):
+                    @if (Model.Guilds.Any())
+                    {
+                        @foreach (var item in Model.Guilds)
+                        {
+                            <li class="list-group-item styleList text-light">
+                                <strong>@item.Name</strong>
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        <li class="list-group-item styleNoList text-light">
+                            Nessuna Gilda disponibile
+                        </li>
+                    }
+                </p>
+
+
+
+            </div>
+        </div>
+    </div>
+
 </div>
-<div>
-    <a asp-action="Index">Back to List</a>
+
+
+
+<div class="row mt-4 mx-0">
+    <div class="col-md-12">
+        <a class="btn iconStyWar" asp-action="Edit" asp-route-id="@Model.Id">Modifica</a>
+        <a class="btn btnHref" asp-action="AllNations">Torna alla lista</a>
+    </div>
 </div>

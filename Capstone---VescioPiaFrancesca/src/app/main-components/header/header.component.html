@@ -1,33 +1,69 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-dark bg-dark navbar-expand-lg">
   <div class="container-fluid">
     <a class="navbar-brand" href="">ZanthaVerse</a>
     <button
-      class="navbar-toggler"
       type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
+      class="navbar-toggler"
+      (click)="collapse.toggle()"
+      [attr.aria-expanded]="!isCollapsed"
+      aria-controls="collapseExample"
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div
+      #collapse="ngbCollapse"
+      [(ngbCollapse)]="isCollapsed"
+      class="collapse navbar-collapse"
+    >
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            (click)="toggleDropDown()"
+          >
+            Dropdown
+          </a>
+          <ul class="dropdown-menu" [ngClass]="{ show: showD }">
+            <li>
+              <a
+                class="dropdown-item"
+                routerLink="/nation"
+                (click)="toggleDropDown()"
+                >Nazioni</a
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                routerLink="/eco"
+                (click)="toggleDropDown()"
+                >Echi</a
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                routerLink="/city"
+                (click)="toggleDropDown()"
+                >Città</a
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                rrouterLink="/guild"
+                (click)="toggleDropDown()"
+                >Gilde</a
+              >
+            </li>
+          </ul>
+        </li>
+
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" routerLink="">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/nation">Nazioni</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/eco">Echi</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/city">Città</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/guild">Gilde</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/event">Eventi</a>
@@ -43,45 +79,38 @@
         <li class="nav-item">
           <a class="nav-link" *ngIf="isLoggedIn" (click)="logout()">Esci</a>
         </li>
-        <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            href="#"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            Dropdown
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        </li>
-      </ul>
-      <form [formGroup]="searchForm" class="d-flex" role="search">
-        <input
-          class="form-control me-2"
-          type="search"
-          formControlName="search"
-          placeholder="Cerca echi, divinita, città o nazioni"
-          style="width: 280px"
-          aria-label="Search"
-        />
-        <button class="btn btn-outline-success" type="button" (click)="Prova()">
-          Search
-        </button>
-      </form>
 
-      <div>
-        <a class="nav-link" *ngIf="isLoggedIn" routerLink="/auth/profile"
-          >Il tuo profilo</a
-        >
+        <form [formGroup]="searchForm" class="d-flex" role="search">
+          <input
+            class="form-control me-2"
+            type="search"
+            formControlName="search"
+            placeholder="Cerca echi, divinita, città o nazioni"
+            style="width: 280px"
+            aria-label="Search"
+          />
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            (click)="Prova()"
+          >
+            Search
+          </button>
+        </form>
+      </ul>
+
+      <div *ngIf="isLoggedIn">
+        <a class="nav-link" *ngIf="isLoggedIn" routerLink="/auth/profile">
+          <div *ngIf="!user?.image">
+            <img
+              src="../../../../assets/img/default.png"
+              style="width: 100px"
+            />
+          </div>
+          <div *ngIf="user?.image">
+            <img [src]="user?.image" class="rounded-3" style="width: 3em" />
+          </div>
+        </a>
       </div>
     </div>
   </div>

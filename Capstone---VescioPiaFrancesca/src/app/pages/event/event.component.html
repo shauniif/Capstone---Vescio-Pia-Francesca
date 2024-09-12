@@ -1,3 +1,15 @@
+<ngb-carousel>
+  <ng-template ngbSlide *ngFor="let currEvent of pastEvents">
+    <div class="picsum-img-wrapper">
+      <img [src]="currEvent.cover" alt="Event cover" />
+    </div>
+    <div class="carousel-caption">
+      <h3>{{ currEvent.name }}</h3>
+      <p>{{ currEvent.description }}</p>
+    </div>
+  </ng-template>
+</ngb-carousel>
+
 <p>PASSATO</p>
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
   <div class="col my-3" *ngFor="let event of pastEvents">

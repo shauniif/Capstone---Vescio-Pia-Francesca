@@ -41,10 +41,11 @@
                 <label asp-for="Modifier"class="control-label labelStyle"></label>
                 <input asp-for="Modifier" type="number" class="form-control input" />
                 <span asp-validation-for="Modifier" class="text-danger"></span>
-            </div>
+            </div class="form-group">
                 <div class="form-group mb-3">
                 <label asp-for="Photo"class="control-label labelStyle"></label>
                 <input asp-for="Photo" type="file" class="form-control input" />
+                 <span asp-validation-for="Photo" class="text-danger"></span>
             </div>
 
             <div class="form-group">
@@ -52,11 +53,12 @@
             </div>
         </form>
     </div>
+    <div class="d-flex justify-content-center my-3">
+        <a asp-action="AllEcos" class="btn btnHref">Back to List</a>
+    </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

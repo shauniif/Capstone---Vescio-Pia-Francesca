@@ -1,70 +1,97 @@
-<form [formGroup]="signInForm">
-  <div class="form-group">
-    <input
-      type="text"
-      formControlName="firstName"
-      class="form-control"
-      placeholder="Il tuo nome"
-    />
+<div class="d-flex justify-content-center align-items-center height">
+  <div
+    class="formBg d-flex flex-column justify-content-center align-content-center p-4"
+  >
+    <h2 class="fs-1 text-center mb-5 text">
+      {{ this.user ? "Modifica" : "Registrati" }}
+    </h2>
 
-    <span *ngIf="isTouchedInvalid('firstName')">Devi inserire il nome</span>
-  </div>
+    <form [formGroup]="signInForm">
+      <div class="form-group row flex-column flex-sm-row">
+        <div class="col">
+          <label class="control-label text fs-4">Nome</label>
+          <input
+            type="text"
+            formControlName="firstName"
+            class="form-control"
+            placeholder="Il tuo nome"
+          />
+          <span *ngIf="isTouchedInvalid('firstName')"
+            >Devi inserire il nome</span
+          >
+        </div>
+        <div class="col mt-3 mt-sm-0">
+          <label class="control-label text fs-4">Cognome</label>
+          <input
+            type="text"
+            formControlName="lastName"
+            class="form-control"
+            placeholder="Il tuo cognome"
+          />
+          <span *ngIf="isTouchedInvalid('lastName')"
+            >Devi inserire il cognome</span
+          >
+        </div>
+      </div>
 
-  <div class="form-group">
-    <input
-      type="text"
-      formControlName="lastName"
-      class="form-control"
-      placeholder="Il tuo cognome"
-    />
+      <div class="form-group row flex-column flex-sm-row mt-3">
+        <div class="col">
+          <label class="control-label text fs-4">Username</label>
+          <input
+            type="text"
+            formControlName="username"
+            class="form-control"
+            placeholder="Il tuo username"
+          />
+          <span *ngIf="isTouchedInvalid('username')"
+            >Devi inserire lo username</span
+          >
+        </div>
+        <div class="col mt-3 mt-sm-0">
+          <label class="control-label text fs-4">Data di nascita</label>
+          <input
+            type="date"
+            formControlName="dateBirth"
+            class="form-control"
+            placeholder="Data di nascita"
+          />
+          <span *ngIf="isTouchedInvalid('dateBirth')"
+            >Devi inserire la data di nascita</span
+          >
+        </div>
+      </div>
 
-    <span *ngIf="isTouchedInvalid('lastName')">Devi inserire il nome</span>
-  </div>
-  <div class="form-group">
-    <input
-      type="text"
-      formControlName="username"
-      class="form-control"
-      placeholder="Il tuo username"
-    />
+      <div class="form-group row flex-column flex-sm-row mt-3">
+        <div class="col">
+          <label class="control-label text fs-4">Email</label>
+          <input
+            type="email"
+            formControlName="email"
+            class="form-control"
+            placeholder="La tua email"
+          />
+          <span *ngIf="isTouchedInvalid('email')">Email mancante</span>
+        </div>
+        <div class="col mt-3 mt-sm-0">
+          <label class="control-label text fs-4">Password</label>
+          <input
+            type="password"
+            formControlName="password"
+            class="form-control"
+            placeholder="La tua password"
+          />
+          <span *ngIf="isTouchedInvalid('password')">Dati non corretti</span>
+        </div>
+      </div>
 
-    <span *ngIf="isTouchedInvalid('username')">Devi inserire lo username</span>
-  </div>
-
-  <div class="form-group">
-    <input
-      type="date"
-      formControlName="dateBirth"
-      class="form-control"
-      placeholder="Il tuo username"
-    />
-    <span *ngIf="isTouchedInvalid('dateBirth')">Devi inserire lo username</span>
-  </div>
-
-  <div class="form-group">
-    <div class="form-group col-6">
-      <input
-        type="email"
-        formControlName="email"
-        class="form-control"
-        placeholder="La tua email"
-      />
-      <span *ngIf="isTouchedInvalid('email')">Email mancante</span>
+      <div class="mt-3 d-flex justify-content-center">
+        <button (click)="CreateUser()" class="btn btnSty">
+          {{ this.user ? "Modifica" : "Registrati" }}
+        </button>
+      </div>
+    </form>
+    <div class="mt-3 text-center" *ngIf="!this.user">
+      <a routerLink="/auth/login" class="fs-5 text">Sei già registrato?</a>
     </div>
-
-    <div class="form-group col-6">
-      <input
-        type="password"
-        formControlName="password"
-        class="form-control"
-        placeholder="La tua password"
-      />
-    </div>
-
-    <span *ngIf="isTouchedInvalid('password')">Dati non corretti</span>
   </div>
-
-  <button (click)="CreateUser()" class="btn btn-success">
-    {{ this.user ? "Modifica" : "Registrati" }}
-  </button>
-</form>
+</div>

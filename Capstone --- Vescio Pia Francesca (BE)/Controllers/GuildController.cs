@@ -58,10 +58,10 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
 
             public async Task<IActionResult> Edit(int id) 
             {
-                var city = await _guildSvc.Get(id);
+                var guild = await _guildSvc.Get(id);
                 var nations = await _nationSvc.GetAllNations();
                 ViewBag.Nations = nations;
-                return View(city);
+                return View(guild);
             }
 
             [HttpPost]
@@ -80,6 +80,12 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
                     return View(guild);
                 }
             
+        }
+
+        public async Task<IActionResult> Detail(int id)
+        {
+            var guild = await _guildSvc.Read(id);
+            return View(guild);
         }
 
     }

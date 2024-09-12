@@ -48,10 +48,21 @@ a {
 a:hover {
     color: #D3D3D3;
 }
+.btnHref {
+    background-color: #ffffff;
+    color: #080710;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
+.btnHref:hover {
+        background-color: #B3CDE0;
+        color: #ffffff;
+}
 
 /**** CSS PER I FORM INZIO ****/
-
 .formStyle {
     min-height: 20rem;
     min-width: 20rem;
@@ -118,9 +129,10 @@ a:hover {
 
 /**** CSS PER I FORM FINE ****/
 
-
+.bgHeader {
+    background-color: rgba(169, 214, 229, 0.4);
+}
 /*** CSS PER LE TABELLE INIZIO ****/
-
 .tableStyle {
     background-color: rgba(255, 255, 255, 0.05);
     border: 2px solid rgba(255, 255, 255, 0.1);
@@ -156,6 +168,15 @@ a:hover {
     border-radius: 5px;
     cursor: pointer;
 }
+.iconStyDetail {
+    width: auto;
+    background-color: rgba(152, 255, 152, 0.7);
+    color: #080710;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
 .iconStyWar:hover {
     background-color: rgba(255, 255, 159, 0.9);
@@ -163,6 +184,10 @@ a:hover {
 }
 .iconStyDang:hover {
     background-color: rgba(196, 77, 86, 0.9);
+    color: #ffffff;
+}
+.iconStyDetail:hover {
+    background-color: rgba(152, 255, 152, 0.9);
     color: #ffffff;
 }
 
@@ -181,6 +206,7 @@ a:hover {
 
 .card {
     background-color: transparent;
+    width: 100%;
 }
 .list-group {
     background-color: transparent;
@@ -189,29 +215,63 @@ a:hover {
     width: 2em;
 }
 
-.styleComment {
+.styleList {
     background-color: rgba(123, 156, 122, 0.8);
+}
+
+.styleNoList {
+    background-color: rgba(196, 77, 86, 0.9);
+}
+
+
+
+
+.infoText {
+    color: rgba(169, 214, 229, 1)
+}
+
+.futureStyle {
+    background-color: rgba(128, 203, 196, 1)
 }
 
 @media(min-width: 576px) {
     .card-img-top {
-        width: 150px;
+        width: 20rem;
         height: auto;
-        object-fit: cover;
+        object-fit: contain;
     }
+
+
+    
+
+    @media (min-width: 768px) {
+        html {
+            font-size: 16px;
+        }
+
+        .container {
+            min-height: 86.8vh;
+        }
+
+        .card-img-top {
+            width: 30em;
+            object-fit: contain;
+        }
+    }
+
+    /*** 401 e 404 page ***/
 }
+@media(min-width: 992px) {
+     .card-img-top {
+        width: 40rem;
+        height: auto;
+        object-fit: contain;
+    } 
 
-@media (min-width: 768px) {
-    html {
-        font-size: 16px;
-    }
-    .container {
-        min-height: 86.8vh;
-    }
 }
-
-
-
+.errorImg {
+    max-width: 12rem;
+    }
 
 
 

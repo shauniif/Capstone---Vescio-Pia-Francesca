@@ -1,0 +1,82 @@
+﻿@model Capstone_____Vescio_Pia_Francesca__BE_.Entity.Event
+
+@{
+    ViewData["Title"] = "Dettaglio Evento";
+    var today = DateTime.Now.Date;
+}
+
+<h2 class="text-light fs-1 text-center">Dettagli Evento</h2>
+
+<div class="row mt-4 mx-0">
+    <div class="col-md-12 d-flex">
+        <div class="card d-sm-flex flex-sm-row">
+            <img src="@Url.Action("GetEventImage", "Event", new { id = Model.Id })"
+                 alt="Model.Title" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title text-light fw-bold fs-5 mb-2">
+                    <span class="infoText ">@Html.DisplayNameFor(model => model.Name):</span>
+                    @Html.DisplayFor(model => model.Name)
+                </h5>
+                <p class="card-text text-light fs-5 mb-2">
+                    <span class="fw-bold infoText">@Html.DisplayNameFor(model => model.Description):</span>
+                    @Html.DisplayFor(model => model.Description)
+                </p>
+                    @if(Model.Date < today) 
+                    {
+                    <p class="card-text text-light fs-5 styleNoList mb-2">
+                    <span class="fw-bold infoText">@Html.DisplayNameFor(model => model.Date):</span>
+                    @Html.DisplayFor(model => model.Date)
+                    </p>
+                } else if (Model.Date == today)
+                {
+                    <p class="card-text text-light fs-5 styleList mb-2">
+                        <span class="fw-bold infoText ">@Html.DisplayNameFor(model => model.Date):</span>
+                        @Html.DisplayFor(model => model.Date)
+                    </p>
+                } else
+                {
+                    <p class="card-text text-light fs-5 futureStyle mb-2">
+                        <span class="fw-bold infoText ">@Html.DisplayNameFor(model => model.Date):</span>
+                        @Html.DisplayFor(model => model.Date)
+                    </p>
+                }
+                <p class="card-text text-light fs-5 mb-2">
+                    <span class="fw-bold infoText">@Html.DisplayNameFor(model => model.YearOfEvent):</span>
+                    @Html.DisplayFor(model => model.YearOfEvent)
+                </p>
+                <p class="card-text text-light fs-5 mb-2">
+                    <span class="fw-bold infoText">@Html.DisplayNameFor(model => model.Influence):</span>
+                    @Html.DisplayFor(model => model.Influence)
+                </p>
+                <p class="card-text text-light fs-5 mb-2">
+                    <span class="fw-bold infoText">@Html.DisplayNameFor(model => model.Modifier):</span>
+                    @Html.DisplayFor(model => model.Modifier)
+                </p>
+                @if(Model.IsChanged == true) {
+                    <p class="card-text text-light fs-5 mb-2 styleList">
+                        <span class="fw-bold infoText">@Html.DisplayNameFor(model => model.Modifier):</span>
+                        Ha avuto un impatto sul mondo
+                    </p>
+                } else
+                {
+                    <p class="card-text text-light fs-5 mb-2 styleNoList">
+                        <span class="fw-bold infoText">@Html.DisplayNameFor(model => model.Modifier):</span>
+                        Non ha avuto un impatto sul mondo
+                    </p>
+                }
+
+               
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<div class="row mt-4 mx-0">
+    <div class="col-md-12">
+        <a class="btn iconStyWar" asp-action="Edit" asp-route-id="@Model.Id">Modifica</a>
+        <a class="btn btnHref" asp-action="AllEvents">Torna alla lista</a>
+    </div>
+</div>

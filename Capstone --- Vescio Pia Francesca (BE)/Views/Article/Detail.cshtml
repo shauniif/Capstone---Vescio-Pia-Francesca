@@ -10,7 +10,7 @@
 
 <div class="row mt-4 mx-0">
     <div class="col-md-12 d-flex">
-        <div class="card d-sm-flex flex-sm-row" style="width: 100%;">
+        <div class="card d-sm-flex flex-sm-row">
             <img src="@Url.Action("GetArticleImage", "Article", new { id = Model.Id })"
                  alt="Model.Title" class="card-img-top">
             <div class="card-body">
@@ -24,7 +24,7 @@
                         <ul class="list-group list-group-flush">
                             @foreach (var comment in Model.Comments)
                             {
-                                <li class="list-group-item styleComment text-light">
+                                <li class="list-group-item styleList text-light">
                                     <strong>@comment.Author?.FirstName:</strong> @comment.Content
                                 </li>
                             }
@@ -32,7 +32,10 @@
                     }
                     else
                     {
-                        <span class="text-muted">Non ci sono commenti al momento.</span>
+                        <li class="list-group-item styleNoList text-light">
+                            Non ci sono commenti al momento.
+                        </li>
+                        
                     }
                 </p>
             </div>
@@ -45,7 +48,7 @@
 
 <div class="row mt-4 mx-0">
     <div class="col-md-12">
-        <a class="btn btn-primary" asp-action="Update" asp-route-id="@Model.Id">Modifica</a>
-        <a class="btn btn-secondary" asp-action="Index">Torna alla lista</a>
+        <a class="btn iconStyWar" asp-action="Edit" asp-route-id="@Model.Id">Modifica</a>
+        <a asp-action="AllArticles" class="btn btnHref">Torna alla lista</a>
     </div>
 </div>

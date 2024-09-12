@@ -39,11 +39,12 @@
             </div>
         </form>
     </div>
+    <div class="d-flex justify-content-center mt-2">
+        <a asp-action="AllNations" class="btn btnHref">Back to List</a>
+    </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

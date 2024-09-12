@@ -1,8 +1,24 @@
-<button (click)="OrderNationByName()">Ordina in ordine alfabeitco</button>
+<div class="imgBg py-3 d-flex justify-content-center align-items-center">
+  <p class="display-1 fst-italic">Nazioni</p>
+</div>
 
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+<div class="mb-2 fst-italic">
+  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa, minus cum!
+  Doloremque consequuntur fuga voluptatum, repudiandae, vel animi odio mollitia
+  earum officia magni modi eaque officiis corporis quo dicta incidunt? Lorem
+  ipsum dolor sit amet consectetur adipisicing elit. Recusandae, vel provident
+  sunt ipsa at rerum, laborum, quo vero in nesciunt voluptatum quia alias harum
+  similique aspernatur magni dicta debitis? Natus!
+</div>
+
+<button (click)="OrderNationByName()" class="btn btn-primary">
+  Ordina in ordine alfabeitco
+</button>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 cards">
   <div class="col my-3" *ngFor="let nation of nations">
     <div class="card d-flex flex-column h-100">
+      <p>prova</p>
       <app-single-nation [nation]="nation"></app-single-nation>
       <a [routerLink]="['detail', nation.id]">Dettagli</a>
     </div>
