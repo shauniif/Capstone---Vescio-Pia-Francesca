@@ -1,8 +1,15 @@
 .imgPropic {
   width: 100%;
-  max-width: 10vh;
+  max-width: 20vh;
   height: auto;
   min-width: 10vh;
+
+  @media screen and (min-width: 578px) {
+    width: 100%;
+    max-width: 10vh;
+    height: auto;
+    min-width: 10vh;
+  }
 }
 
 
@@ -10,4 +17,165 @@
   box-shadow: 0 15px 25px rgba(129, 124, 124, 0.2);
   backdrop-filter: blur(20px);
   background-color: rgba(255, 255, 255, 0.2);
+}
+
+.btnSty {
+  background-color: rgba(245, 245, 220, 0.7);
+  &:hover {
+    background-color: rgba(245, 245, 220, 1);
+  }
+  &:disabled {
+    background-color:rgba(245, 245, 220, 0.3);;
+  }
+}
+
+.text {
+  color: rgb(55, 45, 75)
+}
+
+
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  position: relative;
+  min-height: 30vh;
+
+  .imgCard {
+    position: absolute;
+    top: -70px;
+    left: 70px;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 50%;
+
+
+    @media screen and (min-width: 380px){
+      top: -70px;
+      left: 80px;
+
+    }
+
+    @media screen and (min-width: 390px){
+      top: -70px;
+      left: 90px;
+
+    }
+
+    @media screen and (min-width: 400px){
+      top: -70px;
+      left: 100px;
+
+    }
+    @media screen and (min-width: 410px){
+      top: -70px;
+      left: 110px;
+
+    }
+
+    @media screen and (min-width: 420px){
+      top: -70px;
+      left: 120px;
+
+    }
+    @media screen and (min-width: 430px){
+      top: -70px;
+      left: 130px;
+
+    }
+    @media screen and (min-width: 440px){
+      top: -70px;
+      left: 140px;
+    }
+    @media screen and (min-width: 450px){
+      top: -70px;
+      left: 150px;
+    }
+
+    @media screen and (min-width: 576px){
+      top: -70px;
+      left: 70px;
+    }
+
+    @media screen and (min-width: 1399px){
+      top: -70px;
+      left: 80px;
+    }
+  }
+
+.card-img-top {
+  width: 100%;
+  height: auto;
+}
+  .card-body {
+    padding-top: 5em;
+  }
+
+}
+
+
+
+
+
+
+
+.card:not(:first-of-type) {
+  margin-top: 5em;
+}
+
+
+@media (min-width: 576px) {
+  .card:nth-of-type(2) {
+    margin-top: 0;
+  }
+}
+
+
+@media (min-width: 768px) {
+  .card:nth-of-type(3) {
+    margin-top: 0;
+  }
+}
+
+
+@media (min-width: 992px) {
+  .card:nth-of-type(4) {
+    margin-top: 0;
+  }
+
+
+}
+
+.btnDelete, .btnModify, .btnDetail {
+  color: gray;
+}
+
+.btnDelete {
+  background-color: rgba(255, 127, 80, 0.7);
+  &:hover {
+    background-color: rgba(255, 127, 80, 1);
+  }
+}
+
+.btnModify {
+  background-color: rgba(255, 255, 153, 0.7);
+  &:hover {
+    background-color: rgba(255, 255, 153, 1);
+  }
+}
+
+.btnDetail {
+  background-color: rgba(152, 255, 152, 0.6);
+  &:hover {
+    background-color: rgba(152, 255, 152, 1);
+  }
+}
+
+.btnNew {
+  background-color: rgba(127, 170, 159, 0.8);
+  &:hover {
+    background-color: rgba(127, 170, 159, 1);
+  }
 }

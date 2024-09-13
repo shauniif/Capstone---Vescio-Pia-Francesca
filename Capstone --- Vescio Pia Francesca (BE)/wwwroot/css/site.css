@@ -207,6 +207,7 @@ a:hover {
 .card {
     background-color: transparent;
     width: 100%;
+    background-color: rgba(255, 255, 250, 0.1);
 }
 .list-group {
     background-color: transparent;

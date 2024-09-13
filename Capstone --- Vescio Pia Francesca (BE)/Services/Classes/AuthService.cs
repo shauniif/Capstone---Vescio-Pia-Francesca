@@ -262,7 +262,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             user.Username = entity.Username;
             _db.Update(user);
             await _db.SaveChangesAsync();
-            return user;
+                return user;
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Models
         public required string Email { get; set; }
         [Required]
         [StringLength(30)]
-        [RegularExpression(@"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", ErrorMessage ="La password deve contenere: almeno una lettera maiuscola, almeno una lettera minuscola, almeno una lettera minuscola, almeno un numero, almeno un carattere speciale ")]
+       // [RegularExpression(@"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", ErrorMessage ="La password deve contenere: almeno una lettera maiuscola, almeno una lettera minuscola, almeno una lettera minuscola, almeno un numero, almeno un carattere speciale ")]
         public string Password { get; set; }
 
         [StringLength(6)]

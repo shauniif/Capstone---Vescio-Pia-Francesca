@@ -30,7 +30,7 @@ export class CreateComponent implements OnInit {
   guilds: iGuild[] = [];
   cities: iCity[] = [];
   character!: iCharacter;
-  constructor(private fb: FormBuilder, private authSvc: AuthService, private characterSvc: CharacterService, private raceSvc: RaceService, private ecoSvc: EcosService, private guildSvc: GuildService, private citySvc: CityService, private route: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private authSvc: AuthService, private characterSvc: CharacterService, private raceSvc: RaceService, private ecoSvc: EcosService, private guildSvc: GuildService, private citySvc: CityService, private route: ActivatedRoute, private router: Router) {
 
   }
   ngOnInit(): void {
@@ -125,6 +125,7 @@ export class CreateComponent implements OnInit {
         {
           console.log("Personaggio modificato con successo:", character);
           this.createCharacterForm.reset();
+          this.router.navigate(['auth/profile']);
         }
       )
     } else {
@@ -132,6 +133,7 @@ export class CreateComponent implements OnInit {
           {
             console.log("Personaggio creato con successo:", character);
             this.createCharacterForm.reset();
+            this.router.navigate(['auth/profile']);
           }
         )
       }

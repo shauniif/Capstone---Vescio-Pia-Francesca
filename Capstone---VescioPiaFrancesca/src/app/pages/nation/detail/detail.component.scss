@@ -12,9 +12,10 @@
   li {
     line-height: 1;
   }
-  a {
-    color: #A9D6E5 ;
+  a, p {
+    color: #A9D6E5;
   }
+
 }
 .btnSty {
   background-color: rgba(131, 72, 144, 0.3);
@@ -24,3 +25,11 @@
   }
 }
 
+.btnBack {
+  background-color: rgba(108, 71, 104, 0.8);
+  color: rgba(255, 255, 255, 0.6);
+  &:hover {
+    background-color: rgba(108, 71, 104, 1);
+    color: rgba(255, 255, 255, 1);
+  }
+}

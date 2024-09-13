@@ -1,0 +1,30 @@
+.height {
+  min-height: 75vh;
+}
+
+.formBg {
+  background-color: rgba(255,255, 255, 0.2);
+
+}
+
+.text {
+ color: #D0D0D0;
+}
+
+.btnSty {
+  color: #D0D0D0;
+}
+.btnCreate {
+  background-color: rgba(127, 170, 159, 0.8);
+  &:hover {
+    background-color: rgba(127, 154, 159, 1);
+  }
+}
+
+.btnModify {
+  background-color: rgba(245, 245, 220, 0.7);
+  &:hover {
+    background-color: rgba(245, 245, 220, 1);
+  }
+}
+

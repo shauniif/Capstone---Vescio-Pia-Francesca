@@ -1,0 +1,26 @@
+.bg {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5em;
+}
+
+.card {
+  background-color: transparent;
+  border: 0;
+.card-body {
+    padding: 0 0.3em;
+  }
+  li {
+    line-height: 1;
+  }
+}
+a, p {
+  color: #A9D6E5 ;
+}
+.btnSty {
+  background-color: rgba(131, 72, 144, 0.3);
+  color: white;
+  &:hover {
+    background-color: rgba(131, 72, 144, 0.8);
+  }
+}
+

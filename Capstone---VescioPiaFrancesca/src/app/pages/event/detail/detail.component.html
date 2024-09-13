@@ -1,4 +1,35 @@
 <div *ngIf="event">
-  <app-single-event [event]="event"></app-single-event>
-  <p class="card-text">{{ event.influence }} : {{ event.modifier }}</p>
+  <div class="p-5 bg">
+    <div class="row">
+      <div class="col-12 col-md-4">
+        <img [src]="event.cover" class="card-img-top" alt="Nation_image" />
+      </div>
+      <div class="col-12 col-md-8 text-white">
+        <div class="card-body flex-grow-1">
+          <div class="border-bottom">
+            <h5 class="card-title fs-1">{{ event.name }}</h5>
+          </div>
+          <p class="card-text mt-3 fs-5">
+            {{ event.description }}
+          </p>
+          <p class="card-text mt-3 fs-5">
+            Evento accaduto durante l'anno: {{ event.yearOfEvent }} della
+            {{ event.yearOfEvent > 196 ? "20° torre" : "19° torre" }}
+          </p>
+          <p class="card-text mt-3 fs-6">
+            <span class="fw-bold">Data uscita evento:</span>
+            {{ formattedDate }}
+          </p>
+          <p class="card-text mt-3 fs-5">
+            <span class="fw-bold">Cosa ha influenzato:</span>
+            {{ event.influence }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <a routerLink="/event" class="ms-2 mt-2 btn btnBack ms-xxl-5"
+    >Torna indietro</a
+  >
 </div>

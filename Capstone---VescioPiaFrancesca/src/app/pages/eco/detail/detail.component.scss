@@ -1,0 +1,38 @@
+.bg {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5em;
+}
+
+.card {
+  background-color: transparent;
+  border: 0;
+.card-body {
+    padding: 0 0.3em;
+  }
+  li {
+    line-height: 1;
+  }
+}
+a {
+  color: #A9D6E5 ;
+}
+.text {
+  color: rgba(255, 127, 80, 1);
+}
+.btnSty {
+  background-color: rgba(131, 72, 144, 0.3);
+  color: white;
+  &:hover {
+    background-color: rgba(131, 72, 144, 0.8);
+  }
+}
+
+.btnBack {
+  background-color: rgba(108, 71, 104, 0.8);
+  color: rgba(255, 255, 255, 0.6);
+  &:hover {
+    background-color: rgba(108, 71, 104, 1);
+    color: rgba(255, 255, 255, 1);
+  }
+}
+

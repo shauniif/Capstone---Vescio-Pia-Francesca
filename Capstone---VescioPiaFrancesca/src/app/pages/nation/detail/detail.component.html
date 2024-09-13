@@ -9,12 +9,12 @@
           <div class="border-bottom">
             <h5 class="card-title fs-1">{{ nation.name }}</h5>
           </div>
-          <p class="card-text mt-3 fs-3">
+          <p class="card-text mt-3 fs-5">
             {{ nation.description }}
           </p>
-          <p class="card-text mb-3">
-            Forma di governo
-            <span class="fw-bold"> {{ nation.formOfGovernment }}</span>
+          <p class="card-text mb-3 fs-5">
+            <span class="fw-bold">Forma di governo:</span>
+            {{ nation.formOfGovernment }}
           </p>
         </div>
 
@@ -32,7 +32,7 @@
         <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
           <div class="card">
             <div class="card-body">
-              <p *ngIf="nation.ecos && nation.ecos.length === 0">
+              <p class="fs-5" *ngIf="nation.ecos && nation.ecos.length === 0">
                 Nessun Eco disponibile
               </p>
               <ul
@@ -40,7 +40,9 @@
                 *ngIf="nation.ecos && nation.ecos.length > 0"
               >
                 <li *ngFor="let eco of nation.ecos">
-                  <a [routerLink]="['/eco/detail', eco.id]"> {{ eco.name }}</a>
+                  <a class="fs-5" [routerLink]="['/eco/detail', eco.id]">
+                    {{ eco.name }}</a
+                  >
                 </li>
               </ul>
             </div>
@@ -61,7 +63,10 @@
         <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed2">
           <div class="card">
             <div class="card-body">
-              <p *ngIf="nation.cities && nation.cities.length === 0">
+              <p
+                class="fs-5"
+                *ngIf="nation.cities && nation.cities.length === 0"
+              >
                 Nessuna Città disponibile
               </p>
               <ul
@@ -69,7 +74,7 @@
                 *ngIf="nation.cities && nation.cities.length > 0"
               >
                 <li *ngFor="let city of nation.cities">
-                  <a [routerLink]="['/city/detail', city.id]">{{
+                  <a class="fs-5" [routerLink]="['/city/detail', city.id]">{{
                     city.name
                   }}</a>
                 </li>
@@ -92,7 +97,10 @@
         <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed3">
           <div class="card border-0">
             <div class="card-body">
-              <p *ngIf="nation.guilds && nation.guilds.length === 0">
+              <p
+                class="fs-5"
+                *ngIf="nation.guilds && nation.guilds.length === 0"
+              >
                 Nessuna Gilda disponibile
               </p>
               <ul
@@ -100,7 +108,7 @@
                 *ngIf="nation.guilds && nation.guilds.length > 0"
               >
                 <li *ngFor="let guild of nation.guilds">
-                  <a [routerLink]="['/guild/detail', guild.id]">{{
+                  <a class="fs-5" [routerLink]="['/guild/detail', guild.id]">{{
                     guild.name
                   }}</a>
                 </li>
@@ -111,4 +119,7 @@
       </div>
     </div>
   </div>
+  <a routerLink="/nation" class="ms-2 mt-2 btn btnBack ms-xxl-5"
+    >Torna indietro</a
+  >
 </div>

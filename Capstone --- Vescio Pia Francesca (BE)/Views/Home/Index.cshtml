@@ -2,7 +2,121 @@
     ViewData["Title"] = "Home Page";
 }
 
-    <div class="text-center mb-5">
-        <h1 class="display-4">ZanthaVerse</h1>
-        <p class="lead">Dove ogni</p>
+<div class="pt-3">
+    <div class="mb-4">
+    <h1 class="text-center text-white fs-1">Welcome to ZhantaVerse!</h1>
+    <h5 class="fst-italic text-white text-center px-5 mx-5">Plasma la sua storia,  fonda città leggendarie, e scrivi le cronache di epiche battaglie. 
+        Ogni decisione crea un destino, ogni personaggio un eroe. Sei pronto a lasciare il tuo segno nel mondo di Zhanta?</h5>
     </div>
+    @if (User.IsInRole("Admin") || User.IsInRole("Sub-Admin")) {
+    <div class="row">
+            <div class="col-md-4">
+                <div class="card text-center mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title text-white">Nazioni</h5>
+                        <p class="card-text text-white">Crea, modifica e visualizza le nazioni del tuo mondo.</p>
+                        <a asp-controller="Nation" asp-action="AllNations" class="btn btnHref">Gestisci Nazioni</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title text-white">Città</h5>
+                        <p class="card-text text-white">Gestisci le città e i loro abitanti.</p>
+                        <a asp-controller="City" asp-action="AllCities" class="btn btnHref">Gestisci Città</a>
+                    </div>
+                </div>
+            </div>
+        <div class="col-md-4">
+            <div class="card text-center mb-4">
+                <div class="card-body">
+                    <h5 class="card-title text-white">Razze</h5>
+                    <p class="card-text text-white">Aggiungi nuove razze e visualizza quelle esistenti.</p>
+                    <a asp-controller="Race" asp-action="AllRaces" class="btn btnHref">Gestisci Razze</a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-4">
+            <div class="card text-center mb-4">
+                <div class="card-body">
+                    <h5 class="card-title text-white">Articoli</h5>
+                    <p class="card-text text-white">Scrivi e gestisci articoli sul mondo di gioco.</p>
+                    <a asp-controller="Article" asp-action="AllArticles" class="btn btnHref">Gestisci Articoli</a>
+                </div>
+            </div>
+        </div>
+
+            <div class="col-md-4">
+                <div class="card text-center mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title text-white">Gilde</h5>
+                        <p class="card-text text-white">Crea e gestisci le gilde e i loro membri.</p>
+                        <a asp-controller="Guild" asp-action="AllGuilds" class="btn btnHref">Gestisci Gilde</a>
+                    </div>
+                </div>
+            </div>
+
+        <div class="col-md-4">
+            <div class="card text-center mb-4">
+                <div class="card-body">
+                    <h5 class="card-title text-white">Personaggi</h5>
+                    <p class="card-text text-white">Gestisci i personaggi</p>
+                    <a asp-controller="Event" asp-action="AllEvents" class="btn btnHref">Gestisci Personaggi</a>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card text-center mb-4">
+                <div class="card-body">
+                    <h5 class="card-title text-white">Echi</h5>
+                    <p class="card-text text-white">Crea e modifica gli Echi, le divinità che influenzano profondamente Zhanta. </p>
+                    <a asp-controller="Eco" asp-action="AllEcos" class="btn btnHref">Gestisci Divinità</a>
+                </div>
+            </div>
+        </div>
+
+            <div class="col-md-6">
+                <div class="card text-center mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title text-white">Eventi</h5>
+                        <p class="card-text text-white">Crea e visualizza gli eventi epici che cambieranno il mondo.</p>
+                        <a asp-controller="Event" asp-action="AllEvents" class="btn btnHref">Gestisci Eventi</a>
+                    </div>
+                </div>
+            </div>
+    
+    </div>
+    }
+      <div class="row">
+                <div class="col-md-6">
+                    <div class="card text-center mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title text-white">Login</h5>
+                            <p class="card-text text-white">Accedi al sistema e inizia a gestire il tuo mondo fantasy.</p>
+                            <a asp-controller="Auth" asp-action="Login" class="btn btnHref">Login</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card text-center mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title text-white">Registrazione</h5>
+                            <p class="card-text text-white">Crea un account e diventa parte della gestione del mondo di D&D.</p>
+                            <a asp-controller="Auth" asp-action="Register" class="btn btnHref">Registrati</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</div>

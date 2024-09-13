@@ -1,76 +1,101 @@
-<form [formGroup]="createCharacterForm">
-  <div class="form-group">
-    <input
-      type="text"
-      formControlName="name"
-      class="form-control"
-      placeholder="Il nome del personaggio"
-    />
-
-    <span *ngIf="isTouchedInvalid('name')">Devi inserire il nome</span>
-  </div>
-
-  <div class="form-group">
-    <label for="guildId">Gilda:</label>
-    <select formControlName="guildId" class="form-control">
-      <option value="">--Please choose an option--</option>
-      <option *ngFor="let guild of guilds" [value]="guild.id">
-        {{ guild.name }}
-      </option>
-    </select>
-    <span *ngIf="isTouchedInvalid('guildId')">Devi selezionare la gilda</span>
-  </div>
-
-  <div class="form-group">
-    <label for="cityId">Città:</label>
-    <select formControlName="cityId" class="form-control">
-      <option value="null">--Please choose an option--</option>
-      <option *ngFor="let city of cities" [value]="city.id">
-        {{ city.name }}
-      </option>
-    </select>
-    <span *ngIf="isTouchedInvalid('cityId')">Devi selezionare la città</span>
-  </div>
-
-  <div class="form-group">
-    <label for="raceId">Razza:</label>
-    <select formControlName="raceId" class="form-control">
-      <option value="null">--Please choose an option--</option>
-      <option *ngFor="let race of races" [value]="race.id">
-        {{ race.name }}
-      </option>
-    </select>
-    <span *ngIf="isTouchedInvalid('raceId')">Devi selezionare una razza</span>
-  </div>
-
-  <div class="form-group">
-    <label for="ecoId">Eco:</label>
-    <select formControlName="ecoId" class="form-control">
-      <option value="">--Please choose an option--</option>
-      <option *ngFor="let eco of ecos" [value]="eco.id">
-        {{ eco.name }}
-      </option>
-    </select>
-    <span *ngIf="isTouchedInvalid('ecoId')">Devi selezionare l'eco</span>
-  </div>
-
-  <div>
-    <input type="file" (change)="onFileSelected($event)" />
-  </div>
-  <button
-    type="submit"
-    *ngIf="!this.character"
-    (click)="CreateCaracter()"
-    [disabled]="!createCharacterForm.valid"
+<div class="d-flex justify-content-center align-items-center height">
+  <div
+    class="formBg d-flex flex-column justify-content-center align-content-center p-4"
   >
-    Crea personaggio
-  </button>
-  <button
-    type="submit"
-    *ngIf="this.character"
-    (click)="CreateCaracter()"
-    [disabled]="!createCharacterForm.valid"
-  >
-    Modifica personaggio
-  </button>
-</form>
+    <h2 class="fs-1 text-center mb-5 text">
+      {{ this.character ? "Modifica" : "Crea" }} il tuo personaggio
+    </h2>
+    <form [formGroup]="createCharacterForm">
+      <div class="form-group row flex-column flex-sm-row">
+        <div class="col">
+          <label class="control-label text fs-4">Nome</label>
+          <input
+            type="text"
+            formControlName="name"
+            class="form-control"
+            placeholder="Il nome del personaggio"
+          />
+
+          <span *ngIf="isTouchedInvalid('name')">Devi inserire il nome</span>
+        </div>
+
+        <div class="col mt-3 mt-sm-0">
+          <label for="guildId" class="control-label text fs-4">Gilda:</label>
+          <select formControlName="guildId" class="form-control">
+            <option value="">--Please choose an option--</option>
+            <option *ngFor="let guild of guilds" [value]="guild.id">
+              {{ guild.name }}
+            </option>
+          </select>
+          <span *ngIf="isTouchedInvalid('guildId')"
+            >Devi selezionare la gilda</span
+          >
+        </div>
+      </div>
+
+      <div class="form-group row flex-column flex-sm-row">
+        <div class="col mt-3 mt-sm-0">
+          <label for="cityId" class="control-label text fs-4">Città:</label>
+          <select formControlName="cityId" class="form-control">
+            <option value="null">--Please choose an option--</option>
+            <option *ngFor="let city of cities" [value]="city.id">
+              {{ city.name }}
+            </option>
+          </select>
+          <span *ngIf="isTouchedInvalid('cityId')"
+            >Devi selezionare la città</span
+          >
+        </div>
+
+        <div class="col mt-3 mt-sm-0">
+          <label for="raceId" class="control-label text fs-4">Razza:</label>
+          <select formControlName="raceId" class="form-control">
+            <option value="null">--Please choose an option--</option>
+            <option *ngFor="let race of races" [value]="race.id">
+              {{ race.name }}
+            </option>
+          </select>
+          <span *ngIf="isTouchedInvalid('raceId')"
+            >Devi selezionare una razza</span
+          >
+        </div>
+      </div>
+
+      <div class="form-group row flex-column flex-sm-row">
+        <div class="col mt-3 mt-sm-0">
+          <label for="ecoId" class="control-label text fs-4">Eco:</label>
+          <select formControlName="ecoId" class="form-control">
+            <option value="">--Please choose an option--</option>
+            <option *ngFor="let eco of ecos" [value]="eco.id">
+              {{ eco.name }}
+            </option>
+          </select>
+          <span *ngIf="isTouchedInvalid('ecoId')">Devi selezionare l'eco</span>
+        </div>
+
+        <div class="col mt-3 mt-sm-0">
+          <label for="image" class="control-label text fs-4">Immagine:</label>
+          <input
+            type="file"
+            formControlName="image"
+            class="form-control"
+            (change)="onFileSelected($event)"
+          />
+        </div>
+        <span *ngIf="isTouchedInvalid('ecoId')">Devi inserire l'immagine</span>
+      </div>
+
+      <div class="mt-3 d-flex justify-content-center">
+        <button
+          type="submit"
+          (click)="CreateCaracter()"
+          class="btn"
+          [ngClass]="{ btnCreate: !character, btnModify: character }"
+          [disabled]="!createCharacterForm.valid"
+        >
+          {{ this.character ? "Modifica" : "Crea" }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

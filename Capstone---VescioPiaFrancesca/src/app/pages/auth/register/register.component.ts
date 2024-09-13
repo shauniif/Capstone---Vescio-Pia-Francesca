@@ -33,13 +33,22 @@ export class RegisterComponent {
     this.route.params.subscribe((params:any) => {
       this.authSvc.GetUser(params.id).subscribe(user => {
         this.user = user;
+        let date = new Date(user.dateBirth);
+
+
+        let day = date.getDate().toString().padStart(2, '0');
+        let month = (date.getMonth() + 1).toString().padStart(2, '0');
+        let year = date.getFullYear();
+
+
+        let formattedDate = `${year}-${month}-${day}`;
         this.signInForm.patchValue(
           {
             firstName: this.user.firstName,
             lastName: this.user.lastName,
             username: this.user.username,
             email: this.user.email,
-            dateBirth: this.user.dateBirth,
+            dateBirth: formattedDate,
             password: this.user.password,
           }
         )
@@ -62,9 +71,8 @@ export class RegisterComponent {
       this.authSvc.UpdateUser(UserToUpdate.id, UserToUpdate).subscribe(data =>
         {
           this.AuthData = data
-          this.authSvc.login(this.AuthData).subscribe(data =>
-            console.log(data)
-          )
+          this.authSvc.login(this.AuthData).subscribe(data => console.log(data))
+          this.router.navigate(['auth/profile'])
         })
       } else {
         const newUser: iUser = this.signInForm.value;

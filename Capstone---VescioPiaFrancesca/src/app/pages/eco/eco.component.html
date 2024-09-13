@@ -90,9 +90,18 @@
 
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
     <div class="col my-3" *ngFor="let eco of filteredEcos">
-      <div class="card d-flex flex-column h-100">
-        <app-single-eco [eco]="eco"></app-single-eco>
-        <a [routerLink]="['detail', eco.id]">Dettagli</a>
+      <div
+        class="card d-flex flex-column"
+        [ngStyle]="{ 'background-image': 'url(' + eco.pic + ')' }"
+      >
+        <div class="d-flex flex-column h-100">
+          <div class="card-body">
+            <h5 class="card-title">{{ eco.name }}</h5>
+            <a [routerLink]="['detail', eco.id]" class="btn btnSty p-1"
+              >Dettagli</a
+            >
+          </div>
+        </div>
       </div>
     </div>
   </div>

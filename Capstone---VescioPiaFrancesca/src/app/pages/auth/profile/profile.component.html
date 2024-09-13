@@ -1,11 +1,16 @@
 <div class="pt-5">
-  <div class="row justify-content-center textWhite border p-5 ps-2 bgUserInf">
-    <div class="col-3">
+  <div
+    class="row flex-column flex-md-row justify-content-center textWhite border p-5 px-2 bgUserInf"
+  >
+    <div class="col-12 col-lg-3">
       <div
         *ngIf="!user.image"
         class="d-flex justify-content-center rounded-circle mt-3"
       >
-        <img src="../../../../assets/img/default.png" style="width: 100px" />
+        <img
+          src="../../../../assets/img/default.png"
+          class="imgPropic rounded-circle"
+        />
       </div>
       <div *ngIf="user.image" class="d-flex justify-content-center mt-3">
         <img [src]="user.image" class="imgPropic rounded-circle" />
@@ -16,7 +21,7 @@
           <input formControlName="id" type="hidden" [value]="user.id" />
         </div>
         <div class="mb-3">
-          <label for="fileUpload" class="form-label text-center"
+          <label for="fileUpload" class="form-label text-center text-white fs-6"
             >Modifica la tua immagine di profilo
           </label>
           <input
@@ -26,11 +31,11 @@
             class="form-control"
           />
         </div>
-        <div class="d-flex justify-content-sm-center">
+        <div class="d-flex justify-content-center">
           <button
             type="submit"
             (click)="UploadImage()"
-            class="btn btn-primary"
+            class="btn btnSty"
             [disabled]="!imageForm.valid"
           >
             Upload
@@ -39,7 +44,7 @@
       </form>
     </div>
 
-    <div class="col-9 py-3">
+    <div class="col-12 col-lg-9 py-3">
       <div class="border-bottom mb-3">
         <h5 class="fs-4 text-white">
           {{ user.firstName }} {{ user.lastName }}
@@ -48,56 +53,76 @@
       <h4 class="text-white">Informazioni Utente</h4>
 
       <div
-        class="row row-cols-3 flex-column justify-content-center align-content-center"
+        class="row row-cols-1 row-cols-md-3 flex-column justify-content-center align-content-center"
       >
         <div class="col d-flex justify-content-around">
-          <p class="text-white">Email:</p>
-          <p>{{ user.email }}</p>
+          <p class="text-white fs-5">Email:</p>
+          <p class="text fs-5">{{ user.email }}</p>
         </div>
         <div class="col d-flex justify-content-around">
-          <p class="text-white d-flex">Data di nascita:</p>
-          <p>{{ user.dateBirth }}</p>
+          <p class="text-white fs-5">Data di nascita:</p>
+          <p class="text fs-5">{{ formattedDate }}</p>
         </div>
         <div class="col d-flex justify-content-around">
-          <p class="text-white">Username:</p>
-          <p>{{ user.username }}</p>
+          <p class="text-white fs-5">Username:</p>
+          <p class="text fs-5">{{ user.username }}</p>
         </div>
       </div>
 
-      <div class="row justify-content-center align-content-center">
-        <a
-          class="btn btn-primary mt-3 w-25"
-          [routerLink]="['/auth/edit', user.id]"
-          >Modifica i tuoi dati</a
-        >
+      <div class="text-center">
+        <a class="btn btnSty mt-3 w-25" [routerLink]="['/auth/edit', user.id]"
+          >Modifica
+        </a>
+      </div>
+    </div>
+    <h3 class="text-white mb-4">I tuoi personaggi:</h3>
+    <div>
+      <a routerLink="/character/create" class="btn btnNew mt-3 mb-5 text-white"
+        >Crea un nuovo personaggio</a
+      >
+    </div>
+    <div
+      class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 mt-5 mb-0 mx-auto"
+    >
+      <div class="col card" *ngFor="let character of user.characters">
+        <div class="imgCard">
+          <img class="card-img-top" [src]="character.image" />
+        </div>
+        <div class="card-body text-center">
+          <p class="card-title">
+            <span class="fw-bold text-white">Nome:</span> {{ character.name }}
+          </p>
+          <p class="card-text">
+            <span class="fw-bold text-white">Punteggio:</span>
+            {{ character.score }}
+          </p>
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-xxl-3 gy-3">
+            <div class="col">
+              <button
+                type="button"
+                (click)="DeleteCharacter(character.id)"
+                class="btn btnDelete"
+              >
+                Cancella
+              </button>
+            </div>
+            <div class="col">
+              <a
+                [routerLink]="['/character/edit', character.id]"
+                class="btn btnModify"
+                >Modifica</a
+              >
+            </div>
+            <div class="col">
+              <a
+                [routerLink]="['/character/detail', character.id]"
+                class="btn btnDetail"
+                >Dettagli</a
+              >
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <div>
-    <h3>I tuoi personaggi:</h3>
-    <div *ngFor="let character of user.characters">
-      <p>Nome: {{ character.name }}</p>
-      <p>Punteggio: {{ character.score }}</p>
-      <button
-        type="button"
-        (click)="DeleteCharacter(character.id)"
-        class="btn btn-danger"
-      >
-        Cancella
-      </button>
-      <a
-        [routerLink]="['/character/edit', character.id]"
-        class="btn btn-warning"
-        >Modifica</a
-      >
-      <a
-        [routerLink]="['/character/detail', character.id]"
-        class="btn btn-success"
-        >Dettagli</a
-      >
-    </div>
-    <a routerLink="/character/create">Crea un nuovo personaggio</a>
-  </div>
-
-  <div class="row"></div>
 </div>
