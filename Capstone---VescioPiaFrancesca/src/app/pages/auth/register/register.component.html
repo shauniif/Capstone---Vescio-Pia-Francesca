@@ -85,7 +85,11 @@
       </div>
 
       <div class="mt-3 d-flex justify-content-center">
-        <button (click)="CreateUser()" class="btn btnSty">
+        <button
+          (click)="CreateUser()"
+          class="btn"
+          [ngClass]="{ btnCreate: !user, btnModify: user }"
+        >
           {{ this.user ? "Modifica" : "Registrati" }}
         </button>
       </div>

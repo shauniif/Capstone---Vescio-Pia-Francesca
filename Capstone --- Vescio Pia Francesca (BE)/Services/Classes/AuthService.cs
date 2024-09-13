@@ -58,7 +58,8 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             {
                 user.Roles.Add(role);
             }
-            if(role.Name == "Admin" || role.Name == "Sub-Admin")
+
+            if((role.Name == "Admin" || role.Name == "Sub-Admin") && user.AdminCode == null)
             {
                 var adminCode = GenerateCode();
                 user.AdminCode = adminCode;
@@ -183,7 +184,8 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                 user.Roles.Remove(role);
             }
 
-            if (role.Name == "Admin" || role.Name == "Sub-Admin")
+
+            if ((role.Name == "Admin" || role.Name == "Sub-Admin") && !user.Roles.Any(r => r.Name == "Admin" || r.Name == "Sub-Admin"))
             {
                 user.AdminCode = null;
             }

@@ -15,6 +15,8 @@ export class EcoComponent {
   nationsName: string[] = [];
   filteredEcos: iEco[] = [];
   EcosWithNoNation: iEco[] = [];
+  isCollapsed: boolean = true
+  isCollapsed2: boolean = true
   constructor(private ecoSvc: EcosService, private nationSvc: NationsService)
   {
 
@@ -57,7 +59,7 @@ export class EcoComponent {
 
 
 
-        console.log("Ecco", this.filteredEcos)
+
       }
      })
 
@@ -65,9 +67,19 @@ export class EcoComponent {
 
   OrderEcoByPosition(): void {
     this.filteredEcos.sort((a, b) => a.position - b.position)
+
   }
 
   OrderEcoByName(): void {
     this.filteredEcos.sort((a, b) => a.name.localeCompare(b.name))
+
+  }
+
+  DropDownClose(dropdownType: 'first' | 'second'): void {
+    if (dropdownType === 'first') {
+      this.isCollapsed = true;
+    } else if (dropdownType === 'second') {
+      this.isCollapsed2 = true;
+    }
   }
 }

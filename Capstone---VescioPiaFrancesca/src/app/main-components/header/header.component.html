@@ -79,25 +79,20 @@
         <li class="nav-item">
           <a class="nav-link" *ngIf="isLoggedIn" (click)="logout()">Esci</a>
         </li>
-
-        <form [formGroup]="searchForm" class="d-flex" role="search">
-          <input
-            class="form-control me-2"
-            type="search"
-            formControlName="search"
-            placeholder="Cerca echi, divinita, città o nazioni"
-            style="width: 280px"
-            aria-label="Search"
-          />
-          <button
-            class="btn btn-outline-secondary"
-            type="button"
-            (click)="Prova()"
-          >
-            Search
-          </button>
-        </form>
       </ul>
+      <form [formGroup]="searchForm" class="d-flex me-3" role="search">
+        <input
+          class="form-control me-2 bg-transparent text-white colorPlaceholder inputSty"
+          type="search"
+          formControlName="search"
+          placeholder="Cerca echi, divinita, città o nazioni"
+          style="width: 280px"
+          aria-label="Search"
+        />
+        <button class="btn btnSty" type="button" (click)="Prova()">
+          Search
+        </button>
+      </form>
 
       <div *ngIf="isLoggedIn">
         <a class="nav-link" *ngIf="isLoggedIn" routerLink="/auth/profile">

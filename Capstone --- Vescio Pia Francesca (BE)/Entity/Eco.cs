@@ -23,5 +23,23 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Entity
 
         public List<Character> Devotees = new List<Character>();
 
+        public string ShortDescription
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Description))
+                {
+                    return string.Empty; 
+                }
+
+                if (Description.Length > 75)
+                {
+                    return Description.Substring(0, 75) + "...";
+                }
+
+                return Description;
+            }
+        }
+
     }
 }

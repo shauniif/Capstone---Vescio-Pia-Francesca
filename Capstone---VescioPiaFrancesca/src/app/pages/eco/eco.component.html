@@ -1,24 +1,99 @@
-<div class="imgBg my-3 d-flex justify-content-center align-items-center">
-  <p class="display-1 fst-italic">Echi</p>
-</div>
-
 <div>
-  <button *ngFor="let nation of nationsName" (click)="FilterEco(nation)">
-    {{ nation }}
-  </button>
-  <button (click)="filteredEcos = ecos">Mostra tutte</button>
-  <button (click)="filteredEcos = EcosWithNoNation">Mostra Nomadi</button>
-  <button (click)="OrderEcoByName()">Ordina in ordine alfabeitco</button>
-  <button (click)="OrderEcoByPosition()">
-    Ordina in base al posizionamento
-  </button>
-</div>
+  <div class="imgBg d-flex mb-3 justify-content-center align-items-center">
+    <p class="display-1 fst-italic">Echi</p>
+  </div>
 
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
-  <div class="col my-3" *ngFor="let eco of filteredEcos">
-    <div class="card d-flex flex-column h-100">
-      <app-single-eco [eco]="eco"></app-single-eco>
-      <a [routerLink]="['detail', eco.id]">Dettagli</a>
+  <div class="my-3">
+    <p class="fst-italic text-white">
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa, minus
+      cum! Doloremque consequuntur fuga voluptatum, repudiandae, vel animi odio
+      mollitia earum officia magni modi eaque officiis corporis quo dicta
+      incidunt? Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      Recusandae, vel provident sunt ipsa at rerum, laborum, quo vero in
+      nesciunt voluptatum quia alias harum similique aspernatur magni dicta
+      debitis? Natus!
+    </p>
+  </div>
+
+  <div class="row justify-content-between">
+    <div class="col-auto dropdown">
+      <p class="">
+        <button
+          type="button"
+          class="btn btnSty fs-5 dropdown-toggle"
+          (click)="isCollapsed = !isCollapsed"
+          [attr.aria-expanded]="!isCollapsed"
+          aria-controls="collapseExample"
+        >
+          Seleziona in base alla nazione
+        </button>
+      </p>
+      <div
+        #collapse="ngbCollapse"
+        [(ngbCollapse)]="isCollapsed"
+        class="dropdown-menu colorDrop"
+      >
+        <button
+          *ngFor="let nation of nationsName"
+          (click)="FilterEco(nation); DropDownClose('first')"
+          class="dropdown-item"
+        >
+          {{ nation }}
+        </button>
+        <button
+          (click)="filteredEcos = ecos; DropDownClose('first')"
+          class="dropdown-item"
+        >
+          Mostra tutte
+        </button>
+        <button
+          (click)="filteredEcos = EcosWithNoNation; DropDownClose('first')"
+          class="dropdown-item"
+        >
+          Mostra Nomadi
+        </button>
+      </div>
+    </div>
+
+    <div class="col-auto dropdown">
+      <p class="">
+        <button
+          type="button"
+          class="btn btnSty fs-5 dropdown-toggle"
+          (click)="isCollapsed2 = !isCollapsed2"
+          [attr.aria-expanded]="!isCollapsed2"
+          aria-controls="collapseExample"
+        >
+          Ordina
+        </button>
+      </p>
+      <div
+        #collapse="ngbCollapse"
+        [(ngbCollapse)]="isCollapsed2"
+        class="dropdown-menu colorDrop"
+      >
+        <button
+          (click)="OrderEcoByName(); DropDownClose('second')"
+          class="dropdown-item"
+        >
+          Ordina in ordine alfabeitco
+        </button>
+        <button
+          (click)="OrderEcoByPosition(); DropDownClose('second')"
+          class="dropdown-item"
+        >
+          Ordina in base al posizionamento
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+    <div class="col my-3" *ngFor="let eco of filteredEcos">
+      <div class="card d-flex flex-column h-100">
+        <app-single-eco [eco]="eco"></app-single-eco>
+        <a [routerLink]="['detail', eco.id]">Dettagli</a>
+      </div>
     </div>
   </div>
 </div>

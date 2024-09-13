@@ -5,6 +5,7 @@ import { NationRoutingModule } from './nation-routing.module';
 import { NationComponent } from './nation.component';
 import { DetailComponent } from './detail/detail.component';
 import { SharedModule } from '../../shared/shared.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { SharedModule } from '../../shared/shared.module';
   imports: [
     CommonModule,
     NationRoutingModule,
-    SharedModule
+    SharedModule,
+    NgbModule
   ]
 })
 export class NationModule { }

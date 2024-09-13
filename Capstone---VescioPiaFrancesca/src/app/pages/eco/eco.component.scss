@@ -5,3 +5,22 @@
   position: relative;
   width: 100%;
 }
+
+.btnSty, .colorDrop {
+  background-color: rgba(116, 78, 188, 0.5);
+  color: rgba(255, 255, 255, 0.5);
+  &:hover {
+    background-color: rgba(116, 78, 188, 1);
+    color: rgba(255, 255, 255, 1)
+  }
+  .dropdown-item {
+    color: white;
+    &:hover {
+      background-color: rgba(230, 230, 250, 1);
+      color: rgba(0 ,0 , 0, 1) ;
+    }
+  }
+
+}
+
+

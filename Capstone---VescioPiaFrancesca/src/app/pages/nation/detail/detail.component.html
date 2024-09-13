@@ -1,44 +1,114 @@
-<div *ngIf="nation">
-  <div class="d-flex flex-column h-100">
-    <img [src]="nation.photo" class="card-img-top" alt="Nation_image" />
-    <div class="card-body flex-grow-1">
-      <h5 class="card-title">{{ nation.name }}</h5>
-      <p class="card-text">
-        {{ nation.description }}
-      </p>
-      <p class="card-text">
-        <span class="fw-bold"></span>
-        {{ nation.formOfGovernment }}
-      </p>
+<div class="py-5">
+  <div *ngIf="nation" class="p-5 bg">
+    <div class="row">
+      <div class="col-12 col-md-4">
+        <img [src]="nation.photo" class="card-img-top" alt="Nation_image" />
+      </div>
+      <div class="col-12 col-md-8 text-white">
+        <div class="card-body flex-grow-1">
+          <div class="border-bottom">
+            <h5 class="card-title fs-1">{{ nation.name }}</h5>
+          </div>
+          <p class="card-text mt-3 fs-3">
+            {{ nation.description }}
+          </p>
+          <p class="card-text mb-3">
+            Forma di governo
+            <span class="fw-bold"> {{ nation.formOfGovernment }}</span>
+          </p>
+        </div>
+
+        <p>
+          <button
+            type="button"
+            class="btn btnSty fs-5"
+            (click)="isCollapsed = !isCollapsed"
+            [attr.aria-expanded]="!isCollapsed"
+            aria-controls="collapseExample"
+          >
+            Divinità
+          </button>
+        </p>
+        <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+          <div class="card">
+            <div class="card-body">
+              <p *ngIf="nation.ecos && nation.ecos.length === 0">
+                Nessun Eco disponibile
+              </p>
+              <ul
+                class="list-unstyled"
+                *ngIf="nation.ecos && nation.ecos.length > 0"
+              >
+                <li *ngFor="let eco of nation.ecos">
+                  <a [routerLink]="['/eco/detail', eco.id]"> {{ eco.name }}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <p>
+          <button
+            type="button"
+            class="btn btnSty fs-5"
+            (click)="isCollapsed2 = !isCollapsed2"
+            [attr.aria-expanded]="!isCollapsed2"
+            aria-controls="collapseExample"
+          >
+            Città
+          </button>
+        </p>
+        <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed2">
+          <div class="card">
+            <div class="card-body">
+              <p *ngIf="nation.cities && nation.cities.length === 0">
+                Nessuna Città disponibile
+              </p>
+              <ul
+                class="list-unstyled"
+                *ngIf="nation.cities && nation.cities.length > 0"
+              >
+                <li *ngFor="let city of nation.cities">
+                  <a [routerLink]="['/city/detail', city.id]">{{
+                    city.name
+                  }}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <p>
+          <button
+            type="button"
+            class="btn btnSty fs-5"
+            (click)="isCollapsed3 = !isCollapsed3"
+            [attr.aria-expanded]="!isCollapsed3"
+            aria-controls="collapseExample"
+          >
+            Gilde
+          </button>
+        </p>
+        <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed3">
+          <div class="card border-0">
+            <div class="card-body">
+              <p *ngIf="nation.guilds && nation.guilds.length === 0">
+                Nessuna Gilda disponibile
+              </p>
+              <ul
+                class="list-unstyled"
+                *ngIf="nation.guilds && nation.guilds.length > 0"
+              >
+                <li *ngFor="let guild of nation.guilds">
+                  <a [routerLink]="['/guild/detail', guild.id]">{{
+                    guild.name
+                  }}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-
-  <p>Divinità</p>
-
-  <p *ngIf="nation.ecos && nation.ecos.length === 0">Nessun Eco disponibile</p>
-  <ul *ngIf="nation.ecos && nation.ecos.length > 0">
-    <li *ngFor="let eco of nation.ecos">
-      <a [routerLink]="['/eco/detail', eco.id]"> {{ eco.name }}</a>
-    </li>
-  </ul>
-
-  <p>Città</p>
-  <p *ngIf="nation.cities && nation.cities.length === 0">
-    Nessuna Città disponibile
-  </p>
-  <ul *ngIf="nation.cities && nation.cities.length > 0">
-    <li *ngFor="let city of nation.cities">
-      <a [routerLink]="['/city/detail', city.id]">{{ city.name }}</a>
-    </li>
-  </ul>
-
-  <p>Gilde</p>
-  <p *ngIf="nation.guilds && nation.guilds.length === 0">
-    Nessuna Gilda disponibile
-  </p>
-  <ul *ngIf="nation.guilds && nation.guilds.length > 0">
-    <li *ngFor="let guild of nation.guilds">
-      <a [routerLink]="['/guild/detail', guild.id]">{{ guild.name }}</a>
-    </li>
-  </ul>
 </div>

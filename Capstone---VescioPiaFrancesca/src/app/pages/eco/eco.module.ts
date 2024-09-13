@@ -5,6 +5,7 @@ import { EcoRoutingModule } from './eco-routing.module';
 import { EcoComponent } from './eco.component';
 import { SharedModule } from '../../shared/shared.module';
 import { DetailComponent } from './detail/detail.component';
+import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { DetailComponent } from './detail/detail.component';
   imports: [
     CommonModule,
     EcoRoutingModule,
-    SharedModule
+    SharedModule,
+    NgbCollapseModule
   ]
 })
 export class EcoModule { }

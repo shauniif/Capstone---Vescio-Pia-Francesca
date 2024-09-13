@@ -10,6 +10,9 @@ import { NationsService } from '../../../Services/nations.service';
 })
 export class DetailComponent {
   nation!: iNations
+  isCollapsed: boolean = true
+  isCollapsed2: boolean = true
+  isCollapsed3: boolean = true
   constructor(
     private route:ActivatedRoute,
     private nationSvc: NationsService
