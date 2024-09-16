@@ -1,0 +1,43 @@
+.imgBg {
+  background-image: url('../../../assets/img/Guilds.png');
+  background-size: cover;
+  height: 30em;
+  position: relative;
+  width: 100%;
+  box-shadow: 0 15px 25px rgba(129, 124, 124, 0.2);
+}
+
+.colorText {
+  color:  rgb(82, 43, 21);
+  text-shadow:
+  2px 2px 0px white,
+  -2px 2px 0px white,
+  2px -2px 0px white,
+  -2px -2px 0px white;
+}
+
+.btnSty, .colorDrop {
+  background-color: rgba(116, 78, 188, 0.5);
+  color: rgba(255, 255, 255, 0.5);
+  &:hover {
+    background-color: rgba(116, 78, 188, 1);
+    color: rgba(255, 255, 255, 1)
+  }
+  .dropdown-item {
+    color: white;
+    &:hover {
+      background-color: rgba(230, 230, 250, 1);
+      color: rgba(0 ,0 , 0, 1) ;
+    }
+  }
+}
+
+.card {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: relative;
+  transition: transform 400ms ease, background-color 400ms ease ;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-5px);
+  }
+}

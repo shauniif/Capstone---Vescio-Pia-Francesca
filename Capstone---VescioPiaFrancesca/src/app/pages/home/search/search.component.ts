@@ -19,18 +19,27 @@ export class SearchComponent implements OnInit  {
   guilds: iGuild[] = [];
   cities: iCity[] = [];
   nations: iNations[] = [];
+  isLoading: boolean = true;
   constructor( private route: ActivatedRoute, private searchSvc: SearchService) {}
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      console.log(params);
-      this.searchQuery = params['search'];
-      this.searchSvc.GetElementSearched(this.searchQuery).subscribe((e: iSearchResponse) => {
-        this.ecos = e.ecos;
-        this.guilds = e.guilds;
-        this.cities = e.cities;
-        this.nations = e.nations;
-      })
-    });
+
+    this.loadData()
   }
 
-}
+  loadData(): void {
+    setTimeout(() => {
+      this.route.params.subscribe(params => {
+        console.log(params);
+        this.searchQuery = params['search'];
+        this.searchSvc.GetElementSearched(this.searchQuery).subscribe((e: iSearchResponse) => {
+          this.ecos = e.ecos;
+          this.guilds = e.guilds;
+          this.cities = e.cities;
+          this.nations = e.nations;
+
+          this.isLoading = false;
+        })
+      }), 5000})
+    }
+  }
+

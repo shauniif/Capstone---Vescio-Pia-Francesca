@@ -1,41 +1,89 @@
-<h2>Elementi trovati con: {{ searchQuery }}</h2>
+<div class="pt-3 bg text-white">
+  <h2>Elementi trovati con: {{ searchQuery }}</h2>
 
-<h4>Nazioni trovate con questo risultato</h4>
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
-  <div class="col my-3" *ngFor="let nation of nations">
-    <div class="card d-flex flex-column h-100">
-      <app-single-nation [nation]="nation"></app-single-nation>
-      <a [routerLink]="['detail', nation.id]">Dettagli</a>
+  <div *ngIf="isLoading" class="py-4 d-flex justify-content-center">
+    <div class="text-center my-3 pb-3 spinner">
+      <div class="spinner1 text-center"></div>
     </div>
   </div>
-</div>
+  <div *ngIf="!isLoading">
+    <div *ngIf="nations.length > 0">
+      <h4>Nazioni trovate con questo risultato: {{ nations.length }}</h4>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+        <div class="col my-3" *ngFor="let nation of nations">
+          <a
+            [routerLink]="['/nation/detail', nation.id]"
+            class="text-decoration-none"
+          >
+            <div class="card d-flex flex-column h-100">
+              <app-single-nation [nation]="nation"> </app-single-nation>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
 
-<h4>Gilde trovate con questo risultato:</h4>
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
-  <div class="col my-3" *ngFor="let guild of guilds">
-    <div class="card d-flex flex-column h-100">
-      <app-single-guild [guild]="guild"></app-single-guild>
-      <a [routerLink]="['detail', guild.id]">Dettagli</a>
+    <div *ngIf="guilds.length > 0">
+      <h4>Gilde trovate con questo risultato: {{ guilds.length }}</h4>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+        <div class="col my-3" *ngFor="let guild of guilds">
+          <a
+            [routerLink]="['/guild/detail', guild.id]"
+            class="text-decoration-none"
+          >
+            <div class="card d-flex flex-column h-100">
+              <app-single-guild [guild]="guild"></app-single-guild>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="ecos.length > 0">
+      <h4>Echi trovati con questo risultato: {{ ecos.length }}</h4>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+        <div class="col my-3" *ngFor="let eco of ecos">
+          <a
+            [routerLink]="['/eco/detail', eco.id]"
+            class="text-decoration-none"
+          >
+            <div class="card d-flex flex-column h-100">
+              <app-single-eco [eco]="eco"></app-single-eco>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="cities.length > 0">
+      <h4>Città trovate con questo risultato: {{ cities.length }}</h4>
+      <div
+        class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 pb-3"
+      >
+        <div class="col my-3" *ngFor="let city of cities">
+          <a
+            [routerLink]="['/city/detail', city.id]"
+            class="text-decoration-none"
+          >
+            <div class="card d-flex flex-column h-100">
+              <app-single-city [city]="city"></app-single-city>
+            </div>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-
-<h4>Echi trovati con questo risultato:</h4>
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
-  <div class="col my-3" *ngFor="let eco of ecos">
-    <div class="card d-flex flex-column h-100">
-      <app-single-eco [eco]="eco"></app-single-eco>
-      <a [routerLink]="['detail', eco.id]">Dettagli</a>
-    </div>
-  </div>
-</div>
-
-<h4>Città trovate con questo risultato:</h4>
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
-  <div class="col my-3" *ngFor="let city of cities">
-    <div class="card d-flex flex-column h-100">
-      <app-single-city [city]="city"></app-single-city>
-      <a [routerLink]="['detail', city.id]">Dettagli</a>
-    </div>
+  <div
+    *ngIf="
+      cities.length == 0 &&
+      ecos.length == 0 &&
+      guilds.length == 0 &&
+      nations.length == 0 &&
+      !isLoading
+    "
+  >
+    <p class="text-center text-white fs-4">
+      Nessun elemento trovato con la ricerca effettuata.
+    </p>
   </div>
 </div>

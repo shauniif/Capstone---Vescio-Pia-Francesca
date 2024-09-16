@@ -1,3 +1,4 @@
+import { iCharacter } from "./i-character";
 import { iNations } from "./nations";
 
 export interface iGuild {
@@ -5,5 +6,9 @@ export interface iGuild {
   name: string;
   description: string;
   modifier: number;
-  nation: iNations
+  members: iCharacter[];
+  power: number;
+  nation: iNations;
+
+
 }

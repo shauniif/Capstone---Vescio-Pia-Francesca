@@ -5,6 +5,7 @@ import { GuildRoutingModule } from './guild-routing.module';
 import { GuildComponent } from './guild.component';
 import { DetailComponent } from './detail/detail.component';
 import { SharedModule } from '../../shared/shared.module';
+import { NgbCollapse } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { SharedModule } from '../../shared/shared.module';
   imports: [
     CommonModule,
     GuildRoutingModule,
-    SharedModule
+    SharedModule,
+    NgbCollapse
   ]
 })
 export class GuildModule { }

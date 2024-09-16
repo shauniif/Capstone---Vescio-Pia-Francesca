@@ -5,6 +5,7 @@ import { CityRoutingModule } from './city-routing.module';
 import { CityComponent } from './city.component';
 import { DetailComponent } from './detail/detail.component';
 import { SharedModule } from '../../shared/shared.module';
+import { NgbCollapse } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { SharedModule } from '../../shared/shared.module';
   imports: [
     CommonModule,
     CityRoutingModule,
-    SharedModule
+    SharedModule,
+    NgbCollapse
   ]
 })
 export class CityModule { }

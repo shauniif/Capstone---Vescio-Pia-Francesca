@@ -15,8 +15,8 @@ export class EcoComponent {
   nationsName: string[] = [];
   filteredEcos: iEco[] = [];
   EcosWithNoNation: iEco[] = [];
-  isCollapsed: boolean = true
-  isCollapsed2: boolean = true
+  isCollapsed: boolean = true;
+  isCollapsed2: boolean = true;
   constructor(private ecoSvc: EcosService, private nationSvc: NationsService)
   {
 
@@ -77,9 +77,9 @@ export class EcoComponent {
 
   DropDownClose(dropdownType: 'first' | 'second'): void {
     if (dropdownType === 'first') {
-      this.isCollapsed = true;
+      this.isCollapsed = false;
     } else if (dropdownType === 'second') {
-      this.isCollapsed2 = true;
+      this.isCollapsed2 = false;
     }
   }
 }

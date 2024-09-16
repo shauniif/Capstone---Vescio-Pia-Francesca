@@ -1,16 +1,98 @@
-<div>
-  <button *ngFor="let nation of nationsName" (click)="FilterGuild(nation)">
-    {{ nation }}
-  </button>
-  <button (click)="filteredGuilds = guildsCopy">Mostra tutte</button>
-  <button (click)="OrderGuildByName()">Ordina in ordine alfabeitco</button>
+<div class="imgBg py-3 d-flex justify-content-center align-items-center">
+  <p class="display-1 fst-italic colorText">Gilde</p>
+</div>
+
+<div class="mb-2 fst-italic text-white my-4">
+  Le nazioni sono tanto diverse quanto affascinanti. Dalle gelide terre di
+  Uvarkh alle rigogliose foreste di Zenif, ogni regno ha una storia unica,
+  plasmata dal paesaggio e dalle tradizioni del suo popolo. Le culture
+  cavalleresche di Rotia, la ricerca scientifica avanzata di Corargore e le
+  antiche usanze di Yonari si intrecciano in una complessa rete di alleanze,
+  conflitti e scoperte. Mentre le lande glaciali di Hylweln e i deserti di
+  Asshara sfidano chiunque osi attraversarle, le imponenti montagne di Tomaryl
+  restano una roccaforte inespugnabile.
+</div>
+
+<div
+  class="row row-cols-1 row-cols-lg-2 justify-content-start justify-content-lg-between"
+>
+  <div class="col">
+    <div class="dropdown">
+      <p class="">
+        <button
+          type="button"
+          class="btn btnSty fs-5 dropdown-toggle"
+          (click)="isCollapsed = !isCollapsed"
+          [attr.aria-expanded]="!isCollapsed"
+          aria-controls="collapseExample"
+        >
+          Seleziona in base alla nazione
+        </button>
+      </p>
+      <div
+        #collapse="ngbCollapse"
+        [(ngbCollapse)]="isCollapsed"
+        class="dropdown-menu dropdown-menu-start colorDrop"
+        aria-labelledby="dropdownMenuButton"
+      >
+        <button
+          *ngFor="let nation of nationsName"
+          (click)="FilterGuild(nation); DropDownClose('first')"
+          class="dropdown-item"
+        >
+          {{ nation }}
+        </button>
+        <button
+          (click)="filteredGuilds = guilds; DropDownClose('first')"
+          class="dropdown-item"
+        >
+          Mostra tutte
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="dropdown">
+      <p class="">
+        <button
+          type="button"
+          class="btn btnSty fs-5 dropdown-toggle"
+          (click)="isCollapsed2 = !isCollapsed2"
+          [attr.aria-expanded]="!isCollapsed2"
+          aria-controls="collapseExample"
+        >
+          Ordina
+        </button>
+      </p>
+      <div
+        #collapse2="ngbCollapse"
+        [(ngbCollapse)]="isCollapsed2"
+        class="dropdown-menu dropdown-menu-start colorDrop"
+        aria-labelledby="dropdownMenuButton"
+      >
+        <button
+          (click)="OrderGuildByName(); DropDownClose('second')"
+          class="dropdown-item"
+        >
+          Alfabetico
+        </button>
+        <button
+          (click)="OrderEcoByPower(); DropDownClose('second')"
+          class="dropdown-item"
+        >
+          Potenza
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
   <div class="col my-3" *ngFor="let guild of filteredGuilds">
-    <div class="card d-flex flex-column h-100">
-      <app-single-guild [guild]="guild"></app-single-guild>
-      <a [routerLink]="['detail', guild.id]">Dettagli</a>
+    <div class="card d-flex flex-column h-100 p-2">
+      <h4 class="text-white">{{ guild.name }}</h4>
+      <a [routerLink]="['detail', guild.id]" class="btn btnSty">Dettagli</a>
     </div>
   </div>
 </div>

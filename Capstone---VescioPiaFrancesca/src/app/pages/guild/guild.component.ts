@@ -15,11 +15,14 @@ export class GuildComponent {
   nationsName: string[] = [];
   filteredGuilds: iGuild[] = [];
   guildsCopy: iGuild[] = [];
+  isCollapsed: boolean = true;
+  isCollapsed2: boolean = true;
   constructor(private guildSvc: GuildService, private nationSvc: NationsService) {}
   ngOnInit(): void {
 
     this.guildSvc.guilds$.subscribe((guilds) =>{
       this.guilds = guilds;
+      console.log(this.guilds);
       this.filteredGuilds = [...this.guilds]
       })
 
@@ -49,4 +52,15 @@ export class GuildComponent {
     this.filteredGuilds.sort((a, b) => a.name.localeCompare(b.name))
   }
 
+  OrderEcoByPower(): void {
+    this.filteredGuilds.sort((a, b) => a.power - b.power)
+  }
+
+  DropDownClose(dropdownType: 'first' | 'second'): void {
+    if (dropdownType === 'first') {
+      this.isCollapsed = true;
+    } else if (dropdownType === 'second') {
+      this.isCollapsed2 = true;
+    }
+  }
 }

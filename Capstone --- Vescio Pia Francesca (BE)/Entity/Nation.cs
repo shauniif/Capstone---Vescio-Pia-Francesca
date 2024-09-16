@@ -33,9 +33,9 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Entity
                     return string.Empty;
                 }
 
-                if (Description.Length > 75)
+                if (Description.Length > 50)
                 {
-                    return Description.Substring(0, 75) + "...";
+                    return Description.Substring(0, 50) + "...";
                 }
 
                 return Description;

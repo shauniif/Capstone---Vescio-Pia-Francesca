@@ -1,30 +1,30 @@
-<div class="">
-  <div class="imgBg py-3 d-flex justify-content-center align-items-center">
-    <p class="display-1 fst-italic colorText">Nazioni</p>
-  </div>
+<div class="imgBg py-3 d-flex justify-content-center align-items-center">
+  <p class="display-1 fst-italic colorText">Nazioni</p>
+</div>
 
-  <div class="mb-2 fst-italic text-white my-4">
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa, minus cum!
-    Doloremque consequuntur fuga voluptatum, repudiandae, vel animi odio
-    mollitia earum officia magni modi eaque officiis corporis quo dicta
-    incidunt? Lorem ipsum dolor sit amet consectetur adipisicing elit.
-    Recusandae, vel provident sunt ipsa at rerum, laborum, quo vero in nesciunt
-    voluptatum quia alias harum similique aspernatur magni dicta debitis? Natus!
-  </div>
+<div class="mb-2 fst-italic text-white my-4">
+  Le nazioni sono tanto diverse quanto affascinanti. Dalle gelide terre di
+  Uvarkh alle rigogliose foreste di Zenif, ogni regno ha una storia unica,
+  plasmata dal paesaggio e dalle tradizioni del suo popolo. Le culture
+  cavalleresche di Rotia, la ricerca scientifica avanzata di Corargore e le
+  antiche usanze di Yonari si intrecciano in una complessa rete di alleanze,
+  conflitti e scoperte. Mentre le lande glaciali di Hylweln e i deserti di
+  Asshara sfidano chiunque osi attraversarle, le imponenti montagne di Tomaryl
+  restano una roccaforte inespugnabile.
+</div>
 
-  <button (click)="OrderNationByName()" class="btn btnSty text-white">
-    Ordina in ordine alfabetico
-  </button>
+<button (click)="OrderNationByName()" class="btn btnSty text-white">
+  Ordina in ordine alfabetico
+</button>
 
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 cards">
-    <div class="col my-3" *ngFor="let nation of nations">
-      <div class="card d-flex flex-column h-100">
-        <app-single-nation [nation]="nation"></app-single-nation>
-        <div class="d-flex justify-content-center py-2">
-          <a [routerLink]="['detail', nation.id]" class="btn btnSty w-50"
-            >Dettagli</a
-          >
-        </div>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 cards">
+  <div class="col my-3" *ngFor="let nation of nations">
+    <div class="card d-flex flex-column h-100">
+      <app-single-nation [nation]="nation"></app-single-nation>
+      <div class="d-flex justify-content-center py-2">
+        <a [routerLink]="['detail', nation.id]" class="btn btnSty w-50"
+          >Dettagli</a
+        >
       </div>
     </div>
   </div>

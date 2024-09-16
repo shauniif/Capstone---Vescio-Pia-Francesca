@@ -101,10 +101,46 @@
         </main>
     </div>
     </div>
-    <footer class="footer text-muted bg-dark">
+    <footer class="foot text-muted bg-dark text-center text-lg-start bg-dark text-muted">
+        <div class="row m-0 py-4">
+
+            <div class="col-md-4 col-lg-4 mx-auto mb-2">
+                <h6 class="text-uppercase fw-bold mb-2 text-light fs-5">
+                    Zanthaverse
+                </h6>
+                <p class="small text-light">
+                    Gestisci nazioni, eventi e personaggi nel mondo di Zanthaverse e scopri nuove avventure.
+                </p>
+            </div>
+
+            <div class="col-md-4 col-lg-4 mx-auto mb-2">
+                <h6 class="text-uppercase fw-bold mb-2 text-light fs-5">Link Utili</h6>
+                <p class="small"><a class="text-light" asp-controller="Home" asp-action="Index" class="text-reset">Home</a></p>
+                <p class="small"><a class="text-light" asp-controller="Guild" asp-action="AllGuilds" class="text-reset">Gilde</a></p>
+                <p class="small"><a class="text-light" asp-controller="Character" asp-action="AllCharacters" class="text-reset">Personaggi</a></p>
+                <p class="small"><a class="text-light" asp-controller="Eco" asp-action="AllEcos" class="text-reset">Echi</a></p>
+            </div>
+
+            <div class="col-md-4 col-lg-4 mx-auto mb-2">
+                <h6 class="text-uppercase fw-bold mb-2 text-light fs-5">Account</h6>
+                @if (!(User.Identity?.IsAuthenticated ?? false))
+                {
+                    <p class="small"><a class="text-light" asp-controller="Auth" asp-action="Login" class="text-reset">Login</a></p>
+                    <p class="small"><a class="text-light" asp-controller="Auth" asp-action="Register" class="text-reset">Registrati</a></p>
+                }
+                @if (User.Identity?.IsAuthenticated ?? false)
+                {
+                    <p class="small"><a class="text-light" asp-controller="Auth" asp-action="Profile" class="text-reset">Profilo</a></p>
+                }
+            </div>
+        </div>
+
         
-            &copy; 2024 - Capstone_____Vescio_Pia_Francesca__BE_ - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        
+
+        <!-- Copyright -->
+        <div class="text-center p-1 text-light">
+            © 2024 Copyright: Zanthaverse
+        </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

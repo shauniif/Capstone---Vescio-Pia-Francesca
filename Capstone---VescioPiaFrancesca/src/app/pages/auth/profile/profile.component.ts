@@ -78,6 +78,12 @@ export class ProfileComponent implements OnInit{
       this.user.characters= this.user.characters.filter(c => c.id!== id);
     })
   }
+
+  logout() : void
+  {
+   this.authSvc.logout();
+  }
+
 }
 
 

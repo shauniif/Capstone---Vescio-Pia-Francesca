@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
   searchForm!: FormGroup;
   isCollapsed:boolean = true;
   showD: boolean = false;
+  showDProfile: boolean = false;
 
   user!: iUser | null;
   constructor(private authSvc:AuthService, private router: Router, private fb: FormBuilder) {}
@@ -43,7 +44,7 @@ export class HeaderComponent implements OnInit {
   }
 
 
-  Prova(): void {
+  Search(): void {
     let search = this.searchForm.get('search')?.value;
     console.log(search);
     this.router.navigate(['search/', search]);

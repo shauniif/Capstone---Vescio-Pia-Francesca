@@ -15,6 +15,7 @@
 }
 
 .inputSty {
+  width: 17.5em;
   border-color: rgba(255, 255, 255, 0.4);
   &:focus {
     border-color: rgba(255, 255, 255, 0.8);
@@ -22,3 +23,15 @@
     box-shadow: 0 0 0 0.2rem rgba(108, 121, 153, 0.8);
   }
 }
+
+
+.logo {
+  max-width: 3em;
+  height: auto;
+}
+
+.dropdown-item:hover{
+  background:  rgb(51, 111, 123, 1) ;
+}
+
+

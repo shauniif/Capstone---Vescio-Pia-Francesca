@@ -1,6 +1,6 @@
 <div>
   <div class="imgBg d-flex mb-3 justify-content-center align-items-center">
-    <p class="display-1 fst-italic">Echi</p>
+    <p class="display-1 fst-italic colorText">Echi</p>
   </div>
 
   <div class="my-3">
@@ -15,91 +15,100 @@
     </p>
   </div>
 
-  <div class="row justify-content-between">
-    <div class="col-auto dropdown">
-      <p class="">
-        <button
-          type="button"
-          class="btn btnSty fs-5 dropdown-toggle"
-          (click)="isCollapsed = !isCollapsed"
-          [attr.aria-expanded]="!isCollapsed"
-          aria-controls="collapseExample"
+  <div
+    class="row row-cols-1 row-cols-lg-2 justify-content-start justify-content-lg-between"
+  >
+    <div class="col">
+      <div class="dropdown">
+        <p class="">
+          <button
+            type="button"
+            class="btn btnSty fs-5 dropdown-toggle"
+            (click)="isCollapsed = !isCollapsed"
+            [attr.aria-expanded]="!isCollapsed"
+            aria-controls="collapseExample"
+          >
+            Seleziona in base alla nazione
+          </button>
+        </p>
+        <div
+          #collapse="ngbCollapse"
+          [(ngbCollapse)]="isCollapsed"
+          class="dropdown-menu dropdown-menu-start colorDrop"
+          aria-labelledby="dropdownMenuButton"
         >
-          Seleziona in base alla nazione
-        </button>
-      </p>
-      <div
-        #collapse="ngbCollapse"
-        [(ngbCollapse)]="isCollapsed"
-        class="dropdown-menu colorDrop"
-      >
-        <button
-          *ngFor="let nation of nationsName"
-          (click)="FilterEco(nation); DropDownClose('first')"
-          class="dropdown-item"
-        >
-          {{ nation }}
-        </button>
-        <button
-          (click)="filteredEcos = ecos; DropDownClose('first')"
-          class="dropdown-item"
-        >
-          Mostra tutte
-        </button>
-        <button
-          (click)="filteredEcos = EcosWithNoNation; DropDownClose('first')"
-          class="dropdown-item"
-        >
-          Mostra Nomadi
-        </button>
+          <button
+            *ngFor="let nation of nationsName"
+            (click)="FilterEco(nation); DropDownClose('first')"
+            class="dropdown-item"
+          >
+            {{ nation }}
+          </button>
+          <button
+            (click)="filteredEcos = ecos; DropDownClose('first')"
+            class="dropdown-item"
+          >
+            Mostra tutte
+          </button>
+          <button
+            (click)="filteredEcos = EcosWithNoNation; DropDownClose('first')"
+            class="dropdown-item"
+          >
+            Mostra Nomadi
+          </button>
+        </div>
       </div>
     </div>
 
-    <div class="col-auto dropdown">
-      <p class="">
-        <button
-          type="button"
-          class="btn btnSty fs-5 dropdown-toggle"
-          (click)="isCollapsed2 = !isCollapsed2"
-          [attr.aria-expanded]="!isCollapsed2"
-          aria-controls="collapseExample"
+    <div class="col">
+      <div class="dropdown">
+        <p class="">
+          <button
+            type="button"
+            class="btn btnSty fs-5 dropdown-toggle"
+            (click)="isCollapsed2 = !isCollapsed2"
+            [attr.aria-expanded]="!isCollapsed2"
+            aria-controls="collapseExample"
+          >
+            Ordina
+          </button>
+        </p>
+        <div
+          #collapse="ngbCollapse"
+          [(ngbCollapse)]="isCollapsed2"
+          class="dropdown-menu dropdown-menu-end colorDrop"
         >
-          Ordina
-        </button>
-      </p>
-      <div
-        #collapse="ngbCollapse"
-        [(ngbCollapse)]="isCollapsed2"
-        class="dropdown-menu colorDrop"
-      >
-        <button
-          (click)="OrderEcoByName(); DropDownClose('second')"
-          class="dropdown-item"
-        >
-          Ordina in ordine alfabeitco
-        </button>
-        <button
-          (click)="OrderEcoByPosition(); DropDownClose('second')"
-          class="dropdown-item"
-        >
-          Ordina in base al posizionamento
-        </button>
+          <button
+            (click)="OrderEcoByName(); DropDownClose('second')"
+            class="dropdown-item"
+          >
+            Alfabetico
+          </button>
+          <button
+            (click)="OrderEcoByPosition(); DropDownClose('second')"
+            class="dropdown-item"
+          >
+            Posizione
+          </button>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
-    <div class="col my-3" *ngFor="let eco of filteredEcos">
-      <div
-        class="card d-flex flex-column"
-        [ngStyle]="{ 'background-image': 'url(' + eco.pic + ')' }"
-      >
-        <div class="d-flex flex-column h-100">
-          <div class="card-body">
-            <h5 class="card-title">{{ eco.name }}</h5>
-            <a [routerLink]="['detail', eco.id]" class="btn btnSty p-1"
-              >Dettagli</a
-            >
+  <div>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+      <div class="col my-3" *ngFor="let eco of filteredEcos">
+        <div
+          class="card d-flex flex-column"
+          [ngStyle]="{ 'background-image': 'url(' + eco.pic + ')' }"
+        >
+          <div class="d-flex flex-column h-100">
+            <div class="card-body">
+              <h5 class="card-title">{{ eco.name }}</h5>
+              <a [routerLink]="['detail', eco.id]" class="btn btnSty p-1"
+                >Dettagli</a
+              >
+            </div>
           </div>
         </div>
       </div>

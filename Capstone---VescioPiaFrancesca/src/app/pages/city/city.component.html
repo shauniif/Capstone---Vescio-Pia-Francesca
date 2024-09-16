@@ -1,20 +1,90 @@
 <div class="imgBg my-3 d-flex justify-content-center align-items-center">
-  <p class="display-1 fst-italic">Città</p>
+  <p class="display-1 fst-italic colorText">Città</p>
 </div>
 
-<div>
-  <button *ngFor="let nation of nationsName" (click)="FilterCity(nation)">
-    {{ nation }}
-  </button>
-  <button (click)="filteredCities = cities">Mostra tutte</button>
-  <button (click)="OrderCitiesByName()">Ordine alfabetico</button>
+<div class="mb-2 fst-italic text-white my-4">
+  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa, minus cum!
+  Doloremque consequuntur fuga voluptatum, repudiandae, vel animi odio mollitia
+  earum officia magni modi eaque officiis corporis quo dicta incidunt? Lorem
+  ipsum dolor sit amet consectetur adipisicing elit. Recusandae, vel provident
+  sunt ipsa at rerum, laborum, quo vero in nesciunt voluptatum quia alias harum
+  similique aspernatur magni dicta debitis? Natus!
+</div>
+
+<div
+  class="row row-cols-1 row-cols-lg-2 justify-content-start justify-content-lg-between"
+>
+  <div class="col">
+    <div class="dropdown">
+      <p class="">
+        <button
+          type="button"
+          class="btn btnSty fs-5 dropdown-toggle"
+          (click)="isCollapsed = !isCollapsed"
+          [attr.aria-expanded]="!isCollapsed"
+          aria-controls="collapseExample"
+        >
+          Seleziona in base alla nazione
+        </button>
+      </p>
+      <div
+        #collapse="ngbCollapse"
+        [(ngbCollapse)]="isCollapsed"
+        class="dropdown-menu dropdown-menu-start colorDrop"
+        aria-labelledby="dropdownMenuButton"
+      >
+        <button
+          *ngFor="let nation of nationsName"
+          (click)="FilterCity(nation); DropDownClose('first')"
+          class="dropdown-item"
+        >
+          {{ nation }}
+        </button>
+        <button
+          (click)="filteredCities = cities; DropDownClose('first')"
+          class="dropdown-item"
+        >
+          Mostra tutte
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="dropdown">
+      <p class="">
+        <button
+          type="button"
+          class="btn btnSty fs-5 dropdown-toggle"
+          (click)="isCollapsed2 = !isCollapsed2"
+          [attr.aria-expanded]="!isCollapsed2"
+          aria-controls="collapseExample"
+        >
+          Ordina
+        </button>
+      </p>
+      <div
+        #collapse2="ngbCollapse"
+        [(ngbCollapse)]="isCollapsed2"
+        class="dropdown-menu dropdown-menu-start colorDrop"
+        aria-labelledby="dropdownMenuButton"
+      >
+        <button
+          (click)="OrderCitiesByName(); DropDownClose('second')"
+          class="dropdown-item"
+        >
+          Alfabetico
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
   <div class="col my-3" *ngFor="let city of filteredCities">
-    <div class="card d-flex flex-column h-100">
-      <app-single-city [city]="city"></app-single-city>
-      <a [routerLink]="['detail', city.id]">Dettagli</a>
+    <div class="card d-flex flex-column h-100 p-2">
+      <h4 class="card-title text-white">{{ city.name }}</h4>
+      <a [routerLink]="['detail', city.id]" class="btn btnSty">Dettagli</a>
     </div>
   </div>
 </div>

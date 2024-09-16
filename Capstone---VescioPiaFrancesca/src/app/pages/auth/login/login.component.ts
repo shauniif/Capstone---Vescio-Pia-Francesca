@@ -34,7 +34,7 @@ export class LoginComponent {
           {
             console.log(data)
         })
-        this.router.navigate([' '])
+        this.router.navigate([''])
       }
   }
 }

@@ -35,8 +35,8 @@ html {
     min-height: 87.6vh;
 }
 
-footer {
-    height: 7vh;
+.foot {
+    min-height: 7vh;
 }
 
 

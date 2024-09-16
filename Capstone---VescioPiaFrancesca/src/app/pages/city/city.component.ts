@@ -13,7 +13,8 @@ export class CityComponent implements OnInit {
   cities: iCity[] = [];
   nationsName: string[] = [];
   filteredCities: iCity[] = [];
-
+  isCollapsed: boolean = true;
+  isCollapsed2: boolean = true;
   constructor(private citySvc: CityService, private nationSvc: NationsService ) {}
 
   ngOnInit(): void {
@@ -22,6 +23,7 @@ export class CityComponent implements OnInit {
       this.filteredCities = [... this.cities]
   })
     this.getNationName();
+
 
   }
   getNationName(): void {
@@ -41,5 +43,13 @@ export class CityComponent implements OnInit {
 
   OrderCitiesByName(): void {
     this.filteredCities.sort((a, b) => a.name.localeCompare(b.name))
+  }
+
+  DropDownClose(dropdownType: 'first' | 'second'): void {
+    if (dropdownType === 'first') {
+      this.isCollapsed = true;
+    } else if (dropdownType === 'second') {
+      this.isCollapsed2 = true;
+    }
   }
 }
