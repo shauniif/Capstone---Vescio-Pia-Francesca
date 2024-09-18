@@ -88,4 +88,6 @@ export class AuthService {
     UpdateUser(id:number,currUser: iUser) : Observable<iUser>{
     return this.http.put<iUser>(`${this.authUrl}/${id}`, currUser)
   }
+
+
 }

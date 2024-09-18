@@ -10,11 +10,12 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
     public class ArticleApiController : ControllerBase
     {
         private readonly IArticleService _articleSvc;
+        private readonly IAuthService _authSvc;
 
-        public ArticleApiController(IArticleService articleSvc)
+        public ArticleApiController(IArticleService articleSvc, IAuthService authSvc)
         {
             _articleSvc = articleSvc;
-
+            _authSvc = authSvc;
         }
 
         [HttpGet]
@@ -36,6 +37,15 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
             var article = await _articleSvc.Read(id);
             var articleSel = await _articleSvc.GetArticle(article.Id);
             return Ok(articleSel);
+        }
+
+        [HttpGet("author/{id}")]
+
+        public async Task<IActionResult> GetAuthor(int id)
+        {
+            var author = await _authSvc.GetById(id);
+            var authorSel = await _authSvc.CreateUser(author.Id);
+            return Ok(authorSel);
         }
     }
 }

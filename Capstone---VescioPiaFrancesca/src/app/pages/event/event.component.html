@@ -1,41 +1,97 @@
-<ngb-carousel>
-  <ng-template ngbSlide *ngFor="let currEvent of pastEvents">
+<ngb-carousel
+  [interval]="3000"
+  [pauseOnHover]="true"
+  [showNavigationArrows]="true"
+  [showNavigationIndicators]="true"
+  class="slide"
+>
+  <ng-template ngbSlide>
+    <div class="picsum-img-wrapper">
+      <img src="../../../assets/img/Events.png" alt="Event cover" />
+    </div>
+    <div class="carousel-caption">
+      <h3>Eventi</h3>
+    </div>
+  </ng-template>
+
+  <ng-template ngbSlide *ngFor="let currEvent of futureEvents">
     <div class="picsum-img-wrapper">
       <img [src]="currEvent.cover" alt="Event cover" />
     </div>
     <div class="carousel-caption">
       <h3>{{ currEvent.name }}</h3>
-      <p>{{ currEvent.description }}</p>
+      <div>
+        <p
+          class="badge badge-fr bg-f text-white fst-italic fs-5 d-none d-sm-block px-sm-0 py-sm-3"
+        >
+          In arrivo
+        </p>
+        <p class="badge bg-f text-white fst-italic fs-5 d-sm-none">In arrivo</p>
+      </div>
     </div>
   </ng-template>
 </ngb-carousel>
 
-<p>PASSATO</p>
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
-  <div class="col my-3" *ngFor="let event of pastEvents">
-    <div class="card d-flex flex-column h-100">
-      <app-single-event [event]="event"></app-single-event>
-      <a [routerLink]="['detail', event.id]">Dettagli</a>
+<div class="row mt-4">
+  <div class="col-12 col-lg-10">
+    <h4 class="fw-bold text-white text-center">Eventi Correnti</h4>
+    <div class="row row-cols-1 row-cols-lg-3">
+      <div class="col my-3" *ngFor="let event of displayedCurrEvents">
+        <div class="card d-flex flex-column h-100">
+          <div class="d-flex flex-column h-100 text-white">
+            <img [src]="event.cover" class="card-img-top" alt="Nation_image" />
+            <div class="card-body flex-grow-1">
+              <h5 class="card-title">{{ event.name }}</h5>
+              <div>
+                <p class="badge badge-pr bg-pr text-white fst-italic">
+                  Ora in corso
+                </p>
+              </div>
+              <a [routerLink]="['detail', event.id]" class="btn btnSty"
+                >Dettagli</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center align-content-center">
+      <button
+        (click)="toggleShowMore('first')"
+        class="btn btnShowMore text-white"
+      >
+        {{ showMore ? "Mostra meno" : "Mostra più" }}
+      </button>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-2">
+    <h4 class="fw-bold text-white text-center">Eventi passati</h4>
+    <div class="row row-cols-1">
+      <div class="col my-3" *ngFor="let event of displayedPastEvents">
+        <div class="card d-flex flex-column h-100">
+          <div class="d-flex flex-column h-100 text-white">
+            <img [src]="event.cover" class="card-img-top" alt="Nation_image" />
+            <div class="card-body flex-grow-1">
+              <h5 class="card-title">{{ event.name }}</h5>
+              <div>
+                <p class="badge badge-pa bg-pa text-white fst-italic">Finito</p>
+              </div>
+              <a [routerLink]="['detail', event.id]" class="btn btnSty"
+                >Dettagli</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <button
+        (click)="toggleShowMore('second')"
+        class="btn btnShowMore text-white"
+      >
+        {{ showMore2 ? "Mostra meno" : "Mostra più" }}
+      </button>
     </div>
   </div>
 </div>
 
-<p>PRESENTE</p>
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
-  <div class="col my-3" *ngFor="let event of currEvents">
-    <div class="card d-flex flex-column h-100">
-      <app-single-event [event]="event"></app-single-event>
-      <a [routerLink]="['detail', event.id]">Dettagli</a>
-    </div>
-  </div>
-</div>
-
-<p>FUTURO</p>
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
-  <div class="col my-3" *ngFor="let event of futureEvents">
-    <div class="card d-flex flex-column h-100">
-      <app-single-event [event]="event"></app-single-event>
-      <a [routerLink]="['detail', event.id]">Dettagli</a>
-    </div>
-  </div>
-</div>
+<app-cooming-soon></app-cooming-soon>

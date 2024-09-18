@@ -1,8 +1,23 @@
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
-  <div class="col my-3" *ngFor="let article of articles">
-    <div class="card d-flex flex-column h-100">
+<h4 class="text-white my-4">L'articolo più importante</h4>
+
+<a [routerLink]="['detail', article.id]" class="text-decoration-none">
+  <div
+    class="imgBg py-5 d-flex justify-content-center align-items-center"
+    [ngStyle]="{ 'background-image': 'url(' + article.image + ')' }"
+  >
+    <p class="display-1 fst-italic text-light colorText">{{ article.title }}</p>
+  </div>
+</a>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 my-4">
+  <div class="col my-3" *ngFor="let article of articlesCopy">
+    <div class="card h-100 shadow-sm border-light">
       <app-single-article [article]="article"></app-single-article>
-      <a [routerLink]="['detail', article.id]">Dettagli</a>
+      <div class="card-body">
+        <a [routerLink]="['detail', article.id]" class="btn btn-primary"
+          >Dettagli</a
+        >
+      </div>
     </div>
   </div>
 </div>

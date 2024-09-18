@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { iArticle } from '../interfaces/i-article';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { iUser } from '../interfaces/i-user';
 
 @Injectable({
   providedIn: 'root'
@@ -30,4 +31,7 @@ export class ArticleService {
     return this.http.get<iArticle>(`${this.articleApi}/${id}`);
   }
 
+  GetAuthor(id: number): Observable<iUser> {
+    return this.http.get<iUser>(`${this.articleApi}/author/${id}`);
+  }
 }

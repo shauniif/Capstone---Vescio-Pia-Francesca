@@ -61,7 +61,7 @@
         </div>
         <div class="col d-flex justify-content-around">
           <p class="text-white fs-5">Data di nascita:</p>
-          <p class="text fs-5">{{ formattedDate }}</p>
+          <p class="text fs-5">{{ user.dateBirth | date : "dd/MM/yyyy" }}</p>
         </div>
         <div class="col d-flex justify-content-around">
           <p class="text-white fs-5">Username:</p>
@@ -95,11 +95,11 @@
         <div class="imgCard">
           <img class="card-img-top" [src]="character.image" />
         </div>
-        <div class="card-body text-center">
+        <div class="card-body text-center text">
           <p class="card-title">
             <span class="fw-bold text-white">Nome:</span> {{ character.name }}
           </p>
-          <p class="card-text">
+          <p class="card-text text">
             <span class="fw-bold text-white">Punteggio:</span>
             {{ character.score }}
           </p>

@@ -1,7 +1,7 @@
+
 import { Component, OnInit } from '@angular/core';
 import { iArticle } from '../../../interfaces/i-article';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { iUser } from '../../../interfaces/i-user';
 import { iComment } from '../../../interfaces/i-comment';
 import { ArticleService } from '../../../Services/article.service';
 import { ActivatedRoute } from '@angular/router';
@@ -9,6 +9,7 @@ import { CommentService } from '../../../Services/comment.service';
 
 import { ICommentCreate } from '../../../interfaces/i-comment-create';
 import { AuthService } from '../../auth/auth.service';
+import { iUser } from '../../../interfaces/i-user';
 
 @Component({
   selector: 'app-detail',
@@ -34,7 +35,17 @@ export class DetailComponent implements OnInit {
     this.route.params.subscribe((params:any) => {
       this.articleSvc.getArticle(params.id).subscribe(article => {
         this.article = article;
-        console.log("Articolo ricevuto:", this.article)
+        this.articleSvc.GetAuthor(article.author.id).subscribe(author =>
+          {
+            console.log(author)
+            this.article.author = author;
+          })
+        this.article.comments.forEach(comment => {
+          this.articleSvc.GetAuthor(comment.author.id).subscribe(author =>
+            {
+              comment.author = author;
+            })
+        })
       })
     })
 
@@ -76,7 +87,9 @@ export class DetailComponent implements OnInit {
 
         newComment.articleId = this.article.id;
         this.commentSvc.CreateComment(newComment).subscribe((comment) => {
-          console.log('Commento creato con successo:', comment);
+          this.articleSvc.GetAuthor(comment.author.id).forEach((author) => {
+            comment.author = author;
+          })
           this.article.comments.push(comment);
           this.createCommentForm.reset();
         })
@@ -98,7 +111,9 @@ export class DetailComponent implements OnInit {
           updatedComment.articleId = this.article.id;
       if(this.currComment == null) return
       this.commentSvc.UpdateComment(this.currComment?.id, updatedComment).subscribe((comment) => {
-        console.log('Commento aggiornato con successo:', comment);
+        this.articleSvc.GetAuthor(comment.author.id).forEach((author) => {
+          comment.author = author;
+        })
         this.article.comments = this.article.comments.map(c => c.id === comment.id? comment : c);
         this.currComment = null;
         this.createCommentForm.reset();

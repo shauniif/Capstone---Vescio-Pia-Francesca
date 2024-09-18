@@ -6,6 +6,7 @@ import { SingleCityComponent } from './single-city/single-city.component';
 import { SingleGuildComponent } from './single-guild/single-guild.component';
 import { SingleEventComponent } from './single-event/single-event.component';
 import { SingleArticleComponent } from './single-article/single-article.component';
+import { CoomingSoonComponent } from './cooming-soon/cooming-soon.component';
 
 
 
@@ -16,7 +17,8 @@ import { SingleArticleComponent } from './single-article/single-article.componen
     SingleCityComponent,
     SingleGuildComponent,
     SingleEventComponent,
-    SingleArticleComponent
+    SingleArticleComponent,
+    CoomingSoonComponent
   ],
   imports: [
     CommonModule
@@ -28,7 +30,8 @@ import { SingleArticleComponent } from './single-article/single-article.componen
     SingleCityComponent,
     SingleGuildComponent,
     SingleEventComponent,
-    SingleArticleComponent
+    SingleArticleComponent,
+    CoomingSoonComponent
   ]
 })
 export class SharedModule { }

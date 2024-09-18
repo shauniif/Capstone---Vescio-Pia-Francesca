@@ -20,15 +20,6 @@ export class ProfileComponent implements OnInit{
   ngOnInit(): void {
   this.authSvc.user$.subscribe(user => {
       if(user) this.user = user;
-      let date = new Date(this.user.dateBirth);
-
-
-      let day = date.getDate().toString().padStart(2, '0');
-      let month = (date.getMonth() + 1).toString().padStart(2, '0');
-      let year = date.getFullYear();
-
-
-      this.formattedDate = `${day}-${month}-${year}`;
 
       this.characterSvc.GetMyCharacter(this.user.id).subscribe(characters => {
         this.user.characters = characters;

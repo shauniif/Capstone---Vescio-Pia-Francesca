@@ -17,7 +17,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
 
         [HttpGet]
         public async Task<IActionResult> AllEvents()
-        {
+            {
             var events = await _eventSvc.GetAll();
             return Ok(events);
         }

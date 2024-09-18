@@ -1,0 +1,93 @@
+.bg {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5em;
+}
+
+.bgImage {
+  background-size: cover;
+  height: 30em;
+  position: relative;
+  width: 100%;
+  box-shadow: 0 15px 25px rgba(129, 124, 124, 0.2);
+}
+
+
+.colorText {
+  color:  rgb(255, 255, 255);
+  text-shadow:
+  2px 2px 0px black,
+  -2px 2px 0px black,
+  2px -2px 0px black,
+  -2px -2px 0px black;
+}
+
+
+
+.text {
+  text-align: justify;
+}
+
+.comment-sec {
+  margin: 1em 3em 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.author-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+
+
+.comment-content {
+  margin: 0;
+  color: #e0d9d9;
+}
+
+.btn-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.btn-group .btn {
+  margin-bottom: 0.5rem;
+}
+
+
+.btnDelete {
+  background-color: rgba(255, 127, 80, 0.7);
+  &:hover {
+    background-color: rgba(255, 127, 80, 1);
+  }
+}
+
+.btnModify {
+  background-color: rgba(255, 255, 153, 0.7);
+  &:hover {
+    background-color: rgba(255, 255, 153, 1);
+  }
+}
+
+.btnConfirm {
+  background-color: rgba(152, 255, 152, 0.6);
+  &:hover {
+    background-color: rgba(152, 255, 152, 1);
+  }
+}
+
+.author-info {
+  display: flex;
+  align-items: center;
+}
+
+.publication-date {
+  margin: 0;
+  color: rgb(212, 144, 202)
+}
+
+.contentSty {
+  word-wrap: break-word;
+}

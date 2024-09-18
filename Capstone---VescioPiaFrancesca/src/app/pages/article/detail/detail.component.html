@@ -1,70 +1,149 @@
-<div *ngIf="article">
-  <app-single-article [article]="article"></app-single-article>
-  <div *ngFor="let comment of article.comments">
-    <p class="card-text">
-      <span class="fw-bold"></span>
-      {{ comment.author.username }}: {{ comment.content }}
-    </p>
-
-    <div *ngIf="comment.author.username == currentUserLog?.username">
-      <button
-        type="button"
-        (click)="PrepareToUpdate(comment.id)"
-        class="btn btn-danger"
-      >
-        Modfica
-      </button>
-
-      <button
-        type="button"
-        (click)="DeleteComment(comment.id)"
-        class="btn btn-danger"
-      >
-        Cancella
-      </button>
+<div class="bg pb-5">
+  <div *ngIf="article">
+    <div
+      [ngStyle]="{ 'background-image': 'url(' + article.image + ')' }"
+      class="bgImage d-flex justify-content-center align-items-center"
+    >
+      <p class="display-1 fst-italic colorText">{{ article.title }}</p>
     </div>
-    <div *ngIf="currComment">
-      <form
-        [formGroup]="updateCommentForm"
-        *ngIf="currComment.id == comment.id"
-      >
+
+    <div class="author-info d-flex align-items-center ps-5 mt-2">
+      <img [src]="article.author.image" class="author-img" alt="Author Image" />
+      <div class="ms-3">
+        <p class="fw-bold m-0 text-white">
+          {{ article.author.firstName }} {{ article.author.lastName }}
+        </p>
+        <p class="publication-date">
+          {{ article.publicationDate | date : "dd/MM/yyyy" }}
+        </p>
+      </div>
+    </div>
+
+    <div class="px-5 mt-4 text">
+      <p class="text-white contentSty">
+        {{ article.content }}
+      </p>
+    </div>
+
+    <p class="display-5 text-white ps-5 mb-4">Sezione commenti:</p>
+    <div class="mt-2">
+      <div *ngFor="let comment of article.comments" class="comment-sec pb-3">
+        <div class="d-flex align-items-start">
+          <img
+            [src]="comment.author.image"
+            alt="Author Image"
+            class="author-img"
+          />
+          <div class="ml-3 flex-grow-1">
+            <p class="text-white fw-bold ps-3">
+              {{ comment.author.firstName }} {{ comment.author.lastName }}
+            </p>
+            <p class="comment-content ps-3">{{ comment.content }}</p>
+          </div>
+          <div
+            *ngIf="comment.author.username === currentUserLog?.username"
+            class="btn-group ml-2"
+          >
+            <button
+              type="button"
+              (click)="PrepareToUpdate(comment.id)"
+              class="btn btnModify btn-sm"
+              aria-label="Edit Comment"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-pencil-square"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+                />
+                <path
+                  fill-rule="evenodd"
+                  d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"
+                />
+              </svg>
+            </button>
+            <button
+              type="button"
+              (click)="DeleteComment(comment.id)"
+              class="btn btnDelete btn-sm"
+              aria-label="Delete Comment"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-trash-fill"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div *ngIf="currComment">
+          <form
+            [formGroup]="updateCommentForm"
+            *ngIf="currComment.id == comment.id"
+            class="mt-3"
+          >
+            <input
+              type="text"
+              formControlName="content"
+              class="form-control mb-2"
+              placeholder="Modifica il commento..."
+            />
+            <span
+              *ngIf="isTouchedInvalid(updateCommentForm, 'content')"
+              class="text-danger"
+              >Devi inserire il commento</span
+            >
+            <button
+              type="submit"
+              (click)="UpdateComment()"
+              class="btn btnConfirm btn-sm"
+              [disabled]="updateCommentForm.invalid"
+            >
+              Modifica
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="display-5 text-white ps-5 my-4">Commenta:</p>
+  <form [formGroup]="createCommentForm" *ngIf="!currComment" class="my-5">
+    <div class="form-group row flex-column flex-sm-row px-5">
+      <div class="col">
         <input
           type="text"
           formControlName="content"
           class="form-control"
           placeholder="Scrivi un commento..."
         />
-        <span *ngIf="isTouchedInvalid(updateCommentForm, 'content')"
+        <span *ngIf="isTouchedInvalid(createCommentForm, 'content')"
           >Devi inserire il commento</span
         >
-
+      </div>
+      <div class="col">
         <button
           type="submit"
-          (click)="UpdateComment()"
-          [disabled]="updateCommentForm.invalid"
+          (click)="CreateComment()"
+          [disabled]="createCommentForm.invalid"
+          class="btn btnConfirm"
         >
-          Modifica
+          Commenta
         </button>
-      </form>
+      </div>
     </div>
-  </div>
-  <!-- Form for create the comment -->
-  <form [formGroup]="createCommentForm" *ngIf="!currComment">
-    <input
-      type="text"
-      formControlName="content"
-      class="form-control"
-      placeholder="Scrivi un commento..."
-    />
-    <span *ngIf="isTouchedInvalid(createCommentForm, 'content')"
-      >Devi inserire il commento</span
-    >
-    <button
-      type="submit"
-      (click)="CreateComment()"
-      [disabled]="createCommentForm.invalid"
-    >
-      Commenta
-    </button>
   </form>
 </div>
