@@ -25,46 +25,41 @@
   </div>
   <div class="col-12 col-lg-8">
     <h2 class="fst-italic text-white">Cos'è Zantha?</h2>
-    <p class="text-white">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo, eum nisi?
-      Mollitia alias sit, obcaecati provident, impedit non dignissimos saepe
-      deserunt excepturi, beatae voluptas placeat odio. Amet deserunt neque
-      facere! Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
-      vitae possimus ipsa sapiente provident fuga iste aut debitis fugiat dolore
-      repudiandae reprehenderit id, dolorem officia molestias expedita non ipsam
-      quia. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit
-      eveniet repudiandae sapiente magni, alias perferendis cum laboriosam, eos
-      deserunt illo, molestias iusto ex enim vero? Nobis expedita quidem odit
-      voluptatibus!
+    <p class="text-white fs-5">
+      <span>
+        Zantha è un mondo a forma di anello, dove la magia scorre abbondante,
+        provenendo da misteriose fonti celesti e arcane.
+      </span>
+      <span>
+        In questo universo, creature di ogni tipo e origine utilizzano la magia
+        per modellare il proprio destino.
+      </span>
+      <span>
+        Il pianeta è suddiviso in due grandi regioni: la Fascia Interna, con un
+        ciclo giorno-notte estremamente breve, e la Fascia Esterna, che gode di
+        una maggiore alternanza tra luce e oscurità.
+      </span>
+      <span>
+        Le due fasce sono separate da una catena montuosa imponente, superabile
+        solo attraverso due passaggi difficili e intrisi di antiche leggende.
+      </span>
     </p>
   </div>
 </div>
 
 <div class="row row-cols-1 row-cols-lg-2 mt-5">
-  <div class="col">
+  <div class="col text-white fs-5">
     <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo, eum nisi?
-      Mollitia alias sit, obcaecati provident, impedit non dignissimos saepe
-      deserunt excepturi, beatae voluptas placeat odio. Amet deserunt neque
-      facere! Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
-      vitae possimus ipsa sapiente provident fuga iste aut debitis fugiat dolore
-      repudiandae reprehenderit id, dolorem officia molestias expedita non ipsam
-      quia. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit
-      eveniet repudiandae sapiente magni, alias perferendis cum laboriosam, eos
-      deserunt illo, molestias iusto ex enim vero? Nobis expedita quidem odit
-      voluptatibus!
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo, eum nisi?
-      Mollitia alias sit, obcaecati provident, impedit non dignissimos saepe
-      deserunt excepturi, beatae voluptas placeat odio. Amet deserunt neque
-      facere! Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
-      vitae possimus ipsa sapiente provident fuga iste aut debitis fugiat dolore
-      repudiandae reprehenderit id, dolorem officia molestias expedita non ipsam
-      quia. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit
-      eveniet repudiandae sapiente magni, alias perferendis cum laboriosam, eos
-      deserunt illo, molestias iusto ex enim vero? Nobis expedita quidem odit
-      voluptatibus!
+      Ramaol, il continente più vasto e antico dal punto di vista geologico, è
+      tuttavia quello in cui la civilizzazione ha messo radici solo
+      recentemente, in gran parte grazie a un'ondata massiccia di immigrazione.
+      Un tempo popolato esclusivamente da tribù native orchesche, oggi Ramaol è
+      un crocevia di culture e ambienti diversi. Le sue terre spaziano dalle
+      intricate e misteriose foreste di Zenif agli sterminati deserti di
+      Asshara, fino alle tundre perennemente gelide di Uvarkh. Inoltre, tra i
+      continenti della Fascia Esterna, Ramaol si distingue per il suo avanzato
+      sviluppo tecnologico, che ha portato a un sorprendente progresso
+      scientifico e magico.
     </p>
   </div>
   <div class="col">
@@ -72,8 +67,73 @@
   </div>
 </div>
 
-<div class="row row-cols-1 row-cols-lg-3 mt-5">
-  <div class="col">Carosello Immagini Sessioni</div>
-  <div class="col">Carosello Articoli</div>
-  <div class="col">Carosello Eventi</div>
+<div class="row row-cols-1 row-cols-lg-3 my-5">
+  <div class="col">
+    <h4 class="text-white">Ambientazioni del mondo</h4>
+    <ngb-carousel>
+      <ng-template ngbSlide *ngFor="let img of images">
+        <div class="picsum-img-wrapper">
+          <img [src]="img.src" alt="Event cover" />
+        </div>
+        <div class="carousel-caption">
+          <h3>{{ img.name }}</h3>
+        </div>
+      </ng-template>
+    </ngb-carousel>
+  </div>
+  <div class="col">
+    <h4 class="text-white">Articoli sulle campagne</h4>
+    <ngb-carousel>
+      <ng-template ngbSlide *ngFor="let article of articles">
+        <div class="picsum-img-wrapper">
+          <div *ngIf="isLoggedIn">
+            <a routerLink="/article">
+              <img [src]="article.image" alt="Event cover" />
+            </a>
+          </div>
+          <div *ngIf="!isLoggedIn">
+            <img [src]="article.image" alt="Event cover" />
+          </div>
+        </div>
+        <div class="carousel-caption">
+          <h3>{{ article.title }}</h3>
+        </div>
+      </ng-template>
+    </ngb-carousel>
+  </div>
+  <div class="col">
+    <h4 class="text-white">Eventi nel mondo</h4>
+    <ngb-carousel>
+      <ng-template ngbSlide *ngFor="let event of events">
+        <div class="picsum-img-wrapper">
+          <div *ngIf="isLoggedIn">
+            <a routerLink="/event">
+              <img [src]="event.cover" alt="Event cover" />
+            </a>
+          </div>
+          <div *ngIf="!isLoggedIn">
+            <img [src]="event.cover" alt="Event cover" />
+          </div>
+        </div>
+        <div class="carousel-caption">
+          <h3>{{ event.name }}</h3>
+        </div>
+      </ng-template>
+    </ngb-carousel>
+  </div>
+</div>
+
+<div *ngIf="!isLoggedIn" class="bg pt-1 mt-5">
+  <h4 class="text-center mt-4 text-white">Vuoi saperne di più?</h4>
+  <div
+    class="row row-cols-1 row-cols-sm-2 row-cols-md-3 gy-3 row-cols-lg-4 mt-1 justify-content-center text-center p-4"
+  >
+    <div class="col">
+      <a routerLink="/auth/register" class="btn login">Registrati</a>
+    </div>
+
+    <div class="col-12">
+      <a routerLink="/auth/login" class="btn register">Accedi</a>
+    </div>
+  </div>
 </div>

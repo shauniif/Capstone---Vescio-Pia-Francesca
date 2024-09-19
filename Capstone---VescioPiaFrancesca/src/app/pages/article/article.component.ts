@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { iArticle } from '../../interfaces/i-article';
 import { ArticleService } from '../../Services/article.service';
+import { iUser } from '../../interfaces/i-user';
 
 @Component({
   selector: 'app-article',
@@ -13,10 +14,21 @@ export class ArticleComponent implements OnInit {
   articles: iArticle[] = [];
   articlesCopy: iArticle[] = [];
   article!: iArticle
+  isCollapsed: boolean = true;
+  authors: iUser[] = [];
   constructor(private articleSvc: ArticleService) {}
   ngOnInit(): void {
     this.articleSvc.articles$.subscribe((articles) => {
       this.articles = articles;
+      this.articles.forEach(article => {
+        this.articleSvc.GetAuthor(article.author.id).subscribe(author => {
+          this.article.author = author;
+          if(!this.authors.find(a => a.id === author.id)) {
+            this.authors.push(author);
+          }
+
+        })
+      });
       this.articlesCopy = [...this.articles];
       this.article = this.getRandomArticle();
     });
@@ -32,4 +44,19 @@ export class ArticleComponent implements OnInit {
     const [randomArticle] = this.articlesCopy.splice(randomIndex, 1);
     return randomArticle;
   }
+
+  OrderByTitle(): void {
+    this.articlesCopy.sort((a, b) => a.title.localeCompare(b.title))
+  }
+
+  OrderByDate(): void {
+    this.articlesCopy.sort((a, b) => a.publicationDate.localeCompare(b.publicationDate))
+  }
+
+
+
+  DropDownClose(): void {
+      this.isCollapsed = true;
+  }
+
 }

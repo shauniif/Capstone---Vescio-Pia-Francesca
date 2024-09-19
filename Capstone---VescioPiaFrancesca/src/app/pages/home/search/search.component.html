@@ -7,32 +7,18 @@
     </div>
   </div>
   <div *ngIf="!isLoading">
-    <div *ngIf="nations.length > 0">
-      <h4>Nazioni trovate con questo risultato: {{ nations.length }}</h4>
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
-        <div class="col my-3" *ngFor="let nation of nations">
+    <div *ngIf="cities.length > 0">
+      <h4>Città trovate con questo risultato: {{ cities.length }}</h4>
+      <div
+        class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 pb-3"
+      >
+        <div class="col my-3" *ngFor="let city of cities">
           <a
-            [routerLink]="['/nation/detail', nation.id]"
+            [routerLink]="['/city/detail', city.id]"
             class="text-decoration-none"
           >
             <div class="card d-flex flex-column h-100">
-              <app-single-nation [nation]="nation"> </app-single-nation>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <div *ngIf="guilds.length > 0">
-      <h4>Gilde trovate con questo risultato: {{ guilds.length }}</h4>
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
-        <div class="col my-3" *ngFor="let guild of guilds">
-          <a
-            [routerLink]="['/guild/detail', guild.id]"
-            class="text-decoration-none"
-          >
-            <div class="card d-flex flex-column h-100">
-              <app-single-guild [guild]="guild"></app-single-guild>
+              <app-single-city [city]="city"></app-single-city>
             </div>
           </a>
         </div>
@@ -55,24 +41,39 @@
       </div>
     </div>
 
-    <div *ngIf="cities.length > 0">
-      <h4>Città trovate con questo risultato: {{ cities.length }}</h4>
-      <div
-        class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 pb-3"
-      >
-        <div class="col my-3" *ngFor="let city of cities">
+    <div *ngIf="guilds.length > 0">
+      <h4>Gilde trovate con questo risultato: {{ guilds.length }}</h4>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+        <div class="col my-3" *ngFor="let guild of guilds">
           <a
-            [routerLink]="['/city/detail', city.id]"
+            [routerLink]="['/guild/detail', guild.id]"
             class="text-decoration-none"
           >
             <div class="card d-flex flex-column h-100">
-              <app-single-city [city]="city"></app-single-city>
+              <app-single-guild [guild]="guild"></app-single-guild>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="nations.length > 0">
+      <h4>Nazioni trovate con questo risultato: {{ nations.length }}</h4>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+        <div class="col my-3" *ngFor="let nation of nations">
+          <a
+            [routerLink]="['/nation/detail', nation.id]"
+            class="text-decoration-none"
+          >
+            <div class="card d-flex flex-column h-100">
+              <app-single-nation [nation]="nation"> </app-single-nation>
             </div>
           </a>
         </div>
       </div>
     </div>
   </div>
+
   <div
     *ngIf="
       cities.length == 0 &&

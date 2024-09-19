@@ -91,7 +91,7 @@
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
   <div class="col my-3" *ngFor="let guild of filteredGuilds">
     <div class="card d-flex flex-column h-100 p-2">
-      <h4 class="text-white">{{ guild.name }}</h4>
+      <h4 class="text-white flex-grow-1">{{ guild.name }}</h4>
       <a [routerLink]="['detail', guild.id]" class="btn btnSty">Dettagli</a>
     </div>
   </div>

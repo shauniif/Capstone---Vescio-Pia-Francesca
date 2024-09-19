@@ -1,32 +1,69 @@
-<footer
-  class="d-flex flex-wrap justify-content-between align-items-center py-3 bg-dark"
->
-  <p class="col-md-4 mb-0 text-light">© 2024 Company, Inc</p>
-
-  <a
-    href="/"
-    class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
-  >
-    <svg class="bi me-2" width="40" height="32">
-      <use xlink:href="#bootstrap"></use>
-    </svg>
-  </a>
-
-  <ul class="nav col-md-4 justify-content-end">
-    <li class="nav-item">
-      <a href="#" class="nav-link px-2 text-light">Home</a>
-    </li>
-    <li class="nav-item">
-      <a href="#" class="nav-link px-2 text-light">Features</a>
-    </li>
-    <li class="nav-item">
-      <a href="#" class="nav-link px-2 text-light">Pricing</a>
-    </li>
-    <li class="nav-item">
-      <a href="#" class="nav-link px-2 text-light">FAQs</a>
-    </li>
-    <li class="nav-item">
-      <a href="#" class="nav-link px-2 text-light">About</a>
-    </li>
-  </ul>
+<footer class="footer bg-dark text-light py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h5>Esplora Zantha</h5>
+        <ul class="list-unstyled">
+          <li><a routerLink="" class="text-light">Home</a></li>
+          <li><a routerLink="/article" class="text-light">Articoli</a></li>
+          <li><a routerLink="/guild" class="text-light">Gilde</a></li>
+          <li><a routerLink="/nation" class="text-light">Nazioni</a></li>
+          <li><a routerLink="/faq" class="text-light">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <h5>Contatti</h5>
+        <ul class="list-unstyled">
+          <li>
+            <span class="d-block"
+              >Vuoi aiutare ad ampliare il mondo di Zantha?</span
+            >
+            Scrivici:
+            <a href="mailto:info@zantha.com" class="text-light"
+              >info&#64;zantha.com</a
+            >
+          </li>
+          <li>
+            Seguici sui Social:
+            <a
+              target="_blank"
+              href="https://www.tiktok.com/@zanthaverse?lang=it-IT"
+              class="text-light mx-1"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-tiktok"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3z"
+                />
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <div *ngIf="!isLoggedIn">
+          <h5>Scopri di più</h5>
+          <p>Immergiti nella magia e nei misteri del mondo di Zantha.</p>
+          <a routerLink="/auth/login" class="btn btn-light btn-sm"
+            >Inizia ora</a
+          >
+        </div>
+        <div *ngIf="isLoggedIn">
+          <h5>Scopri di più</h5>
+          <p>Immergiti nella magia e nei misteri del mondo di Zantha.</p>
+          <a routerLink="/auth/login" class="btn btn-light btn-sm"
+            >Inizia ora</a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-4">
+      <small>© 2024 Zantha. All Rights Reserved.</small>
+    </div>
+  </div>
 </footer>

@@ -1,0 +1,40 @@
+<div class="pt-3">
+  <div class="bg text-white pt-4">
+    <h2 class="display-2 text-center">FAQ - Domande Frequenti</h2>
+
+    <h3>Funzionalità per gli Utenti</h3>
+
+    <p>
+      <button
+        type="button"
+        class="btn btn-outline-primary ms-2"
+        (click)="isCollapsed = !isCollapsed"
+        [attr.aria-expanded]="!isCollapsed"
+        aria-controls="collapseExample"
+      >
+        Funzionalità per gli Utenti
+      </button>
+    </p>
+    <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+      <div class="card">
+        <div class="card-body">
+          <h5>Cosa può fare un utente registrato?</h5>
+          <p>
+            Un utente registrato può partecipare agli eventi del mondo di
+            Zantha, unirsi a una gilda, interagire con altri giocatori e leggere
+            articoli esclusivi sulla lore.
+          </p>
+
+          <h5>Come posso unirmi a una gilda?</h5>
+          <p>
+            Per unirti a una gilda, vai alla sezione "Gilde", scegli quella che
+            ti interessa. Vai nella sezione del tuo profilo in altro a destra.
+            Da lì vai alla sezione
+            <span class="text">crea un nuovo personaggio</span> e seleziona la
+            gilda che vuoi unirti.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

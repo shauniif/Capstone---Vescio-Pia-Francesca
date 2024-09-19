@@ -1,23 +1,85 @@
-<h4 class="text-white my-4">L'articolo più importante</h4>
-
 <a [routerLink]="['detail', article.id]" class="text-decoration-none">
   <div
     class="imgBg py-5 d-flex justify-content-center align-items-center"
     [ngStyle]="{ 'background-image': 'url(' + article.image + ')' }"
   >
-    <p class="display-1 fst-italic text-light colorText">{{ article.title }}</p>
+    <div class="infArticle">
+      <p class="display-1 fst-italic text-light colorText mb-0">
+        {{ article.title }}
+      </p>
+      <p class="text-white mb-0" *ngIf="article.author">
+        By {{ article.author.firstName }} {{ article.author.lastName }}
+      </p>
+      <p class="text-white">
+        {{ article.publicationDate | date : "dd-MM-yyyy" }}
+      </p>
+    </div>
   </div>
 </a>
 
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 my-4">
-  <div class="col my-3" *ngFor="let article of articlesCopy">
-    <div class="card h-100 shadow-sm border-light">
-      <app-single-article [article]="article"></app-single-article>
-      <div class="card-body">
-        <a [routerLink]="['detail', article.id]" class="btn btn-primary"
-          >Dettagli</a
+<div
+  class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-2 justify-content-start justify-content-lg-between mt-3"
+>
+  <div class="col">
+    <div class="dropdown">
+      <p class="mb-1">
+        <button
+          type="button"
+          class="btn btnSty fs-5 dropdown-toggle"
+          (click)="isCollapsed = !isCollapsed"
+          [attr.aria-expanded]="!isCollapsed"
+          aria-controls="collapseExample"
         >
+          Ordina
+        </button>
+      </p>
+      <div
+        #collapse="ngbCollapse"
+        [(ngbCollapse)]="isCollapsed"
+        class="dropdown-menu dropdown-menu-end colorDrop"
+      >
+        <button (click)="OrderByTitle(); DropDownClose()" class="dropdown-item">
+          Alfabetico
+        </button>
+        <button (click)="OrderByDate(); DropDownClose()" class="dropdown-item">
+          Data Pubblicazione
+        </button>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="row my-4">
+  <div class="col-12 col-md-9">
+    <div class="row row-cols-1 row-cols-md-3">
+      <div class="col my-3" *ngFor="let article of articlesCopy">
+        <app-single-article [article]="article"></app-single-article>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-3">
+    <h4 class="text-white">Autori più attivi:</h4>
+    <div *ngFor="let author of authors">
+      <a
+        [routerLink]="['articlesofanAuthor', author.id]"
+        class="text-decoration-none"
+      >
+        <div
+          class="card border-0 d-flex flex-row flex-md-column flex-lg-row align-items-center w-auto"
+        >
+          <img
+            [src]="author.image"
+            class="img-fluid rounded-start author-img"
+            alt="Author image"
+          />
+          <div class="card-body">
+            <h5 class="card-title text-white">
+              {{ author.firstName }} {{ author.lastName }}
+            </h5>
+          </div>
+        </div>
+      </a>
     </div>
   </div>
 </div>

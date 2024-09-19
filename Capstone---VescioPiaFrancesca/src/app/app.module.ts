@@ -11,6 +11,8 @@ import { AuthInterceptor } from './Interceptor/auth.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Error404Component } from './pages/error404/error404.component';
 import { Error401Component } from './pages/error401/error401.component';
+import { FaqComponent } from './pages/faq/faq.component';
+
 
 
 @NgModule({
@@ -20,6 +22,7 @@ import { Error401Component } from './pages/error401/error401.component';
     FooterComponent,
     Error404Component,
     Error401Component,
+    FaqComponent,
   ],
   imports: [
     BrowserModule,

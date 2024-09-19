@@ -4,12 +4,109 @@
   position: relative;
   width: 100%;
   box-shadow: 0 15px 25px rgba(129, 124, 124, 0.2);
+  transition: transform 0.3s ease-in-out;
+    &:hover {
+      transform: scale(1.02);
+    }
 }
+
+
+
 .colorText {
   color: white;
-  text-shadow:
-  2px 2px 0px black,
-  -2px 2px 0px black,
-  2px -2px 0px black,
-  -2px -2px 0px black;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
+
+  .btnSty, .colorDrop {
+    background-color: rgba(116, 78, 188, 0.5);
+    color: rgba(255, 255, 255, 0.5);
+    &:hover {
+      background-color: rgba(116, 78, 188, 1);
+      color: rgba(255, 255, 255, 1)
+    }
+    .dropdown-item {
+      color: white;
+      &:hover {
+        background-color: rgba(230, 230, 250, 1);
+        color: rgba(0 ,0 , 0, 1) ;
+      }
+    }
+  }
+
+
+  .imgBg {
+    background-color: transparent;
+    height: 30em;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+
+
+    .card-img-top {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+
+    // Creo un overlay trasparente che al passaggio del mouse rende "scuro" il bg della card in modo tale
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      transition: opacity 450ms ease-in-out;
+      opacity: 0;
+      z-index: 0;
+    }
+      .infArticle {
+        position: absolute;
+        bottom: -80px;
+        opacity: 0;
+        transition: bottom 450ms ease-in-out, opacity 450ms ease-in-out, 100ms ease-in-out;
+        z-index: -10;
+
+
+        h5 {
+          color: rgb(255, 255, 255);
+          transition: background-color 0.5s ease-in-out;
+        }
+      }
+
+
+
+    &:hover {
+      transform: scale(1.05); // Leggero zoom sulla card
+      box-shadow: 0 25px 35px rgba(0, 0, 0, 0.4); // Ombra più pronunciata
+      &:before {
+        opacity: 1;
+      }
+      .infArticle {
+        position: absolute;
+        bottom: 0px;
+        opacity: 1;
+        z-index: 1;
+      }
+    }
+    }
+
+
+    .author-img {
+      width: 10vw; /* Dimensione dell'immagine */
+      height: 10vh;
+      object-fit: cover; /* Per mantenere il rapporto corretto */
+      margin-right: 15px; /* Spaziatura tra immagine e testo */
+    }
+
+
+    .card {
+      background-color: rgba(255,255, 255, 0.3);
+      box-shadow: 0 15px 25px rgba(129, 124, 124, 0.2);
+      transition: box-shadow 0.4s ease-in-out;
+      &:hover {
+        box-shadow: 0 25px 35px rgba(0, 0, 0, 0.4);
+      }
+    }

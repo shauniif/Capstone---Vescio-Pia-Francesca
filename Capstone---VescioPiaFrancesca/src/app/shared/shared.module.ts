@@ -7,6 +7,7 @@ import { SingleGuildComponent } from './single-guild/single-guild.component';
 import { SingleEventComponent } from './single-event/single-event.component';
 import { SingleArticleComponent } from './single-article/single-article.component';
 import { CoomingSoonComponent } from './cooming-soon/cooming-soon.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -21,7 +22,8 @@ import { CoomingSoonComponent } from './cooming-soon/cooming-soon.component';
     CoomingSoonComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule,
   ],
   exports:
   [

@@ -5,7 +5,7 @@ import { EventRoutingModule } from './event-routing.module';
 import { EventComponent } from './event.component';
 import { SharedModule } from '../../shared/shared.module';
 import { DetailComponent } from './detail/detail.component';
-import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCarouselModule, NgbCollapse } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -17,7 +17,8 @@ import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
     CommonModule,
     EventRoutingModule,
     SharedModule,
-    NgbCarouselModule
+    NgbCarouselModule,
+    NgbCollapse
   ]
 })
 export class EventModule { }

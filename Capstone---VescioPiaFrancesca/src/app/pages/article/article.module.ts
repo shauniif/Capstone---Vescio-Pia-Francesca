@@ -6,12 +6,15 @@ import { ArticleComponent } from './article.component';
 import { SharedModule } from '../../shared/shared.module';
 import { DetailComponent } from './detail/detail.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
+import { AuthorArticlesComponent } from './author-articles/author-articles.component';
 
 
 @NgModule({
   declarations: [
     ArticleComponent,
-    DetailComponent
+    DetailComponent,
+    AuthorArticlesComponent
   ],
   imports: [
     CommonModule,
@@ -19,6 +22,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
+    NgbCollapseModule
   ]
 })
 export class ArticleModule { }

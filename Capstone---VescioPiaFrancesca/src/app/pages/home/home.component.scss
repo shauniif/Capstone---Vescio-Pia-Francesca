@@ -26,3 +26,47 @@
   background-repeat: no-repeat;
   background-position: center ;
 }
+
+.picsum-img-wrapper {
+  width: 100%; /* Imposta la larghezza massima */
+  padding-top: 100%; /* Imposta un rapporto 1:1 per creare un contenitore quadrato */
+  position: relative; /* Per consentire il posizionamento assoluto dell'immagine */
+}
+
+.picsum-img-wrapper img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Mantiene le proporzioni dell'immagine riempiendo il contenitore */
+}
+
+.bg {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5em;
+}
+
+
+.login {
+  background-color: rgba(179, 120, 171, 0.7);
+  &:hover {
+    background-color: rgba(179, 120, 171, 1);
+    color: white;
+  }
+ }
+
+ .register {
+   background-color: rgba(148, 205, 206, 0.7);
+   &:hover {
+    background-color: rgba(148, 205, 206, 0.7);
+    color: white;
+  }
+  }
+
+  .text-white {
+    white-space: pre-line;
+    span {
+      display: block;
+    }
+  }

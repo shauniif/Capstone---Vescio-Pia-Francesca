@@ -23,7 +23,6 @@ export class HeaderComponent implements OnInit {
     this.authSvc.isLoggedIn$.subscribe(isLoggedIn => this.isLoggedIn = isLoggedIn);
     this.authSvc.user$.subscribe((user) => {
       this.user = user
-      console.log(this.user)
     }
     );
     this.searchForm = this.fb.group({
