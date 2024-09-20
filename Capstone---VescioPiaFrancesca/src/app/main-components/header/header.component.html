@@ -107,11 +107,11 @@
           <div *ngIf="!user?.image">
             <img
               src="../../../../assets/img/default.png"
-              style="width: 100px"
+              class="rounded-3 img"
             />
           </div>
           <div *ngIf="user?.image">
-            <img [src]="user?.image" class="rounded-3" style="width: 3em" />
+            <img [src]="user?.image" class="rounded-3 img" />
           </div>
         </a>
       </div>

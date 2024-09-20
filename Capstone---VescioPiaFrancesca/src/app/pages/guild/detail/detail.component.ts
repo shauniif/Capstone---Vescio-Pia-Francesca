@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { iGuild } from '../../../interfaces/i-guild';
 import { ActivatedRoute } from '@angular/router';
 import { GuildService } from '../../../Services/guild.service';
+import { CharacterService } from '../../../Services/character.service';
 
 @Component({
   selector: 'app-detail',
@@ -11,11 +12,17 @@ import { GuildService } from '../../../Services/guild.service';
 export class DetailComponent {
 
   guild!: iGuild
-  constructor(private route:ActivatedRoute, private guildSvc: GuildService) {}
+  constructor(private route:ActivatedRoute, private guildSvc: GuildService, private chacterSvc: CharacterService) {}
   ngOnInit(): void {
     this.route.params.subscribe((params:any) => {
-      this.guildSvc.getGuild(params.id).subscribe(guild => {
-        this.guild = guild;
+      this.guildSvc.guilds$.subscribe(guilds => {
+        let guild = guilds.find(g => g.id == params.id);
+        if(guild) this.guild = guild;
+        if (this.guild) {
+          this.chacterSvc.characters$.subscribe(characters => {
+            this.guild.members = characters.filter(c => c.guild?.id === this.guild.id);
+          })
+        }
       })
     })
   }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { iNations } from '../../../interfaces/nations';
+import { iNation } from '../../../interfaces/i-nation';
 import { ActivatedRoute } from '@angular/router';
 import { NationsService } from '../../../Services/nations.service';
 
@@ -9,7 +9,7 @@ import { NationsService } from '../../../Services/nations.service';
   styleUrl: './detail.component.scss'
 })
 export class DetailComponent {
-  nation!: iNations
+  nation!: iNation | undefined;
   isCollapsed: boolean = true
   isCollapsed2: boolean = true
   isCollapsed3: boolean = true
@@ -20,11 +20,9 @@ export class DetailComponent {
 
   ngOnInit(): void {
     this.route.params.subscribe((params:any) => {
-
-      this.nationSvc.getNation(params.id).subscribe(nation => {
-        this.nation = nation;
+      this.nationSvc.nations$.subscribe(nations => {
+         this.nation = nations.find(nation => nation.id == params.id);
       })
-    })
+      })
+    }
   }
-
-}

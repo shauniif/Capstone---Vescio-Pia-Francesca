@@ -18,12 +18,10 @@ export class DetailComponent {
 
   ngOnInit(): void {
     this.route.params.subscribe((params:any) => {
-      this.citySvc.getCity(params.id).subscribe(city => {
-        this.city = city;
+      this.citySvc.cities$.subscribe(cities => {
+        let city : iCity | undefined = cities.find(c => c.id == params.id);
+        if(city) this.city = city;
       })
     })
   }
-
-
-
 }

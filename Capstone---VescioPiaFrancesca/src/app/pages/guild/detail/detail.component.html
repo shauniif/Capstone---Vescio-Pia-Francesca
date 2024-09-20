@@ -33,6 +33,12 @@
               }}</span>
             </a>
           </div>
+          <div *ngIf="guild.members" class="fs-4 colorMembers">
+            <span class="fw-bold">Numeri dei membri della gilda: </span>
+            <span class="text-decoration-underline">{{
+              guild.members.length
+            }}</span>
+          </div>
         </div>
       </div>
     </div>

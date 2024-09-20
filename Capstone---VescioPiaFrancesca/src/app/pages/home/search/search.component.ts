@@ -5,7 +5,7 @@ import { SearchService } from '../../../Services/search.service';
 import { iGuild } from '../../../interfaces/i-guild';
 import { iEco } from '../../../interfaces/i-eco';
 import { iCity } from '../../../interfaces/i-city';
-import { iNations } from '../../../interfaces/nations';
+import { iNation } from '../../../interfaces/i-nation';
 
 @Component({
   selector: 'app-search',
@@ -18,7 +18,7 @@ export class SearchComponent implements OnInit  {
   ecos: iEco[] = [];
   guilds: iGuild[] = [];
   cities: iCity[] = [];
-  nations: iNations[] = [];
+  nations: iNation[] = [];
   isLoading: boolean = true;
   constructor( private route: ActivatedRoute, private searchSvc: SearchService) {}
   ngOnInit(): void {
@@ -35,7 +35,6 @@ export class SearchComponent implements OnInit  {
           this.guilds = e.guilds;
           this.cities = e.cities;
           this.nations = e.nations;
-
           this.isLoading = false;
         })
       }), 5000})

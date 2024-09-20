@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { iNations } from '../../interfaces/nations';
+import { iNation } from '../../interfaces/i-nation';
 import { NationsService } from '../../Services/nations.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { NationsService } from '../../Services/nations.service';
 })
 export class NationComponent {
 
-  nations:iNations[] = [];
+  nations:iNation[] = [];
   constructor(private nationSvc: NationsService) {}
   ngOnInit(): void {
     this.nationSvc.nations$.subscribe((nations) =>{

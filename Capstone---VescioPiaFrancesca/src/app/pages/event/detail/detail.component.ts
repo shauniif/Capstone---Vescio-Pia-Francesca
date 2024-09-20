@@ -18,16 +18,9 @@ export class DetailComponent implements OnInit {
   ){}
   ngOnInit(): void {
     this.route.params.subscribe((params:any) => {;
-      this.eventSvc.getEvent(params.id).subscribe(event => {
-        this.event = event;
-        let date = new Date(this.event.date);
-
-
-      let day = date.getDate().toString().padStart(2, '0');
-      let month = (date.getMonth() + 1).toString().padStart(2, '0');
-      let year = date.getFullYear();
-
-      this.formattedDate = `${day}-${month}-${year}`;
+      this.eventSvc.events$.subscribe(events => {
+        let event: iEvent | undefined = events.find(event => event.id == params.id);
+        if(event)this.event = event;
       })
     })
   }

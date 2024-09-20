@@ -1,4 +1,4 @@
-import { iNations } from "./nations"
+import { iNation } from "./i-nation"
 
 export interface iEco {
   id: number
@@ -7,5 +7,5 @@ export interface iEco {
   description: string
   pic: string
   modifier: number
-  nation: iNations
+  nation: iNation
 }

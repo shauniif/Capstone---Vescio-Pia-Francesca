@@ -1,8 +1,8 @@
-import { iNations } from "./nations";
+import { iNation } from "./i-nation";
 
 export interface iCity {
   id: number;
   name: string;
   description: string;
-  nation: iNations
+  nation: iNation
 }

@@ -2,7 +2,7 @@ import { iCity } from "./i-city"
 import { iEco } from "./i-eco"
 import { iGuild } from "./i-guild"
 
-export interface iNations {
+export interface iNation {
   id: number
   name:string
   description: string

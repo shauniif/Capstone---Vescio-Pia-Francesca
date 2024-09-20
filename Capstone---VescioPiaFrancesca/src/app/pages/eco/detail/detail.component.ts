@@ -1,3 +1,4 @@
+import { EcoComponent } from './../eco.component';
 import { Component } from '@angular/core';
 import { iEco } from '../../../interfaces/i-eco';
 import { ActivatedRoute } from '@angular/router';
@@ -16,10 +17,10 @@ export class DetailComponent {
   ){}
   ngOnInit(): void {
     this.route.params.subscribe((params:any) => {
-      this.ecoSvc.getEco(params.id).subscribe(eco => {
-        this.eco = eco;
+      this.ecoSvc.ecos$.subscribe(ecos => {
+        let eco: iEco | undefined = ecos.find(eco => eco.id == params.id);
+        if (eco) this.eco = eco;
       })
     })
   }
-
 }

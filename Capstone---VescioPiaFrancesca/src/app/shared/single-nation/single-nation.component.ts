@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { iNations } from '../../interfaces/nations';
+import { iNation } from '../../interfaces/i-nation';
 
 @Component({
   selector: 'app-single-nation',
@@ -7,5 +7,5 @@ import { iNations } from '../../interfaces/nations';
   styleUrl: './single-nation.component.scss'
 })
 export class SingleNationComponent {
- @Input() nation!: iNations;
+ @Input() nation!: iNation;
 }

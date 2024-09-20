@@ -1,4 +1,4 @@
-import { iNations } from './../interfaces/nations';
+import { iNation } from './../interfaces/i-nation';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
@@ -12,21 +12,15 @@ export class NationsService {
     this.getAll();
   }
 
-  private nationsSubject = new BehaviorSubject<iNations[]>([]);
+  private nationsSubject = new BehaviorSubject<iNation[]>([]);
   nations$ = this.nationsSubject.asObservable();
 
   nationUrl:string = `${environment.apiUrl}NationApi`
-  nation: iNations[] = []
-
-
-  getNation(id: number) {
-    return this.http
-    .get<iNations>(`${this.nationUrl}/${id}`)
-  }
+  nation: iNation[] = []
 
   getAll(): Subscription {
     return this.http
-    .get<iNations[]>(this.nationUrl)
+    .get<iNation[]>(this.nationUrl)
     .subscribe((data) => {
       this.nation = data
       this.nationsSubject.next(this.nation);
