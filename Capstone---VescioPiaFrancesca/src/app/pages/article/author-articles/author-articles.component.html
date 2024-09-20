@@ -1,16 +1,18 @@
-<div class="author-card my-4 p-4">
-  <div class="row align-items-center">
-    <div class="col-md-3 text-center">
-      <img
-        [src]="author.image"
-        class="img-fluid rounded-circle author-image"
-        alt="Author image"
-      />
-    </div>
-    <div class="col-md-9">
-      <h3 class="text-center text-white">
-        Tutti gli articoli di {{ author.firstName }} {{ author.lastName }}
-      </h3>
+<div *ngIf="author">
+  <div class="author-card my-4 p-4">
+    <div class="row align-items-center">
+      <div class="col-md-3 text-center">
+        <img
+          [src]="author.image"
+          class="img-fluid rounded-circle author-image"
+          alt="Author image"
+        />
+      </div>
+      <div class="col-md-9">
+        <h3 class="text-center text-white">
+          Tutti gli articoli di {{ author.firstName }} {{ author.lastName }}
+        </h3>
+      </div>
     </div>
   </div>
 </div>

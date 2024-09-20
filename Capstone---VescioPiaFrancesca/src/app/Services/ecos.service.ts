@@ -27,7 +27,7 @@ export class EcosService {
   }
 
   getEco(id: number) : Observable<iEco>  {
-    console.log("ID ricevuto nel servizio:", id);
+
     return this.http.get<iEco>(`${this.ecoUrl}/${id}`);
   }
 

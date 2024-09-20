@@ -20,23 +20,28 @@ export class ArticleComponent implements OnInit {
   ngOnInit(): void {
     this.articleSvc.articles$.subscribe((articles) => {
       this.articles = articles;
+      this.articlesCopy = [...this.articles];
+
       this.articles.forEach(article => {
         this.articleSvc.GetAuthor(article.author.id).subscribe(author => {
-          this.article.author = author;
+
+          if(author.id === article.author.id) {
+            article.author = author;
+          }
           if(!this.authors.find(a => a.id === author.id)) {
             this.authors.push(author);
-          }
 
+          }
         })
       });
-      this.articlesCopy = [...this.articles];
+
       this.article = this.getRandomArticle();
     });
   }
 
 
   getRandomArticle(): iArticle {
-    if (this.articles.length === 0) {
+    if (this.articlesCopy.length === 0) {
 
       return {} as iArticle;
     }

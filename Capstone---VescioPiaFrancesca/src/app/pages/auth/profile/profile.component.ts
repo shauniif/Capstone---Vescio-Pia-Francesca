@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit{
 
       this.characterSvc.GetMyCharacter(this.user.id).subscribe(characters => {
         this.user.characters = characters;
-        console.log(this.user.characters)
+
       })
       this.imageForm = this.fb.group({
         id: this.fb.control(this.user.id, [Validators.required]),
@@ -51,7 +51,7 @@ export class ProfileComponent implements OnInit{
 
       this.authSvc.insertImage(formData).subscribe({
         next: (response) => {
-          console.log('Immagine caricata con successo:', response)
+
           this.user.image = response.image;
         },
         error: (err: HttpErrorResponse) => {

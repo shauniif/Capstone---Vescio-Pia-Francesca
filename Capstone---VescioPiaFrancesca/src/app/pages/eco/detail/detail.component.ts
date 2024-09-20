@@ -16,11 +16,8 @@ export class DetailComponent {
   ){}
   ngOnInit(): void {
     this.route.params.subscribe((params:any) => {
-      console.log("ID dal parametro della rotta:", params.id);
       this.ecoSvc.getEco(params.id).subscribe(eco => {
-        console.log("Eco ricevuto data:", eco);
         this.eco = eco;
-        console.log("Eco ricevuto:", this.eco)
       })
     })
   }

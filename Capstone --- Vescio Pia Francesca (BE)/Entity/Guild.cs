@@ -18,5 +18,23 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Entity
         public decimal Modifier { get; set; }
 
         public List<Character> Character { get; set; } = new List<Character>();
+
+        public string ShortDescription
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Description))
+                {
+                    return string.Empty;
+                }
+
+                if (Description.Length > 50)
+                {
+                    return Description.Substring(0, 50) + "...";
+                }
+
+                return Description;
+            }
+        }
     }
 }

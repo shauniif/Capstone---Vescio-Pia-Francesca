@@ -47,23 +47,20 @@ export class EventComponent implements OnInit {
 
     }) */
       this.eventSvc.events$.subscribe((events) => {
-      console.log(events)
-      for(let i = 0; i < 3; i++) {
-        this.pastEvents.push(events[i])
-        console.log(this.pastEvents)
-        this.displayedPastEvents = [...this.pastEvents]
-      }
-      for(let i = 3; i < 5; i++) {
-        this.currEvents.push(events[i])
-        this.displayedCurrEvents = [...this.currEvents]
-        console.log(this.currEvents)
-      }
-      for(let i = 4; i < 6; i++) {
-        this.futureEvents.push(events[i])
+        // Dividi gli eventi in base alla loro posizione
+        for (let i = 0; i <events.length; i++) {
+          if (i < 3) {
+            this.pastEvents.push(events[i]);
+            this.displayedPastEvents = [... this.pastEvents]
+          } else if (i >= 3 && i < 5) {
+            this.currEvents.push(events[i]);
+            this.displayedCurrEvents = [... this.currEvents]
+          } else if (i >= 5 && i < 7) {
+            this.futureEvents.push(events[i]);
 
-        console.log(this.futureEvents)
-      }
-      })
+          }
+        }
+      });
   }
 
 
@@ -82,11 +79,9 @@ export class EventComponent implements OnInit {
    if(type == "first") {
     if (this.showMore) {
       this.displayedCurrEvents = this.currEvents;
-      console.log(this.displayedCurrEvents)
 
     } else {
       this.displayedCurrEvents = this.currEvents.slice(0, this.initialDisplayCountC);
-      console.log(this.displayedCurrEvents)
     }
   } if(type == "second") {
     if (this.showMore2) {

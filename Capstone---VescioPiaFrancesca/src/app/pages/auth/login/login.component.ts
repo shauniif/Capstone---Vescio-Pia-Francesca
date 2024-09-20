@@ -30,10 +30,7 @@ export class LoginComponent {
     if (this.loginForm.valid)
       {
         let userLogin: iAuthData = this.loginForm.value;
-        this.authSvc.login(userLogin).subscribe(data =>
-          {
-            console.log(data)
-        })
+        this.authSvc.login(userLogin).subscribe()
         this.router.navigate([''])
       }
   }

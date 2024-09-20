@@ -25,7 +25,6 @@ export class EcoComponent {
   ngOnInit(): void {
       this.ecoSvc.ecos$.subscribe((ecos) => {
         this.ecos = ecos;
-        console.log(this.ecos);
         this.filteredEcos = [... this.ecos]
         this.EcosWithNoNation = this.filteredEcos.filter(eco => eco.nation == null)
 
@@ -68,10 +67,8 @@ export class EcoComponent {
   DropDownClose(dropdownType: 'first' | 'second'): void {
     if (dropdownType === 'first') {
       this.isCollapsed = true;
-      console.log(this.isCollapsed )
-    } else if (dropdownType === 'second') {
+     } else if (dropdownType === 'second') {
       this.isCollapsed2 = true;
-      console.log(this.isCollapsed2)
     }
   }
 }

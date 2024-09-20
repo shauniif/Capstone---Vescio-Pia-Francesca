@@ -17,7 +17,7 @@ export class DetailComponent implements OnInit {
     this.route.params.subscribe((params: any) => {
       this.characterSvc.GetCharacter(params.id).subscribe(character => {
         this.currCharacter = character;
-        console.log(this.currCharacter);
+
       })
     })
   }

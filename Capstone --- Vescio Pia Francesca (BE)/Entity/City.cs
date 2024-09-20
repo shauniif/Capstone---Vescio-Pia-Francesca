@@ -16,5 +16,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Entity
         public Nation Nation { get; set; }
 
         public List<Character> Character { get; set; } = new List<Character>();
+
+
     }
 }

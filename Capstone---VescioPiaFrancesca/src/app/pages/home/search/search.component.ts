@@ -29,7 +29,6 @@ export class SearchComponent implements OnInit  {
   loadData(): void {
     setTimeout(() => {
       this.route.params.subscribe(params => {
-        console.log(params);
         this.searchQuery = params['search'];
         this.searchSvc.GetElementSearched(this.searchQuery).subscribe((e: iSearchResponse) => {
           this.ecos = e.ecos;

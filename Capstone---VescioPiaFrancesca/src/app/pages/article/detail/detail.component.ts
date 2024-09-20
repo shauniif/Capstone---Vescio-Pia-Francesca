@@ -37,7 +37,7 @@ export class DetailComponent implements OnInit {
         this.article = article;
         this.articleSvc.GetAuthor(article.author.id).subscribe(author =>
           {
-            console.log(author)
+
             this.article.author = author;
           })
         this.article.comments.forEach(comment => {
@@ -93,15 +93,13 @@ export class DetailComponent implements OnInit {
           this.article.comments.push(comment);
           this.createCommentForm.reset();
         })
-
-        console.log(newComment)
       };
     }
 
 
   UpdateComment(): void {
     if (this.updateCommentForm.valid) {
-      console.log(this.updateCommentForm.value)
+
       const updatedComment: ICommentCreate = this.updateCommentForm.value;
       this.authSvc.authSubject.subscribe(authSubject => {
         if (authSubject && authSubject.id)
@@ -123,7 +121,7 @@ export class DetailComponent implements OnInit {
 
   DeleteComment(id:number): void {
     this.commentSvc.DeleteComment(id).subscribe((comment) => {
-      console.log('Commento eliminato con successo:', comment);
+
       this.article.comments = this.article.comments.filter(c => c.id!== id);
     })
   }

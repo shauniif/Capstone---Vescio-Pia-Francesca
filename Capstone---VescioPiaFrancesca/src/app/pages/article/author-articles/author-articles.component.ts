@@ -19,11 +19,14 @@ constructor(
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
       this.articleSvc.GetAuthor(params.id).subscribe(author => {
-        this.author = author;
-      })
-      this.articleSvc.articles$.subscribe((articles) => {
-        this.articles = articles;
-      })
+        if(author) this.author = author;
+
+        this.articleSvc.articles$.subscribe((articles) => {
+
+          this.articles = articles.filter(article => article.author.id === this.author.id);
+
+        })
       });
+    })
     }
   }

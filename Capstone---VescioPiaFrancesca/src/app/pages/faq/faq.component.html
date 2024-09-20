@@ -1,13 +1,11 @@
 <div class="pt-3">
-  <div class="bg text-white pt-4">
+  <div class="bg text-white py-4">
     <h2 class="display-2 text-center">FAQ - Domande Frequenti</h2>
 
-    <h3>Funzionalità per gli Utenti</h3>
-
-    <p>
+    <p class="ms-4">
       <button
         type="button"
-        class="btn btn-outline-primary ms-2"
+        class="btn btnSty fs-4 ms-2"
         (click)="isCollapsed = !isCollapsed"
         [attr.aria-expanded]="!isCollapsed"
         aria-controls="collapseExample"
@@ -16,17 +14,28 @@
       </button>
     </p>
     <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
-      <div class="card">
+      <div class="card bg-transparent text-white border-0 px-5">
         <div class="card-body">
-          <h5>Cosa può fare un utente registrato?</h5>
-          <p>
+          <h4>Cosa può fare un utente registrato?</h4>
+          <p class="fs-5">
             Un utente registrato può partecipare agli eventi del mondo di
             Zantha, unirsi a una gilda, interagire con altri giocatori e leggere
             articoli esclusivi sulla lore.
           </p>
 
-          <h5>Come posso unirmi a una gilda?</h5>
-          <p>
+          <h4>
+            Che cosa è il <span class="text">Punteggio</span> del personaggio?
+          </h4>
+          <p class="fs-5">
+            Il Punteggio del personaggio è il risultato di molteplici influenze,
+            tra cui la sua affiliazione e il suo legame con diversi gruppi e
+            luoghi. Questo valore, in particolare, ha un impatto diretto sulle
+            potenzialità delle gilde, riflettendo come le scelte e il cammino
+            del personaggio possano rafforzare o alterare gli equilibri di
+            potere nel mondo.
+          </p>
+          <h4>Come posso unirmi a una gilda?</h4>
+          <p class="fs-5">
             Per unirti a una gilda, vai alla sezione "Gilde", scegli quella che
             ti interessa. Vai nella sezione del tuo profilo in altro a destra.
             Da lì vai alla sezione
@@ -36,5 +45,56 @@
         </div>
       </div>
     </div>
+
+    <p class="ms-4">
+      <button
+        type="button"
+        class="btn btnSty fs-4 ms-2"
+        (click)="isCollapsed2 = !isCollapsed2"
+        [attr.aria-expanded]="!isCollapsed2"
+        aria-controls="collapseExample"
+      >
+        Informazioni sulla Lore
+      </button>
+    </p>
+    <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed2">
+      <div class="card bg-transparent text-white border-0 px-5">
+        <div class="card-body">
+          <h4>Quali sono le Due Lune di Zantha?</h4>
+          <p class="fs-5">
+            Le lune di Zantha, <span class="text"> Leni</span> e
+            <span class="text">Sovia</span>, si distinguono per il loro
+            simbolismo e il moto orbitale unico attorno al pianeta. Sovia, la
+            luna azzurra nota come "La porta della conoscenza", è simbolo di
+            cambiamento, dolcezza materna, istinto e mistero astrale. La sua
+            orbita segue un percorso sinusoidale che attraversa il pianeta da
+            parte a parte, tracciando un movimento simile al simbolo
+            dell'infinito. Leni, la luna gialla chiamata "La lontana terra dei
+            fiumi d'oro", è legata alla fertilità, alla paternità e alla
+            stabilità. Essa compie un'orbita più breve rispetto a Sovia,
+            seguendo un cammino circolare su un meridiano specifico,
+            attraversando anch'essa il foro centrale del pianeta.
+          </p>
+
+          <h4>Che cos'è una Torre?</h4>
+          <p class="fs-5">
+            La "Torre" in Zantha è un evento straordinario e drammatico. Il
+            grande sacrificio di esseri viventi, volto a consentire la presenza
+            fisica delle divinità, segna una fase di conflitto divino che
+            definisce la nuova era. Questo scontro tra divinità porta un'epica
+            tensione nel mondo, e la guerra si protrae finché tutte le divinità
+            coinvolte non si ritirano, lasciando dietro di sé un segno
+            indelebile sugli abitanti e sulla terra stessa.
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
+</div>
+
+<h4 class="text-center text-white mt-3">Hai altre domande? Contattaci!</h4>
+<div class="text-center">
+  <a href="mailto:info@zantha.com" class="btn btnSty fs-4"
+    >info&#64;zantha.com</a
+  >
 </div>

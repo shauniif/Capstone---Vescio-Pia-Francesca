@@ -10,7 +10,10 @@
         <h2 class="text-light fs-1">I miei articoli</h2>
     </div>
 
-    
+    <div class="col-12">
+        <a asp-action="Create" class="fs-4">Crea un nuovo articolo</a>
+    </div>
+
 
     <div class="col-12 my-3">
         <div class="table-responsive tableStyle">
@@ -55,7 +58,7 @@
                                 @Html.DisplayFor(modelItem => item.Author.FirstName)
                             </td>
                             <td>
-                                <a class="btn iconStyDetail" asp-action="Detail" asp-route-id="@item.Id"><i class="bi bi-card-text"></i></a>
+                                    <a class="btn iconStyDetail" asp-action="Detail" asp-route-id="@item.Id"><i class="bi bi-card-text"></i></a>
                                     <a class="btn iconStyWar" asp-action="Update" asp-route-id="@item.Id"><i class="bi bi-pencil"></i></a>
                                     <a class="btn iconStyDang" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash-fill"></i></a>
                             </td>

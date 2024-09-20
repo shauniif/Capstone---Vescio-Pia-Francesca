@@ -59,27 +59,20 @@ export class RegisterComponent {
 
 
   CreateUser(): void {
-    if(this.signInForm.valid && this.user){
-      console.log(true);
-    } else
-    {
-      console.log(false);
-    }
+
     if(this.signInForm.valid && this.user) {
       const UserToUpdate: iUser = this.signInForm.value;
       UserToUpdate.id = this.user.id
       this.authSvc.UpdateUser(UserToUpdate.id, UserToUpdate).subscribe(data =>
         {
           this.AuthData = data
-          this.authSvc.login(this.AuthData).subscribe(data => console.log(data))
+          this.authSvc.login(this.AuthData).subscribe()
           this.router.navigate(['auth/profile'])
         })
       } else {
         const newUser: iUser = this.signInForm.value;
-      this.authSvc.register(newUser).subscribe((data) => {
-        console.log('User registrato con successo:', data);
-        this.router.navigate(['auth/login'])});
-    }
+      this.authSvc.register(newUser).subscribe();
+        this.router.navigate(['auth/login'])};
   }
 
   isTouchedInvalid(fieldName:string){

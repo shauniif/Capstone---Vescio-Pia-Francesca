@@ -22,7 +22,7 @@ export class GuildComponent {
 
     this.guildSvc.guilds$.subscribe((guilds) =>{
       this.guilds = guilds;
-      console.log(this.guilds);
+
       this.filteredGuilds = [...this.guilds]
       })
 

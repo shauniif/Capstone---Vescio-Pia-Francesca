@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrl: './faq.component.scss'
 })
 export class FaqComponent {
-  isCollapsed = false;
+  isCollapsed = true;
+  isCollapsed2 = true;
 }

@@ -45,7 +45,7 @@ export class CreateComponent implements OnInit {
         raceId: this.fb.control(null, [Validators.required]),
         ecoId: this.fb.control(''),
         userId: this.fb.control(this.user.id, [Validators.required]),
-        image: this.fb.control(null, [Validators.required]),
+        image: this.fb.control('', [Validators.required]),
       });
     })
 
@@ -63,20 +63,21 @@ export class CreateComponent implements OnInit {
     });
 
     this.route.params.subscribe((params:any) => {;
-      this.characterSvc.GetCharacter(params.id).subscribe(character => {
-        this.character = character;
-        this.createCharacterForm.patchValue({
-          name: this.character?.name,
-          guildId: this.character?.guild?.id ? this.character?.guild?.id : '',
-          cityId: this.character?.city?.id,
-          raceId: this.character?.race?.id,
-          ecoId: this.character?.eco?.id ? this.character?.eco?.id : '',
-          userId: this.user?.id,
-          image: null,
-        });;
-      })
+      if(params) {
+        this.characterSvc.GetCharacter(params.id).subscribe(character => {
+          this.character = character;
+          this.createCharacterForm.patchValue({
+            name: this.character?.name,
+            guildId: this.character?.guild?.id ? this.character?.guild?.id : '',
+            cityId: this.character?.city?.id,
+            raceId: this.character?.race?.id,
+            ecoId: this.character?.eco?.id ? this.character?.eco?.id : '',
+            userId: this.user?.id,
+            image: '',
+          });
+        })
+      }
     })
-
 
     this.getRaces()
     this.getEco()
@@ -116,14 +117,14 @@ export class CreateComponent implements OnInit {
     }
 
     const ecoId = this.createCharacterForm.get('ecoId')?.value;
-    console.log(ecoId);
+
     if (ecoId  != null) {
       formData.append('ecoId', ecoId);
     }
     if(this.character) {
       this.characterSvc.UpdateCharacter(this.character.id, formData).subscribe((character) =>
         {
-          console.log("Personaggio modificato con successo:", character);
+
           this.createCharacterForm.reset();
           this.router.navigate(['auth/profile']);
         }
@@ -131,7 +132,7 @@ export class CreateComponent implements OnInit {
     } else {
       this.characterSvc.CreateCharacter(formData).subscribe((character) =>
           {
-            console.log("Personaggio creato con successo:", character);
+
             this.createCharacterForm.reset();
             this.router.navigate(['auth/profile']);
           }

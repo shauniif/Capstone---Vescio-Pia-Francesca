@@ -60,7 +60,7 @@
 
   <div class="col-12 col-md-3">
     <h4 class="text-white">Autori più attivi:</h4>
-    <div *ngFor="let author of authors">
+    <div *ngFor="let author of authors" class="my-2">
       <a
         [routerLink]="['articlesofanAuthor', author.id]"
         class="text-decoration-none"

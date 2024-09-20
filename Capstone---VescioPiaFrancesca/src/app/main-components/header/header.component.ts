@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
 
   toggleDropDown() {
     this.showD = !this.showD;
-    console.log(this.showD);
+
 
   }
 
@@ -45,7 +45,7 @@ export class HeaderComponent implements OnInit {
 
   Search(): void {
     let search = this.searchForm.get('search')?.value;
-    console.log(search);
+
     this.router.navigate(['search/', search]);
   }
 }

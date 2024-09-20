@@ -138,6 +138,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                     Description = currEvent.Description,
                     Influence = currEvent.Influence,
                     Modifier = currEvent.Modifier,
+                    IsChanged = currEvent.IsChanged ?? false
                 };
                 return eventModel;
             }

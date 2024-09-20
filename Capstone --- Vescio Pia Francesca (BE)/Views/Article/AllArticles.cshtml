@@ -11,7 +11,7 @@
     </div>
 
     <div class="col-12">
-        <a asp-action="Create" class="fs-4">Crea una nuova un nuovo articolo</a>
+        <a asp-action="Create" class="fs-4">Crea un nuovo articolo</a>
     </div>
 
     <div class="col-12 my-3">
@@ -56,11 +56,11 @@
                                             @Html.DisplayFor(modelItem => item.Author.FirstName)
                                         </td>
                                         <td>
-                                                @Html.ActionLink("Detail", "Detail", new {id = item.Id }) 
+                                                
                                                 @if (User.FindFirst("FirstName")?.Value == item.Author.FirstName || User.IsInRole("Admin")) 
                                                 {
 
-                                                    <a class="btn iconStyWar" asp-action="Update" asp-route-id="@item.Id"><i class="bi bi-pencil"></i></a>
+                                                    <a class="btn iconStyDetail" asp-action="Detail" asp-route-id="@item.Id"><i class="bi bi-card-text"></i></a>
                                                     <a class="btn iconStyWar" asp-action="Update" asp-route-id="@item.Id"><i class="bi bi-pencil"></i></a>
                                                     <a class="btn iconStyDang" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash-fill"></i></a>
 
