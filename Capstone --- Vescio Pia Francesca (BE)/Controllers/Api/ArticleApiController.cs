@@ -2,11 +2,14 @@
 using Capstone_____Vescio_Pia_Francesca__BE_.Entity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ArticleApiController : ControllerBase
     {
         private readonly IArticleService _articleSvc;
@@ -19,6 +22,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
         }
 
         [HttpGet]
+                [AllowAnonymous]
         public async Task<IActionResult> AllArticles()
         {
             var articles = await _articleSvc.GetAllArticles();

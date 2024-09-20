@@ -2,11 +2,14 @@
 using Capstone_____Vescio_Pia_Francesca__BE_.Entity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class GuildApiController : ControllerBase
     {
         private readonly IGuildService _guildSvc;

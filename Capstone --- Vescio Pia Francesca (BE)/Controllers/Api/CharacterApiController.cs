@@ -10,7 +10,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
 {
     [Route("api/[controller]")]
     [ApiController]
-  //  [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+   [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class CharacterApiController : ControllerBase
     {
         private readonly ICharacterService _characterSvc;

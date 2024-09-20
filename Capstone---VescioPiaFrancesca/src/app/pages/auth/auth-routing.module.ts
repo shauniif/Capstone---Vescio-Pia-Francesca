@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, CanActivate } from '@angular/router';
 import { AuthComponent } from './auth.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
+import { GuestGuard } from './guard/guest.guard';
+import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
   { path: '',
@@ -11,19 +13,23 @@ const routes: Routes = [
   },
   {
     path: 'register',
-    component: RegisterComponent
+    component: RegisterComponent,
+    canActivate:[GuestGuard]
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate:[GuestGuard]
   },
   {
     path: 'profile',
-    component: ProfileComponent
+    component: ProfileComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'edit/:id',
-    component: RegisterComponent
+    component: RegisterComponent,
+    canActivate:[AuthGuard]
   }
   ];
 

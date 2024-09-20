@@ -7,11 +7,14 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Capstone_____Vescio_Pia_Francesca__BE_.DTO;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class AuthApiController : ControllerBase
     {
         private readonly IAuthService _authSvc;
@@ -25,6 +28,8 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
             issuer = configuration["Jwt:Issuer"]!;
             audience = configuration["Jwt:Audience"]!;
         }
+
+        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] UserViewModel user)
         {
@@ -33,6 +38,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
             return Ok(userSel);
         }
 
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel user)
         {

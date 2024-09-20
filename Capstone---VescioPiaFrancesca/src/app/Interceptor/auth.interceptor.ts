@@ -16,6 +16,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const accessData = this.authSvc.getAccessData()
+    console.log(accessData?.token)
     if(!accessData) return next.handle(request);
     const newRequest = request.clone({
       headers: request.headers.append('Authorization', `Bearer ${accessData.token}`),

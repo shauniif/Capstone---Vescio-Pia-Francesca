@@ -1,5 +1,7 @@
 ﻿using Capstone_____Vescio_Pia_Francesca__BE_.DTO;
 using Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,6 +9,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class SearchApiController : ControllerBase
     {
         private readonly IEcoService _ecoSvc;
