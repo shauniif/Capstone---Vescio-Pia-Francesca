@@ -25,5 +25,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Entity
 
         [Column(TypeName = "decimal(18, 2)")]
         public decimal Score { get; set; }
+
+        public string Background { get; set; }
     }
 }

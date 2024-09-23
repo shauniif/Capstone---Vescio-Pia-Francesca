@@ -18,6 +18,8 @@ using System.ComponentModel.DataAnnotations;
 
                 public int? EcoId { get; set; }
                 public int UserId  { get; set; }
+
+                public string Background {  get; set; }
                 public IFormFile Image { get; set; }
             }
     }

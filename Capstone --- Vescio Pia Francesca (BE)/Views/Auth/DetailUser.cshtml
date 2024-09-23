@@ -12,7 +12,7 @@
     <div class="col-md-12 d-flex">
         <div class="card d-sm-flex flex-sm-row">
             <img src="@Url.Action("GetUserImage", "Auth", new { id = Model.Id })"
-                 alt="Model.Title" class="card-img-Detail">
+                 alt="Model.Title" class="card-img-top">
             <div class="card-body">
                 <h5 class="card-title text-light fw-bold fs-5 mb-2">
                     <span class="infoText ">@Html.DisplayNameFor(model => model.FirstName):</span>
@@ -25,6 +25,16 @@
                 <p class="card-text text-light fs-5 mb-2">
                     <span class="fw-bold infoText">@Html.DisplayNameFor(model => model.Email):</span>
                     @Html.DisplayFor(model => model.Email)
+                </p>
+                <p class="card-text text-light fs-5 mb-2">
+                    @if(Model.AdminCode != null)
+                    {
+                        <span class="fw-bold infoText">@Html.DisplayNameFor(model => model.AdminCode):</span>
+                        @Html.DisplayFor(model => model.AdminCode)
+                    } else
+                    {
+                        <span>He is a user</span>
+                    }
                 </p>
                 <p class="card-text text-light fs-5 mb-2">
                     <span class="fw-bold infoText">@Html.DisplayNameFor(model => model.Roles):</span>

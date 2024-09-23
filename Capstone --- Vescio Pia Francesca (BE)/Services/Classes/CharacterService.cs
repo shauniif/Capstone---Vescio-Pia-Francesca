@@ -78,6 +78,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                     Eco = eco,
                     Guild = guild,
                     User = user,
+                    Background = dto.Background,
                     Image = ConvertImage(dto.Image),
                     Score = await CountScore(eco?.Modifier ?? 1, city.Id, race.Modifier, guild?.Modifier ?? 1)
                 };
@@ -194,6 +195,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                 currCharacter.City = city;
                 currCharacter.Guild = guild;
                 currCharacter.Eco = eco;
+                currCharacter.Background = dto.Background;
                 currCharacter.Image = ConvertImage(dto.Image);
                 currCharacter.Score = await CountScore(eco?.Modifier ?? 1, city.Id, race.Modifier, guild?.Modifier ?? 1);
                 _db.Characters.Update(currCharacter);
@@ -223,6 +225,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                             Id = c.Id,
                             Name = c.Name,
                             Image = c.Image,
+                            Background = c.Background,
                             Score = c.Score,
                             Guild = c.Guild != null ? new Guild
                             {

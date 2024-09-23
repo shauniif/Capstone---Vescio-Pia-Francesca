@@ -3,6 +3,7 @@ import { iGuild } from '../../interfaces/i-guild';
 import { GuildService } from '../../Services/guild.service';
 import { NationsService } from '../../Services/nations.service';
 import { map } from 'rxjs';
+import { CharacterService } from '../../Services/character.service';
 
 @Component({
   selector: 'app-guild',
@@ -17,13 +18,13 @@ export class GuildComponent {
   guildsCopy: iGuild[] = [];
   isCollapsed: boolean = true;
   isCollapsed2: boolean = true;
-  constructor(private guildSvc: GuildService, private nationSvc: NationsService) {}
+  constructor(private guildSvc: GuildService, private nationSvc: NationsService, private characterSvc: CharacterService) {}
   ngOnInit(): void {
 
     this.guildSvc.guilds$.subscribe((guilds) =>{
       this.guilds = guilds;
-
       this.filteredGuilds = [...this.guilds]
+      console.log(this.guilds)
       })
 
 
@@ -52,8 +53,8 @@ export class GuildComponent {
     this.filteredGuilds.sort((a, b) => a.name.localeCompare(b.name))
   }
 
-  OrderEcoByPower(): void {
-    this.filteredGuilds.sort((a, b) => a.power - b.power)
+  OrderGuildByPower(): void {
+    this.filteredGuilds.sort((a, b) => b.power - a.power)
   }
 
   DropDownClose(dropdownType: 'first' | 'second'): void {

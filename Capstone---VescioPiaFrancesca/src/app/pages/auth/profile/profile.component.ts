@@ -20,6 +20,7 @@ export class ProfileComponent implements OnInit{
   ngOnInit(): void {
   this.authSvc.user$.subscribe(user => {
       if(user) this.user = user;
+      console.log(this.user);
 
       this.characterSvc.GetMyCharacter(this.user.id).subscribe(characters => {
         this.user.characters = characters;

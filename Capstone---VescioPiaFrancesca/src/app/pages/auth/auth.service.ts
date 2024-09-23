@@ -78,7 +78,17 @@ export class AuthService {
 
    insertImage(formData: FormData): Observable<iUser>
    {
-      return this.http.patch<iUser>(`${this.UploadUrl}`, formData)
+      return this.http.patch<iUser>(`${this.UploadUrl}`, formData).pipe(tap(user => {
+        if (user) {
+          console.log(user)
+          this.authSubject.next(user)
+          const accessData = this.getAccessData();
+          if(!accessData) return;
+          accessData.user = user;
+          localStorage.setItem('accessData', JSON.stringify(accessData));
+        }
+      }
+    ))
    }
 
    GetUser(id: number): Observable<iUser> {

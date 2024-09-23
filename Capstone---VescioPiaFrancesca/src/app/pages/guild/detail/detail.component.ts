@@ -18,11 +18,6 @@ export class DetailComponent {
       this.guildSvc.guilds$.subscribe(guilds => {
         let guild = guilds.find(g => g.id == params.id);
         if(guild) this.guild = guild;
-        if (this.guild) {
-          this.chacterSvc.characters$.subscribe(characters => {
-            this.guild.members = characters.filter(c => c.guild?.id === this.guild.id);
-          })
-        }
       })
     })
   }

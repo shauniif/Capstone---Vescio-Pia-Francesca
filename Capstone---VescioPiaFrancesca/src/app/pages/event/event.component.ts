@@ -47,15 +47,15 @@ export class EventComponent implements OnInit {
 
     }) */
       this.eventSvc.events$.subscribe((events) => {
-        // Dividi gli eventi in base alla loro posizione
+        console.log(events)
         for (let i = 0; i <events.length; i++) {
           if (i < 3) {
             this.pastEvents.push(events[i]);
             this.displayedPastEvents = [... this.pastEvents]
-          } else if (i >= 3 && i < 5) {
+          } else if (i >= 3 && i < 6) {
             this.currEvents.push(events[i]);
             this.displayedCurrEvents = [... this.currEvents]
-          } else if (i >= 5 && i < 7) {
+          } else if (i >= 6 && i < 9) {
             this.futureEvents.push(events[i]);
 
           }

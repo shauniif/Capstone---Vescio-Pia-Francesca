@@ -46,6 +46,7 @@ export class CreateComponent implements OnInit {
         ecoId: this.fb.control(''),
         userId: this.fb.control(this.user.id, [Validators.required]),
         image: this.fb.control('', [Validators.required]),
+        background: this.fb.control('', [Validators.required]),
       });
     })
 
@@ -74,6 +75,7 @@ export class CreateComponent implements OnInit {
             ecoId: this.character?.eco?.id ? this.character?.eco?.id : '',
             userId: this.user?.id,
             image: '',
+            background: this.character?.background
           });
         })
       }
@@ -109,6 +111,7 @@ export class CreateComponent implements OnInit {
     formData.append('raceId', this.createCharacterForm.get('raceId')?.value);
     formData.append('userId', this.createCharacterForm.get('userId')?.value);
     formData.append('image', this.createCharacterForm.get('image')?.value);
+    formData.append('background', this.createCharacterForm.get('background')?.value);
 
     const guildId = this.createCharacterForm.get('guildId')?.value;
 

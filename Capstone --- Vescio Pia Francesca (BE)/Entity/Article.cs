@@ -19,5 +19,23 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Entity
         public DateTime PublicationDate { get; set; }
 
         public List<Comment> Comments { get; set; } = new List<Comment>();
+
+        public string ShortContent
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Content))
+                {
+                    return string.Empty;
+                }
+
+                if (Content.Length > 75)
+                {
+                    return Content.Substring(0, 75) + "...";
+                }
+
+                return Content;
+            }
+        }
     }
 }

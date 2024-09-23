@@ -20,7 +20,7 @@
     </div>
 
     <div class="px-5 mt-4 text">
-      <p class="text-white contentSty">
+      <p class="text-white contentSty fs-5">
         {{ article.content }}
       </p>
     </div>
@@ -36,7 +36,7 @@
           />
           <div class="ml-3 flex-grow-1">
             <p class="text-white fw-bold ps-3">
-              {{ comment.author.firstName }} {{ comment.author.lastName }}
+              {{ comment.author.username }}
             </p>
             <p class="comment-content ps-3">{{ comment.content }}</p>
           </div>

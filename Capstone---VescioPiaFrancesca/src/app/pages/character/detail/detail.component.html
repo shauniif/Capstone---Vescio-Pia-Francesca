@@ -13,19 +13,25 @@
           <h5 class="card-title fs-1">{{ currCharacter.name }}</h5>
         </div>
       </div>
-
-      <div class="mt-3"></div>
-      <div *ngIf="currCharacter.race">
+      <div class="mt-3">
+        <div *ngIf="currCharacter.race">
+          <p class="fs-4">
+            <span class="fw-bold">Razza: </span> {{ currCharacter.race.name }}
+          </p>
+        </div>
+      </div>
+      <div class="mt-3">
         <p class="fs-4">
-          <span class="fw-bold">Razza: </span> {{ currCharacter.race.name }}
+          <span class="fw-bold">Background: </span>
+          {{ currCharacter.background }}
         </p>
       </div>
 
       <div class="mt-3">
-        <p *ngIf="currCharacter.eco == null">Ateo</p>
+        <p *ngIf="currCharacter.eco == null" class="fs-4">Ateo</p>
         <div *ngIf="currCharacter.eco">
           <a
-            [routerLink]="['/nation/detail', currCharacter.eco.id]"
+            [routerLink]="['/eco/detail', currCharacter.eco.id]"
             class="fs-4 text-decoration-none"
           >
             <span class="fw-bold">Eco: </span>
@@ -42,7 +48,7 @@
         </p>
         <div *ngIf="currCharacter.guild">
           <a
-            [routerLink]="['/nation/detail', currCharacter.guild.id]"
+            [routerLink]="['/guild/detail', currCharacter.guild.id]"
             class="fs-4 text-decoration-none"
           >
             <span class="fw-bold">Gilda: </span>
@@ -55,10 +61,10 @@
         <div class="mt-3"></div>
         <div *ngIf="currCharacter.city">
           <a
-            [routerLink]="['/nation/detail', currCharacter.city.id]"
+            [routerLink]="['/city/detail', currCharacter.city.id]"
             class="fs-4 text-decoration-none"
           >
-            <span class="fw-bold">Gilda: </span>
+            <span class="fw-bold">Città: </span>
             <span class="text-decoration-underline">{{
               currCharacter.city.name
             }}</span>

@@ -16,6 +16,10 @@
                     @Html.DisplayFor(model => model.Name)
                 </h5>
                 <p class="card-text text-light fs-5 mb-2">
+                    <span class="fw-bold infoText">@Html.DisplayNameFor(model => model.Background):</span>
+                    @Html.DisplayFor(model => model.Background)
+                </p>
+                <p class="card-text text-light fs-5 mb-2">
                     <span class="fw-bold infoText">@Html.DisplayNameFor(model => model.Race):</span>
                     @Html.DisplayFor(model => model.Race.Name)
                 </p>

@@ -7,6 +7,7 @@ import { iUser } from "./i-user"
 export interface iCharacter {
   id: number
   name: string
+  background: string
   image: string
   score: number
   guild?: iGuild

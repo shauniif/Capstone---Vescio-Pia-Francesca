@@ -247,6 +247,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
         {
             var user = await GetById(id);
             user.Image = ConvertImage(image);
+            _db.Users.Update(user);
             await _db.SaveChangesAsync();
             return user;
         }
