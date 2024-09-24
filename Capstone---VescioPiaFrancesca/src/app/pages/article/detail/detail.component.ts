@@ -33,9 +33,10 @@ export class DetailComponent implements OnInit {
   }
   ngOnInit(): void {
     this.route.params.subscribe((params:any) => {
-      this.articleSvc.getArticle(params.id).subscribe(article => {
-        this.article = article;
-        this.articleSvc.GetAuthor(article.author.id).subscribe(author =>
+      this.articleSvc.articles$.subscribe(articles => {
+        let article = articles.find(article => article.id == params.id);
+        if(article) this.article = article;
+        this.articleSvc.GetAuthor(this.article.author.id).subscribe(author =>
           {
 
             this.article.author = author;

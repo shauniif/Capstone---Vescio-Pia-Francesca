@@ -267,7 +267,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
                     Password = password
                 };
                 await Login(adminModel);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Profile", "Auth");
             }
 
             return View(userModel);
