@@ -137,6 +137,7 @@ export class CreateComponent implements OnInit {
           {
 
             this.createCharacterForm.reset();
+
             this.router.navigate(['auth/profile']);
           }
         )
@@ -214,5 +215,8 @@ export class CreateComponent implements OnInit {
   }
 
 
+
 }
+
+
 

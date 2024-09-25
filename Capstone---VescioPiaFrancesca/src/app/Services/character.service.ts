@@ -46,9 +46,11 @@ export class CharacterService {
     return this.http.put<iCharacter>(`${this.characterUrl}/${id}`, currCharacter)
   }
 
+
   DeleteCharacter(id:number) {
     return this.http.delete<iCharacter>(`${this.characterUrl}/${id}`);
   }
+
 
 
 }

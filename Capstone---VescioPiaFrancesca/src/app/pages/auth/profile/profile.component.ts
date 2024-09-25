@@ -66,7 +66,6 @@ export class ProfileComponent implements OnInit{
 
   DeleteCharacter(id:number): void {
     this.characterSvc.DeleteCharacter(id).subscribe(() => {
-
       this.user.characters= this.user.characters.filter(c => c.id!== id);
     })
   }

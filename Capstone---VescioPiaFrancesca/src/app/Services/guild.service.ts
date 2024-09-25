@@ -24,7 +24,6 @@ export class GuildService {
     .subscribe((data) => {
       this.guilds = data
       this.CharacterSvc.characters$.subscribe((character) => {
-
         this.guilds.forEach((guild) => {
         guild.members = character.filter((char) => char.guild?.id === guild.id);
         guild.power = 0

@@ -24,7 +24,6 @@ export class GuildComponent {
     this.guildSvc.guilds$.subscribe((guilds) =>{
       this.guilds = guilds;
       this.filteredGuilds = [...this.guilds]
-      console.log(this.guilds)
       })
 
 

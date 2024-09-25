@@ -67,7 +67,7 @@
                 <div class="card-body">
                     <h5 class="card-title text-white">Personaggi</h5>
                     <p class="card-text text-white">Gestisci i personaggi</p>
-                    <a asp-controller="Event" asp-action="AllEvents" class="btn btnHref">Gestisci Personaggi</a>
+                    <a asp-controller="Character" asp-action="AllCharacters" class="btn btnHref">Gestisci Personaggi</a>
                 </div>
             </div>
         </div>
@@ -99,7 +99,10 @@
     
     </div>
     }
-      <div class="row m-0">
+    @if (!(User.Identity?.IsAuthenticated ?? false))
+    {
+        
+    <div class="row m-0">
                 <div class="col-md-6">
                     <div class="card text-center mb-4">
                         <div class="card-body">
@@ -119,4 +122,5 @@
                     </div>
                 </div>
             </div>
+    }
 </div>
