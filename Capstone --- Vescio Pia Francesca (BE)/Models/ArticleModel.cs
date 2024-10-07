@@ -3,11 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Models
 {
-    public class ArticleModel
+    public class ArticleModel : BaseModel
     {
-        public int Id { get; set; }
-        [MinLength(5)]
-        [MaxLength(50)]
         public required string Title { get; set; }
         public IFormFile Image { get; set; }
         public required string Content { get; set; }

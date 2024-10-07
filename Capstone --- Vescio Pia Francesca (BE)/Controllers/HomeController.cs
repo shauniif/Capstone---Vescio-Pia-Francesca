@@ -41,10 +41,10 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
         {
 
            
-                var ecos = await _ecoSvc.GetAllEcos();
+                var ecos = await _ecoSvc.GetAll();
                 var guilds = await _guildSvc.GetAll();
-                var nations = await _nationSvc.GetAllNations();
-                var races = await _racesSvc.GetAllRaces();
+                var nations = await _nationSvc.GetAll();
+                var races = await _racesSvc.GetAll();
                  var characters = await _characterSvc.GetAll();
             var events = await _eventSvc.GetAll();
 
@@ -84,7 +84,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
 
         public async Task<IActionResult> GetUserImage(int id)
         {
-            var user = await _authSvc.GetById(id);
+            var user = await _authSvc.Read(id);
             if (user?.Image == null)
             {
                 return NotFound();

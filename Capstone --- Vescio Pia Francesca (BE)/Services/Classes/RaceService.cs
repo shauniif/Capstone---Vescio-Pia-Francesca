@@ -46,11 +46,11 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             }
             catch (Exception ex)
             {
-                throw new Exception("Role not deleted", ex);
+                throw new Exception("Race not deleted", ex);
             }
         }
 
-        public async Task<IEnumerable<Race>> GetAllRaces()
+        public async Task<IEnumerable<Race>> GetAll()
         {
             try
             {

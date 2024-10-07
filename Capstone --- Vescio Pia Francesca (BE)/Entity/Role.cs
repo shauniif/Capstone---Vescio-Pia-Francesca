@@ -3,10 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Entity
 {
-    public class Role
+    public class Role : BaseEntity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
 
         [Required]
         [StringLength(50)]

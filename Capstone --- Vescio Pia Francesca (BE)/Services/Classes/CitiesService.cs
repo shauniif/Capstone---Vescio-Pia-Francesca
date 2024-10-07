@@ -87,7 +87,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             }
         }
 
-        public async Task<IEnumerable<City>> GetAllCities()
+        public async Task<IEnumerable<City>> GetAll()
         {
             try
             {

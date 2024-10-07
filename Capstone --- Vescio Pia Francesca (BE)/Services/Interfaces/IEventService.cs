@@ -3,20 +3,11 @@ using Capstone_____Vescio_Pia_Francesca__BE_.Entity;
 
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces
 {
-    public interface IEventService
+    public interface IEventService : CrudService<Event, EventModel>
     {
-        Task<Event> Create(EventModel model);
-        Task<Event> Read(int id);
-        Task<Event> Update(EventModel model);
-        Task<Event> Delete(int id);
-        
         Task<EventModel> Get(int id);
-
-        Task<IEnumerable<Event>> GetAll();
-
         Task<IEnumerable<Event>> GetEventsOfTheDay();
         Task<decimal> ChangeModifier(string name, decimal modifier);
-
         Task CalcuateModifier(IEnumerable<Eco> ecos, IEnumerable<Guild> guilds, IEnumerable<Nation> nations, IEnumerable<Race> races, IEnumerable<Character> characters);
     }
 }

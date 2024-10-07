@@ -3,15 +3,11 @@ using Capstone_____Vescio_Pia_Francesca__BE_.Models;
 
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces
 {
-    public interface IEcoService
+    public interface IEcoService : CrudService<Eco, EcoModel>
     {
-        Task<Eco> Create(EcoModel entity);
-        Task<Eco> Update(EcoModel entity);
-        Task<Eco> Delete(int id);
-        Task<Eco> Read(int id);
         Task<Eco> GetEco(int id);
         Task<EcoModel> Get(int id);
-        Task<IEnumerable<Eco>> GetAllEcos();
+        Task<IEnumerable<Eco>> GetAll();
         Task<IEnumerable<Eco>> Search(string query);
     }
 }

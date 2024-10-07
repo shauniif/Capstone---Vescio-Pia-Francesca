@@ -31,7 +31,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
         }
         public async Task<IActionResult> GetUserImage(int id)
         {
-            var user = await _authSvc.GetById(id);
+            var user = await _authSvc.Read(id);
             var defaultImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/default.jpg");
             Console.WriteLine(defaultImagePath);
             if (user?.Image == null)
@@ -121,7 +121,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
         [AllowAnonymous]
             public async Task<IActionResult> DetailNewUser(int id)
             {
-                var user = await _authSvc.GetById(id);
+                var user = await _authSvc.Read(id);
                 return View(user);
             }
 
@@ -193,7 +193,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
         public async Task<IActionResult> DetailUser(int id)
             {
                 // trovo l'user
-                var user = await _authSvc.GetById(id);
+                var user = await _authSvc.Read(id);
                 // mappo i suoi ruoli
                 var userRoles = user.Roles.Select(r => r.Name).ToList();
                 // tutti i ruoli
@@ -240,7 +240,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
 
         public async Task<IActionResult> UpdateUser(int id)
         {
-            var user = await _authSvc.GetById(id);
+            var user = await _authSvc.Read(id);
             var userModel = new UserViewModel
             {
                 Username = user.Username,

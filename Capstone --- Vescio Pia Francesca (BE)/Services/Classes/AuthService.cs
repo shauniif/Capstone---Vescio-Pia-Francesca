@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
 {
-    public class AuthService : IAuthService
+    public class AuthService : ImageToString, IAuthService
     {
         private readonly IPasswordEncoder _passwordEncoder;
         private readonly DataContext _db;
@@ -16,22 +16,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
         {
             _passwordEncoder = passwordEncoder;
             _db = db;
-        }
-
-        private string ConvertImage(IFormFile image)
-        {
-
-            using (MemoryStream memoryStream = new MemoryStream())
-            {
-                image.CopyTo(memoryStream);
-                byte[] fileBytes = memoryStream.ToArray();
-                string base64String = Convert.ToBase64String(fileBytes);
-                string urlImg = $"data:image/jpeg;base64,{base64String}";
-                return urlImg;
-            }
-
-        }
-
+        } 
 
         private string GenerateCode()
         {
@@ -88,7 +73,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
 
         public async Task<User> Delete(int id)
         {
-            var user = await GetById(id);
+            var user = await Read(id);
 
             var articles = await _db.Articles.Where(a => a.Author.Id == user.Id).ToListAsync();
 
@@ -123,7 +108,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             return users;
         }
 
-        public async Task<User> GetById(int id)
+        public async Task<User> Read(int id)
         {
             var user = await _db.Users
                 .Include(u => u.Roles)
@@ -245,7 +230,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
 
         public async Task<User> InsertImage(int id, IFormFile image)
         {
-            var user = await GetById(id);
+            var user = await Read(id);
             user.Image = ConvertImage(image);
             _db.Users.Update(user);
             await _db.SaveChangesAsync();
@@ -255,7 +240,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
 
         public async Task<User> Update(UserViewModel entity)
         {
-            var user = await GetById(entity.Id);
+            var user = await Read(entity.Id);
             user.FirstName = entity.FirstName;
             user.LastName = entity.LastName;
             user.Email = entity.Email;

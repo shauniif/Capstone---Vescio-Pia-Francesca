@@ -3,9 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Models
 {
-    public class UserViewModel
+    public class UserViewModel : BaseModel
     {
-        public int Id { get; set; }
 
         [Required(ErrorMessage = "Il nome è obbligatorio")]
         [StringLength(30)]

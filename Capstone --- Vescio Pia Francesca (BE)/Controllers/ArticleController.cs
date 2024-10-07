@@ -14,11 +14,12 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
     public class ArticleController : Controller
     {
         private readonly IArticleService _articleSvc;
+        private readonly IAuthService _authSvc;
 
-        public ArticleController(IArticleService articleSvc)
+        public ArticleController(IArticleService articleSvc, IAuthService authSvc)
         {
             _articleSvc = articleSvc;
-
+            _authSvc = authSvc;
         }
         public async Task<IActionResult> GetArticleImage(int id)
         {
@@ -33,7 +34,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
         }
         public async Task<IActionResult> AllArticles()
         {
-            var articles = await _articleSvc.GetAllArticles();
+            var articles = await _articleSvc.GetAll();
             return View(articles);
         }
 
@@ -52,9 +53,18 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(ArticleModel article, string name)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                await _articleSvc.Create(article, name);
+                var idClaimString = User.FindFirst("Id")?.Value;
+
+                int idClaim = 0;
+                if (int.TryParse(idClaimString, out int id))
+                {
+                    idClaim = id;
+                }
+                var author = await _authSvc.Read(idClaim);
+                article.Author = author;
+                await _articleSvc.Create(article);
                 return RedirectToAction(nameof(AllArticles));
             }
             return View(article);

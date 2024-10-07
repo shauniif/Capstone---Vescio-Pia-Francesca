@@ -94,7 +94,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUser(int id)
         {
-            var user = await _authSvc.GetById(id);
+            var user = await _authSvc.Read(id);
             var userSel = await _authSvc.CreateUser(user.Id);
             return Ok(userSel);
         }
@@ -104,7 +104,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
         {
             if (ModelState.IsValid)
             {   
-                var Curruser = await _authSvc.GetById(id);
+                var Curruser = await _authSvc.Read(id);
                 if (Curruser != null && Curruser.Id == user.Id)
                 {
                      await _authSvc.Update(user);

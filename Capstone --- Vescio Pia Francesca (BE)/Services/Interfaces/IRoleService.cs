@@ -2,15 +2,8 @@
 
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces
 {
-    public interface IRoleService
+    public interface IRoleService : CrudService<Role, Role>
     {
-        Task<Role> Create(Role entity);
-        Task<Role> Update(Role entity);
-        Task<Role> Delete(int id);
-
-        Task<Role> Read(int id);
-
         Task<Role> RoleAdmin();
-        Task<IEnumerable<Role>> GetAll();
     }
 }

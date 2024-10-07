@@ -62,7 +62,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             }
         }
 
-        public async Task<IEnumerable<Comment>> GetAllComments()
+        public async Task<IEnumerable<Comment>> GetAll()
         {
             try
             {

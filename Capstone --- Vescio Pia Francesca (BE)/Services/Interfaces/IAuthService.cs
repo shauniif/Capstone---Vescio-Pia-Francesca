@@ -3,17 +3,10 @@ using Capstone_____Vescio_Pia_Francesca__BE_.Models;
 
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces
 {
-    public interface IAuthService
+    public interface IAuthService : CrudService<User, UserViewModel>
     {
-        Task<User> Create(UserViewModel entity);
-
-        Task<User> Update(UserViewModel entity);
+      
         Task<User> CreateSubAdmin(UserViewModel entity);
-        Task<User> Delete(int id);
-
-        Task<IEnumerable<User>> GetAll();
-
-        Task<User> GetById(int id);
 
         Task<User> Login(LoginAdminModel entity);
         Task<User> LoginUser(LoginModel entity);

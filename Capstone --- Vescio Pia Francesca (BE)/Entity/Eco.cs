@@ -3,43 +3,17 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Entity
 {
-    public class Eco
+    public class Eco : DescribedModifiableEntity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
 
         public int Position { get; set; }
-
-        [MaxLength(80)]
-        public string Name { get; set; }
-
-        public string Description { get; set; }
-
         public string Pic { get; set; }
 
-        [Column(TypeName = "decimal(18, 2)")]
-        public decimal Modifier { get; set; }
         public Nation? Nation { get; set; }
 
         public List<Character> Devotees = new List<Character>();
 
-        public string ShortDescription
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(Description))
-                {
-                    return string.Empty; 
-                }
-
-                if (Description.Length > 75)
-                {
-                    return Description.Substring(0, 75) + "...";
-                }
-
-                return Description;
-            }
-        }
+      
 
     }
 }

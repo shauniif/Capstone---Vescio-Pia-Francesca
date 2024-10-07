@@ -22,7 +22,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
         }
         public async Task<IActionResult> AllRaces()
         {
-            var races = await _raceSvc.GetAllRaces();
+            var races = await _raceSvc.GetAll();
             return View(races);
         }
 

@@ -23,12 +23,12 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
         }
         public async Task<IActionResult> AllEcos()
         {
-            var ecos = await _ecoSvc.GetAllEcos();
+            var ecos = await _ecoSvc.GetAll();
             return View(ecos);
         }
         public async Task<IActionResult> Create()
        {
-            var nation = await _nationSvc.GetAllNations();
+            var nation = await _nationSvc.GetAll();
             ViewBag.Nations = nation;
             return View();
         }
@@ -42,7 +42,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
                 return RedirectToAction(nameof(AllEcos));
             } 
             else {
-                var nation = await _nationSvc.GetAllNations();
+                var nation = await _nationSvc.GetAll();
                 ViewBag.Nations = nation;
                 return View(eco);
             };
@@ -57,7 +57,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var eco = await _ecoSvc.Get(id);
-            var nations = await _nationSvc.GetAllNations();
+            var nations = await _nationSvc.GetAll();
             ViewBag.Nations = nations;
             return View(eco);
         }
@@ -71,7 +71,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
                 return RedirectToAction(nameof(AllEcos));
             }
             else {
-                var nations = await _nationSvc.GetAllNations();
+                var nations = await _nationSvc.GetAll();
                 ViewBag.Nations = nations;
                 return View(eco);
             };

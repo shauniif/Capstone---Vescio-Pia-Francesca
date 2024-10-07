@@ -6,26 +6,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
 {
-    public class EcoService : IEcoService
+    public class EcoService : ImageToString, IEcoService
     {
         private readonly DataContext _db;
 
         public EcoService(DataContext db)
         {
             _db = db;
-        }
-        private string ConvertImage(IFormFile image)
-        {
-
-            using (MemoryStream memoryStream = new MemoryStream())
-            {
-                image.CopyTo(memoryStream);
-                byte[] fileBytes = memoryStream.ToArray();
-                string base64String = Convert.ToBase64String(fileBytes);
-                string urlImg = $"data:image/jpeg;base64,{base64String}";
-                return urlImg;
-            }
-
         }
         public async Task<Eco> Create(EcoModel entity)
         {
@@ -107,7 +94,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             }
         }
 
-        public async Task<IEnumerable<Eco>> GetAllEcos()
+        public async Task<IEnumerable<Eco>> GetAll()
         {
             try
             {

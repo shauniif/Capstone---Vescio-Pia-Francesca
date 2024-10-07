@@ -21,7 +21,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var ecos = await _ecoSvc.GetAllEcos();
+            var ecos = await _ecoSvc.GetAll();
             var ecosSelect = new List<Eco>();
             foreach (var nation in ecos)
             {

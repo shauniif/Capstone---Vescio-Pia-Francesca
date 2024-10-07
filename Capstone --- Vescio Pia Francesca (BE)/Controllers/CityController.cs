@@ -25,13 +25,13 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
         }
         public async Task<IActionResult> AllCities()
         {
-            var cities = await _citiesSvc.GetAllCities();
+            var cities = await _citiesSvc.GetAll();
             return View(cities);
         }
 
         public async Task<IActionResult> Create()
         {
-            var nation = await _nationSvc.GetAllNations();
+            var nation = await _nationSvc.GetAll();
             ViewBag.Nations = nation;
             return View();
         }
@@ -48,7 +48,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
             }
             else
             {
-                var nations = await _nationSvc.GetAllNations();
+                var nations = await _nationSvc.GetAll();
                 ViewBag.Nations = nations;
                 return View(city);
             }
@@ -57,7 +57,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var city = await _citiesSvc.Get(id);
-            var nations = await _nationSvc.GetAllNations();
+            var nations = await _nationSvc.GetAll();
             ViewBag.Nations = nations;
             return View(city);
         }
@@ -73,7 +73,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
             }
             else
             {
-                var nations = await _nationSvc.GetAllNations();
+                var nations = await _nationSvc.GetAll();
                 ViewBag.Nations = nations;
                 return View(city);
             }

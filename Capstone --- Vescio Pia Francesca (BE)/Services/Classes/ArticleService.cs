@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
 {
-    public class ArticleService : IArticleService
+    public class ArticleService : ImageToString, IArticleService
     {
         private readonly DataContext _db;
 
@@ -14,30 +14,17 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
         {
             _db = db;
         }
-        private string ConvertImage(IFormFile image)
-        {
 
-            using (MemoryStream memoryStream = new MemoryStream())
-            {
-                image.CopyTo(memoryStream);
-                byte[] fileBytes = memoryStream.ToArray();
-                string base64String = Convert.ToBase64String(fileBytes);
-                string urlImg = $"data:image/jpeg;base64,{base64String}";
-                return urlImg;
-            }
-
-        }
-        public async Task<Article> Create(ArticleModel model, string name)
+        public async Task<Article> Create(ArticleModel model)
         {   try
             {
-                var author = await _db.Users.FirstOrDefaultAsync(u => u.FirstName == name);
                 var article = new Article
                 {
                     Title = model.Title,
                     Content = model.Content,
                     PublicationDate = DateTime.Now,
                     Image = ConvertImage(model.Image),
-                    Author = author
+                    Author = model.Author,
                 };
                 await _db.Articles.AddAsync(article);
                 await _db.SaveChangesAsync();
@@ -65,7 +52,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             
         }
 
-        public async Task<IEnumerable<Article>> GetAllArticles()
+        public async Task<IEnumerable<Article>> GetAll()
         {
             try
             {

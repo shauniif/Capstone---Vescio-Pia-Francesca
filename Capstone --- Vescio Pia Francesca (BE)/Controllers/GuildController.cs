@@ -29,7 +29,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
 
             public async Task<IActionResult> Create() 
             {
-                var nation = await _nationSvc.GetAllNations();
+                var nation = await _nationSvc.GetAll();
                 ViewBag.Nations = nation;
                 return View();
             }
@@ -43,7 +43,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
                     return RedirectToAction(nameof(AllGuilds));
                 }
                 else {
-                    var nations = await _nationSvc.GetAllNations();
+                    var nations = await _nationSvc.GetAll();
                     ViewBag.Nations = nations;
                     return View(guild);
                 }
@@ -59,7 +59,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
             public async Task<IActionResult> Edit(int id) 
             {
                 var guild = await _guildSvc.Get(id);
-                var nations = await _nationSvc.GetAllNations();
+                var nations = await _nationSvc.GetAll();
                 ViewBag.Nations = nations;
                 return View(guild);
             }
@@ -75,7 +75,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
                 }
                 else
                 {
-                    var nation = await _nationSvc.GetAllNations();
+                    var nation = await _nationSvc.GetAll();
                     ViewBag.Nations = nation;
                     return View(guild);
                 }

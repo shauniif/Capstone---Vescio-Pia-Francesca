@@ -21,7 +21,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
         [HttpGet]
         public async Task<IActionResult> AllCities()
         {
-            var cities = await _citiesSvc.GetAllCities();
+            var cities = await _citiesSvc.GetAll();
             var citiesSel = new List<City>();
             foreach (var city in cities) 
             {

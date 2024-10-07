@@ -27,7 +27,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
         
         public async Task<IActionResult> GetAll()
         {
-                var nations = await _nationSvc.GetAllNations();
+                var nations = await _nationSvc.GetAll();
             var nationsSelect = new List<Nation>();
                 foreach (var nation in nations) {
                 var nationSel= await _nationSvc.GetNation(nation.Id);

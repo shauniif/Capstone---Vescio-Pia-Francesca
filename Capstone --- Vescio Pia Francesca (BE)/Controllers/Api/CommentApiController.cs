@@ -28,7 +28,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var comments = await _commentSvc.GetAllComments();
+            var comments = await _commentSvc.GetAll();
             return Ok(comments);
         }
 

@@ -3,11 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Entity
 {
-    public class Article
+    public class Article : BaseEntity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
         [MinLength(5)]
         [MaxLength(50)]
         public required string Title { get; set; }

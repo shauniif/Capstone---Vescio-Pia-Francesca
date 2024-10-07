@@ -11,7 +11,7 @@ using System.Reflection.PortableExecutable;
 
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
 {
-    public class NationService : INationService
+    public class NationService : ImageToString, INationService
     {
         private readonly DataContext _db;
 
@@ -19,23 +19,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
         {
             _db = db;
         }
-        private string ConvertImage(IFormFile image)
-        {
-
-            using (MemoryStream memoryStream = new MemoryStream())
-            {
-                image.CopyTo(memoryStream);
-                byte[] fileBytes = memoryStream.ToArray();
-                string base64String = Convert.ToBase64String(fileBytes);
-                string urlImg = $"data:image/jpeg;base64,{base64String}";
-                return urlImg;
-            }
-
-        }
-
         
-
-
         public async Task<Nation> Create(NationModel entity)
         {
             try
@@ -90,7 +74,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             }
         }
 
-        public async Task<IEnumerable<Nation>> GetAllNations()
+        public async Task<IEnumerable<Nation>> GetAll()
         {
             try
             {
@@ -168,7 +152,6 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                 nationModel.Description = nation.Description;
                 nationModel.FormOfGovernment = nation.FormOfGovernment;
                 nationModel.Modifier = nation.Modifier;
-                nationModel.Cities = nation.Cities;
                 return nationModel;
             }
             catch (Exception ex)

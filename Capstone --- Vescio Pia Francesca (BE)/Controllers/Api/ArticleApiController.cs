@@ -25,7 +25,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
                 [AllowAnonymous]
         public async Task<IActionResult> AllArticles()
         {
-            var articles = await _articleSvc.GetAllArticles();
+            var articles = await _articleSvc.GetAll();
             var articlesSelet = new List<Article>();
             foreach (var article in articles) 
             {
@@ -47,7 +47,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
 
         public async Task<IActionResult> GetAuthor(int id)
         {
-            var author = await _authSvc.GetById(id);
+            var author = await _authSvc.Read(id);
             var authorSel = await _authSvc.CreateUser(author.Id);
             return Ok(authorSel);
         }

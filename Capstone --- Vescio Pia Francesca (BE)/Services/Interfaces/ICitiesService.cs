@@ -3,18 +3,10 @@ using Capstone_____Vescio_Pia_Francesca__BE_.Models;
 
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces
 {
-    public interface ICitiesService
-    {
-        Task<City> Create(CityModel entity);
-        Task<City> Read(int id);
+    public interface ICitiesService : CrudService<City, CityModel>
+    {      
         Task<CityModel> Get(int id);
         Task<City> GetCity(int id);
-
-        Task<City> Update(CityModel entity);
-
-        Task<City> Delete(int id);
-
-        Task<IEnumerable<City>> GetAllCities();
 
         Task<IEnumerable<City>> Search(string query);
     }
