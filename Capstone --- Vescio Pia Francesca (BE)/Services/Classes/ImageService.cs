@@ -1,6 +1,8 @@
-﻿namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
+﻿using Capstone_____Vescio_Pia_Francesca__BE_.Entity;
+
+namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
 {
-    public class ImageToString
+    public class ImageService
     {
         protected string ConvertImage(IFormFile image)
         {
@@ -15,5 +17,7 @@
             }
 
         }
+
+      
     }
 }

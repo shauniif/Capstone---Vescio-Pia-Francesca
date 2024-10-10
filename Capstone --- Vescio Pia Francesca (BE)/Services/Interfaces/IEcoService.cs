@@ -7,7 +7,6 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces
     {
         Task<Eco> GetEco(int id);
         Task<EcoModel> Get(int id);
-        Task<IEnumerable<Eco>> GetAll();
         Task<IEnumerable<Eco>> Search(string query);
     }
 }

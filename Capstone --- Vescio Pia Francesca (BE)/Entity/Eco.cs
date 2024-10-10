@@ -13,7 +13,6 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Entity
 
         public List<Character> Devotees = new List<Character>();
 
-      
 
     }
 }

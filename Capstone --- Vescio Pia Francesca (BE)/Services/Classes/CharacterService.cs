@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
 {
-    public class CharacterService : ImageToString, ICharacterService
+    public class CharacterService : ImageService, ICharacterService
     {
         private readonly DataContext _db;
 
@@ -100,12 +100,13 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                         .Include(c => c.Race)
                         .Include(c => c.Eco)
                         .Include(c => c.User)
+                    .AsNoTracking()
                     .ToListAsync();
                 return characters;
             }
             catch (Exception ex)
             {
-                throw new Exception("Comments not found", ex);
+                throw new Exception("Characters not found", ex);
             }
         }
 

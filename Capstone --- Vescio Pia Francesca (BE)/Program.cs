@@ -52,6 +52,7 @@ builder.Services
     .AddScoped<IArticleService, ArticleService>()
     .AddScoped<ICommentService, CommentService>()
     .AddScoped<ICharacterService, CharacterService>()
+    
     .AddScoped<DbContext, DataContext>()
     ;
 string key = builder.Configuration["Jwt:Key"]!;

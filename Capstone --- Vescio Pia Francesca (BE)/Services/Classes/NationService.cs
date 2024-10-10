@@ -11,7 +11,7 @@ using System.Reflection.PortableExecutable;
 
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
 {
-    public class NationService : ImageToString, INationService
+    public class NationService : ImageService, INationService
     {
         private readonly DataContext _db;
 
@@ -79,9 +79,6 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             try
             {
                 var nations = await _db.Nations
-                    .Include(n => n.Ecos)
-                    .Include(n => n.Guilds)
-                    .Include(n => n.Cities)
                     .ToListAsync();
                 return nations;
             }
@@ -97,6 +94,8 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             {
                 var nation = await _db.Nations
                     .Include(n => n.Cities)
+                    .Include(n => n.Ecos)
+                    .Include(n => n.Guilds)
                     .SingleOrDefaultAsync(i => i.Id == id);
 
                 if (nation == null)

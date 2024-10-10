@@ -7,7 +7,7 @@ using Microsoft.Extensions.Options;
 
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
 {
-    public class EventService : ImageToString, IEventService
+    public class EventService : ImageService, IEventService
     {
      
         private readonly DataContext _db;
@@ -141,7 +141,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             try
             {
                 var today = DateTime.Today.Date;
-                var events = await _db.Events.Where(e => e.Date == today).ToListAsync();
+                var events = await _db.Events.Where(e => e.Date.Date == today).ToListAsync();
                 return events;
             }
             catch (Exception ex)
@@ -150,67 +150,55 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             }
         }
 
-        public async Task<decimal> ChangeModifier(string name, decimal modifier)
+        public async Task<decimal> ChangeModifier(string name, decimal entityModifier, Event currEvent)
         {
-            var events = await GetEventsOfTheDay();
-            
-            foreach (var e in events)
-            { 
-                if(e.IsChanged != null)
-                {
 
-                if ( e.IsChanged == false && e.Influence.ToLower().Trim().Contains(name.ToLower().Trim()))
-                {
-                    modifier += e.Modifier;
-                    e.IsChanged = true;
-                }
-                }
+            if (name.ToLower().Trim().Contains(currEvent.Influence.ToLower().Trim()))
+            {
+                entityModifier += currEvent.Modifier;
             }
-            await _db.SaveChangesAsync();
-            return modifier;
+            
+            return entityModifier;
         }
+
+        private async Task UpdateModifiersAsync<T>(IEnumerable<T> entities, Func<T, string> getName, Func<T, decimal> getModifier, Action<T, decimal> setModifier, Event e) where T : BaseEntity
+        {
+            foreach (var entity in entities)
+            {
+                var newModifier = await ChangeModifier(getName(entity), getModifier(entity), e);
+                setModifier(entity, newModifier);
+            }
+        }
+
 
         public async Task CalcuateModifier(IEnumerable<Eco> ecos, IEnumerable<Guild> guilds, IEnumerable<Nation> nations, IEnumerable<Race> races, IEnumerable<Character> characters)
         {
-            foreach (var eco in ecos)
+            var events = await GetEventsOfTheDay();
+
+            foreach (var e in events)
             {
-                eco.Modifier = await ChangeModifier(eco.Name, eco.Modifier);
-            }
-            foreach (var guild in guilds)
-            {
-                guild.Modifier = await ChangeModifier(guild.Name, guild.Modifier);
-            }
-            foreach (var nation in nations)
-            {
-                nation.Modifier = await ChangeModifier(nation.Name, nation.Modifier);
-            }
-            foreach (var race in races)
-            {
-                race.Modifier = await ChangeModifier(race.Name, race.Modifier);
+                if (e.IsChanged != null && e.IsChanged == false)
+                {
+                   
+                    await UpdateModifiersAsync(ecos, eco => eco.Name, eco => eco.Modifier, (eco, newModifier) => eco.Modifier = newModifier, e);
+                    await UpdateModifiersAsync(guilds, guild => guild.Name, guild => guild.Modifier, (guild, newModifier) => guild.Modifier = newModifier, e);
+                    await UpdateModifiersAsync(nations, nation => nation.Name, nation => nation.Modifier, (nation, newModifier) => nation.Modifier = newModifier, e);
+                    await UpdateModifiersAsync(races, race => race.Name, race => race.Modifier, (race, newModifier) => race.Modifier = newModifier, e);
+
+                    
+                    foreach (var character in characters)
+                    {
+                        character.Score = await _characterSvc.ChangeScore(character.Id);
+                    }
+
+                    
+                    e.IsChanged = true;
+                }
             }
 
-            foreach (var character in characters)
-            {
-                Console.WriteLine($"{character.Id}:{character.Score} prima:");
-
-            };
-            foreach (var character in characters)
-            {
-                character.Score = await _characterSvc.ChangeScore(character.Id);
-                Console.WriteLine($"{character.Id}:{character.Score} durante:");
-            };
-
-            foreach (var character in characters)
-            {
-                Console.WriteLine($"{character.Id}:{character.Score} dopo:");
-
-            }
             await _db.SaveChangesAsync();
-            foreach (var character in characters)
-            {
-                Console.WriteLine($"{character.Id}:{character.Score} dopo salvataggio:");
 
-            };
+
         }
     }
 }

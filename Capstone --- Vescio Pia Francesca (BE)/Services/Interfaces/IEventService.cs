@@ -7,7 +7,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces
     {
         Task<EventModel> Get(int id);
         Task<IEnumerable<Event>> GetEventsOfTheDay();
-        Task<decimal> ChangeModifier(string name, decimal modifier);
+        Task<decimal> ChangeModifier(string name, decimal entityModifier, Event currEvent);
         Task CalcuateModifier(IEnumerable<Eco> ecos, IEnumerable<Guild> guilds, IEnumerable<Nation> nations, IEnumerable<Race> races, IEnumerable<Character> characters);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Capstone_____Vescio_Pia_Francesca__BE_.Entity;
 using Capstone_____Vescio_Pia_Francesca__BE_.Models;
+using Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes;
 using Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces;
 using Capstone_____Vescio_Pia_Francesca__BE_.Views;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -15,12 +16,11 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
     {
         private readonly INationService _nationSvc;
         private readonly IEventService _eventSvc;
-
+ 
         public NationController(INationService nationSvc, IEventService eventSvc)
         {
             _nationSvc = nationSvc;
             _eventSvc = eventSvc;
-
         }
         public async Task<IActionResult> AllNations()
         {
@@ -86,10 +86,11 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
             var nation = await _nationSvc.Read(id);
             if (nation?.Photo == null)
             {
-                return NotFound(); 
+                return NotFound();
             }
-            var nationPhotodata = nation.Photo.Substring(23);
-            byte[] imageBytes = Convert.FromBase64String(nationPhotodata);
+            var userImgData = nation?.Photo.Substring(23);
+            byte[] imageBytes = Convert.FromBase64String(userImgData);
+
             return File(imageBytes, "image/jpeg");
         }
     }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
 {
-    public class EcoService : ImageToString, IEcoService
+    public class EcoService : ImageService, IEcoService
     {
         private readonly DataContext _db;
 

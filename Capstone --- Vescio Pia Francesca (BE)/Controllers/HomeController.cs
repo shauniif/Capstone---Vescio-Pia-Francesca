@@ -45,15 +45,10 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
                 var guilds = await _guildSvc.GetAll();
                 var nations = await _nationSvc.GetAll();
                 var races = await _racesSvc.GetAll();
-                 var characters = await _characterSvc.GetAll();
-            var events = await _eventSvc.GetAll();
+                var characters = await _characterSvc.GetAll();
+   
+                await _eventSvc.CalcuateModifier(ecos, guilds, nations, races, characters);
 
-            foreach (var e in events) { 
-                if(e.Date.Date == DateTime.Now.Date && !(e.IsChanged ?? false))
-                {
-                    await _eventSvc.CalcuateModifier(ecos, guilds, nations, races, characters);
-                };
-            }
 
             return View();
         }
