@@ -21,15 +21,25 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
         {
             try
             {
+                var defaulrole = await _db.GuildRole.FirstOrDefaultAsync(r => r.Name == "Membro");
                 Eco eco = null;
                 Guild guild = null;
+                CharacterGuildRole guildRole = null;
+
                 if (dto.GuildId != null) {
                      guild = await _db.Guilds.FirstOrDefaultAsync(g => g.Id == dto.GuildId);
+                    guildRole = new CharacterGuildRole
+                    {
+                        Guild = guild,
+                        Role =  defaulrole,
+
+                    };
                     if (guild == null)
                     {
                         throw new Exception("Guild not found");
                     }
                 }
+
                 
                 if(dto.EcoId != null)
                 {
@@ -58,6 +68,10 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                 {
                     throw new Exception("User not found");
                 }
+
+                
+                
+
                 var character = new Character
                 {
                     Name = dto.Name,

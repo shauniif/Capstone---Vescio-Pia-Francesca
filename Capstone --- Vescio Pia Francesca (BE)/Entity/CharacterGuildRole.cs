@@ -1,6 +1,6 @@
 ﻿namespace Capstone_____Vescio_Pia_Francesca__BE_.Entity
 {
-    public class GuildCharacterRole
+    public class CharacterGuildRole : BaseEntity
     {
         public Guild Guild { get; set; }
 
