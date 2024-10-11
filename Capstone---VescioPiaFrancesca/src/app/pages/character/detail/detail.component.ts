@@ -17,7 +17,6 @@ export class DetailComponent implements OnInit {
     this.route.params.subscribe((params: any) => {
       this.characterSvc.characters$.subscribe(characters => {
         this.currCharacter = characters.find(character => character.id == params.id);
-
       })
     })
   }

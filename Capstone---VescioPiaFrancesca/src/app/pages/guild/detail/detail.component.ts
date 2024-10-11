@@ -12,6 +12,7 @@ import { CharacterService } from '../../../Services/character.service';
 export class DetailComponent {
 
   guild!: iGuild
+
   constructor(private route:ActivatedRoute, private guildSvc: GuildService, private chacterSvc: CharacterService) {}
   ngOnInit(): void {
     this.route.params.subscribe((params:any) => {

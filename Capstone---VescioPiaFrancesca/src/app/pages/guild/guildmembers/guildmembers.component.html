@@ -1,0 +1,18 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Immagine</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Background</th>
+      <th scope="col">Eco</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let character of characters">
+      <td><img [src]="character.image" /></td>
+      <td>{{ character.name }}</td>
+      <td>{{ character.background }}</td>
+      <td>{{ character.eco?.name }}</td>
+    </tr>
+  </tbody>
+</table>

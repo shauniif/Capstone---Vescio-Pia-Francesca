@@ -1,74 +1,76 @@
-<div class="p-5 bg">
-  <div class="row">
-    <div class="col-12 col-md-4">
-      <img
-        [src]="currCharacter.image"
-        class="card-img-top"
-        alt="Nation_image"
-      />
-    </div>
-    <div class="col-12 col-md-8 text-white">
-      <div class="card-body flex-grow-1">
-        <div class="border-bottom">
-          <h5 class="card-title fs-1">{{ currCharacter.name }}</h5>
-        </div>
+<div *ngIf="currCharacter">
+  <div class="p-5 bg">
+    <div class="row">
+      <div class="col-12 col-md-4">
+        <img
+          [src]="currCharacter.image"
+          class="card-img-top"
+          alt="Nation_image"
+        />
       </div>
-      <div class="mt-3">
-        <div *ngIf="currCharacter.race">
+      <div class="col-12 col-md-8 text-white">
+        <div class="card-body flex-grow-1">
+          <div class="border-bottom">
+            <h5 class="card-title fs-1">{{ currCharacter.name }}</h5>
+          </div>
+        </div>
+        <div class="mt-3">
+          <div *ngIf="currCharacter.race">
+            <p class="fs-4">
+              <span class="fw-bold">Razza: </span> {{ currCharacter.race.name }}
+            </p>
+          </div>
+        </div>
+        <div class="mt-3">
           <p class="fs-4">
-            <span class="fw-bold">Razza: </span> {{ currCharacter.race.name }}
+            <span class="fw-bold">Background: </span>
+            {{ currCharacter.background }}
           </p>
         </div>
-      </div>
-      <div class="mt-3">
-        <p class="fs-4">
-          <span class="fw-bold">Background: </span>
-          {{ currCharacter.background }}
-        </p>
-      </div>
 
-      <div class="mt-3">
-        <p *ngIf="currCharacter.eco == null" class="fs-4">Ateo</p>
-        <div *ngIf="currCharacter.eco">
-          <a
-            [routerLink]="['/eco/detail', currCharacter.eco.id]"
-            class="fs-4 text-decoration-none"
-          >
-            <span class="fw-bold">Eco: </span>
-            <span class="text-decoration-underline">{{
-              currCharacter.eco.name
-            }}</span>
-          </a>
-        </div>
-      </div>
-
-      <div class="mt-3">
-        <p *ngIf="currCharacter.guild == null">
-          Non appartiene a nessuna gilda
-        </p>
-        <div *ngIf="currCharacter.guild">
-          <a
-            [routerLink]="['/guild/detail', currCharacter.guild.id]"
-            class="fs-4 text-decoration-none"
-          >
-            <span class="fw-bold">Gilda: </span>
-            <span class="text-decoration-underline">{{
-              currCharacter.guild.name
-            }}</span>
-          </a>
+        <div class="mt-3">
+          <p *ngIf="currCharacter.eco == null" class="fs-4">Ateo</p>
+          <div *ngIf="currCharacter.eco">
+            <a
+              [routerLink]="['/eco/detail', currCharacter.eco.id]"
+              class="fs-4 text-decoration-none"
+            >
+              <span class="fw-bold">Eco: </span>
+              <span class="text-decoration-underline">{{
+                currCharacter.eco.name
+              }}</span>
+            </a>
+          </div>
         </div>
 
-        <div class="mt-3"></div>
-        <div *ngIf="currCharacter.city">
-          <a
-            [routerLink]="['/city/detail', currCharacter.city.id]"
-            class="fs-4 text-decoration-none"
-          >
-            <span class="fw-bold">Città: </span>
-            <span class="text-decoration-underline">{{
-              currCharacter.city.name
-            }}</span>
-          </a>
+        <div class="mt-3">
+          <p *ngIf="currCharacter.guild == null">
+            Non appartiene a nessuna gilda
+          </p>
+          <div *ngIf="currCharacter.guild">
+            <a
+              [routerLink]="['/guild/detail', currCharacter.guild.id]"
+              class="fs-4 text-decoration-none"
+            >
+              <span class="fw-bold">Gilda: </span>
+              <span class="text-decoration-underline">{{
+                currCharacter.guild.name
+              }}</span>
+            </a>
+          </div>
+
+          <div class="mt-3"></div>
+          <div *ngIf="currCharacter.city">
+            <a
+              [routerLink]="['/city/detail', currCharacter.city.id]"
+              class="fs-4 text-decoration-none"
+            >
+              <span class="fw-bold">Città: </span>
+              <span class="text-decoration-underline">{{
+                currCharacter.city.name
+              }}</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>

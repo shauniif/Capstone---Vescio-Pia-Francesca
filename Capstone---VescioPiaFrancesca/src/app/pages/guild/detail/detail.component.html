@@ -34,10 +34,15 @@
             </a>
           </div>
           <div *ngIf="guild.members" class="fs-4 colorMembers">
-            <span class="fw-bold">Numeri dei membri della gilda: </span>
-            <span class="text-decoration-underline">{{
-              guild.members.length
-            }}</span>
+            <p>
+              <span class="fw-bold">Numeri dei membri della gilda: </span>
+              <span class="text-decoration-underline">{{
+                guild.members.length
+              }}</span>
+            </p>
+            <a class="btn btnBack" [routerLink]="['/guild/members', guild.id]">
+              Vedi tutti i membri</a
+            >
           </div>
         </div>
       </div>

@@ -6,12 +6,14 @@ import { GuildComponent } from './guild.component';
 import { DetailComponent } from './detail/detail.component';
 import { SharedModule } from '../../shared/shared.module';
 import { NgbCollapse } from '@ng-bootstrap/ng-bootstrap';
+import { GuildmembersComponent } from './guildmembers/guildmembers.component';
 
 
 @NgModule({
   declarations: [
     GuildComponent,
-    DetailComponent
+    DetailComponent,
+    GuildmembersComponent
   ],
   imports: [
     CommonModule,
