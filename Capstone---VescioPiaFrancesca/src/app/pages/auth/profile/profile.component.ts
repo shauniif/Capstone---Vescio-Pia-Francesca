@@ -22,9 +22,8 @@ export class ProfileComponent implements OnInit{
       if(user) this.user = user;
       console.log(this.user);
 
-      this.characterSvc.GetMyCharacter(this.user.id).subscribe(characters => {
-        this.user.characters = characters;
-
+      this.characterSvc.characters$.subscribe(characters => {
+        this.user.characters = characters.filter(character => character.user.id == this.user.id);
       })
       this.imageForm = this.fb.group({
         id: this.fb.control(this.user.id, [Validators.required]),
@@ -38,7 +37,6 @@ export class ProfileComponent implements OnInit{
 
   onFileSelected(event: any): void {
     const file = event.target.files[0];
-
     this.imageForm.patchValue({ image: file });
     this.imageForm.get('image')?.updateValueAndValidity();
 

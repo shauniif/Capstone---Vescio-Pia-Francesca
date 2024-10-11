@@ -86,11 +86,8 @@ export class EventComponent implements OnInit {
   } if(type == "second") {
     if (this.showMore2) {
       this.displayedPastEvents = this.pastEvents;
-
-
     } else {
       this.displayedPastEvents = this.pastEvents.slice(0, this.initialDisplayCountP);
-
     }
   }
 }

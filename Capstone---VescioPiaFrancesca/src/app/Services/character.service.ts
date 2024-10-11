@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { iCharacter } from '../interfaces/i-character';
 import { ICharacterCreate } from '../interfaces/i-character-create';
 
@@ -39,16 +39,31 @@ export class CharacterService {
 
 
   CreateCharacter(newCharacter: FormData) : Observable<iCharacter>{
-    return this.http.post<iCharacter>(`${this.characterUrl}/Create`, newCharacter)
+    return this.http.post<iCharacter>(`${this.characterUrl}/Create`, newCharacter).pipe(
+      tap((newChar) => {
+        this.characters.push(newChar);
+        this.charactersSubject.next(this.characters);
+      })
+    )
   }
 
   UpdateCharacter(id:number,currCharacter: FormData) : Observable<iCharacter>{
-    return this.http.put<iCharacter>(`${this.characterUrl}/${id}`, currCharacter)
+    return this.http.put<iCharacter>(`${this.characterUrl}/${id}`, currCharacter).pipe(
+      tap((updatedChar) => {
+        const index = this.characters.findIndex(c => c.id === updatedChar.id);
+        this.characters[index] = updatedChar;
+        this.charactersSubject.next(this.characters);
+      })
+    )
   }
 
 
   DeleteCharacter(id:number) {
-    return this.http.delete<iCharacter>(`${this.characterUrl}/${id}`);
+    return this.http.delete<iCharacter>(`${this.characterUrl}/${id}`).pipe(
+      tap(() => {
+        this.characters = this.characters.filter(c => c.id !== id);
+        this.charactersSubject.next(this.characters);
+      }));
   }
 
 

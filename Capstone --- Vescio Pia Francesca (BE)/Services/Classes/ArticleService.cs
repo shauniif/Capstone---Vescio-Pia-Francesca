@@ -153,23 +153,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                                  Email=c.Author.Email,
                                  Username = c.Author.Username
                              },
-                             PublicationDate = c.PublicationDate,
-                             Article = new Article
-                             {
-                                 Id = c.Article.Id,
-                                 Title = c.Article.Title,
-                                 Content = c.Article.Content,
-                                 Author = new User
-                                 {
-                                     Id = a.Author.Id,
-                                     FirstName = a.Author.FirstName,
-                                     LastName = a.Author.LastName,
-                                     DateBirth = a.Author.DateBirth,
-                                     Email = a.Author.Email,
-                                     Username = a.Author.Username
-                                 },
-                                 Image = c.Article.Image
-                             }
+                             PublicationDate = c.PublicationDate, 
                          }).ToList()
                       }).FirstOrDefaultAsync(c => c.Id == id);
             if (article == null)

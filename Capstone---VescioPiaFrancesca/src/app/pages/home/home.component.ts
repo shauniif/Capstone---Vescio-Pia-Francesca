@@ -8,6 +8,7 @@ import { EcosService } from '../../Services/ecos.service';
 import { iArticle } from '../../interfaces/i-article';
 import { iEvent } from '../../interfaces/i-event';
 import { AuthService } from '../auth/auth.service';
+import { CharacterService } from '../../Services/character.service';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +21,7 @@ export class HomeComponent implements OnInit  {
   articles: iArticle[] = [];
   events: iEvent[] = [];
   isLoggedIn:boolean = false;
-  constructor(private nationSvc: NationsService, private citySvc: CityService, private guildSvc: GuildService, private eventSvc: EventService, private ecoSvc: EcosService, private ArticleSvc: ArticleService, private authSvc: AuthService) {}
+  constructor(private nationSvc: NationsService, private citySvc: CityService, private guildSvc: GuildService, private eventSvc: EventService, private ecoSvc: EcosService, private ArticleSvc: ArticleService, private authSvc: AuthService, private characterService: CharacterService) {}
 
 
   ngOnInit(): void {

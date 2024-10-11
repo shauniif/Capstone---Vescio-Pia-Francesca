@@ -11,12 +11,12 @@ import { CharacterService } from '../../../Services/character.service';
 })
 export class DetailComponent implements OnInit {
 
-  currCharacter!: iCharacter;
+  currCharacter!: iCharacter | undefined;
   constructor(private characterSvc: CharacterService, private route: ActivatedRoute) { }
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
-      this.characterSvc.GetCharacter(params.id).subscribe(character => {
-        this.currCharacter = character;
+      this.characterSvc.characters$.subscribe(characters => {
+        this.currCharacter = characters.find(character => character.id == params.id);
 
       })
     })

@@ -45,11 +45,5 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
             var nationSel = await _nationSvc.GetNation(nation.Id);
             return Ok(nationSel);
         }
-
-        [HttpGet("test")]
-        public IActionResult Test()
-        {
-            return Ok("Test funzionante");
-        }
     }
 }

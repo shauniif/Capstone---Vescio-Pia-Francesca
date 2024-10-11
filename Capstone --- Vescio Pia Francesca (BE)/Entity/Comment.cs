@@ -17,7 +17,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Entity
         public required User Author { get; set; }
 
         [Required]
-        public required Article Article { get; set; }
+        public Article Article { get; set; }
 
         public DateTime PublicationDate { get; set; } = DateTime.Now;
     }
