@@ -18,7 +18,6 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Context
         public virtual DbSet<Character> Characters { get; set; }
         public virtual DbSet<Race> Races { get; set; }
         public virtual DbSet<Event> Events { get; set; }
-
         public virtual DbSet<GuildRole> GuildRole {  get; set; }
 
         public DataContext(DbContextOptions<DataContext> opt) : base(opt) { }

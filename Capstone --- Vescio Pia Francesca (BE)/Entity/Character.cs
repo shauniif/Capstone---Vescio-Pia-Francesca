@@ -26,6 +26,6 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Entity
 
         public string Background { get; set; }
 
-        
+        public GuildRole? Role { get; set; }
     }
 }
