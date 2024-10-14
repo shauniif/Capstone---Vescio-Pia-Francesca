@@ -6,7 +6,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Entity
     public class Guild : DescribedModifiableEntity
     {
         public Nation Nation { get; set; }
-        public List<Character> Character { get; set; } = new List<Character>();
+        public ICollection<Character> Characters { get; set; } 
 
     }
 }

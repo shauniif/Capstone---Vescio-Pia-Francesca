@@ -1,3 +1,56 @@
+<h4 class="text-white">Ruoli della gilda</h4>
+<div *ngFor="let guildRole of guildRoles">
+  <p class="text-white">{{ guildRole.name }}</p>
+  <p class="text-white">{{ guildRole.modifier }}</p>
+</div>
+<button class="btn btn-primary" (click)="open(roleModal)">
+  Aggiungi un ruolo
+</button>
+
+<ng-template #roleModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Aggiungi un Ruolo</h5>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+
+  <div class="modal-body">
+    <form [formGroup]="guildRoleForm">
+      <div class="mb-3">
+        <label for="roleName" class="form-label">Nome del Ruolo</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="name"
+          required
+        />
+        <span *ngIf="isTouchedInvalid('name')">Nome ruolo mancante</span>
+      </div>
+      <div class="mb-3">
+        <label for="roleModifier" class="form-label">Modificatore</label>
+        <input
+          type="number"
+          class="form-control"
+          formControlName="modifier"
+          required
+        />
+        <span *ngIf="isTouchedInvalid('modifier')">Modificatore mancante</span>
+      </div>
+      <button
+        type="submit"
+        class="btn btn-primary"
+        (click)="createorUpdateRole()"
+      >
+        Aggiungi Ruolo
+      </button>
+    </form>
+  </div>
+</ng-template>
+
 <table class="table">
   <thead>
     <tr>
@@ -5,14 +58,18 @@
       <th scope="col">Nome</th>
       <th scope="col">Background</th>
       <th scope="col">Eco</th>
+      <th scope="col">Ruolo</th>
+      <th scope="col">Azioni</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let character of characters">
-      <td><img [src]="character.image" /></td>
+      <td><img [src]="character.image" class="card-img" /></td>
       <td>{{ character.name }}</td>
       <td>{{ character.background }}</td>
       <td>{{ character.eco?.name }}</td>
+      <td></td>
+      <td></td>
     </tr>
   </tbody>
 </table>

@@ -34,5 +34,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers
             var character = await _characterSvc.Read(id);
             return View(character);
         }
+
+        
     }
 }

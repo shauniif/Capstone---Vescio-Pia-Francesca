@@ -52,6 +52,7 @@ builder.Services
     .AddScoped<IArticleService, ArticleService>()
     .AddScoped<ICommentService, CommentService>()
     .AddScoped<ICharacterService, CharacterService>()
+    .AddScoped<IGuildRoleService, GuildRoleService>()
     
     .AddScoped<DbContext, DataContext>()
     ;

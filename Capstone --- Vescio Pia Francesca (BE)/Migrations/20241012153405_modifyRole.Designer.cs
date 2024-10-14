@@ -4,6 +4,7 @@ using Capstone_____Vescio_Pia_Francesca__BE_.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Capstone_____Vescio_Pia_Francesca__BE_.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20241012153405_modifyRole")]
+    partial class modifyRole
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,9 +80,6 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Migrations
                     b.Property<int?>("GuildId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("GuildRoleId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Image")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -105,8 +105,6 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Migrations
                     b.HasIndex("EcoId");
 
                     b.HasIndex("GuildId");
-
-                    b.HasIndex("GuildRoleId");
 
                     b.HasIndex("RaceId");
 
@@ -290,9 +288,6 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("GuildId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Modifier")
                         .HasColumnType("decimal(18, 2)");
 
@@ -302,8 +297,6 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("GuildId");
 
                     b.ToTable("GuildRole");
                 });
@@ -462,12 +455,8 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Migrations
                         .HasForeignKey("EcoId");
 
                     b.HasOne("Capstone_____Vescio_Pia_Francesca__BE_.Entity.Guild", "Guild")
-                        .WithMany("CharacterGuildRole")
+                        .WithMany("Character")
                         .HasForeignKey("GuildId");
-
-                    b.HasOne("Capstone_____Vescio_Pia_Francesca__BE_.Entity.GuildRole", "GuildRole")
-                        .WithMany("Characters")
-                        .HasForeignKey("GuildRoleId");
 
                     b.HasOne("Capstone_____Vescio_Pia_Francesca__BE_.Entity.Race", "Race")
                         .WithMany("Character")
@@ -486,8 +475,6 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Migrations
                     b.Navigation("Eco");
 
                     b.Navigation("Guild");
-
-                    b.Navigation("GuildRole");
 
                     b.Navigation("Race");
 
@@ -544,17 +531,6 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Migrations
                     b.Navigation("Nation");
                 });
 
-            modelBuilder.Entity("Capstone_____Vescio_Pia_Francesca__BE_.Entity.GuildRole", b =>
-                {
-                    b.HasOne("Capstone_____Vescio_Pia_Francesca__BE_.Entity.Guild", "Guild")
-                        .WithMany()
-                        .HasForeignKey("GuildId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Guild");
-                });
-
             modelBuilder.Entity("RoleUser", b =>
                 {
                     b.HasOne("Capstone_____Vescio_Pia_Francesca__BE_.Entity.Role", null)
@@ -582,12 +558,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Migrations
 
             modelBuilder.Entity("Capstone_____Vescio_Pia_Francesca__BE_.Entity.Guild", b =>
                 {
-                    b.Navigation("CharacterGuildRole");
-                });
-
-            modelBuilder.Entity("Capstone_____Vescio_Pia_Francesca__BE_.Entity.GuildRole", b =>
-                {
-                    b.Navigation("Characters");
+                    b.Navigation("Character");
                 });
 
             modelBuilder.Entity("Capstone_____Vescio_Pia_Francesca__BE_.Entity.Nation", b =>

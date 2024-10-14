@@ -2,6 +2,7 @@
 {
     public class GuildRole : ModifiableEntity
     {
-       
+        public Guild? Guild { get; set; }
+        public List<Character> Characters { get; set; } = new List<Character>();
     }
 }

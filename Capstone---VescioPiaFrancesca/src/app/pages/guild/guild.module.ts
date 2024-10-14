@@ -7,6 +7,7 @@ import { DetailComponent } from './detail/detail.component';
 import { SharedModule } from '../../shared/shared.module';
 import { NgbCollapse } from '@ng-bootstrap/ng-bootstrap';
 import { GuildmembersComponent } from './guildmembers/guildmembers.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { GuildmembersComponent } from './guildmembers/guildmembers.component';
     CommonModule,
     GuildRoutingModule,
     SharedModule,
-    NgbCollapse
+    NgbCollapse,
+    ReactiveFormsModule
   ]
 })
 export class GuildModule { }

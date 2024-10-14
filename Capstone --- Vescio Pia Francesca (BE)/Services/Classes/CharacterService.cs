@@ -21,10 +21,10 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
         {
             try
             {
-                var defaulrole = await _db.GuildRole.FirstOrDefaultAsync(r => r.Name == "Membro");
+                
                 Eco eco = null;
                 Guild guild = null;
-
+                
 
                 if (dto.GuildId != null) {
                      guild = await _db.Guilds.FirstOrDefaultAsync(g => g.Id == dto.GuildId);                    
@@ -76,7 +76,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                     User = user,
                     Background = dto.Background,
                     Image = ConvertImage(dto.Image),
-                    Role = defaulrole,
+                   
                     Score = await CountScore(eco?.Modifier ?? 1, city.Id, race.Modifier, guild?.Modifier ?? 1)
                 };
 
@@ -294,6 +294,25 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             character.Score = characterScoreChanged;
             await _db.SaveChangesAsync();
             return characterScoreChanged;
+        }
+
+        public async Task AddOrRemoveRole(int id, int idRole)
+        {
+            var role = _db.GuildRole.FirstOrDefault(c => c.Id == idRole);
+            if(role == null)
+            {
+                throw new ArgumentException("role not found");
+            }
+            var character = _db.Characters.FirstOrDefault(c => c.Id == id);
+            if (character == null)
+            {
+                throw new ArgumentException("character not found");
+            }
+
+            if (character.GuildRole == null) character.GuildRole = role;
+            else character.GuildRole = null;
+
+            await _db.SaveChangesAsync();
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
 {
     [Route("api/[controller]")]
     [ApiController]
-   [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class CharacterApiController : ControllerBase
     {
         private readonly ICharacterService _characterSvc;
@@ -35,7 +35,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
 
         [HttpDelete("{id}")]
 
-        public async Task<IActionResult> Delete(int id) 
+        public async Task<IActionResult> Delete(int id)
         {
             await _characterSvc.Delete(id);
             return NoContent();
@@ -85,6 +85,14 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
                 charactersSel.Add(characterSel);
             }
             return Ok(charactersSel);
+        }
+
+        [HttpPatch("{id},{idRole}")]
+        public async Task<IActionResult> AddOrRemoveRole(int id, int idRole)
+        {
+
+            await _characterSvc.AddOrRemoveRole(id, idRole);
+                return Ok();
         }
     }
    
