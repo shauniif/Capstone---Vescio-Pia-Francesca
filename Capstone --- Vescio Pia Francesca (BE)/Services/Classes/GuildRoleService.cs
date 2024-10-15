@@ -78,7 +78,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
         {
             try
             {
-                var role = await _db.GuildRole.SingleOrDefaultAsync(i => i.Id == id);
+                var role = await _db.GuildRole.Include(gr => gr.Guild).SingleOrDefaultAsync(i => i.Id == id);
                 return role;
             }
             catch (Exception ex)

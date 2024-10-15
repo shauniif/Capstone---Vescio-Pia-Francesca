@@ -2,6 +2,14 @@
 <div *ngFor="let guildRole of guildRoles">
   <p class="text-white">{{ guildRole.name }}</p>
   <p class="text-white">{{ guildRole.modifier }}</p>
+  <button
+    class="btn btn-warning"
+    (click)="PrepareToUpdate(guildRole.id); open(roleModal)"
+  >
+    Modifica
+  </button>
+
+  <button class="btn btn-danger" (click)="Delete(guildRole.id)">Elimina</button>
 </div>
 <button class="btn btn-primary" (click)="open(roleModal)">
   Aggiungi un ruolo
@@ -14,7 +22,7 @@
       type="button"
       class="btn-close"
       aria-label="Close"
-      (click)="modal.dismiss('Cross click')"
+      (click)="modal.dismiss('Cross click'); this.ResetForm()"
     ></button>
   </div>
 
@@ -45,7 +53,7 @@
         class="btn btn-primary"
         (click)="createorUpdateRole()"
       >
-        Aggiungi Ruolo
+        {{ this.guildRole ? "Modifica" : "Aggiungi" }} ruolo
       </button>
     </form>
   </div>

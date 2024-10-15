@@ -42,7 +42,7 @@ export class GuildRoleService {
 
     DeleteGuildRole(id:number)
     {
-      this.http.delete<iGuildRole>(`${this.guildRoleUrl}/${id})}`).pipe(
+      return this.http.delete<iGuildRole>(`${this.guildRoleUrl}/${id}`).pipe(
         tap(() => {
           const index = this.guildRoles.findIndex(gr => gr.id === id);
           this.guildRoles.splice(index, 1);
@@ -53,7 +53,7 @@ export class GuildRoleService {
 
     UpdateGuildRole(id:number, updatedGuildRole: FormData)
     {
-      this.http.put<iGuildRole>(`${this.guildRoleUrl}/${id}`, updatedGuildRole).pipe(
+     return this.http.put<iGuildRole>(`${this.guildRoleUrl}/${id}`, updatedGuildRole).pipe(
         tap((updatedRole) => {
           const index = this.guildRoles.findIndex(gr => gr.id === updatedRole.id);
           this.guildRoles[index] = updatedRole;
@@ -61,6 +61,8 @@ export class GuildRoleService {
         })
       )
     }
+
+
 
   }
 

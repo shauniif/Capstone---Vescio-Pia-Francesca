@@ -39,7 +39,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] GuildRoleDTO dto)
+        public async Task<IActionResult> Update(int id, [FromForm] GuildRoleDTO dto)
         {
             if (ModelState.IsValid)
             {
@@ -63,13 +63,8 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
         public async Task<IActionResult> GetAll()
         {
             var guildRoles = await _guildRoleSvc.GetAll();
-            var guildRolesSel = new List<GuildRole>();
-            foreach (var guildRole in guildRoles)
-            {
-                var guildRoleSel = await _guildRoleSvc.Read(guildRole.Id);
-                guildRolesSel.Add(guildRoleSel);
-            }
-            return Ok(guildRolesSel);
+            
+            return Ok(guildRoles);
         }
 
         
