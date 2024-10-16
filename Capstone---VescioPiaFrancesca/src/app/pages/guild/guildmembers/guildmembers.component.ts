@@ -108,11 +108,18 @@ export class GuildmembersComponent implements OnInit  {
 
   AddRole(id: number, idRole: string): void {
 
-    this.CharacterService.AddRoleOnCharacter(id, Number(idRole)).subscribe();
+    this.CharacterService.AddRoleOnCharacter(id, Number(idRole)).subscribe( () => {
+      let index = this.characters.findIndex(c => c.id == id)
+      var role = this.guildRoles.find(r => r.id == Number(idRole))
+      this.characters[index].guildRole = role
+    });
   }
 
   RemoveRole(id: number, idRole: string): void {
-    this.CharacterService.AddRoleOnCharacter(id, Number(idRole)).subscribe()
+    this.CharacterService.AddRoleOnCharacter(id, Number(idRole)).subscribe( () => {
+      let index = this.characters.findIndex(c => c.id == id)
+      this.characters[index].guildRole = undefined;
+    })
   }
 }
 

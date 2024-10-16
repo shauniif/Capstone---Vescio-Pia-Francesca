@@ -67,23 +67,11 @@ export class CharacterService {
   }
 
   AddRoleOnCharacter(id:number, idRole:number) : Observable<iCharacter>{
-    return this.http.patch<iCharacter>(`${this.characterUrl}/Add/${id},${idRole}`, {}).pipe(
-      tap((updatedChar) => {
-        const index = this.characters.findIndex(c => c.id === updatedChar.id);
-        this.characters[index] = updatedChar;
-        this.charactersSubject.next(this.characters);
-      })
-    )
+    return this.http.patch<iCharacter>(`${this.characterUrl}/Add/${id},${idRole}`, {})
   }
 
   RemoveRoleOnCharacter(id:number, idRole:number) : Observable<iCharacter>{
-    return this.http.patch<iCharacter>(`${this.characterUrl}/Add/${id},${idRole}`, {}).pipe(
-      tap((updatedChar) => {
-        const index = this.characters.findIndex(c => c.id === updatedChar.id);
-        this.characters[index] = updatedChar;
-        this.charactersSubject.next(this.characters);
-      })
-    )
+    return this.http.patch<iCharacter>(`${this.characterUrl}/Add/${id},${idRole}`, {})
   }
 
 

@@ -75,7 +75,13 @@
       <td><img [src]="character.image" class="card-img" /></td>
       <td>{{ character.name }}</td>
       <td>{{ character.background }}</td>
-      <td>{{ character.eco?.name }}</td>
+      <td>
+        {{ character.eco?.name }}
+        <p *ngIf="!character.guildRole">No role assigned</p>
+        <p *ngIf="character.guildRole">
+          Role assigned: {{ character.guildRole.name }}
+        </p>
+      </td>
       <td>
         <select name="" id="" #roleSelect>
           <option value="">Seleziona un ruolo</option>
@@ -92,9 +98,10 @@
         <button
           class="btn btn-warning"
           (click)="AddRole(character.id, roleSelect.value)"
-          [ngClass]="
-            character.guildRole != null ? 'btn-warning' : 'btn-success'
-          "
+          [ngClass]="{
+            'btn-warning': character.guildRole,
+            'btn-success': !character.guildRole
+          }"
         >
           {{ character.guildRole ? "Modifica" : "Aggiungi" }}</button
         ><button
