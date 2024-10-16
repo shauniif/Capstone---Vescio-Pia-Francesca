@@ -47,7 +47,7 @@ export class EventComponent implements OnInit {
 
     }) */
       this.eventSvc.events$.subscribe((events) => {
-        console.log(events)
+
         for (let i = 0; i <events.length; i++) {
           if (i < 3) {
             this.pastEvents.push(events[i]);

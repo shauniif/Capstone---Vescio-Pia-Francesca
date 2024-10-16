@@ -8,8 +8,11 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Interfaces
         Task<IEnumerable<Character>> GetAllByUser(int id);
         Task<decimal> CountScore(decimal ecoModifier, int cityid, decimal raceModifier, decimal guildModifier);
         Task<decimal> ChangeScore(int id);
-        Task AddOrRemoveRole(int id, int idRole);
-        
+        Task AddRole(int id, int idRole);
+        Task RemoveRole(int id, int idRole);
+
+
+
     }
 
 }

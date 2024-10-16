@@ -76,8 +76,34 @@
       <td>{{ character.name }}</td>
       <td>{{ character.background }}</td>
       <td>{{ character.eco?.name }}</td>
-      <td></td>
-      <td></td>
+      <td>
+        <select name="" id="" #roleSelect>
+          <option value="">Seleziona un ruolo</option>
+          <option
+            *ngFor="let role of guildRoles"
+            value="{{ role.id }}"
+            [selected]="role.id === character.guildRole?.id"
+          >
+            {{ role.name }}
+          </option>
+        </select>
+      </td>
+      <td>
+        <button
+          class="btn btn-warning"
+          (click)="AddRole(character.id, roleSelect.value)"
+          [ngClass]="
+            character.guildRole != null ? 'btn-warning' : 'btn-success'
+          "
+        >
+          {{ character.guildRole ? "Modifica" : "Aggiungi" }}</button
+        ><button
+          class="btn btn-danger"
+          (click)="RemoveRole(character.id, roleSelect.value)"
+        >
+          Elimina
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>

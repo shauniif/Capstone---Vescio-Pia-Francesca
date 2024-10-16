@@ -87,12 +87,22 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
             return Ok(charactersSel);
         }
 
-        [HttpPatch("{id},{idRole}")]
-        public async Task<IActionResult> AddOrRemoveRole(int id, int idRole)
+        [HttpPatch("Add/{id},{idRole}")]
+        public async Task<IActionResult> AddRole(int id, int idRole)
         {
 
-            await _characterSvc.AddOrRemoveRole(id, idRole);
+            await _characterSvc.AddRole(id, idRole);
                 return Ok();
+        }
+
+
+
+        [HttpPatch("Remove/{id},{idRole}")]
+        public async Task<IActionResult> RemoveRole(int id, int idRole)
+        {
+
+            await _characterSvc.RemoveRole(id, idRole);
+            return Ok();
         }
     }
    

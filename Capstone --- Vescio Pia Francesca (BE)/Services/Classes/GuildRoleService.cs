@@ -20,7 +20,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
         {
             try
             {
-                var guild = await _db.Guilds.FirstOrDefaultAsync(g => g.Id == entity.GuildId);
+                    var guild = await _db.Guilds.FirstOrDefaultAsync(g => g.Id == entity.GuildId);
                 if (guild == null)
                 {
                     throw new Exception("Guild not found");
@@ -104,5 +104,6 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                 throw new Exception("Role not updated", ex);
             }
         }
+
     }
 }

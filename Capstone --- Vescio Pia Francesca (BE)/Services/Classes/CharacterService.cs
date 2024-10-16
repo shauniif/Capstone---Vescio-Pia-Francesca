@@ -217,6 +217,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                         .Include(c => c.Race)
                         .Include(c => c.Eco)
                         .Include(c => c.User)
+                        .Include(c => c.GuildRole)
                         .Where(c => c.Id == id)
                         .Select(c => new Character
                         {
@@ -256,8 +257,14 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
                                 Email = c.User.Email,
                                 DateBirth = c.User.DateBirth,
                                 Username = c.User.Username
-                            }
-                        })
+                            },
+                            GuildRole = c.GuildRole != null ? new GuildRole
+                            {
+                                Id = c.GuildRole.Id,
+                                Name = c.GuildRole.Name,
+                            } : null
+                        }
+                            )
                         .FirstOrDefaultAsync();
                 if (character == null)
                 {
@@ -296,7 +303,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
             return characterScoreChanged;
         }
 
-        public async Task AddOrRemoveRole(int id, int idRole)
+        public async Task AddRole(int id, int idRole)
         {
             var role = _db.GuildRole.FirstOrDefault(c => c.Id == idRole);
             if(role == null)
@@ -311,7 +318,24 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Services.Classes
 
             if (character.GuildRole == null) character.GuildRole = role;
             else character.GuildRole = null;
+            
+            _db.Characters.Update(character);
+            await _db.SaveChangesAsync();
+        }
 
+        public async Task RemoveRole(int id, int idRole)
+        {
+            var role = _db.GuildRole.FirstOrDefault(c => c.Id == idRole);
+            if (role == null)
+            {
+                throw new ArgumentException("role not found");
+            }
+            var character = _db.Characters.FirstOrDefault(c => c.Id == id);
+            if (character == null)
+            {
+                throw new ArgumentException("character not found");
+            }
+            character.GuildRole = null;
             await _db.SaveChangesAsync();
         }
     }

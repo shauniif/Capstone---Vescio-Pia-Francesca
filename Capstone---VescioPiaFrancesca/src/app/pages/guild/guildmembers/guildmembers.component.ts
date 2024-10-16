@@ -32,6 +32,7 @@ export class GuildmembersComponent implements OnInit  {
     })
      this.CharacterService.characters$.subscribe(characters => {
       this.characters = characters.filter(character => character.guild?.id == Number(this.idGuild));
+      console.log(this.characters);
 
      })
      this.guildRolesSvc.guildRoles$.subscribe(guildRoles => {
@@ -102,6 +103,16 @@ export class GuildmembersComponent implements OnInit  {
     this.guildRoleForm.reset();
     this.guildRole = null;
     this.modalService.dismissAll();
+  }
+
+
+  AddRole(id: number, idRole: string): void {
+
+    this.CharacterService.AddRoleOnCharacter(id, Number(idRole)).subscribe();
+  }
+
+  RemoveRole(id: number, idRole: string): void {
+    this.CharacterService.AddRoleOnCharacter(id, Number(idRole)).subscribe()
   }
 }
 

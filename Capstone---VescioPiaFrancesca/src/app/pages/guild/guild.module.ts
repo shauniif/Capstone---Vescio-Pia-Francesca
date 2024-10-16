@@ -21,7 +21,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     GuildRoutingModule,
     SharedModule,
     NgbCollapse,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ]
 })
 export class GuildModule { }
