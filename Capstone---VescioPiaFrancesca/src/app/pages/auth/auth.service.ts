@@ -99,5 +99,11 @@ export class AuthService {
     return this.http.put<iUser>(`${this.authUrl}/${id}`, currUser)
   }
 
+    GetId() : number {
+      const accessData = this.getAccessData();
+      if(!accessData) return 0;
+      return accessData.user.id;
+    }
+
 
 }

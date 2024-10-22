@@ -40,7 +40,12 @@
                 guild.members.length
               }}</span>
             </p>
-            <a class="btn btnBack" [routerLink]="['/guild/members', guild.id]">
+
+            <a
+              class="btn btnBack"
+              [routerLink]="['/guild/members', guild.id]"
+              *ngIf="requiredRole"
+            >
               Vedi tutti i membri</a
             >
           </div>

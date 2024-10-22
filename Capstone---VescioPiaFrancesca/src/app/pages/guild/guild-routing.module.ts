@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { GuildComponent } from './guild.component';
 import { DetailComponent } from './detail/detail.component';
 import { GuildmembersComponent } from './guildmembers/guildmembers.component';
+import { CharacterRoleGuardGuard } from '../character/guard/character-role-guard.guard';
 
 const routes: Routes = [
   {
@@ -15,7 +16,8 @@ const routes: Routes = [
   },
   {
     path: 'members/:id',
-    component: GuildmembersComponent
+    component: GuildmembersComponent,
+    canActivate: [CharacterRoleGuardGuard]
   }
 
 ];
