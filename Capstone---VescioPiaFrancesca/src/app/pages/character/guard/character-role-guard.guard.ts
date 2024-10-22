@@ -18,9 +18,11 @@ export class CharacterRoleGuardGuard  {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): MaybeAsync<GuardResult> {
     const userid = this.authSvc.GetId();
+    const guildId = route.paramMap.get('id');
     return this.characterSvc.GetMyCharacter(userid).pipe(
       map(characters => {
-        const hasRequiredRole = characters.some(character => character.guildRole?.name == 'Leader');
+        // controllo se almeno un dei personaggi dell'utente loggato ha sia il ruolo Leader ma anche che appartenga alla gilda "cercata"
+        const hasRequiredRole = characters.some(character => character.guildRole?.name == 'Leader' && character.guild?.id === Number(guildId));
 
         if(hasRequiredRole) {
           return true;
