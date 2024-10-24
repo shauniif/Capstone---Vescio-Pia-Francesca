@@ -11,7 +11,7 @@ import { map } from 'rxjs';
 export class CharacterRoleGuardGuard  {
   constructor(
     private authSvc: AuthService,
-    private characterSvc: CharacterService, // Servizio che gestisce i personaggi
+    private characterSvc: CharacterService,
     private router: Router
   ) {}
   canActivate(
