@@ -33,9 +33,18 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] UserViewModel user)
         {
+            Console.WriteLine(user);
+            if (ModelState.IsValid)
+            {
+
             var newUser = await _authSvc.Create(user);
             var userSel = await _authSvc.CreateUser(newUser.Id);
             return Ok(userSel);
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
 
         [AllowAnonymous]

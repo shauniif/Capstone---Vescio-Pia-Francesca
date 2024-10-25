@@ -8,22 +8,22 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Models
 
         [Required(ErrorMessage = "Il nome è obbligatorio")]
         [StringLength(30)]
-        public required string FirstName { get; set; }
+        public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "Il nome è obbligatorio")]
+        [Required(ErrorMessage = "Il cognome è obbligatorio")]
         [StringLength(30)]
-        public required string LastName { get; set; }
+        public string LastName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "L'username è obbligatorio")]
         [StringLength(30)]
-        public  string Username { get; set; }
+        public string Username { get; set; }
 
-        [Required]
-        public required DateTime DateBirth { get; set; }
+        [Required(ErrorMessage = "La data di nascita è obbligatoria")]
+        public DateTime DateBirth { get; set; }
 
-        [Required]
-        [EmailAddress]
-        public required string Email { get; set; }
+        [Required(ErrorMessage = "L'e-mail è obbligatoria")]
+        [EmailAddress(ErrorMessage = "Inserisci un e-mail valida")]
+        public string Email { get; set; }
         [Required]
         [StringLength(30)]
         [RegularExpression(@"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", ErrorMessage ="La password deve contenere: almeno una lettera maiuscola, almeno una lettera minuscola, almeno una lettera minuscola, almeno un numero, almeno un carattere speciale ")]

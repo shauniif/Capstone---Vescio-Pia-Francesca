@@ -61,6 +61,7 @@ export class RegisterComponent {
   CreateUser(): void {
 
     if(this.signInForm.valid && this.user) {
+      console.log("we2");
       const UserToUpdate: iUser = this.signInForm.value;
       UserToUpdate.id = this.user.id
       this.authSvc.UpdateUser(UserToUpdate.id, UserToUpdate).subscribe(data =>
@@ -70,14 +71,26 @@ export class RegisterComponent {
           this.router.navigate(['auth/profile'])
         })
       } else {
+        console.log("we3");
         const newUser: iUser = this.signInForm.value;
-      this.authSvc.register(newUser).subscribe();
-        this.router.navigate(['auth/login'])};
+
+      this.authSvc.register(newUser).subscribe({
+          next: () => this.router.navigate(['auth/login']),
+          error(err) {
+            if (err.error && err.error.errors) {
+              console.log(err.error.errors);  // Imposta i messaggi per visualizzarli
+            } else {
+              console.log('Si è verificato un errore imprevisto');
+            };
+          },
+      });
+        };
   }
 
   isTouchedInvalid(fieldName:string){
     const field = this.signInForm.get(fieldName);
     return field?.invalid && field?.touched
   }
+
 
 }

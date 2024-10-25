@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { iAuthResponse } from '../../interfaces/iauth-response';
 import { iAuthData } from '../../interfaces/i-auth-data';
-import { BehaviorSubject, map, Observable, tap } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, tap, throwError } from 'rxjs';
 import { iUser } from '../../interfaces/i-user';
 import { environment } from '../../../environments/environment.development';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +33,8 @@ export class AuthService {
   register(newUser: Partial<iUser>): Observable<iUser> {
     return this.http.post<iUser>(this.registerUrl, newUser);
   }
+
+
 
   login(AuthData: iAuthData): Observable<iAuthResponse>
   {
