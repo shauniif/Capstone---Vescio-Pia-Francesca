@@ -78,7 +78,7 @@ export class RegisterComponent {
           next: () => this.router.navigate(['auth/login']),
           error(err) {
             if (err.error && err.error.errors) {
-              console.log(err.error.errors);  // Imposta i messaggi per visualizzarli
+              console.log(err.error.errors); 
             } else {
               console.log('Si è verificato un errore imprevisto');
             };

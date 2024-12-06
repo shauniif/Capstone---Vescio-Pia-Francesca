@@ -33,7 +33,6 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] UserViewModel user)
         {
-            Console.WriteLine(user);
             if (ModelState.IsValid)
             {
 
@@ -43,7 +42,7 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
             }
             else
             {
-                return BadRequest(ModelState);
+                return BadRequest(ModelState.ErrorCount);
             }
         }
 

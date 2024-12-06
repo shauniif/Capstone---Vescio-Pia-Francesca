@@ -5,6 +5,8 @@ VisualStudioVersion = 17.10.35004.147
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capstone --- Vescio Pia Francesca (BE)", "Capstone --- Vescio Pia Francesca (BE).csproj", "{A9E95B8C-43FD-4089-BEAF-60E08664FBDA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prova", "..\..\..\Prova\Prova.csproj", "{B585DB7C-51C6-4BE5-9AE6-94AB62BC96C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{A9E95B8C-43FD-4089-BEAF-60E08664FBDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9E95B8C-43FD-4089-BEAF-60E08664FBDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9E95B8C-43FD-4089-BEAF-60E08664FBDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B585DB7C-51C6-4BE5-9AE6-94AB62BC96C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B585DB7C-51C6-4BE5-9AE6-94AB62BC96C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B585DB7C-51C6-4BE5-9AE6-94AB62BC96C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B585DB7C-51C6-4BE5-9AE6-94AB62BC96C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

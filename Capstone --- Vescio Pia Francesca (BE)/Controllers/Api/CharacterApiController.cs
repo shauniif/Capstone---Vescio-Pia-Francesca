@@ -29,8 +29,11 @@ namespace Capstone_____Vescio_Pia_Francesca__BE_.Controllers.Api
                 var character = await _characterSvc.Create(dto);
                 var characterSel = await _characterSvc.Read(character.Id);
                 return Ok(characterSel);
+            } else
+            {
+
+            return BadRequest(ModelState.ErrorCount);
             }
-            return BadRequest();
         }
 
         [HttpDelete("{id}")]
